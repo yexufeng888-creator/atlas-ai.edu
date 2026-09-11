@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 接口 - ATLAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
+            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">API</div>
+            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">ATLAS API</h1>
+            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">强大、灵活、易用的 RESTful API</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section style="padding: 6rem 2rem; background: #ffffff;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            
+            <div style="margin-bottom: 4rem;">
+                <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">API 端点</h2>
+                <div style="display: grid; gap: 1.5rem;">
+                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: #10b981; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">GET</span>
+                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks</code>
+                        </div>
+                        <p style="color: #6b7280;">获取任务列表</p>
+                    </div>
+                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">POST</span>
+                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks</code>
+                        </div>
+                        <p style="color: #6b7280;">创建新任务</p>
+                    </div>
+                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">PUT</span>
+                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks/:id</code>
+                        </div>
+                        <p style="color: #6b7280;">更新任务</p>
+                    </div>
+                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
+                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
+                            <span style="background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">DELETE</span>
+                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks/:id</code>
+                        </div>
+                        <p style="color: #6b7280;">删除任务</p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 1rem; padding: 3rem; color: white; text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">准备开始？</h3>
+                <p style="opacity: 0.95; margin-bottom: 2rem;">获取你的 API 密钥并开始构建</p>
+                <a href="#" style="background: white; color: #667eea; padding: 0.75rem 2rem; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block;">获取 API 密钥</a>
+            </div>
+        
+        </div>
+    </section>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+</body>
+</html>

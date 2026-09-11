@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻动态 - ATLAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <style>
+        @media (max-width: 700px) {
+            .news-article {
+                grid-template-columns: 1fr !important;
+                gap: 1.25rem !important;
+            }
+        }
+    </style>
+    
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
+            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">新闻</div>
+            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">ATLAS 新闻</h1>
+            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">最新的公司动态和产品更新</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section style="padding: 6rem 2rem; background: #ffffff;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            
+            <div style="display: grid; gap: 3rem;">
+                <article class="news-article" style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem; align-items: start;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 1rem; aspect-ratio: 16/9;"></div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">2026年1月15日</div>
+                        <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">ATLAS 正式发布</h2>
+                        <p style="color: #6b7280; line-height: 1.6; margin-bottom: 1rem;">
+                            今天，我们很高兴地宣布 ATLAS 正式发布。经过一年的开发和测试，ATLAS 现在已经准备好帮助你管理生活的方方面面。
+                        </p>
+                        <a href="#" style="color: #0071e3; font-weight: 500; text-decoration: none;">阅读更多 →</a>
+                    </div>
+                </article>
+
+                <article class="news-article" style="display: grid; grid-template-columns: 300px 1fr; gap: 2rem; align-items: start;">
+                    <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 1rem; aspect-ratio: 16/9;"></div>
+                    <div>
+                        <div style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">2025年12月1日</div>
+                        <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">完成 A 轮融资</h2>
+                        <p style="color: #6b7280; line-height: 1.6; margin-bottom: 1rem;">
+                            Campus Intelligence 宣布完成 A 轮融资，将加速产品开发和团队扩张。
+                        </p>
+                        <a href="#" style="color: #0071e3; font-weight: 500; text-decoration: none;">阅读更多 →</a>
+                    </div>
+                </article>
+            </div>
+        
+        </div>
+    </section>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+model: Qwen/Qwen2.5-7B-Instruct
+data: training/data
+train: true
+fine_tune_type: lora
+num_layers: 16
+batch_size: 1
+iters: 600
+val_batches: 25
+learning_rate: 1.0e-5
+steps_per_report: 10
+steps_per_eval: 100
+save_every: 100
+adapter_path: training/adapters/atlas-qwen7b
+seed: 42

@@ -1,0 +1,194 @@
+/* Dark Theme Styles */
+:root {
+    --color-bg: #f8f9fa;
+    --color-surface: #ffffff;
+    --color-text: #1a1a1a;
+    --color-text-muted: #6b7280;
+    --color-primary: #2563eb;
+    --color-primary-light: #3b82f6;
+    --color-accent: #06b6d4;
+    --color-border: #e5e7eb;
+}
+
+/* Dark Theme Variables */
+.dark-theme {
+    --color-bg: #0a0a0a;
+    --color-surface: #1a1a1a;
+    --color-text: #f5f5f5;
+    --color-text-muted: #a0a0a0;
+    --color-primary: #3b82f6;
+    --color-primary-light: #60a5fa;
+    --color-accent: #22d3ee;
+    --color-border: #2a2a2a;
+}
+
+.dark-theme body {
+    background: linear-gradient(to bottom right, #0a0a0a, #0f1419, #0a0f1a);
+}
+
+/* Animated Background - Dark Theme */
+.dark-theme .orb-1 {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(6, 182, 212, 0.2));
+}
+
+.dark-theme .orb-2 {
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(168, 85, 247, 0.15));
+}
+
+.dark-theme .orb-3 {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+}
+
+/* Cards */
+.dark-theme .glass-card {
+    background: rgba(26, 26, 26, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-theme .feature-card,
+.dark-theme .section-card {
+    background: rgba(26, 26, 26, 0.7);
+}
+
+.dark-theme .feature-card::before,
+.dark-theme .section-card::before {
+    opacity: 0;
+}
+
+.dark-theme .feature-card:hover::before,
+.dark-theme .section-card:hover::before {
+    opacity: 0.5;
+}
+
+/* Buttons */
+.dark-theme .btn-primary {
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.4);
+}
+
+.dark-theme .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: #f5f5f5;
+}
+
+.dark-theme .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* Stats */
+.dark-theme .stats {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+}
+
+/* Badge */
+.dark-theme .badge {
+    background: rgba(26, 26, 26, 0.8);
+}
+
+/* Info Items */
+.dark-theme .info-item {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .info-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Tags */
+.dark-theme .tag {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+    border-color: rgba(59, 130, 246, 0.3);
+    color: #60a5fa;
+}
+
+/* Timeline Events */
+.dark-theme .event-card {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Tasks */
+.dark-theme .task-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Preference Categories */
+.dark-theme .preference-list li {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark-theme .preference-list li:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* Form Inputs */
+.dark-theme .form-input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: #f5f5f5;
+}
+
+.dark-theme .form-input:focus {
+    border-color: var(--color-primary);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+/* Transitions */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Prevent transition on theme change */
+.dark-theme * {
+    transition-duration: 0s !important;
+}
+
+.dark-theme.ready * {
+    transition-duration: 0.3s !important;
+}
+
+/* Auth Message */
+.auth-message {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.error-message {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.success-message {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #10b981;
+}
+
+.info-message {
+    background: rgba(59, 130, 246, 0.1);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    color: #3b82f6;
+}
+
+/* Smooth Theme Transition */
+html {
+    transition: background-color 0.3s ease;
+}
+
+html.transitioning * {
+    transition: none !important;
+}

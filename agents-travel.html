@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>旅行规划 - ATLAS</title>
+    <link rel="stylesheet" href="assets/css/page.css">
+    <link rel="stylesheet" href="assets/css/3d-effects.css">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-scroll.css">
+    <style>
+        /* Apple-inspired Design System */
+        :root {
+            --color-primary: #0071e3;
+            --color-primary-dark: #0077ED;
+            --color-text: #1d1d1f;
+            --color-text-secondary: #86868b;
+            --color-bg: #fbfbfd;
+            --color-surface: #ffffff;
+            --color-border: #d2d2d7;
+            --font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-system);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Page Header */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .page-description {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Container */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--color-border);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 980px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .page-container {
+                padding: 3rem 1.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        [data-fade-in] {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+    </style>
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <main class="page-content">
+        <div class="content-container glass-card">
+            <div class="page-header">
+                <p class="page-eyebrow">TRAVEL PLANNER</p>
+                <h1 class="page-title">Travel Planner Agent</h1>
+                <p class="page-description">帮助你规划行程、预算和日程安排</p>
+            </div>
+
+            <div class="page-body">
+
+            <div class="memory-sections">
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">✈️</div>
+                    <h3>核心功能</h3>
+                    <div class="tag-list">
+                        <span class="tag">智能行程规划</span>
+                        <span class="tag">机票酒店搜索</span>
+                        <span class="tag">景点推荐</span>
+                        <span class="tag">预算管理</span>
+                        <span class="tag">行程优化</span>
+                        <span class="tag">天气提醒</span>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">🎯</div>
+                    <h3>使用场景</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">商务出差</span>
+                            <span class="info-value">快速规划最优路线</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">周末短途</span>
+                            <span class="info-value">发现周边好去处</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">假期旅行</span>
+                            <span class="info-value">详细行程安排</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">多城串联</span>
+                            <span class="info-value">优化交通路线</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">🤖</div>
+                    <h3>AI 能力</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">智能推荐</span>
+                            <span class="info-value">基于偏好和历史</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">实时价格</span>
+                            <span class="info-value">追踪最优惠方案</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">路线优化</span>
+                            <span class="info-value">节省时间和金钱</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">风险提醒</span>
+                            <span class="info-value">天气、签证、疫情</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">💡</div>
+                    <h3>快速开始</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">1. 告诉目的地</span>
+                            <span class="info-value">"我想去上海"</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">2. 指定日期</span>
+                            <span class="info-value">"9月15-18日"</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">3. 说明偏好</span>
+                            <span class="info-value">"喜欢文化和美食"</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">4. 获得方案</span>
+                            <span class="info-value">AI 生成完整行程</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">📊</div>
+                    <h3>使用统计</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">规划次数</span>
+                            <span class="info-value">23 次</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">节省预算</span>
+                            <span class="info-value">约 ¥8,500</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">满意度</span>
+                            <span class="info-value">4.8 / 5.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">⚙️</div>
+                    <h3>权限设置</h3>
+                    <div class="tag-list">
+                        <span class="tag">✅ 搜索航班</span>
+                        <span class="tag">✅ 搜索酒店</span>
+                        <span class="tag">✅ 查看日历</span>
+                        <span class="tag">❌ 自动预订</span>
+                        <span class="tag">❌ 支付操作</span>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(6, 182, 212, 0.05)); border-radius: 1rem; text-align: center;">
+                <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">💬 试试问我</h4>
+                <p style="color: var(--color-text-muted); font-size: 0.875rem; margin-bottom: 1rem;">
+                    "帮我规划一个上海3日游" · "推荐北京周边周末游" · "下月去成都需要准备什么"
+                </p>
+                <a href="ask.html" class="btn" style="display: inline-block; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; text-decoration: none; border-radius: 0.5rem; font-weight: 600;">开始规划</a>
+            </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <p>Personal Intelligence OS · 由 ATLAS 驱动</p>
+    </footer>
+
+    <script src="assets/js/page.js"></script>
+    <script src="assets/js/3d-effects.js"></script>
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-scroll.js"></script>
+    <script>
+        // 语言切换按钮样式
+        const langStyle = document.createElement('style');
+        langStyle.textContent = `
+            .lang-switch.active {
+                background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+                color: white !important;
+                border-color: transparent !important;
+            }
+        `;
+        document.head.appendChild(langStyle);
+    </script>
+</body>
+</html>

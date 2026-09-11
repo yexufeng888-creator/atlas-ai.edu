@@ -1,0 +1,436 @@
+/**
+ * ATLAS Shell Styles
+ * Apple-inspired navigation and global styles
+ */
+
+:root {
+  --atlas-white: #f5f5f7;
+  --atlas-black: #000000;
+  --atlas-dark: #1d1d1f;
+  --atlas-mid: #6e6e73;
+  --atlas-blue: #0071e3;
+  --atlas-blue-light: #2997ff;
+  --atlas-blue-glow: rgba(41, 151, 255, 0.15);
+  --atlas-purple: #bf5af2;
+  --atlas-teal: #32d74b;
+  --atlas-glass: rgba(255, 255, 255, 0.06);
+  --atlas-glass-border: rgba(255, 255, 255, 0.12);
+  --atlas-nav-height: 52px;
+}
+
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: clip;
+}
+
+/* ============================================================
+   全局导航 - Global Navigation
+   ============================================================ */
+
+.global-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: var(--atlas-nav-height);
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.atlas-nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 品牌标志 - 优化版本 */
+.atlas-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.atlas-brand:hover {
+  opacity: 0.8;
+}
+
+.atlas-brand-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  object-fit: cover;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.atlas-brand-mark {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.atlas-brand-name {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  color: #fff;
+}
+
+/* 导航链接 */
+.atlas-nav-panel {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.atlas-nav-links {
+  display: flex;
+  gap: 24px;
+  list-style: none;
+}
+
+.atlas-nav-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  transition: color 0.2s;
+  position: relative;
+  padding: 4px 0;
+}
+
+.atlas-nav-link:hover {
+  color: #fff;
+}
+
+.atlas-nav-link.is-current {
+  color: #fff;
+}
+
+.atlas-nav-link.is-current::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--atlas-blue-light), var(--atlas-purple));
+  border-radius: 2px;
+}
+
+/* 导航操作区 */
+.atlas-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.atlas-system-status,
+.atlas-login-link {
+  display: inline-flex;
+}
+
+.region-flag svg {
+  width: 15px;
+  height: 15px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5;
+  stroke-linecap: round;
+}
+
+/* 地区选择器 */
+.region-selector {
+  position: relative;
+}
+
+.region-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 6px;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.region-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  color: #fff;
+}
+
+.region-flag {
+  font-size: 16px;
+  line-height: 1;
+}
+
+.region-label {
+  font-size: 13px;
+}
+
+.region-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  min-width: 280px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 1000;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.region-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.region-section {
+  padding: 8px 0;
+}
+
+.region-section:not(:last-child) {
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.region-section-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 8px 16px;
+}
+
+.region-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  color: #1a1a1a;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+.region-item:hover {
+  background: #f8f9fa;
+}
+
+/* 移动端菜单按钮 */
+.atlas-menu-toggle {
+  display: none;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  position: relative;
+  z-index: 1001;
+}
+
+.atlas-menu-lines {
+  display: block;
+  position: relative;
+  width: 18px;
+  height: 12px;
+  margin: auto;
+}
+
+.atlas-menu-lines::before,
+.atlas-menu-lines::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  border-radius: 1px;
+  transition: transform 0.3s, opacity 0.3s;
+}
+
+.atlas-menu-lines::before {
+  top: 0;
+}
+
+.atlas-menu-lines::after {
+  bottom: 0;
+}
+
+.global-nav.is-open .atlas-menu-lines::before {
+  transform: translateY(5px) rotate(45deg);
+}
+
+.global-nav.is-open .atlas-menu-lines::after {
+  transform: translateY(-5px) rotate(-45deg);
+}
+
+/* ============================================================
+   响应式布局 - Responsive
+   ============================================================ */
+
+@media (max-width: 768px) {
+  .atlas-menu-toggle {
+    display: block;
+  }
+
+  .atlas-nav-panel {
+    position: fixed;
+    top: var(--atlas-nav-height);
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: calc(100vh - var(--atlas-nav-height));
+    background: #1a1a1a;
+    backdrop-filter: blur(40px);
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0;
+    gap: 0;
+    transform: translateX(calc((var(--atlas-menu-state, 0) - 1) * 100%));
+    transition: transform 0.18s ease-out;
+    overflow-y: auto;
+    z-index: 999;
+  }
+
+  .global-nav.is-open .atlas-nav-panel {
+    transform: translateX(0);
+  }
+
+  .atlas-nav-panel[aria-hidden="false"] {
+    visibility: visible;
+  }
+
+  .atlas-nav-panel[aria-hidden="true"] {
+    visibility: hidden;
+  }
+
+  .atlas-nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 2rem 1.5rem;
+  }
+
+  .atlas-nav-link {
+    font-size: 1.125rem;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .atlas-nav-link.is-current {
+    color: #06b6d4;
+  }
+
+  .atlas-nav-link.is-current::after {
+    display: none;
+  }
+
+  .atlas-nav-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 16px;
+    padding: 2rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .region-selector {
+    width: 100%;
+  }
+
+  .region-btn {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .region-dropdown {
+    right: auto;
+    left: 0;
+    width: 100%;
+  }
+
+  .atlas-lang-switcher {
+    justify-content: center;
+  }
+}
+
+/* ============================================================
+   页面内容偏移 - Content Offset
+   ============================================================ */
+
+.has-global-nav {
+  padding-top: var(--atlas-nav-height);
+}
+
+/* ============================================================
+   加载动画 - Loading Animation
+   ============================================================ */
+
+@keyframes atlas-shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.atlas-loading {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  background-size: 1000px 100%;
+  animation: atlas-shimmer 2s infinite;
+}
+
+/* ============================================================
+   实用工具类 - Utility Classes
+   ============================================================ */
+
+.atlas-glass-card {
+  background: var(--atlas-glass);
+  border: 1px solid var(--atlas-glass-border);
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.atlas-gradient-text {
+  background: linear-gradient(135deg, #2563eb, #06b6d4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.atlas-blur-bg {
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+}

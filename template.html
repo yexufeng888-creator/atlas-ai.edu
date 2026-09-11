@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS - {{DESCRIPTION}}">
+    <title>{{TITLE}} - ATLAS</title>
+    <link rel="stylesheet" href="assets/css/page.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">
+                <span class="brand-name">ATLAS</span>
+                <span class="brand-subtitle">Personal Intelligence OS</span>
+            </a>
+            
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">首页</a>
+                <a href="ask.html" class="nav-link">询问</a>
+                <a href="memory.html" class="nav-link">记忆</a>
+                <a href="life.html" class="nav-link">生活</a>
+                <a href="agents.html" class="nav-link">智能体</a>
+                <a href="settings.html" class="nav-link">设置</a>
+            </div>
+            
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Content -->
+    <main class="page-content">
+        <div class="content-container">
+            <div class="page-header">
+                <p class="page-eyebrow">{{EYEBROW}}</p>
+                <h1 class="page-title">{{TITLE}}</h1>
+                <p class="page-description">{{DESCRIPTION}}</p>
+            </div>
+
+            <div class="page-body">
+                {{CONTENT}}
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="page-footer">
+        <p>Personal Intelligence OS · 由 ATLAS 驱动</p>
+    </footer>
+
+    <script src="assets/js/page.js"></script>
+</body>
+</html>

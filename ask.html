@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI 问询 - ATLAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/ask.css?v=20260910c">
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <!-- AI Ask Container -->
+    <div class="ask-container">
+        <!-- Sidebar -->
+        <aside class="ask-sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-title-row">
+                    <h2>对话历史</h2>
+                    <button class="ask-sidebar-close" id="askSidebarClose" type="button" aria-label="关闭对话历史">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg>
+                    </button>
+                </div>
+                <button class="new-chat-btn" id="newChatBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 5v14M5 12h14"/>
+                    </svg>
+                    新对话
+                </button>
+            </div>
+            <div class="chat-list" id="chatList">
+                <!-- 对话历史将动态生成 -->
+            </div>
+
+            <!-- API 设置按钮 -->
+            <button class="api-settings-btn" id="apiSettingsBtn">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="3"/>
+                    <path d="M12 1v6m0 6v6M6 6l4.24 4.24M17.76 17.76L13.52 13.52M1 12h6m6 0h6M6 18l4.24-4.24M17.76 6.24L13.52 10.48"/>
+                </svg>
+                API 设置
+            </button>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="ask-main">
+            <button class="ask-sidebar-toggle" id="askSidebarToggle" type="button" aria-label="打开对话历史">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+            </button>
+            <!-- Welcome Screen -->
+            <div class="welcome-screen" id="welcomeScreen">
+                <div class="welcome-content">
+                    <img src="assets/img/atlas-logo.jpg" alt="ATLAS" class="welcome-logo">
+                    <h1 class="welcome-title">你想了解什么？</h1>
+                    <p class="welcome-subtitle">选择一个 AI 模型开始对话</p>
+
+                    <!-- 快捷建议 -->
+                    <div class="quick-suggestions">
+                        <button class="suggestion-card" data-prompt="帮我写一封专业的求职邮件">
+                            <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
+                            <span class="suggestion-text">帮我写一封专业的求职邮件</span>
+                        </button>
+                        <button class="suggestion-card" data-prompt="解释一下量子计算的基本原理">
+                            <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="14" r="5"/><path d="m14 10 5-5M13.5 6.5l4 4M8 9l-3-3"/></svg></span>
+                            <span class="suggestion-text">解释量子计算的基本原理</span>
+                        </button>
+                        <button class="suggestion-card" data-prompt="给我一些提高工作效率的建议">
+                            <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+                            <span class="suggestion-text">提高工作效率的建议</span>
+                        </button>
+                        <button class="suggestion-card" data-prompt="帮我规划一次周末旅行">
+                            <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-7-7 18-3-8-8-3Z"/><path d="m11 14 4-4"/></svg></span>
+                            <span class="suggestion-text">帮我规划周末旅行</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Messages -->
+            <div class="chat-messages" id="chatMessages" style="display: none;">
+                <!-- 消息将动态生成 -->
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <!-- Model Selector -->
+                <div class="model-selector">
+                    <button class="model-btn active" data-model="atlas" title="ATLAS 本地模型">
+                        <span class="model-icon model-icon-atlas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></span>
+                        <span class="model-name">ATLAS</span>
+                    </button>
+                    <button class="model-btn" data-model="gpt-4" title="OpenAI GPT-4">
+                        <span class="model-icon model-icon-openai"><i></i></span>
+                        <span class="model-name">GPT-4</span>
+                    </button>
+                    <button class="model-btn" data-model="claude" title="Anthropic Claude">
+                        <span class="model-icon model-icon-claude"><i></i></span>
+                        <span class="model-name">Claude</span>
+                    </button>
+                    <button class="model-btn" data-model="gemini" title="Google Gemini">
+                        <span class="model-icon model-icon-gemini"><i></i></span>
+                        <span class="model-name">Gemini</span>
+                    </button>
+                </div>
+
+                <!-- Input Box -->
+                <div class="input-box">
+                    <textarea
+                        id="messageInput"
+                        placeholder="输入消息... (Shift + Enter 换行，Enter 发送)"
+                        rows="1"
+                    ></textarea>
+                    <button class="send-btn" id="sendBtn" disabled>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- API Settings Modal -->
+    <div class="modal" id="apiModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>API 设置</h2>
+                <button class="modal-close" id="modalClose">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-description">配置你的 API 密钥以使用不同的 AI 模型</p>
+
+                <!-- OpenAI API -->
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-openai"><i></i></span>
+                        <h3>OpenAI (GPT-4)</h3>
+                        <span class="api-status" id="openaiStatus">未配置</span>
+                    </div>
+                    <input
+                        type="password"
+                        class="api-input"
+                        id="openaiKey"
+                        placeholder="sk-..."
+                    >
+                    <a href="https://platform.openai.com/api-keys" target="_blank" class="api-link">获取 API Key →</a>
+                </div>
+
+                <!-- Anthropic API -->
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-claude"><i></i></span>
+                        <h3>Anthropic (Claude)</h3>
+                        <span class="api-status" id="claudeStatus">未配置</span>
+                    </div>
+                    <input
+                        type="password"
+                        class="api-input"
+                        id="claudeKey"
+                        placeholder="sk-ant-..."
+                    >
+                    <a href="https://console.anthropic.com/settings/keys" target="_blank" class="api-link">获取 API Key →</a>
+                </div>
+
+                <!-- Google API -->
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-gemini"><i></i></span>
+                        <h3>Google (Gemini)</h3>
+                        <span class="api-status" id="geminiStatus">未配置</span>
+                    </div>
+                    <input
+                        type="password"
+                        class="api-input"
+                        id="geminiKey"
+                        placeholder="AI..."
+                    >
+                    <a href="https://makersuite.google.com/app/apikey" target="_blank" class="api-link">获取 API Key →</a>
+                </div>
+
+                <!-- ATLAS Local -->
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-atlas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></span>
+                        <h3>ATLAS 本地模型</h3>
+                        <span class="api-status active">已启用</span>
+                    </div>
+                    <p class="api-note">ATLAS 本地模型无需配置，开箱即用</p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" id="modalCancel">取消</button>
+                <button class="btn btn-primary" id="modalSave">保存</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/ask.js?v=20260910c"></script>
+</body>
+</html>

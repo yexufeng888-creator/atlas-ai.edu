@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>运行记录 - ATLAS</title>
+    <link rel="stylesheet" href="assets/css/page.css">
+    <link rel="stylesheet" href="assets/css/3d-effects.css">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-scroll.css">
+    <style>
+        /* Apple-inspired Design System */
+        :root {
+            --color-primary: #0071e3;
+            --color-primary-dark: #0077ED;
+            --color-text: #1d1d1f;
+            --color-text-secondary: #86868b;
+            --color-bg: #fbfbfd;
+            --color-surface: #ffffff;
+            --color-border: #d2d2d7;
+            --font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-system);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Page Header */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .page-description {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Container */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--color-border);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 980px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .page-container {
+                padding: 3rem 1.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        [data-fade-in] {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+    </style>
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <main class="page-content">
+        <div class="content-container glass-card">
+            <div class="page-header">
+                <p class="page-eyebrow">AGENT RUNS</p>
+                <h1 class="page-title">Agent 运行记录</h1>
+                <p class="page-description">查看历史执行、工具调用和审计日志</p>
+            </div>
+
+            <div class="page-body">
+
+            <div style="margin-bottom: 2rem; text-align: center;">
+                <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">今天共执行 12 次</h2>
+                <p style="color: var(--color-text-muted);">成功 11 次 · 需要确认 1 次</p>
+            </div>
+
+            <div class="timeline-container">
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">今天 · 9月6日</div>
+                    <div class="timeline-events">
+                        <div class="event-card event-task" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #10b981;">
+                            <div class="event-time">15:30</div>
+                            <div class="event-title">📊 数据分析助手 · 完成Q3数据报告</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 2.3s</span>
+                            <span class="event-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">成功</span>
+                        </div>
+
+                        <div class="event-card event-meeting" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #f59e0b;">
+                            <div class="event-time">14:15</div>
+                            <div class="event-title">✈️ 旅行规划 · 规划上海行程</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 4.7s</span>
+                            <span class="event-tag" style="background: rgba(245, 158, 11, 0.1); color: #f59e0b;">待确认</span>
+                        </div>
+
+                        <div class="event-card event-task" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #10b981;">
+                            <div class="event-time">11:20</div>
+                            <div class="event-title">📧 邮件助手 · 发送会议纪要</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 1.8s</span>
+                            <span class="event-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">成功</span>
+                        </div>
+
+                        <div class="event-card event-focus" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #10b981;">
+                            <div class="event-time">09:45</div>
+                            <div class="event-title">🔍 研究助手 · 竞品分析搜索</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 3.2s</span>
+                            <span class="event-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">成功</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">昨天 · 9月5日</div>
+                    <div class="timeline-events">
+                        <div class="event-card event-task" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #10b981;">
+                            <div class="event-time">18:30</div>
+                            <div class="event-title">📝 写作助手 · 生成博客草稿</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 5.1s</span>
+                            <span class="event-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">成功</span>
+                        </div>
+
+                        <div class="event-card event-meeting" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #10b981;">
+                            <div class="event-time">16:00</div>
+                            <div class="event-title">📅 日程助手 · 安排下周会议</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 2.0s</span>
+                            <span class="event-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">成功</span>
+                        </div>
+
+                        <div class="event-card event-focus" style="grid-template-columns: 80px 1fr 100px auto; border-left-color: #10b981;">
+                            <div class="event-time">10:15</div>
+                            <div class="event-title">💡 创意助手 · 头脑风暴功能点</div>
+                            <span style="font-size: 0.75rem; color: var(--color-text-muted);">耗时 6.8s</span>
+                            <span class="event-tag" style="background: rgba(16, 185, 129, 0.1); color: #10b981;">成功</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item glass-card">
+                    <div class="timeline-date">本周统计</div>
+                    <div class="memory-sections" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                        <div style="padding: 1rem; background: rgba(16, 185, 129, 0.05); border-radius: 0.5rem;">
+                            <div style="font-size: 1.75rem; font-weight: 700; color: #10b981;">47</div>
+                            <div style="font-size: 0.875rem; color: var(--color-text-muted);">成功执行</div>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(245, 158, 11, 0.05); border-radius: 0.5rem;">
+                            <div style="font-size: 1.75rem; font-weight: 700; color: #f59e0b;">3</div>
+                            <div style="font-size: 0.875rem; color: var(--color-text-muted);">待确认</div>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(239, 68, 68, 0.05); border-radius: 0.5rem;">
+                            <div style="font-size: 1.75rem; font-weight: 700; color: #ef4444;">1</div>
+                            <div style="font-size: 0.875rem; color: var(--color-text-muted);">失败</div>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(37, 99, 235, 0.05); border-radius: 0.5rem;">
+                            <div style="font-size: 1.75rem; font-weight: 700; color: #2563eb;">3.2s</div>
+                            <div style="font-size: 0.875rem; color: var(--color-text-muted);">平均耗时</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <p>Personal Intelligence OS · 由 ATLAS 驱动</p>
+    </footer>
+
+    <script src="assets/js/page.js"></script>
+    <script src="assets/js/3d-effects.js"></script>
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-scroll.js"></script>
+    <script>
+        // 语言切换按钮样式
+        const langStyle = document.createElement('style');
+        langStyle.textContent = `
+            .lang-switch.active {
+                background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+                color: white !important;
+                border-color: transparent !important;
+            }
+        `;
+        document.head.appendChild(langStyle);
+    </script>
+</body>
+</html>

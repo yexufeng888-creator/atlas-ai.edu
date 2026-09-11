@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS - 개인 지능 운영 체제。用 AI 驱动的生产力工具改变你的生活。">
+    <title>ATLAS - 개인 지능 운영 체제</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-scroll.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #0071e3;
+            --color-primary-dark: #0077ED;
+            --color-text: #1d1d1f;
+            --color-text-secondary: #86868b;
+            --color-bg: #fbfbfd;
+            --color-surface: #ffffff;
+            --font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-system);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(191, 90, 242, 0.15) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 980px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-eyebrow {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #06b6d4;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a0c4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 400;
+            color: #a1a1a6;
+            margin-bottom: 3rem;
+            line-height: 1.4;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 980px;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 113, 227, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features */
+        .features {
+            padding: 8rem 2rem;
+            background: var(--color-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-eyebrow {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #fafafa;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Stats */
+        .stats {
+            padding: 6rem 2rem;
+            background: var(--color-text);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            color: #a1a1a6;
+            font-weight: 500;
+        }
+
+        /* Showcase */
+        .showcase {
+            padding: 8rem 2rem;
+            background: var(--color-bg);
+        }
+
+        .showcase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .showcase-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-text p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .showcase-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2rem;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .cta p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: #a1a1a6;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: #a1a1a6;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #424245;
+            font-size: 0.875rem;
+        }
+
+        .lang-switch-footer {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .lang-switch-footer a {
+            color: #06b6d4;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .lang-switch-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .showcase-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">개인 지능 운영 체제</div>
+            <h1 class="hero-title">당신의 삶을<br>지능적으로 관리</h1>
+            <p class="hero-subtitle">
+                将信息转化为智能，将决策转化为行动。ATLAS 是你的 AI 驱动的生活操作系统。
+            </p>
+            <div class="hero-cta">
+                <a href="signup.html" class="btn btn-primary">
+                    <span>무료 시작</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0L6.59 1.41 12.17 7H0V9H12.17L6.59 14.59 8 16 16 8z"/>
+                    </svg>
+                </a>
+                <a href="#features" class="btn btn-secondary">자세히 보기</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-eyebrow">기능</div>
+            <h2 class="section-title">성공을 위해 설계됨</h2>
+            <p class="section-description">
+                정리되고 효율적이며 통제력을 유지하는 데 필요한 모든 것.
+            </p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="feature-icon">🧠</span>
+                <h3 class="feature-title">지능형 메모리</h3>
+                <p class="feature-description">
+                    필요할 때 필요한 모든 것을 기억합니다. 개인 지식 그래프가 함께 성장합니다.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">스마트 작업 관리</h3>
+                <p class="feature-description">
+                    AI 기반 우선순위 지정으로 작업 스타일에 적응하고 중요한 일에 집중할 수 있도록 지원합니다.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🤖</span>
+                <h3 class="feature-title">AI 에이전트</h3>
+                <p class="feature-description">
+                    여행 계획부터 이메일 관리까지 모든 것을 자동으로 처리하는 전문 에이전트.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">📊</span>
+                <h3 class="feature-title">라이프 분석</h3>
+                <p class="feature-description">
+                    아름다운 대시보드로 생산성, 건강, 습관을 시각화합니다.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">🔒</span>
+                <h3 class="feature-title">프라이버시 우선</h3>
+                <p class="feature-description">
+                    데이터는 당신의 것입니다. 엔드투엔드 암호화 및 투명한 AI 작업.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon">⚡</span>
+                <h3 class="feature-title">초고속</h3>
+                <p class="feature-description">
+                    네이티브 성능, 즉시 검색 및 장치 간 실시간 동기화.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="stats-grid">
+            <div>
+                <div class="stat-number">50,000</div>
+                <div class="stat-label">활성 사용자</div>
+            </div>
+            <div>
+                <div class="stat-number">1M+</div>
+                <div class="stat-label">완료된 작업</div>
+            </div>
+            <div>
+                <div class="stat-number">99.9<span style="font-size: 2rem;">%</span></div>
+                <div class="stat-label">가동 시간</div>
+            </div>
+            <div>
+                <div class="stat-number">4.9<span style="font-size: 2rem;">/5</span></div>
+                <div class="stat-label">사용자 평가</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Showcase Section -->
+    <section class="showcase">
+        <div class="showcase-content">
+            <div class="showcase-text">
+                <h2>혁신가에 의해<br>혁신가를 위해</h2>
+                <p>
+                    Campus Intelligence 是一支由设计师、工程师和 AI 研究人员组成的团队，
+                    致力于创造赋能你成就更多的工具。
+                </p>
+                <a href="#team" class="btn btn-primary">팀 만나기</a>
+            </div>
+            <div class="showcase-image">
+                🚀
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>인생을 바꿀 준비가 되셨나요?</h2>
+        <p>정리되고 효율적으로 지내기 위해 ATLAS를 사용하는 수천 명의 사용자와 함께하세요.</p>
+        <div class="hero-cta">
+            <a href="signup.html" class="btn btn-primary" style="background: white; color: var(--color-primary);">
+                무료 체험 시작
+            </a>
+            <a href="pricing.html" class="btn btn-secondary" style="border-color: white; color: white;">
+                가격 보기
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>제품</h4>
+                <div class="footer-links">
+                    <a href="#features" class="footer-link">기능</a>
+                    <a href="pricing.html" class="footer-link">가격</a>
+                    <a href="home.html" class="footer-link">대시보드</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>회사</h4>
+                <div class="footer-links">
+                    <a href="#team" class="footer-link">소개</a>
+                    <a href="blog.html" class="footer-link">블로그</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>법률</h4>
+                <div class="footer-links">
+                    <a href="privacy-policy.html" class="footer-link">개인정보</a>
+                    <a href="#" class="footer-link">약관</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2024 Campus Intelligence. All rights reserved.</p>
+            <div class="lang-switch-footer">
+                <a href="index-en.html">🌐 Switch to English</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-scroll.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>移动端菜单调试 - ATLAS</title>
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <style>
+        .debug-panel {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.9);
+            color: #0f0;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            z-index: 10000;
+            max-width: 300px;
+        }
+        .debug-panel h3 {
+            margin: 0 0 10px 0;
+            color: #0ff;
+        }
+        .debug-item {
+            margin: 5px 0;
+        }
+        .status-ok { color: #0f0; }
+        .status-error { color: #f00; }
+        .test-content {
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .test-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        .test-btn:hover {
+            background: #5568d3;
+        }
+    </style>
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <div class="test-content">
+        <h1>🔧 移动端菜单调试页面</h1>
+        <p>这个页面用于测试移动端导航菜单的功能。</p>
+
+        <h2>测试步骤：</h2>
+        <ol>
+            <li>缩小浏览器窗口到手机尺寸（宽度 < 768px）</li>
+            <li>或者按 <code>Ctrl+Shift+M</code> (Mac: <code>Cmd+Shift+M</code>) 进入设备模式</li>
+            <li>点击左上角的 ☰ 菜单按钮</li>
+            <li>查看右下角的调试信息</li>
+        </ol>
+
+        <h2>手动测试：</h2>
+        <button class="test-btn" onclick="toggleMenuManually()">
+            手动切换菜单
+        </button>
+        <button class="test-btn" onclick="checkMenuState()">
+            检查菜单状态
+        </button>
+        <button class="test-btn" onclick="location.reload()">
+            重新加载页面
+        </button>
+
+        <h2>当前窗口信息：</h2>
+        <div id="windowInfo" style="background: #f0f0f0; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <p>窗口宽度: <strong id="windowWidth">-</strong></p>
+            <p>是否移动端: <strong id="isMobile">-</strong></p>
+            <p>菜单按钮可见: <strong id="toggleVisible">-</strong></p>
+        </div>
+    </div>
+
+    <!-- 调试面板 -->
+    <div class="debug-panel">
+        <h3>🐛 调试信息</h3>
+        <div class="debug-item">
+            导航栏: <span id="navStatus" class="status-error">未加载</span>
+        </div>
+        <div class="debug-item">
+            菜单按钮: <span id="toggleStatus" class="status-error">未找到</span>
+        </div>
+        <div class="debug-item">
+            菜单面板: <span id="panelStatus" class="status-error">未找到</span>
+        </div>
+        <div class="debug-item">
+            菜单状态: <span id="menuState" class="status-error">关闭</span>
+        </div>
+        <div class="debug-item">
+            点击次数: <span id="clickCount">0</span>
+        </div>
+    </div>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script>
+        let clickCount = 0;
+
+        function updateDebugInfo() {
+            const nav = document.querySelector('.global-nav');
+            const toggle = document.querySelector('.atlas-menu-toggle');
+            const panel = document.querySelector('.atlas-nav-panel');
+
+            // 更新状态
+            document.getElementById('navStatus').textContent = nav ? '✓ 已加载' : '✗ 未找到';
+            document.getElementById('navStatus').className = nav ? 'status-ok' : 'status-error';
+
+            document.getElementById('toggleStatus').textContent = toggle ? '✓ 已找到' : '✗ 未找到';
+            document.getElementById('toggleStatus').className = toggle ? 'status-ok' : 'status-error';
+
+            document.getElementById('panelStatus').textContent = panel ? '✓ 已找到' : '✗ 未找到';
+            document.getElementById('panelStatus').className = panel ? 'status-ok' : 'status-error';
+
+            const isOpen = nav && nav.classList.contains('is-open');
+            document.getElementById('menuState').textContent = isOpen ? '✓ 打开' : '✗ 关闭';
+            document.getElementById('menuState').className = isOpen ? 'status-ok' : 'status-error';
+
+            // 更新窗口信息
+            const width = window.innerWidth;
+            document.getElementById('windowWidth').textContent = width + 'px';
+            document.getElementById('isMobile').textContent = width <= 768 ? '是' : '否';
+
+            if (toggle) {
+                const toggleStyle = window.getComputedStyle(toggle);
+                const isVisible = toggleStyle.display !== 'none';
+                document.getElementById('toggleVisible').textContent = isVisible ? '是' : '否';
+            }
+        }
+
+        function toggleMenuManually() {
+            const nav = document.querySelector('.global-nav');
+            if (nav) {
+                nav.classList.toggle('is-open');
+                clickCount++;
+                document.getElementById('clickCount').textContent = clickCount;
+                updateDebugInfo();
+                console.log('手动切换菜单，当前状态:', nav.classList.contains('is-open') ? '打开' : '关闭');
+            } else {
+                alert('导航栏未找到！');
+            }
+        }
+
+        function checkMenuState() {
+            const nav = document.querySelector('.global-nav');
+            const toggle = document.querySelector('.atlas-menu-toggle');
+
+            console.log('=== 菜单状态检查 ===');
+            console.log('导航栏元素:', nav);
+            console.log('菜单按钮:', toggle);
+            console.log('is-open class:', nav ? nav.classList.contains('is-open') : 'N/A');
+            console.log('窗口宽度:', window.innerWidth);
+
+            if (toggle) {
+                console.log('菜单按钮显示:', window.getComputedStyle(toggle).display);
+                console.log('菜单按钮位置:', toggle.getBoundingClientRect());
+            }
+
+            updateDebugInfo();
+            alert('调试信息已输出到控制台（按 F12 查看）');
+        }
+
+        // 页面加载完成后初始化
+        window.addEventListener('load', () => {
+            console.log('页面加载完成');
+            updateDebugInfo();
+
+            // 监听菜单按钮点击
+            const toggle = document.querySelector('.atlas-menu-toggle');
+            if (toggle) {
+                toggle.addEventListener('click', () => {
+                    clickCount++;
+                    document.getElementById('clickCount').textContent = clickCount;
+                    console.log('菜单按钮被点击，次数:', clickCount);
+                    setTimeout(updateDebugInfo, 100);
+                });
+            }
+
+            // 监听窗口大小变化
+            window.addEventListener('resize', updateDebugInfo);
+
+            // 每秒更新一次
+            setInterval(updateDebugInfo, 1000);
+        });
+    </script>
+</body>
+</html>

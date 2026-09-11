@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开发者文档 - ATLAS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <!-- Page Hero -->
+    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
+        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
+            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">开发者</div>
+            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">为开发者打造</h1>
+            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">使用 ATLAS API 构建强大的集成和应用</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section style="padding: 6rem 2rem; background: #ffffff;">
+        <div style="max-width: 1000px; margin: 0 auto;">
+            
+            <div style="background: #f9fafb; border-radius: 1rem; padding: 3rem; border: 1px solid #e5e7eb; margin-bottom: 3rem;">
+                <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">快速开始</h2>
+                <p style="color: #6b7280; margin-bottom: 2rem;">通过我们的 RESTful API 访问 ATLAS 的所有功能</p>
+                <div style="background: #1a1a1a; border-radius: 0.75rem; padding: 1.5rem; font-family: 'Courier New', monospace; color: #a1a1a6; overflow-x: auto;">
+                    <code>curl -X GET https://api.atlas.ai/v1/tasks \<br>
+  -H "Authorization: Bearer YOUR_API_KEY"</code>
+                </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">📖 文档</h3>
+                    <ul style="list-style: none; padding: 0; display: grid; gap: 0.75rem;">
+                        <li><a href="api.html" style="color: #0071e3; text-decoration: none;">API 参考</a></li>
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">SDK 文档</a></li>
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">集成指南</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">🔧 工具</h3>
+                    <ul style="list-style: none; padding: 0; display: grid; gap: 0.75rem;">
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">API 密钥管理</a></li>
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">Webhook 配置</a></li>
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">测试工具</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">💡 示例</h3>
+                    <ul style="list-style: none; padding: 0; display: grid; gap: 0.75rem;">
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">代码示例</a></li>
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">集成案例</a></li>
+                        <li><a href="#" style="color: #0071e3; text-decoration: none;">最佳实践</a></li>
+                    </ul>
+                </div>
+            </div>
+        
+        </div>
+    </section>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+</body>
+</html>

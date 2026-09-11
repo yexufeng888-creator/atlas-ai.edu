@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo 配置 - ATLAS</title>
+    <link rel="stylesheet" href="assets/css/page.css">
+    <link rel="stylesheet" href="assets/css/3d-effects.css">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-scroll.css">
+    <style>
+        /* Apple-inspired Design System */
+        :root {
+            --color-primary: #0071e3;
+            --color-primary-dark: #0077ED;
+            --color-text: #1d1d1f;
+            --color-text-secondary: #86868b;
+            --color-bg: #fbfbfd;
+            --color-surface: #ffffff;
+            --color-border: #d2d2d7;
+            --font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --radius-sm: 0.5rem;
+            --radius-md: 1rem;
+            --radius-lg: 1.5rem;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.12);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.16);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-system);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Page Header */
+        .page-hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6rem 2rem 4rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+        }
+
+        .page-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .page-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .page-description {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            line-height: 1.5;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Container */
+        .page-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Cards */
+        .card {
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--color-border);
+        }
+
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-4px);
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 980px;
+            font-size: 1rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 113, 227, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Section Headers */
+        .section-header {
+            margin-bottom: 3rem;
+        }
+
+        .section-eyebrow {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .section-description {
+            font-size: 1.125rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .page-hero {
+                padding: 5rem 1.5rem 3rem;
+            }
+
+            .page-container {
+                padding: 3rem 1.5rem;
+            }
+
+            .card-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        [data-fade-in] {
+            animation: fadeInUp 0.6s ease-out both;
+        }
+    </style>
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <main class="page-content">
+        <div class="content-container glass-card">
+            <div class="page-header">
+                <p class="page-eyebrow">DEMO MODE</p>
+                <h1 class="page-title">Demo 配置</h1>
+                <p class="page-description">演示模式和测试数据管理</p>
+            </div>
+
+            <div class="page-body">
+
+            <div style="margin-bottom: 2rem; padding: 2rem; background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(217, 70, 239, 0.1)); border-radius: 1rem; text-align: center;">
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem;">🎭 当前处于演示模式</h3>
+                <p style="color: var(--color-text-muted); font-size: 0.875rem;">所有数据均为示例，不会影响真实环境</p>
+            </div>
+
+            <div class="memory-sections">
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">🎯</div>
+                    <h3>演示场景</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">产品经理场景</span>
+                            <span class="info-value" style="color: #10b981;">✓ 已加载</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">示例数据</span>
+                            <span class="info-value">完整数据集</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">模拟时间</span>
+                            <span class="info-value">2026-09-06</span>
+                        </div>
+                    </div>
+                    <button style="margin-top: 1rem; padding: 0.75rem 1.5rem; background: white; color: var(--color-text); border: 1px solid var(--color-border); border-radius: 0.5rem; font-weight: 600; cursor: pointer; width: 100%;">切换场景</button>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">📊</div>
+                    <h3>测试数据</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">记忆数据</span>
+                            <span class="info-value">48 条</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">任务数据</span>
+                            <span class="info-value">23 条</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">文档数据</span>
+                            <span class="info-value">156 份</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">对话历史</span>
+                            <span class="info-value">89 条</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">🔄</div>
+                    <h3>数据管理</h3>
+                    <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+                        <button style="padding: 0.75rem; background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">重置为初始状态</button>
+                        <button style="padding: 0.75rem; background: white; color: var(--color-text); border: 1px solid var(--color-border); border-radius: 0.5rem; font-weight: 600; cursor: pointer;">加载随机数据</button>
+                        <button style="padding: 0.75rem; background: white; color: var(--color-text); border: 1px solid var(--color-border); border-radius: 0.5rem; font-weight: 600; cursor: pointer;">导入自定义数据</button>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">🎬</div>
+                    <h3>预设场景</h3>
+                    <div class="tag-list">
+                        <span class="tag">产品经理</span>
+                        <span class="tag">软件工程师</span>
+                        <span class="tag">设计师</span>
+                        <span class="tag">学生</span>
+                        <span class="tag">创业者</span>
+                        <span class="tag">自由职业者</span>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">⚙️</div>
+                    <h3>演示选项</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">自动生成事件</span>
+                            <span class="info-value" style="color: #10b981;">✓ 开启</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">模拟延迟</span>
+                            <span class="info-value" style="color: #6b7280;">✕ 关闭</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">显示提示</span>
+                            <span class="info-value" style="color: #10b981;">✓ 开启</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">引导模式</span>
+                            <span class="info-value" style="color: #10b981;">✓ 开启</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-card glass-card shine-effect elevation-2">
+                    <div class="card-icon">🎨</div>
+                    <h3>界面配置</h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <span class="info-label">演示水印</span>
+                            <span class="info-value" style="color: #10b981;">✓ 显示</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">快捷操作面板</span>
+                            <span class="info-value" style="color: #10b981;">✓ 显示</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">数据来源标签</span>
+                            <span class="info-value" style="color: #10b981;">✓ 显示</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 2rem; padding: 2rem; background: rgba(139, 92, 246, 0.05); border: 1px solid rgba(139, 92, 246, 0.2); border-radius: 1rem;">
+                <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: #8b5cf6;">💡 演示模式说明</h4>
+                <ul style="color: var(--color-text-muted); font-size: 0.875rem; line-height: 1.8; list-style: none; padding-left: 0;">
+                    <li>• 演示模式使用虚拟数据，不会与真实服务交互</li>
+                    <li>• 所有操作都是模拟的，可以安全地测试各项功能</li>
+                    <li>• 随时可以重置数据或切换到其他演示场景</li>
+                    <li>• 退出演示模式后，所有测试数据将被清除</li>
+                </ul>
+            </div>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <button style="padding: 1rem 2rem; background: linear-gradient(135deg, #ef4444, #f59e0b); color: white; border: none; border-radius: 0.75rem; font-size: 1rem; font-weight: 700; cursor: pointer; box-shadow: 0 4px 20px rgba(239, 68, 68, 0.3);">
+                    🚀 退出演示，开始使用真实环境
+                </button>
+            </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="page-footer">
+        <p>Personal Intelligence OS · 由 ATLAS 驱动</p>
+    </footer>
+
+    <script src="assets/js/page.js"></script>
+    <script src="assets/js/3d-effects.js"></script>
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-scroll.js"></script>
+    <script>
+        // 语言切换按钮样式
+        const langStyle = document.createElement('style');
+        langStyle.textContent = `
+            .lang-switch.active {
+                background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
+                color: white !important;
+                border-color: transparent !important;
+            }
+        `;
+        document.head.appendChild(langStyle);
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>菜单测试</title>
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+    <div style="padding: 100px 20px;">
+        <h1>测试移动端菜单</h1>
+        <p>缩小浏览器窗口到手机尺寸，点击左上角的菜单按钮</p>
+        <button onclick="document.querySelector('.global-nav').classList.toggle('is-open')">
+            手动切换菜单
+        </button>
+    </div>
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script>
+        console.log('页面加载完成');
+        console.log('导航栏:', document.querySelector('.global-nav'));
+        console.log('菜单按钮:', document.querySelector('.atlas-menu-toggle'));
+    </script>
+</body>
+</html>

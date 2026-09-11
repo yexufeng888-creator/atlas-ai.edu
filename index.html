@@ -1,0 +1,1398 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS - 个人智能操作系统。用 AI 驱动的生产力工具改变你的生活。">
+    <title>ATLAS - 个人智能操作系统</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-scroll.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --color-primary: #0071e3;
+            --color-primary-dark: #0077ED;
+            --color-text: #1d1d1f;
+            --color-text-secondary: #86868b;
+            --color-bg: #fbfbfd;
+            --color-surface: #ffffff;
+            --font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+        }
+
+        body {
+            font-family: var(--font-system);
+            background: var(--color-bg);
+            color: var(--color-text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(180deg, #000000 0%, #1a1a1a 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 8rem 2rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(0, 113, 227, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(191, 90, 242, 0.15) 0%, transparent 50%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; }
+            50% { opacity: 0.8; }
+        }
+
+        .hero-content {
+            max-width: 980px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .hero-eyebrow {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #06b6d4;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+            text-transform: uppercase;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 7vw, 6rem);
+            font-weight: 700;
+            line-height: 1.05;
+            letter-spacing: -0.03em;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a0c4ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 400;
+            color: #a1a1a6;
+            margin-bottom: 3rem;
+            line-height: 1.4;
+            max-width: 720px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border-radius: 980px;
+            font-size: 1.0625rem;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--color-primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 113, 227, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Features */
+        .features {
+            padding: 8rem 2rem;
+            background: var(--color-surface);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 780px;
+            margin: 0 auto 5rem;
+        }
+
+        .section-eyebrow {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--color-primary);
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            background: #fafafa;
+            border-radius: 1.5rem;
+            padding: 3rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--color-primary), #06b6d4);
+            transform: scaleX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            display: grid;
+            place-items: center;
+        }
+
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--color-text);
+        }
+
+        .feature-description {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Stats */
+        .stats {
+            padding: 6rem 2rem;
+            background: var(--color-text);
+            color: white;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1.125rem;
+            color: #a1a1a6;
+            font-weight: 500;
+        }
+
+        /* Showcase */
+        .showcase {
+            padding: 8rem 2rem;
+            background: var(--color-bg);
+        }
+
+        .showcase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .showcase-text h2 {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+        }
+
+        .showcase-text p {
+            font-size: 1.25rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .showcase-image {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2rem;
+            aspect-ratio: 16/10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
+        }
+
+        /* CTA */
+        .cta {
+            padding: 8rem 2rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            text-align: center;
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        .cta p {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--color-text);
+            color: #a1a1a6;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            color: white;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .footer-link {
+            color: #a1a1a6;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-link:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #424245;
+            font-size: 0.875rem;
+        }
+
+        .lang-switch-footer {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .lang-switch-footer a {
+            color: #06b6d4;
+            text-decoration: none;
+            font-size: 0.875rem;
+        }
+
+        .lang-switch-footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .showcase-content {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20260911a">
+</head>
+<body class="has-global-nav">
+    <nav class="global-nav"></nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-eyebrow">个人智能操作系统</div>
+            <h1 class="hero-title">你的生活，<br>智能化管理</h1>
+            <p class="hero-subtitle">
+                将信息转化为智能，将决策转化为行动。ATLAS 是你的 AI 驱动的生活操作系统。
+            </p>
+            <div class="hero-cta">
+                <a href="signup.html" class="btn btn-primary">
+                    <span>免费开始</span>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M8 0L6.59 1.41 12.17 7H0V9H12.17L6.59 14.59 8 16 16 8z"/>
+                    </svg>
+                </a>
+                <a href="#features" class="btn btn-secondary">了解更多</a>
+            </div>
+            <div class="hero-metrics" aria-label="ATLAS 产品概览">
+                <div><strong>24/7</strong><span>持续理解你的上下文</span></div>
+                <div><strong>1 个</strong><span>统一的智能工作台</span></div>
+                <div><strong>100%</strong><span>数据控制权归你</span></div>
+            </div>
+            <div class="hero-visual" aria-label="ATLAS 智能中枢预览">
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 智能中枢界面预览">
+            </div>
+        </div>
+    </section>
+
+    <section class="command-overview" aria-labelledby="command-overview-title">
+        <div class="command-overview-inner">
+            <div class="command-intro">
+                <div class="section-eyebrow">今日指挥台 · 09:41</div>
+                <h2 id="command-overview-title">把复杂的一天，<br><span>整理成下一步。</span></h2>
+                <p>ATLAS 从你的任务、日程和长期记忆中提取重点，给出清晰的行动顺序。</p>
+                <a class="command-link" href="home.html">进入工作台 <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="command-panel" aria-label="ATLAS 今日工作台预览">
+                <div class="command-panel-top">
+                    <span class="panel-kicker">TODAY / PERSONAL OS</span>
+                    <span class="panel-live"><i></i> 已同步</span>
+                </div>
+                <div class="command-grid">
+                    <div class="command-card command-card-focus">
+                        <span class="command-card-label">当前重点</span>
+                        <strong>完成产品方案 v2</strong>
+                        <span class="command-progress"><b></b></span>
+                        <small>预计 48 分钟 · 高优先级</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">智能记忆</span>
+                        <strong>3 条相关上下文</strong>
+                        <small>上次会议 · 用户访谈 · 设计原则</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">下一步建议</span>
+                        <strong>先确认用户流程</strong>
+                        <small>基于 2 个未完成决策</small>
+                    </div>
+                </div>
+                <div class="command-timeline">
+                    <span class="timeline-dot is-done"></span><span>整理上下文</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot is-active"></span><span>聚焦行动</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot"></span><span>自动跟进</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="atlas-story" id="story" aria-labelledby="story-title">
+        <div class="story-sticky">
+            <div class="section-eyebrow">ATLAS SYSTEM / 01—03</div>
+            <h2 id="story-title">不是更多工具。<br><span>是更少的摩擦。</span></h2>
+            <p>从一个想法，到一个完成的行动，ATLAS 始终保持上下文在线。</p>
+            <div class="story-progress" aria-label="产品故事进度">
+                <span class="is-active"></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="story-steps">
+            <article class="story-step is-active" data-story-step="0">
+                <div class="story-step-index">01 / 捕获</div>
+                <h3>所有输入，<br>都有去处。</h3>
+                <p>一句话、一个文件或一场会议，ATLAS 把零散信息收进同一个可理解的上下文。</p>
+                <div class="story-visual story-visual-capture"><span>“下周准备产品评审”</span><i>任务 · 日程 · 记忆</i></div>
+            </article>
+            <article class="story-step" data-story-step="1">
+                <div class="story-step-index">02 / 理解</div>
+                <h3>上下文，<br>变成判断。</h3>
+                <p>AI 识别重要关系、截止时间和未完成决策，帮你看见真正应该优先处理的事。</p>
+                <div class="story-visual story-visual-understand"><b>产品评审</b><span>3 条相关记忆</span><i>高优先级</i></div>
+            </article>
+            <article class="story-step" data-story-step="2">
+                <div class="story-step-index">03 / 行动</div>
+                <h3>从建议开始，<br>让事情完成。</h3>
+                <p>得到明确的下一步，并让智能体继续跟进，让计划不止停留在列表里。</p>
+                <div class="story-visual story-visual-action"><strong>确认用户流程</strong><span>已加入今日重点</span><i>下一步 →</i></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="product-stage" id="product" aria-labelledby="product-stage-title">
+        <div class="product-stage-inner">
+            <div class="product-stage-copy">
+                <div class="section-eyebrow">THE ATLAS LAYER</div>
+                <h2 id="product-stage-title">你的世界，<br><span>终于连成一体。</span></h2>
+                <p>任务、记忆、日程和智能体不再各自分散。它们在同一个界面里彼此理解。</p>
+                <div class="stage-feature-list">
+                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>看见重点</strong><small>每天自动整理优先级</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>保留上下文</strong><small>跨任务持续记住重要信息</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>推动行动</strong><small>从建议走到真正完成</small></span><i aria-hidden="true">+</i></div>
+                </div>
+            </div>
+            <div class="product-stage-visual">
+                <div class="stage-orbit" aria-hidden="true"></div>
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 统一智能工作台界面">
+                <span class="stage-badge stage-badge-focus">FOCUS / 84</span>
+                <span class="stage-badge stage-badge-memory">MEMORY / 03</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-header">
+            <div class="section-eyebrow">功能特性</div>
+            <h2 class="section-title">为你的成功而设计</h2>
+            <p class="section-description">
+                你需要的一切，让你保持井井有条、高效和掌控全局。
+            </p>
+        </div>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4a3 3 0 0 0-3 3v1a3 3 0 0 0-2 2.8A3 3 0 0 0 6 14v1a3 3 0 0 0 4 2.8V20a2 2 0 0 0 4 0v-2.2a3 3 0 0 0 4-2.8v-1a3 3 0 0 0 2-3.2A3 3 0 0 0 18 8V7a3 3 0 0 0-3-3H9Z"/><path d="M9 8h.01M15 8h.01M8 13c1.5 1 2.5 1 4 0 1.5 1 2.5 1 4 0"/></svg></span>
+                <h3 class="feature-title">智能记忆</h3>
+                <p class="feature-description">
+                    在你需要的时候，记住你需要的一切。你的个人知识图谱与你一起成长。
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></span>
+                <h3 class="feature-title">智能任务管理</h3>
+                <p class="feature-description">
+                    AI 驱动的优先级排序，适应你的工作风格，帮助你专注于重要的事情。
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01M8 16h8"/></svg></span>
+                <h3 class="feature-title">AI 智能体</h3>
+                <p class="feature-description">
+                    专业智能体自动处理从旅行规划到邮件管理的所有事务。
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 3 2 5-7"/></svg></span>
+                <h3 class="feature-title">生活分析</h3>
+                <p class="feature-description">
+                    美观的仪表板可视化你的生产力、健康和习惯。
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg></span>
+                <h3 class="feature-title">隐私优先</h3>
+                <p class="feature-description">
+                    你的数据属于你。端到端加密和透明的 AI 操作。
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
+                <h3 class="feature-title">闪电般快速</h3>
+                <p class="feature-description">
+                    原生性能，即时搜索和跨设备实时同步。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!-- Showcase Section -->
+    <section class="showcase">
+        <div class="showcase-content">
+            <div class="showcase-text">
+                <h2>由创新者打造，<br>为创新者服务</h2>
+                <p>
+                    Campus Intelligence 是一支由设计师、工程师和 AI 研究人员组成的团队，
+                    致力于创造赋能你成就更多的工具。
+                </p>
+                <a href="#team" class="btn btn-primary">认识团队</a>
+            </div>
+            <div class="showcase-image">
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 智能工作流可视化">
+            </div>
+        </div>
+    </section>
+    <section class="team-section" id="team" aria-labelledby="team-title">
+        <div class="team-heading">
+            <div class="section-eyebrow">关于 ATLAS</div>
+            <h2 id="team-title">一群认真对待<br><span>复杂生活的人。</span></h2>
+            <p>我们把设计、工程与 AI 研究放在同一张桌子上，只为让技术真正服务于人的节奏。</p>
+        </div>
+        <div class="team-layout">
+            <div class="team-manifesto">
+                <span class="manifesto-mark">“</span>
+                <p>真正好的智能，不是替你做更多，而是让你更清楚地知道什么值得做。</p>
+                <span class="manifesto-caption">ATLAS / PRODUCT PRINCIPLES</span>
+            </div>
+            <div class="team-values">
+                <article>
+                    <span class="team-number">01</span>
+                    <h3>理解真实生活</h3>
+                    <p>从日程、任务到长期记忆，关注信息背后的上下文。</p>
+                </article>
+                <article>
+                    <span class="team-number">02</span>
+                    <h3>让行动更清晰</h3>
+                    <p>把复杂问题拆成下一步，而不是制造更多通知和噪音。</p>
+                </article>
+                <article>
+                    <span class="team-number">03</span>
+                    <h3>把控制权交还给你</h3>
+                    <p>透明的 AI 操作、可管理的数据和始终明确的边界。</p>
+                </article>
+            </div>
+        </div>
+    </section>
+    <!-- Use Cases Section -->
+    <section class="use-cases" style="padding: 8rem 2rem; background: #ffffff;">
+        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
+            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">使用场景</div>
+            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">为各种生活场景而设计</h2>
+            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">无论你是学生、职场人士还是创业者，ATLAS 都能帮助你更好地管理生活</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto;">
+            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 1.5rem; padding: 3rem; color: white; position: relative; overflow: hidden;">
+                <div class="scene-visual scene-study" aria-hidden="true"><span></span><i></i><b></b></div>
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; position: relative; z-index: 1;">学生</h3>
+                <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.95; position: relative; z-index: 1;">
+                    管理课程作业、考试安排和学习笔记。AI 助手帮你制定学习计划，追踪学习进度。
+                </p>
+                <ul style="list-style: none; padding: 0; position: relative; z-index: 1;">
+                    <li style="padding: 0.5rem 0;">✓ 课程表智能管理</li>
+                    <li style="padding: 0.5rem 0;">✓ 作业截止日期提醒</li>
+                    <li style="padding: 0.5rem 0;">✓ 学习笔记自动整理</li>
+                </ul>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); border-radius: 1.5rem; padding: 3rem; color: white; position: relative; overflow: hidden;">
+                <div class="scene-visual scene-work" aria-hidden="true"><span></span><i></i><b></b></div>
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; position: relative; z-index: 1;">职场人士</h3>
+                <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.95; position: relative; z-index: 1;">
+                    高效管理项目、会议和团队协作。AI 智能体帮你处理日常事务，专注核心工作。
+                </p>
+                <ul style="list-style: none; padding: 0; position: relative; z-index: 1;">
+                    <li style="padding: 0.5rem 0;">✓ 项目进度追踪</li>
+                    <li style="padding: 0.5rem 0;">✓ 会议自动总结</li>
+                    <li style="padding: 0.5rem 0;">✓ 邮件智能处理</li>
+                </ul>
+            </div>
+
+            <div style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); border-radius: 1.5rem; padding: 3rem; color: white; position: relative; overflow: hidden;">
+                <div class="scene-visual scene-build" aria-hidden="true"><span></span><i></i><b></b></div>
+                <h3 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem; position: relative; z-index: 1;">创业者</h3>
+                <p style="font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem; opacity: 0.95; position: relative; z-index: 1;">
+                    掌控业务全局，管理客户关系和业务数据。AI 帮你做出更明智的商业决策。
+                </p>
+                <ul style="list-style: none; padding: 0; position: relative; z-index: 1;">
+                    <li style="padding: 0.5rem 0;">✓ 客户关系管理</li>
+                    <li style="padding: 0.5rem 0;">✓ 业务数据分析</li>
+                    <li style="padding: 0.5rem 0;">✓ 决策辅助支持</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <section class="ai-flow" id="workflow">
+        <div class="section-header">
+            <div class="section-eyebrow">AI 工作流</div>
+            <h2 class="section-title">从混乱输入，到清晰行动</h2>
+            <p class="section-description">ATLAS 将信息理解、记忆和执行连接成一个持续运行的智能回路。</p>
+        </div>
+        <div class="flow-track">
+            <div class="flow-step"><span class="flow-index">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v10H5zM8 19h8M12 15v4"/></svg><h3>捕获</h3><p>收集对话、任务与灵感</p></div>
+            <div class="flow-line"></div>
+            <div class="flow-step"><span class="flow-index">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="m9 12 2 2 4-5"/></svg><h3>理解</h3><p>识别意图与优先级</p></div>
+            <div class="flow-line"></div>
+            <div class="flow-step"><span class="flow-index">03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><h3>行动</h3><p>生成下一步并自动执行</p></div>
+        </div>
+    </section>
+    <!-- Comparison Section -->
+    <section class="comparison" id="comparison" style="padding: 8rem 2rem; background: #ffffff;">
+        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
+            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">为什么选择 ATLAS</div>
+            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">不只是另一个工具</h2>
+            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">ATLAS 将多个应用的功能整合为一个统一的智能系统</p>
+        </div>
+
+        <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem;">
+            <div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #ef4444; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    传统方式
+                </h3>
+                <ul style="list-style: none; padding: 0; display: grid; gap: 1rem;">
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
+                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
+                        <span style="color: #4b5563;">在多个应用间切换，效率低下</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
+                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
+                        <span style="color: #4b5563;">数据分散，难以获得全局视角</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
+                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
+                        <span style="color: #4b5563;">需要手动整理和同步信息</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
+                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
+                        <span style="color: #4b5563;">缺少智能建议和自动化</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
+                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
+                        <span style="color: #4b5563;">学习曲线陡峭，需要配置多个工具</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; color: #10b981; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                    </svg>
+                    使用 ATLAS
+                </h3>
+                <ul style="list-style: none; padding: 0; display: grid; gap: 1rem;">
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                        <span style="color: #4b5563;">一个统一界面，管理所有事务</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                        <span style="color: #4b5563;">AI 自动连接和分析你的所有数据</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                        <span style="color: #4b5563;">智能助手主动提醒和建议</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                        <span style="color: #4b5563;">自动化处理重复性任务</span>
+                    </li>
+                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
+                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
+                        <span style="color: #4b5563;">开箱即用，几分钟即可上手</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" style="padding: 8rem 2rem; background: #f8f9fa;">
+        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
+            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">常见问题</div>
+            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">你可能想知道</h2>
+            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">关于 ATLAS 的常见问题解答</p>
+        </div>
+
+        <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 1.5rem;">
+            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
+                    ATLAS 是什么？
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
+                    ATLAS 是一个 AI 驱动的个人智能操作系统，帮助你管理日常生活、工作任务、个人记忆和各种信息。它就像你的数字大脑，记住所有重要的事情，并在你需要时提供智能建议。
+                </p>
+            </div>
+
+            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
+                    我的数据安全吗？
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
+                    你的数据安全是我们的首要任务。我们使用端到端加密保护你的所有信息，数据只存储在你的设备或加密的云端。我们永远不会将你的个人数据用于训练 AI 模型或出售给第三方。
+                </p>
+            </div>
+
+            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
+                    需要付费吗？
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
+                    ATLAS 提供免费版本，包含核心功能。如果你需要更高级的 AI 能力、更大的存储空间和优先支持，可以升级到专业版。我们提供 14 天免费试用，无需信用卡。
+                </p>
+            </div>
+
+            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
+                    支持哪些平台？
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
+                    ATLAS 支持 Web、iOS、Android、macOS 和 Windows。你的数据会在所有设备间实时同步，让你随时随地访问。
+                </p>
+            </div>
+
+            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
+                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
+                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
+                    可以导入现有数据吗？
+                </h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
+                    可以！ATLAS 支持从 Google Calendar、Notion、Evernote、Apple Notes 等主流应用导入数据。我们还提供 API 和插件，方便与你现有的工具集成。
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack Section -->
+    <section class="tech-stack" style="padding: 8rem 2rem; background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%); color: white;">
+        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
+            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: #06b6d4; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">强大技术</div>
+            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; color: white;">基于前沿 AI 技术</h2>
+            <p class="section-description" style="font-size: 1.25rem; color: #a1a1a6; line-height: 1.5;">我们使用最先进的技术为你提供最佳体验</p>
+        </div>
+
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+                <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">多模型 AI</h3>
+                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
+                    集成 GPT-4、Claude 等顶级 AI 模型
+                </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+                <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">端到端加密</h3>
+                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
+                    军用级加密保护你的隐私
+                </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+                <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">实时同步</h3>
+                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
+                    毫秒级响应，跨设备即时更新
+                </p>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+                <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 8 2 2m6 0 2-2m-2 5 2 2"/></svg></div>
+                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">知识图谱</h3>
+                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
+                    智能连接你的所有信息
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" style="padding: 8rem 2rem; background: #ffffff;">
+        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
+            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">如何开始</div>
+            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">三步开始使用</h2>
+            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">只需几分钟，即可开启你的智能生活</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; max-width: 1000px; margin: 0 auto;">
+            <div style="text-align: center;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">1</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #1a1a1a;">创建账户</h3>
+                <p style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
+                    使用邮箱或社交账号快速注册，30秒完成设置
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);">2</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #1a1a1a;">连接数据</h3>
+                <p style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
+                    导入日历、邮件和笔记，或从头开始建立你的数据
+                </p>
+            </div>
+
+            <div style="text-align: center;">
+                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);">3</div>
+                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #1a1a1a;">开始使用</h3>
+                <p style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
+                    与 AI 助手对话，让 ATLAS 开始为你工作
+                </p>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>准备好改变你的生活了吗？</h2>
+        <p>加入数千名使用 ATLAS 保持井井有条和高效的用户。</p>
+        <div class="hero-cta">
+            <a href="signup.html" class="btn btn-primary" style="background: white; color: var(--color-primary);">
+                开始免费试用
+            </a>
+            <a href="pricing.html" class="btn btn-secondary" style="border-color: white; color: white;">
+                查看定价
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer" style="background: #0a0a0a; color: #a1a1a6; padding: 6rem 2rem 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <!-- 页脚主要内容 -->
+            <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
+                <!-- 品牌栏 -->
+                <div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.5rem;">
+                        <img src="assets/img/atlas-logo.jpg" alt="ATLAS" style="width: 40px; height: 40px; border-radius: 10px;">
+                        <span style="font-size: 1.5rem; font-weight: 700; color: white;">ATLAS</span>
+                    </div>
+                    <p style="font-size: 0.9375rem; line-height: 1.6; color: #6b7280; margin-bottom: 2rem; max-width: 320px;">
+                        你的个人 AI 智能操作系统<br>
+                        让生活井井有条，工作高效有序
+                    </p>
+                    <!-- 社交媒体 -->
+                    <div style="display: flex; gap: 1rem;">
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: #a1a1a6; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='white';" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='#a1a1a6';">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/>
+                            </svg>
+                        </a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: #a1a1a6; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='white';" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='#a1a1a6';">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.879V14.89h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.989C18.343 21.129 22 16.99 22 12c0-5.523-4.477-10-10-10z"/>
+                            </svg>
+                        </a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: #a1a1a6; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='white';" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='#a1a1a6';">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/>
+                            </svg>
+                        </a>
+                        <a href="#" style="width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; color: #a1a1a6; text-decoration: none; transition: all 0.2s;" onmouseover="this.style.background='rgba(255, 255, 255, 0.1)'; this.style.color='white';" onmouseout="this.style.background='rgba(255, 255, 255, 0.05)'; this.style.color='#a1a1a6';">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 产品 -->
+                <div>
+                    <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">产品</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="#features" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">功能特性</a></li>
+                        <li><a href="pricing.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">定价方案</a></li>
+                        <li><a href="home.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">工作台</a></li>
+                        <li><a href="ask.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">AI 问询</a></li>
+                        <li><a href="memory.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">智能记忆</a></li>
+                        <li><a href="agents.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">AI 智能体</a></li>
+                    </ul>
+                </div>
+
+                <!-- 资源 -->
+                <div>
+                    <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">资源</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="blog.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">博客</a></li>
+                        <li><a href="help-center.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">帮助中心</a></li>
+                        <li><a href="developers.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">开发者文档</a></li>
+                        <li><a href="api.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">API 接口</a></li>
+                        <li><a href="community.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">社区论坛</a></li>
+                        <li><a href="changelog.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">更新日志</a></li>
+                    </ul>
+                </div>
+
+                <!-- 公司 -->
+                <div>
+                    <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">公司</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="#team" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">关于我们</a></li>
+                        <li><a href="careers.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">加入我们</a></li>
+                        <li><a href="news.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">新闻动态</a></li>
+                        <li><a href="partners.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">合作伙伴</a></li>
+                        <li><a href="contact.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">联系我们</a></li>
+                    </ul>
+                </div>
+
+                <!-- 法律 -->
+                <div>
+                    <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">法律</h4>
+                    <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
+                        <li><a href="privacy-policy.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">隐私政策</a></li>
+                        <li><a href="terms.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">服务条款</a></li>
+                        <li><a href="cookies.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">Cookie 政策</a></li>
+                        <li><a href="copyright.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">版权声明</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- 页脚底部 -->
+            <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <p style="font-size: 0.875rem; color: #6b7280;">
+                        © 2026 Campus Intelligence Inc. 保留所有权利。
+                    </p>
+                    <p style="font-size: 0.75rem; color: #4b5563;">
+                        部分功能在中国地区因配合监管工作暂不提供
+                    </p>
+                </div>
+                <a href="index-en.html" style="display: flex; align-items: center; gap: 0.5rem; color: #06b6d4; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: color 0.2s;" onmouseover="this.style.color='#0891b2'" onmouseout="this.style.color='#06b6d4'">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    Switch to English
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 响应式样式 -->
+    <style>
+        @media (max-width: 1024px) {
+            .footer > div > div:first-child {
+                grid-template-columns: repeat(3, 1fr) !important;
+            }
+
+            .footer > div > div:first-child > div:first-child {
+                grid-column: 1 / -1 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer > div > div:first-child {
+                grid-template-columns: 1fr !important;
+            }
+
+            .footer > div > div:last-child {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+        }
+    </style>
+
+    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-scroll.js"></script>
+
+    <style>
+        /* 3D 卡片效果 */
+        .card-3d {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+
+        .card-3d:hover {
+            transform: translateY(-10px) rotateX(5deg);
+        }
+
+        /* 粒子背景容器 */
+        #particles-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        /* 增强的卡片 3D 效果 */
+        .feature-card,
+        .use-cases > div > div,
+        .faq > div > div {
+            transform: translateZ(0);
+            backface-visibility: hidden;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px) translateZ(20px);
+        }
+
+        /* 鼠标跟随光效 */
+        .mouse-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 1;
+            transition: opacity 0.3s;
+        }
+
+        /* 优化动画性能 */
+        @media (prefers-reduced-motion: reduce) {
+            .card-3d,
+            .feature-card {
+                transition: none;
+                transform: none !important;
+            }
+        }
+    </style>
+
+    <!-- 粒子背景画布 -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- 鼠标跟随光效 -->
+    <div class="mouse-glow" id="mouseGlow" style="opacity: 0;"></div>
+
+    <script>
+        // 粒子系统
+        (function() {
+            const canvas = document.getElementById('particles-canvas');
+            if (!canvas) return;
+
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            let animationId;
+
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+
+            class Particle {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.vx = (Math.random() - 0.5) * 0.5;
+                    this.vy = (Math.random() - 0.5) * 0.5;
+                    this.radius = Math.random() * 2 + 1;
+                    this.opacity = Math.random() * 0.5 + 0.2;
+                }
+
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(102, 126, 234, ${this.opacity})`;
+                    ctx.fill();
+                }
+            }
+
+            function init() {
+                resizeCanvas();
+                particles = [];
+                for (let i = 0; i < 50; i++) {
+                    particles.push(new Particle());
+                }
+            }
+
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                // 绘制粒子
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+
+                // 连接附近的粒子
+                for (let i = 0; i < particles.length; i++) {
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const dx = particles[i].x - particles[j].x;
+                        const dy = particles[i].y - particles[j].y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+
+                        if (distance < 150) {
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(102, 126, 234, ${0.1 * (1 - distance / 150)})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(particles[i].x, particles[i].y);
+                            ctx.lineTo(particles[j].x, particles[j].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+
+                animationId = requestAnimationFrame(animate);
+            }
+
+            init();
+            animate();
+
+            window.addEventListener('resize', () => {
+                cancelAnimationFrame(animationId);
+                init();
+                animate();
+            });
+        })();
+
+        // 鼠标跟随光效
+        (function() {
+            const glow = document.getElementById('mouseGlow');
+            if (!glow) return;
+
+            let mouseX = 0, mouseY = 0;
+            let glowX = 0, glowY = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                glow.style.opacity = '1';
+            });
+
+            document.addEventListener('mouseleave', () => {
+                glow.style.opacity = '0';
+            });
+
+            function animateGlow() {
+                glowX += (mouseX - glowX) * 0.1;
+                glowY += (mouseY - glowY) * 0.1;
+
+                glow.style.left = glowX + 'px';
+                glow.style.top = glowY + 'px';
+
+                requestAnimationFrame(animateGlow);
+            }
+
+            animateGlow();
+        })();
+
+        // 3D 卡片倾斜效果
+        (function() {
+            const cards = document.querySelectorAll('.feature-card, .use-cases > div > div');
+
+            cards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    const rotateX = (y - centerY) / 10;
+                    const rotateY = (centerX - x) / 10;
+
+                    card.style.transform = `
+                        translateY(-8px)
+                        rotateX(${rotateX}deg)
+                        rotateY(${rotateY}deg)
+                        scale(1.02)
+                    `;
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = '';
+                });
+            });
+        })();
+
+        // 滚动视差效果
+        (function() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const parallaxElements = document.querySelectorAll('[data-parallax]');
+
+                parallaxElements.forEach(element => {
+                    const speed = element.dataset.parallax || 0.5;
+                    const yPos = -(scrolled * speed);
+                    element.style.transform = `translateY(${yPos}px)`;
+                });
+            });
+        })();
+
+        // ATLAS 产品故事：根据当前阅读位置高亮对应阶段。
+        (function() {
+            const steps = [...document.querySelectorAll('.story-step')];
+            const progress = [...document.querySelectorAll('.story-progress span')];
+            if (!steps.length || !progress.length || !('IntersectionObserver' in window)) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) return;
+                    const index = Number(entry.target.dataset.storyStep);
+                    steps.forEach((step, stepIndex) => step.classList.toggle('is-active', stepIndex === index));
+                    progress.forEach((item, itemIndex) => item.classList.toggle('is-active', itemIndex === index));
+                });
+            }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
+
+            steps.forEach((step) => observer.observe(step));
+        })();
+
+        // Product stage scales with scroll progress for the focused launch-page moment.
+        (function() {
+            const stage = document.querySelector('.product-stage');
+            if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            const updateStage = () => {
+                const rect = stage.getBoundingClientRect();
+                const travel = Math.max(stage.offsetHeight - innerHeight, 1);
+                const progress = Math.min(Math.max(-rect.top / travel, 0), 1);
+                stage.style.setProperty('--stage-progress', progress.toFixed(3));
+            };
+
+            let ticking = false;
+            const requestUpdate = () => {
+                if (ticking) return;
+                ticking = true;
+                requestAnimationFrame(() => {
+                    updateStage();
+                    ticking = false;
+                });
+            };
+            updateStage();
+            addEventListener('scroll', requestUpdate, { passive: true });
+            addEventListener('resize', requestUpdate);
+        })();
+
+        // Mobile product story behaves like a compact, accessible accordion.
+        (function() {
+            const features = [...document.querySelectorAll('.stage-feature')];
+            if (!features.length) return;
+
+            const activate = (feature) => {
+                features.forEach((item) => {
+                    const active = item === feature;
+                    item.classList.toggle('is-active', active);
+                    item.setAttribute('aria-expanded', String(active));
+                });
+            };
+
+            features.forEach((feature) => {
+                feature.addEventListener('click', () => activate(feature));
+                feature.addEventListener('keydown', (event) => {
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+                    event.preventDefault();
+                    activate(feature);
+                });
+            });
+        })();
+    </script>
+
+</body>
+</html>
