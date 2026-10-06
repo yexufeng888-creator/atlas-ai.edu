@@ -70,8 +70,8 @@
             'stats.rating': '用户评分',
 
             // Showcase
-            'showcase.title': '由创新者打造，<br>为创新者服务',
-            'showcase.description': 'Campus Intelligence 是一支由设计师、工程师和 AI 研究人员组成的团队，致力于创造赋能你成就更多的工具。',
+            'showcase.title': '让智能，<br>真正融入日常',
+            'showcase.description': '将任务、记忆与行动连接起来，让技术在真实生活中发挥作用。',
             'showcase.cta': '认识团队',
 
             // CTA
@@ -106,8 +106,8 @@
             'team.mission': 'We\'re a dedicated team of designers, engineers, and AI researchers committed to creating tools that empower people to achieve more. Our mission is to make personal intelligence accessible, private, and genuinely useful for everyone.',
 
             // Showcase
-            'showcase.title': 'Built by Innovators,<br>for Innovators',
-            'showcase.description': 'Campus Intelligence is a team of designers, engineers, and AI researchers dedicated to creating tools that empower you to achieve more.',
+            'showcase.title': 'Intelligence that<br>fits real life',
+            'showcase.description': 'Connect tasks, memory, and action so technology can make a meaningful difference in everyday life.',
             'showcase.cta': 'Meet the Team',
 
             // CTA

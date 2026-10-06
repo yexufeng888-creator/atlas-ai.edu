@@ -423,17 +423,26 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261002b">
 </head>
 <body class="has-global-nav">
-    <nav class="global-nav"></nav>
+<nav class="global-nav"></nav>
+<nav class="product-nav" aria-label="홈 제품 탐색">
+    <div class="product-nav-links">
+        <a href="#top" aria-current="location">개요</a>
+        <a href="#features">주요 기능</a>
+        <a href="#showcase">제품 경험</a>
+        <a href="#cta">시작하기</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
             <div class="hero-eyebrow">개인 지능 운영 체제</div>
             <h1 class="hero-title">당신의 삶을<br>지능적으로 관리</h1>
             <p class="hero-subtitle">
-                将信息转化为智能，将决策转化为行动。ATLAS 是你的 AI 驱动的生活操作系统。
+                정보를 지능으로, 결정을 행동으로 바꿉니다. ATLAS는 AI 기반 개인 생활 운영 체제입니다.
             </p>
             <div class="hero-cta">
                 <a href="signup.html" class="btn btn-primary">
@@ -443,6 +452,108 @@
                     </svg>
                 </a>
                 <a href="#features" class="btn btn-secondary">자세히 보기</a>
+            </div>
+            <div class="hero-metrics" aria-label="ATLAS 한눈에 보기">
+                <div><strong>24/7</strong><span>맥락을 계속 이해합니다</span></div>
+                <div><strong>1개</strong><span>하나로 연결된 워크스페이스</span></div>
+                <div><strong>내 데이터</strong><span>언제나 직접 관리합니다</span></div>
+            </div>
+            <div class="hero-visual" aria-label="ATLAS 지능형 워크스페이스 미리보기">
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 지능형 워크스페이스 화면 미리보기">
+            </div>
+        </div>
+    </section>
+
+    <section class="command-overview" id="overview" aria-labelledby="command-overview-title">
+        <div class="command-overview-inner">
+            <div class="command-intro">
+                <div class="section-eyebrow">오늘의 대시보드 · 09:41</div>
+                <h2 id="command-overview-title">복잡한 하루를<br><span>다음 단계로 정리합니다.</span></h2>
+                <p>ATLAS가 할 일, 일정, 장기 기억에서 중요한 맥락을 찾아 명확한 실행 순서를 제안합니다.</p>
+                <a class="command-link" href="home.html">워크스페이스 열기 <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="command-panel" aria-label="ATLAS 오늘의 워크스페이스 미리보기">
+                <div class="command-panel-top">
+                    <span class="panel-kicker">TODAY / PERSONAL OS</span>
+                    <span class="panel-live"><i></i> 동기화됨</span>
+                </div>
+                <div class="command-grid">
+                    <div class="command-card command-card-focus">
+                        <span class="command-card-label">오늘의 집중</span>
+                        <strong>제품 기획안 v2 완성</strong>
+                        <span class="command-progress"><b></b></span>
+                        <small>약 48분 · 높은 우선순위</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">관련 기억</span>
+                        <strong>관련 맥락 3개</strong>
+                        <small>지난 회의 · 사용자 인터뷰 · 디자인 원칙</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">다음 단계 제안</span>
+                        <strong>사용자 흐름 확인</strong>
+                        <small>미결정 사항 2개를 바탕으로 제안</small>
+                    </div>
+                </div>
+                <div class="command-timeline">
+                    <span class="timeline-dot is-done"></span><span>맥락 정리</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot is-active"></span><span>실행에 집중</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot"></span><span>후속 진행</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="atlas-story" id="story" aria-labelledby="story-title">
+        <div class="story-sticky">
+            <div class="section-eyebrow">ATLAS SYSTEM / 01—03</div>
+            <h2 id="story-title">도구는 더 적게.<br><span>마찰도 더 적게.</span></h2>
+            <p>아이디어에서 완료까지, ATLAS가 필요한 맥락을 연결합니다.</p>
+            <div class="story-progress" aria-label="제품 스토리 진행 상황">
+                <span class="is-active"></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="story-steps">
+            <article class="story-step is-active" data-story-step="0">
+                <div class="story-step-index">01 / 수집</div>
+                <h3>모든 입력에<br>알맞은 자리를.</h3>
+                <p>메모, 파일, 회의 내용을 ATLAS가 하나의 활용 가능한 맥락으로 정리합니다.</p>
+                <div class="story-visual story-visual-capture"><span>“다음 주 제품 리뷰 준비하기”</span><i>작업 · 일정 · 기억</i></div>
+            </article>
+            <article class="story-step" data-story-step="1">
+                <div class="story-step-index">02 / 이해</div>
+                <h3>맥락이<br>판단으로 이어집니다.</h3>
+                <p>우선순위, 마감일, 미결정 사항을 연결해 지금 중요한 일을 알려줍니다.</p>
+                <div class="story-visual story-visual-understand"><b>제품 리뷰</b><span>관련 기억 3개</span><i>높은 우선순위</i></div>
+            </article>
+            <article class="story-step" data-story-step="2">
+                <div class="story-step-index">03 / 실행</div>
+                <h3>다음 단계에서<br>완료까지.</h3>
+                <p>명확한 제안부터 시작하고 에이전트와 함께 계획을 계속 진행하세요.</p>
+                <div class="story-visual story-visual-action"><strong>사용자 흐름 확인</strong><span>오늘의 집중 항목에 추가됨</span><i>다음 단계 →</i></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="product-stage" id="product" aria-labelledby="product-stage-title">
+        <div class="product-stage-inner">
+            <div class="product-stage-copy">
+                <div class="section-eyebrow">THE ATLAS LAYER</div>
+                <h2 id="product-stage-title">당신의 세계를<br><span>하나로 연결합니다.</span></h2>
+                <p>작업, 기억, 일정, 에이전트가 하나의 공간에서 함께 작동합니다.</p>
+                <div class="stage-feature-list">
+                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>중요한 일 파악</strong><small>매일 우선순위를 자동으로 정리</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>맥락 유지</strong><small>중요한 정보를 작업과 함께 기억</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>실행 지원</strong><small>제안에서 완료까지 이어가기</small></span><i aria-hidden="true">+</i></div>
+                </div>
+            </div>
+            <div class="product-stage-visual">
+                <div class="stage-orbit" aria-hidden="true"></div>
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 통합 지능형 워크스페이스">
+                <span class="stage-badge stage-badge-focus">FOCUS / 84</span>
+                <span class="stage-badge stage-badge-memory">MEMORY / 03</span>
             </div>
         </div>
     </section>
@@ -531,15 +642,14 @@
     </section>
 
     <!-- Showcase Section -->
-    <section class="showcase">
+    <section class="showcase" id="showcase">
         <div class="showcase-content">
             <div class="showcase-text">
-                <h2>혁신가에 의해<br>혁신가를 위해</h2>
+                <h2>지능을,<br>일상 속으로</h2>
                 <p>
-                    Campus Intelligence 是一支由设计师、工程师和 AI 研究人员组成的团队，
-                    致力于创造赋能你成就更多的工具。
+                    작업, 기억, 행동을 연결해 기술이 실제 일상에 도움이 되도록 합니다.
                 </p>
-                <a href="#team" class="btn btn-primary">팀 만나기</a>
+                <a href="team.html" class="btn btn-primary">팀 만나기</a>
             </div>
             <div class="showcase-image">
                 🚀
@@ -548,7 +658,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta" id="cta">
         <h2>인생을 바꿀 준비가 되셨나요?</h2>
         <p>정리되고 효율적으로 지내기 위해 ATLAS를 사용하는 수천 명의 사용자와 함께하세요.</p>
         <div class="hero-cta">
@@ -575,7 +685,7 @@
             <div class="footer-section">
                 <h4>회사</h4>
                 <div class="footer-links">
-                    <a href="#team" class="footer-link">소개</a>
+                    <a href="team.html" class="footer-link">소개</a>
                     <a href="blog.html" class="footer-link">블로그</a>
                 </div>
             </div>
@@ -595,7 +705,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-shell.js?v=20261002b"></script>
     <script src="assets/js/atlas-scroll.js"></script>
 </body>
 </html>

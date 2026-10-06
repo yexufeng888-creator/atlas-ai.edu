@@ -424,13 +424,21 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/css/index-premium.css?v=20260911a">
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261002b">
 </head>
 <body class="has-global-nav">
-    <nav class="global-nav"></nav>
+<nav class="global-nav"></nav>
+<nav class="product-nav" aria-label="首页产品导航">
+    <div class="product-nav-links">
+        <a href="#top" aria-current="location">概览</a>
+        <a href="#features">功能亮点</a>
+        <a href="#showcase">产品体验</a>
+        <a href="#workflow">工作流程</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
             <div class="hero-eyebrow">个人智能操作系统</div>
             <h1 class="hero-title">你的生活，<br>智能化管理</h1>
@@ -457,7 +465,7 @@
         </div>
     </section>
 
-    <section class="command-overview" aria-labelledby="command-overview-title">
+    <section class="command-overview" id="overview" aria-labelledby="command-overview-title">
         <div class="command-overview-inner">
             <div class="command-intro">
                 <div class="section-eyebrow">今日指挥台 · 09:41</div>
@@ -615,54 +623,22 @@
     
 
     <!-- Showcase Section -->
-    <section class="showcase">
+    <section class="showcase" id="showcase">
         <div class="showcase-content">
             <div class="showcase-text">
-                <h2>由创新者打造，<br>为创新者服务</h2>
+                <h2>让智能，<br>真正融入日常</h2>
                 <p>
-                    Campus Intelligence 是一支由设计师、工程师和 AI 研究人员组成的团队，
-                    致力于创造赋能你成就更多的工具。
+                    将任务、记忆与行动连接起来，让技术在真实生活中发挥作用。
                 </p>
-                <a href="#team" class="btn btn-primary">认识团队</a>
+                <a href="team.html" class="btn btn-primary">认识团队</a>
             </div>
             <div class="showcase-image">
                 <img src="assets/img/atlas-command-center.svg" alt="ATLAS 智能工作流可视化">
             </div>
         </div>
     </section>
-    <section class="team-section" id="team" aria-labelledby="team-title">
-        <div class="team-heading">
-            <div class="section-eyebrow">关于 ATLAS</div>
-            <h2 id="team-title">一群认真对待<br><span>复杂生活的人。</span></h2>
-            <p>我们把设计、工程与 AI 研究放在同一张桌子上，只为让技术真正服务于人的节奏。</p>
-        </div>
-        <div class="team-layout">
-            <div class="team-manifesto">
-                <span class="manifesto-mark">“</span>
-                <p>真正好的智能，不是替你做更多，而是让你更清楚地知道什么值得做。</p>
-                <span class="manifesto-caption">ATLAS / PRODUCT PRINCIPLES</span>
-            </div>
-            <div class="team-values">
-                <article>
-                    <span class="team-number">01</span>
-                    <h3>理解真实生活</h3>
-                    <p>从日程、任务到长期记忆，关注信息背后的上下文。</p>
-                </article>
-                <article>
-                    <span class="team-number">02</span>
-                    <h3>让行动更清晰</h3>
-                    <p>把复杂问题拆成下一步，而不是制造更多通知和噪音。</p>
-                </article>
-                <article>
-                    <span class="team-number">03</span>
-                    <h3>把控制权交还给你</h3>
-                    <p>透明的 AI 操作、可管理的数据和始终明确的边界。</p>
-                </article>
-            </div>
-        </div>
-    </section>
     <!-- Use Cases Section -->
-    <section class="use-cases" style="padding: 8rem 2rem; background: #ffffff;">
+    <section class="use-cases" id="use-cases" style="padding: 8rem 2rem; background: #ffffff;">
         <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
             <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">使用场景</div>
             <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">为各种生活场景而设计</h2>
@@ -798,7 +774,7 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq" style="padding: 8rem 2rem; background: #f8f9fa;">
+    <section class="faq" id="faq" style="padding: 8rem 2rem; background: #f8f9fa;">
         <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
             <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">常见问题</div>
             <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">你可能想知道</h2>
@@ -941,7 +917,7 @@
 
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta" id="cta">
         <h2>准备好改变你的生活了吗？</h2>
         <p>加入数千名使用 ATLAS 保持井井有条和高效的用户。</p>
         <div class="hero-cta">
@@ -1024,7 +1000,7 @@
                 <div>
                     <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">公司</h4>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="#team" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">关于我们</a></li>
+                        <li><a href="team.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">关于我们</a></li>
                         <li><a href="careers.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">加入我们</a></li>
                         <li><a href="news.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">新闻动态</a></li>
                         <li><a href="partners.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">合作伙伴</a></li>
@@ -1090,7 +1066,7 @@
         }
     </style>
 
-    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-shell.js?v=20261002b"></script>
     <script src="assets/js/atlas-scroll.js"></script>
 
     <style>
@@ -1326,72 +1302,6 @@
             });
         })();
 
-        // ATLAS 产品故事：根据当前阅读位置高亮对应阶段。
-        (function() {
-            const steps = [...document.querySelectorAll('.story-step')];
-            const progress = [...document.querySelectorAll('.story-progress span')];
-            if (!steps.length || !progress.length || !('IntersectionObserver' in window)) return;
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (!entry.isIntersecting) return;
-                    const index = Number(entry.target.dataset.storyStep);
-                    steps.forEach((step, stepIndex) => step.classList.toggle('is-active', stepIndex === index));
-                    progress.forEach((item, itemIndex) => item.classList.toggle('is-active', itemIndex === index));
-                });
-            }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
-
-            steps.forEach((step) => observer.observe(step));
-        })();
-
-        // Product stage scales with scroll progress for the focused launch-page moment.
-        (function() {
-            const stage = document.querySelector('.product-stage');
-            if (!stage || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
-            const updateStage = () => {
-                const rect = stage.getBoundingClientRect();
-                const travel = Math.max(stage.offsetHeight - innerHeight, 1);
-                const progress = Math.min(Math.max(-rect.top / travel, 0), 1);
-                stage.style.setProperty('--stage-progress', progress.toFixed(3));
-            };
-
-            let ticking = false;
-            const requestUpdate = () => {
-                if (ticking) return;
-                ticking = true;
-                requestAnimationFrame(() => {
-                    updateStage();
-                    ticking = false;
-                });
-            };
-            updateStage();
-            addEventListener('scroll', requestUpdate, { passive: true });
-            addEventListener('resize', requestUpdate);
-        })();
-
-        // Mobile product story behaves like a compact, accessible accordion.
-        (function() {
-            const features = [...document.querySelectorAll('.stage-feature')];
-            if (!features.length) return;
-
-            const activate = (feature) => {
-                features.forEach((item) => {
-                    const active = item === feature;
-                    item.classList.toggle('is-active', active);
-                    item.setAttribute('aria-expanded', String(active));
-                });
-            };
-
-            features.forEach((feature) => {
-                feature.addEventListener('click', () => activate(feature));
-                feature.addEventListener('keydown', (event) => {
-                    if (event.key !== 'Enter' && event.key !== ' ') return;
-                    event.preventDefault();
-                    activate(feature);
-                });
-            });
-        })();
     </script>
 
 </body>

@@ -423,12 +423,21 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261002b">
 </head>
 <body class="has-global-nav">
-    <nav class="global-nav"></nav>
+<nav class="global-nav"></nav>
+<nav class="product-nav" aria-label="ホームの製品ナビゲーション">
+    <div class="product-nav-links">
+        <a href="#top" aria-current="location">概要</a>
+        <a href="#features">主な機能</a>
+        <a href="#showcase">製品体験</a>
+        <a href="#cta">はじめる</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
             <div class="hero-eyebrow">パーソナルインテリジェンスOS</div>
             <h1 class="hero-title">あなたの生活を<br>インテリジェントに管理</h1>
@@ -443,6 +452,108 @@
                     </svg>
                 </a>
                 <a href="#features" class="btn btn-secondary">詳細を見る</a>
+            </div>
+            <div class="hero-metrics" aria-label="ATLAS の概要">
+                <div><strong>24/7</strong><span>あなたの文脈を理解</span></div>
+                <div><strong>1 つ</strong><span>つながるワークスペース</span></div>
+                <div><strong>あなたのデータ</strong><span>管理権はあなたに</span></div>
+            </div>
+            <div class="hero-visual" aria-label="ATLAS インテリジェンスワークスペースのプレビュー">
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS インテリジェンスワークスペースの画面">
+            </div>
+        </div>
+    </section>
+
+    <section class="command-overview" id="overview" aria-labelledby="command-overview-title">
+        <div class="command-overview-inner">
+            <div class="command-intro">
+                <div class="section-eyebrow">TODAY / 09:41</div>
+                <h2 id="command-overview-title">複雑な一日を、<br><span>次の一歩へ。</span></h2>
+                <p>タスク、予定、長期記憶から大切なことを見つけ、行動の順序を整えます。</p>
+                <a class="command-link" href="home.html">ワークスペースを開く <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="command-panel" aria-label="ATLAS 今日のワークスペース">
+                <div class="command-panel-top">
+                    <span class="panel-kicker">TODAY / PERSONAL OS</span>
+                    <span class="panel-live"><i></i> 同期済み</span>
+                </div>
+                <div class="command-grid">
+                    <div class="command-card command-card-focus">
+                        <span class="command-card-label">今日のフォーカス</span>
+                        <strong>製品企画 v2 を完成</strong>
+                        <span class="command-progress"><b></b></span>
+                        <small>約 48 分 · 優先度高</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">関連する記憶</span>
+                        <strong>関連情報 3 件</strong>
+                        <small>前回の会議 · ユーザー調査 · デザイン原則</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">次のおすすめ</span>
+                        <strong>ユーザーフローを確認</strong>
+                        <small>未決定の項目 2 件をもとに提案</small>
+                    </div>
+                </div>
+                <div class="command-timeline">
+                    <span class="timeline-dot is-done"></span><span>情報を整理</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot is-active"></span><span>行動に集中</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot"></span><span>進捗をフォロー</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="atlas-story" id="story" aria-labelledby="story-title">
+        <div class="story-sticky">
+            <div class="section-eyebrow">ATLAS SYSTEM / 01—03</div>
+            <h2 id="story-title">ツールを増やすより、<br><span>摩擦を減らす。</span></h2>
+            <p>ひらめきから完了まで、ATLAS が必要な文脈をつなぎます。</p>
+            <div class="story-progress" aria-label="製品ストーリーの進行状況">
+                <span class="is-active"></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="story-steps">
+            <article class="story-step is-active" data-story-step="0">
+                <div class="story-step-index">01 / CAPTURE</div>
+                <h3>どんな入力にも、<br>行き先を。</h3>
+                <p>メモ、ファイル、会議の内容を、ATLAS がひとつの使える文脈にまとめます。</p>
+                <div class="story-visual story-visual-capture"><span>「来週の製品レビューを準備」</span><i>タスク · 予定 · 記憶</i></div>
+            </article>
+            <article class="story-step" data-story-step="1">
+                <div class="story-step-index">02 / UNDERSTAND</div>
+                <h3>文脈から、<br>判断へ。</h3>
+                <p>優先事項、期限、未決定の項目を結びつけ、本当に大切なことを見つけます。</p>
+                <div class="story-visual story-visual-understand"><b>製品レビュー</b><span>関連する記憶 3 件</span><i>優先度高</i></div>
+            </article>
+            <article class="story-step" data-story-step="2">
+                <div class="story-step-index">03 / ACT</div>
+                <h3>次の一歩から、<br>実行へ。</h3>
+                <p>明確な提案を受け取り、エージェントと一緒に計画を前へ進めましょう。</p>
+                <div class="story-visual story-visual-action"><strong>ユーザーフローを確認</strong><span>今日のフォーカスに追加</span><i>次の一歩 →</i></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="product-stage" id="product" aria-labelledby="product-stage-title">
+        <div class="product-stage-inner">
+            <div class="product-stage-copy">
+                <div class="section-eyebrow">THE ATLAS LAYER</div>
+                <h2 id="product-stage-title">あなたの世界を、<br><span>ひとつにつなぐ。</span></h2>
+                <p>タスク、記憶、予定、エージェントがひとつの場所で連携します。</p>
+                <div class="stage-feature-list">
+                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>大切なことが見える</strong><small>毎日の優先順位を自動で整理</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>文脈を保つ</strong><small>重要な情報を仕事と一緒に</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>行動を後押し</strong><small>提案を完了までつなげる</small></span><i aria-hidden="true">+</i></div>
+                </div>
+            </div>
+            <div class="product-stage-visual">
+                <div class="stage-orbit" aria-hidden="true"></div>
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 統合インテリジェンスワークスペース">
+                <span class="stage-badge stage-badge-focus">FOCUS / 84</span>
+                <span class="stage-badge stage-badge-memory">MEMORY / 03</span>
             </div>
         </div>
     </section>
@@ -531,15 +642,14 @@
     </section>
 
     <!-- Showcase Section -->
-    <section class="showcase">
+    <section class="showcase" id="showcase">
         <div class="showcase-content">
             <div class="showcase-text">
-                <h2>イノベーターによって<br>イノベーターのために</h2>
+                <h2>知性を、<br>日々の暮らしへ</h2>
                 <p>
-                    Campus Intelligence 是一支由设计师、工程师和 AI 研究人员组成的团队，
-                    致力于创造赋能你成就更多的工具。
+                    タスク、記憶、行動をつなぎ、テクノロジーを日常生活に役立てます。
                 </p>
-                <a href="#team" class="btn btn-primary">チームを見る</a>
+                <a href="team.html" class="btn btn-primary">チームを見る</a>
             </div>
             <div class="showcase-image">
                 🚀
@@ -548,7 +658,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta" id="cta">
         <h2>人生を変える準備はできていますか？</h2>
         <p>整理され効率的に過ごすために、ATLASを使用する数千人のユーザーに参加しましょう。</p>
         <div class="hero-cta">
@@ -575,7 +685,7 @@
             <div class="footer-section">
                 <h4>会社</h4>
                 <div class="footer-links">
-                    <a href="#team" class="footer-link">概要</a>
+                    <a href="team.html" class="footer-link">概要</a>
                     <a href="blog.html" class="footer-link">ブログ</a>
                 </div>
             </div>
@@ -595,7 +705,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-shell.js?v=20261002b"></script>
     <script src="assets/js/atlas-scroll.js"></script>
 </body>
 </html>

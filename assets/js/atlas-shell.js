@@ -43,10 +43,21 @@
     page.includes('-ko.html') ? 'ko' : 'zh-cn';
   const supportedLocales = ['zh-cn', 'zh-hk', 'zh-tw', 'en', 'ja', 'ko'];
   const requestedLocale = new URLSearchParams(window.location.search).get('lang');
-  const storedLocale = window.localStorage.getItem('atlas-locale');
-  const currentLang = supportedLocales.includes(requestedLocale) ? requestedLocale :
+  let storedLocale = null;
+  try {
+    storedLocale = window.localStorage.getItem('atlas-locale');
+  } catch (error) {
+    console.warn('Cannot read saved locale preference:', error);
+  }
+  const isLocalizedLandingPage = /^index(?:-(?:en|hk|tw|ja|ko))?\.html$/i.test(page);
+  const currentLang = isLocalizedLandingPage ? localeFromPage :
+    supportedLocales.includes(requestedLocale) ? requestedLocale :
     supportedLocales.includes(storedLocale) ? storedLocale : localeFromPage;
-  window.localStorage.setItem('atlas-locale', currentLang);
+  try {
+    window.localStorage.setItem('atlas-locale', currentLang);
+  } catch (error) {
+    console.warn('Cannot save locale preference:', error);
+  }
   document.documentElement.lang = currentLang === 'zh-cn' ? 'zh-CN' :
     currentLang === 'zh-hk' ? 'zh-HK' :
     currentLang === 'zh-tw' ? 'zh-TW' : currentLang;
@@ -66,7 +77,7 @@
 
   const localeText = {
     'zh-cn': {
-      online: '系统在线', login: '登录', region: '地区', home: '首页',
+      login: '登录', region: '地区', home: '首页',
       footer: 'Personal Intelligence OS · 由 ATLAS 驱动',
       pages: {
         home: ['个人工作台', '把任务、日程和智能建议集中在一个清晰的行动面板'],
@@ -74,11 +85,12 @@
         memory: ['记忆', 'ATLAS 对你的理解：事实、偏好、经历与推断'],
         life: ['生活', '日历、任务、项目、文档和行程的统一视图'],
         agents: ['智能体', 'Agent 能力、权限、运行记录和待确认动作'],
-        settings: ['设置', '个人资料、隐私控制、Demo 配置和执行规则']
+        settings: ['设置', '个人资料、隐私控制、Demo 配置和执行规则'],
+        team: ['认识团队', '了解 ATLAS 背后的理念、实践与协作']
       }
     },
     'zh-hk': {
-      online: '系統在線', login: '登入', region: '地區', home: '首頁',
+      login: '登入', region: '地區', home: '首頁',
       footer: 'Personal Intelligence OS · 由 ATLAS 驅動',
       pages: {
         home: ['個人工作台', '將任務、日程和智能建議集中在清晰的行動面板'],
@@ -86,11 +98,12 @@
         memory: ['記憶', 'ATLAS 對你的理解：事實、偏好、經歷與推斷'],
         life: ['生活', '日曆、任務、項目、文件和行程的統一視圖'],
         agents: ['智能體', 'Agent 能力、權限、運行記錄和待確認動作'],
-        settings: ['設定', '個人資料、私隱控制、Demo 配置和執行規則']
+        settings: ['設定', '個人資料、私隱控制、Demo 配置和執行規則'],
+        team: ['認識團隊', '了解 ATLAS 背後的理念、實踐與協作']
       }
     },
     'zh-tw': {
-      online: '系統在線', login: '登入', region: '地區', home: '首頁',
+      login: '登入', region: '地區', home: '首頁',
       footer: 'Personal Intelligence OS · 由 ATLAS 驅動',
       pages: {
         home: ['個人工作台', '將任務、日程和智慧建議集中在清晰的行動面板'],
@@ -98,11 +111,12 @@
         memory: ['記憶', 'ATLAS 對你的理解：事實、偏好、經歷與推論'],
         life: ['生活', '日曆、任務、專案、文件和行程的統一視圖'],
         agents: ['智慧體', 'Agent 能力、權限、執行記錄和待確認動作'],
-        settings: ['設定', '個人資料、隱私控制、Demo 配置和執行規則']
+        settings: ['設定', '個人資料、隱私控制、Demo 配置和執行規則'],
+        team: ['認識團隊', '了解 ATLAS 背後的理念、實踐與協作']
       }
     },
     en: {
-      online: 'System online', login: 'Sign in', region: 'Region', home: 'Home',
+      login: 'Sign in', region: 'Region', home: 'Home',
       footer: 'Personal Intelligence OS · Powered by ATLAS',
       pages: {
         home: ['Personal dashboard', 'Tasks, schedules, and intelligent suggestions in one clear action panel'],
@@ -110,11 +124,12 @@
         memory: ['Memory', 'How ATLAS understands you: facts, preferences, experiences, and inferences'],
         life: ['Life', 'One view for your calendar, tasks, projects, documents, and trips'],
         agents: ['Agents', 'Agent capabilities, permissions, runs, and actions awaiting confirmation'],
-        settings: ['Settings', 'Profile, privacy controls, demo configuration, and execution rules']
+        settings: ['Settings', 'Profile, privacy controls, demo configuration, and execution rules'],
+        team: ['Meet the team', 'Discover the principles, practice, and collaboration behind ATLAS']
       }
     },
     ja: {
-      online: 'システム稼働中', login: 'ログイン', region: '地域', home: 'ホーム',
+      login: 'ログイン', region: '地域', home: 'ホーム',
       footer: 'Personal Intelligence OS · ATLAS が提供',
       pages: {
         home: ['パーソナルダッシュボード', 'タスク、予定、インテリジェントな提案を一つの画面に'],
@@ -122,11 +137,12 @@
         memory: ['メモリ', 'ATLAS のあなたへの理解：事実、好み、経験、推論'],
         life: ['生活', 'カレンダー、タスク、プロジェクト、書類、旅行を一つの画面で'],
         agents: ['エージェント', 'エージェントの機能、権限、実行履歴、確認待ちの操作'],
-        settings: ['設定', 'プロフィール、プライバシー、デモ設定、実行ルール']
+        settings: ['設定', 'プロフィール、プライバシー、デモ設定、実行ルール'],
+        team: ['チームについて', 'ATLAS を支える理念、実践、コラボレーションをご紹介します']
       }
     },
     ko: {
-      online: '시스템 온라인', login: '로그인', region: '지역', home: '홈',
+      login: '로그인', region: '지역', home: '홈',
       footer: 'Personal Intelligence OS · ATLAS 제공',
       pages: {
         home: ['개인 대시보드', '작업, 일정, 지능형 제안을 하나의 명확한 화면에서 관리'],
@@ -134,7 +150,8 @@
         memory: ['메모리', 'ATLAS가 이해하는 나: 사실, 선호, 경험, 추론'],
         life: ['생활', '캘린더, 작업, 프로젝트, 문서와 여행을 한눈에'],
         agents: ['에이전트', '에이전트 기능, 권한, 실행 기록, 확인 대기 작업'],
-        settings: ['설정', '프로필, 개인정보 보호, 데모 구성 및 실행 규칙']
+        settings: ['설정', '프로필, 개인정보 보호, 데모 구성 및 실행 규칙'],
+        team: ['팀 소개', 'ATLAS의 원칙, 실천, 협업에 대해 알아보세요']
       }
     }
   };
@@ -171,7 +188,6 @@
         </div>
 
         <div class="atlas-nav-actions">
-          <span class="atlas-system-status"><i></i>${language.online}</span>
           <a class="atlas-login-link" href="login.html">${language.login}</a>
           <!-- 地区选择 -->
           <div class="region-selector">
@@ -262,6 +278,9 @@
         </div>
       </div>
     </div>`;
+  nav.querySelector('.atlas-brand').href = navHrefs[0];
+  const teamHomeLink = document.querySelector('.team-footer a');
+  if (teamHomeLink) teamHomeLink.href = navHrefs[0];
 
   // 移动端菜单切换
   const toggle = nav.querySelector('.atlas-menu-toggle');
@@ -324,6 +343,81 @@
       e.stopPropagation();
     });
   }
+
+  const teamTranslations = {
+    'zh-cn': {
+      kicker: 'ABOUT ATLAS / PEOPLE & PRINCIPLES', title: '让智能，回到真实生活。',
+      intro: 'ATLAS 由设计、工程与人工智能等领域的实践共同推动。我们相信，好的技术应该理解人的处境，让每天的选择更清晰。',
+      manifesto: '真正好的智能，不是替你做更多，而是让你更清楚地知道什么值得做。',
+      principle1Title: '理解真实生活', principle1Body: '从日程、任务到长期记忆，关注信息背后的上下文。',
+      principle2Title: '让行动更清晰', principle2Body: '把复杂问题拆解成下一步，而不是制造更多通知与噪音。',
+      principle3Title: '把控制权交还给你', principle3Body: '透明的 AI 操作、可管理的数据，以及始终清晰的边界。',
+      thanksLabel: 'SPECIAL THANKS', thanksTitle: '特别感谢',
+      thanksBody: '特别感谢沈阳师范大学外国语学院张欣然参与校对。',
+      backHome: '返回 ATLAS 首页'
+    },
+    'zh-hk': {
+      kicker: '關於 ATLAS / 理念與實踐', title: '讓智能，回到真實生活。',
+      intro: 'ATLAS 由設計、工程與人工智能等領域的實踐共同推動。我們相信，好的科技應理解人的處境，讓每天的選擇更清晰。',
+      manifesto: '真正好的智能，不是替你做更多，而是讓你更清楚地知道什麼值得做。',
+      principle1Title: '理解真實生活', principle1Body: '從日程、任務到長期記憶，關注資訊背後的脈絡。',
+      principle2Title: '讓行動更清晰', principle2Body: '把複雜問題拆解成下一步，而不是製造更多通知與雜音。',
+      principle3Title: '把控制權交還給你', principle3Body: '透明的 AI 操作、可管理的資料，以及始終清晰的界線。',
+      thanksLabel: '特別鳴謝', thanksTitle: '特別感謝',
+      thanksBody: '特別感謝沈陽師範大學外國語學院張欣然參與校對。',
+      backHome: '返回 ATLAS 首頁'
+    },
+    'zh-tw': {
+      kicker: '關於 ATLAS / 理念與實踐', title: '讓智慧，回到真實生活。',
+      intro: 'ATLAS 由設計、工程與人工智慧等領域的實踐共同推動。我們相信，好的科技應理解人的處境，讓每天的選擇更清晰。',
+      manifesto: '真正好的智慧，不是替你做更多，而是讓你更清楚地知道什麼值得做。',
+      principle1Title: '理解真實生活', principle1Body: '從日程、任務到長期記憶，關注資訊背後的脈絡。',
+      principle2Title: '讓行動更清晰', principle2Body: '把複雜問題拆解成下一步，而不是製造更多通知與雜音。',
+      principle3Title: '把控制權交還給你', principle3Body: '透明的 AI 操作、可管理的資料，以及始終清楚的界線。',
+      thanksLabel: '特別感謝', thanksTitle: '特別感謝',
+      thanksBody: '特別感謝沈陽師範大學外國語學院張欣然參與校對。',
+      backHome: '返回 ATLAS 首頁'
+    },
+    en: {
+      kicker: 'ABOUT ATLAS / PEOPLE & PRINCIPLES', title: 'Bring intelligence back to real life.',
+      intro: 'ATLAS is shaped by practice across design, engineering, and AI. We believe good technology should understand people’s context and make everyday choices clearer.',
+      manifesto: 'Great intelligence does not do more for you; it helps you see more clearly what is worth doing.',
+      principle1Title: 'Understand real life', principle1Body: 'Connect calendars, tasks, and long-term memory to the context behind information.',
+      principle2Title: 'Make action clearer', principle2Body: 'Turn complex challenges into a next step instead of creating more noise.',
+      principle3Title: 'Put you in control', principle3Body: 'Transparent AI actions, manageable data, and boundaries that stay clear.',
+      thanksLabel: 'SPECIAL THANKS', thanksTitle: 'With gratitude',
+      thanksBody: 'Special thanks to Xinran Zhang of the School of Foreign Languages, Shenyang Normal University, for proofreading.',
+      backHome: 'Back to ATLAS home'
+    },
+    ja: {
+      kicker: 'ATLASについて / 理念と実践', title: '知性を、現実の暮らしへ。',
+      intro: 'ATLAS はデザイン、エンジニアリング、AI などの実践から生まれています。優れた技術は人の状況を理解し、日々の選択を明確にすると考えています。',
+      manifesto: '優れた知性とは、代わりに多くを行うことではなく、何をすべきかを明確にすることです。',
+      principle1Title: '現実の暮らしを理解する', principle1Body: '予定、タスク、長期記憶をつなぎ、情報の背景にある文脈を捉えます。',
+      principle2Title: '行動を明確にする', principle2Body: '複雑な課題を次の一歩に分解し、余計な通知を増やしません。',
+      principle3Title: '主導権をあなたに', principle3Body: '透明な AI の操作、管理できるデータ、明確な境界を大切にします。',
+      thanksLabel: 'SPECIAL THANKS', thanksTitle: '感謝を込めて',
+      thanksBody: '校正にご協力いただいた瀋陽師範大学外国語学院の張欣然さんに、特別な感謝を申し上げます。',
+      backHome: 'ATLAS ホームへ戻る'
+    },
+    ko: {
+      kicker: 'ATLAS 소개 / 원칙과 실천', title: '지능을 현실의 일상으로.',
+      intro: 'ATLAS는 디자인, 엔지니어링, AI 분야의 실천을 바탕으로 만들어집니다. 좋은 기술은 사람의 상황을 이해하고 매일의 선택을 더 명확하게 해야 한다고 믿습니다.',
+      manifesto: '진정한 지능은 더 많은 일을 대신하는 것이 아니라, 무엇이 가치 있는 일인지 명확히 보여주는 것입니다.',
+      principle1Title: '실제 생활 이해하기', principle1Body: '일정, 작업, 장기 기억을 연결해 정보의 맥락을 살펴봅니다.',
+      principle2Title: '행동을 명확하게', principle2Body: '복잡한 문제를 다음 단계로 나누고 불필요한 알림을 늘리지 않습니다.',
+      principle3Title: '주도권은 사용자에게', principle3Body: '투명한 AI 작업, 관리 가능한 데이터, 명확한 경계를 지킵니다.',
+      thanksLabel: 'SPECIAL THANKS', thanksTitle: '감사의 말씀',
+      thanksBody: '교정에 참여해 주신 선양사범대학교 외국어학원 장신란 님께 특별히 감사드립니다.',
+      backHome: 'ATLAS 홈으로 돌아가기'
+    }
+  };
+
+  document.querySelectorAll('[data-team-copy]').forEach((element) => {
+    const key = element.getAttribute('data-team-copy');
+    const translation = teamTranslations[currentLang][key];
+    if (translation) element.textContent = translation;
+  });
 
   const pageHeaders = {
     'zh-cn': {
@@ -415,6 +509,102 @@
   });
   document.querySelectorAll('.page-footer p').forEach((element) => {
     element.textContent = language.footer;
+  });
+
+  const productNav = document.querySelector('.product-nav');
+  if (productNav && 'IntersectionObserver' in window) {
+    const sectionLinks = [...productNav.querySelectorAll('a[href^="#"]')];
+    const observedSections = sectionLinks
+      .map((link) => ({ link, section: document.querySelector(link.getAttribute('href')) }))
+      .filter((item) => item.section);
+    const sectionObserver = new IntersectionObserver((entries) => {
+      const visible = entries
+        .filter((entry) => entry.isIntersecting)
+        .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+      if (!visible) return;
+      observedSections.forEach(({ link, section }) => {
+        const active = section === visible.target;
+        if (active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      });
+    }, { rootMargin: '-28% 0px -62% 0px', threshold: [0, 0.2, 0.5] });
+    observedSections.forEach(({ section }) => sectionObserver.observe(section));
+  }
+  if (productNav) {
+    productNav.addEventListener('click', (event) => {
+      if (!(event.target instanceof Element)) return;
+      const link = event.target.closest('a[href^="#"]');
+      if (!(link instanceof HTMLAnchorElement) || !productNav.contains(link)) return;
+      const href = link.getAttribute('href');
+      const section = href ? document.getElementById(href.slice(1)) : null;
+      if (!href || !section) return;
+
+      event.preventDefault();
+      if (window.location.hash !== href) window.history.pushState(null, '', href);
+      const top = section.getBoundingClientRect().top + window.scrollY - 132;
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth'
+      });
+    });
+    const updateProductNav = () => {
+      productNav.classList.toggle('is-scrolled', window.scrollY > 0);
+    };
+    updateProductNav();
+    window.addEventListener('scroll', updateProductNav, { passive: true });
+  }
+
+  const storySteps = [...document.querySelectorAll('.story-step')];
+  const storyProgress = [...document.querySelectorAll('.story-progress span')];
+  if (storySteps.length && storyProgress.length && 'IntersectionObserver' in window) {
+    const storyObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const activeIndex = Number(entry.target.getAttribute('data-story-step'));
+        storySteps.forEach((step, index) => step.classList.toggle('is-active', index === activeIndex));
+        storyProgress.forEach((item, index) => item.classList.toggle('is-active', index === activeIndex));
+      });
+    }, { rootMargin: '-35% 0px -45% 0px', threshold: 0 });
+    storySteps.forEach((step) => storyObserver.observe(step));
+  }
+
+  const productStage = document.querySelector('.product-stage');
+  if (productStage && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const updateStageProgress = () => {
+      const rect = productStage.getBoundingClientRect();
+      const travel = Math.max(productStage.offsetHeight - window.innerHeight, 1);
+      const progress = Math.min(Math.max(-rect.top / travel, 0), 1);
+      productStage.style.setProperty('--stage-progress', progress.toFixed(3));
+    };
+    let stageUpdatePending = false;
+    const scheduleStageUpdate = () => {
+      if (stageUpdatePending) return;
+      stageUpdatePending = true;
+      window.requestAnimationFrame(() => {
+        updateStageProgress();
+        stageUpdatePending = false;
+      });
+    };
+    updateStageProgress();
+    window.addEventListener('scroll', scheduleStageUpdate, { passive: true });
+    window.addEventListener('resize', scheduleStageUpdate);
+  }
+
+  const stageFeatures = [...document.querySelectorAll('.stage-feature')];
+  stageFeatures.forEach((feature) => {
+    const activateFeature = () => {
+      stageFeatures.forEach((item) => {
+        const active = item === feature;
+        item.classList.toggle('is-active', active);
+        item.setAttribute('aria-expanded', String(active));
+      });
+    };
+    feature.addEventListener('click', activateFeature);
+    feature.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      activateFeature();
+    });
   });
 
   // 导出 ATLAS Shell API

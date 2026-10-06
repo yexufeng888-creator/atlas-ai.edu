@@ -407,12 +407,21 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261002b">
 </head>
 <body class="has-global-nav">
-    <nav class="global-nav"></nav>
+<nav class="global-nav"></nav>
+<nav class="product-nav" aria-label="Homepage product navigation">
+    <div class="product-nav-links">
+        <a href="#top" aria-current="location">Overview</a>
+        <a href="#features">Highlights</a>
+        <a href="#showcase">Experience</a>
+        <a href="#cta">Get started</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
             <div class="hero-eyebrow" data-i18n="hero.eyebrow">Personal Intelligence OS</div>
             <h1 class="hero-title" data-i18n="hero.title">Your Life,<br>Intelligently Organized</h1>
@@ -428,6 +437,108 @@
                     </svg>
                 </a>
                 <a href="#features" class="btn btn-secondary" data-i18n="hero.cta.learn">Learn More</a>
+            </div>
+            <div class="hero-metrics" aria-label="ATLAS at a glance">
+                <div><strong>24/7</strong><span>Context that stays with you</span></div>
+                <div><strong>1</strong><span>Connected workspace</span></div>
+                <div><strong>Your data</strong><span>Always under your control</span></div>
+            </div>
+            <div class="hero-visual" aria-label="ATLAS intelligence workspace preview">
+                <img src="assets/img/atlas-command-center.svg" alt="Preview of the ATLAS intelligence workspace">
+            </div>
+        </div>
+    </section>
+
+    <section class="command-overview" id="overview" aria-labelledby="command-overview-title">
+        <div class="command-overview-inner">
+            <div class="command-intro">
+                <div class="section-eyebrow">YOUR DAY / 09:41</div>
+                <h2 id="command-overview-title">Make a full day<br><span>feel more focused.</span></h2>
+                <p>ATLAS brings together your tasks, schedule, and memories to surface what matters and suggest a clear next step.</p>
+                <a class="command-link" href="home.html">Open your workspace <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="command-panel" aria-label="ATLAS daily workspace preview">
+                <div class="command-panel-top">
+                    <span class="panel-kicker">TODAY / PERSONAL OS</span>
+                    <span class="panel-live"><i></i> Synced</span>
+                </div>
+                <div class="command-grid">
+                    <div class="command-card command-card-focus">
+                        <span class="command-card-label">IN FOCUS</span>
+                        <strong>Finish product brief v2</strong>
+                        <span class="command-progress"><b></b></span>
+                        <small>48 min · High priority</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">CONNECTED MEMORY</span>
+                        <strong>3 related notes</strong>
+                        <small>Last meeting · User interviews · Design principles</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">SUGGESTED NEXT STEP</span>
+                        <strong>Confirm the user flow</strong>
+                        <small>Based on 2 open decisions</small>
+                    </div>
+                </div>
+                <div class="command-timeline">
+                    <span class="timeline-dot is-done"></span><span>Gather context</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot is-active"></span><span>Focus</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot"></span><span>Follow through</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="atlas-story" id="story" aria-labelledby="story-title">
+        <div class="story-sticky">
+            <div class="section-eyebrow">THE ATLAS SYSTEM / 01—03</div>
+            <h2 id="story-title">Fewer tools.<br><span>Less friction.</span></h2>
+            <p>From the first thought to the finished task, ATLAS keeps your context connected.</p>
+            <div class="story-progress" aria-label="Product story progress">
+                <span class="is-active"></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="story-steps">
+            <article class="story-step is-active" data-story-step="0">
+                <div class="story-step-index">01 / CAPTURE</div>
+                <h3>Every input<br>has a place.</h3>
+                <p>A note, a file, or a meeting: ATLAS brings scattered information into one useful context.</p>
+                <div class="story-visual story-visual-capture"><span>“Prepare for next week’s product review”</span><i>Task · Schedule · Memory</i></div>
+            </article>
+            <article class="story-step" data-story-step="1">
+                <div class="story-step-index">02 / UNDERSTAND</div>
+                <h3>Context<br>becomes clarity.</h3>
+                <p>AI connects priorities, deadlines, and open decisions so you can see what deserves attention first.</p>
+                <div class="story-visual story-visual-understand"><b>Product review</b><span>3 related memories</span><i>High priority</i></div>
+            </article>
+            <article class="story-step" data-story-step="2">
+                <div class="story-step-index">03 / ACT</div>
+                <h3>Turn the next step<br>into progress.</h3>
+                <p>Start with a clear recommendation, then let your agents help keep the plan moving.</p>
+                <div class="story-visual story-visual-action"><strong>Confirm the user flow</strong><span>Added to today’s focus</span><i>Next step →</i></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="product-stage" id="product" aria-labelledby="product-stage-title">
+        <div class="product-stage-inner">
+            <div class="product-stage-copy">
+                <div class="section-eyebrow">THE ATLAS LAYER</div>
+                <h2 id="product-stage-title">Your world,<br><span>working as one.</span></h2>
+                <p>Tasks, memories, schedules, and agents no longer sit apart. They work together in one connected space.</p>
+                <div class="stage-feature-list">
+                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>See what matters</strong><small>Priorities organized for your day</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>Keep the context</strong><small>Important details stay with your work</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>Move things forward</strong><small>From a suggestion to done</small></span><i aria-hidden="true">+</i></div>
+                </div>
+            </div>
+            <div class="product-stage-visual">
+                <div class="stage-orbit" aria-hidden="true"></div>
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS unified intelligence workspace">
+                <span class="stage-badge stage-badge-focus">FOCUS / 84</span>
+                <span class="stage-badge stage-badge-memory">MEMORY / 03</span>
             </div>
         </div>
     </section>
@@ -516,15 +627,14 @@
     </section>
 
     <!-- Showcase Section -->
-    <section class="showcase" data-fade-in>
+    <section class="showcase" id="showcase" data-fade-in>
         <div class="showcase-content">
             <div class="showcase-text">
-                <h2 data-i18n="showcase.title">Built by Innovators,<br>for Innovators</h2>
+                <h2 data-i18n="showcase.title">Intelligence that<br>fits real life</h2>
                 <p data-i18n="showcase.description">
-                    Campus Intelligence is a team of designers, engineers, and AI researchers
-                    dedicated to creating tools that empower you to achieve more.
+                    Connect tasks, memory, and action so technology can make a meaningful difference in everyday life.
                 </p>
-                <a href="#team" class="btn btn-primary" data-i18n="showcase.cta">Meet the Team</a>
+                <a href="team.html" class="btn btn-primary" data-i18n="showcase.cta">Meet the Team</a>
             </div>
             <div class="showcase-image">
                 🚀
@@ -533,7 +643,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta" data-fade-in>
+    <section class="cta" id="cta" data-fade-in>
         <h2 data-i18n="cta.title">Ready to Transform Your Life?</h2>
         <p data-i18n="cta.subtitle">Join thousands using ATLAS to stay organized and productive.</p>
         <div class="hero-cta">
@@ -560,7 +670,7 @@
             <div class="footer-section">
                 <h4 data-i18n="footer.company">Company</h4>
                 <div class="footer-links">
-                    <a href="#team" class="footer-link" data-i18n="footer.about">About</a>
+                    <a href="team.html" class="footer-link" data-i18n="footer.about">About</a>
                     <a href="blog.html" class="footer-link" data-i18n="footer.blog">Blog</a>
                 </div>
             </div>
@@ -580,19 +690,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/i18n.js"></script>
-    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-shell.js?v=20261002b"></script>
     <script src="assets/js/atlas-scroll.js"></script>
-    <script>
-        const style = document.createElement('style');
-        style.textContent = `
-            .lang-switch.active {
-                background: linear-gradient(135deg, #2563eb, #06b6d4) !important;
-                color: white !important;
-                border-color: transparent !important;
-            }
-        `;
-        document.head.appendChild(style);
-    </script>
 </body>
 </html>

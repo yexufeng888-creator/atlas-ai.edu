@@ -7,12 +7,26 @@ const state = {
     currentModel: 'atlas',
     currentChatId: null,
     chats: [],
+    isResponding: false,
+    modalOpener: null,
     apiKeys: {
         openai: localStorage.getItem('openai_key') || '',
         claude: localStorage.getItem('claude_key') || '',
         gemini: localStorage.getItem('gemini_key') || ''
     }
 };
+let chatSequence = 0;
+
+const pageTranslations = window.ATLASSecondaryDashboardI18n?.translations || {};
+const pageLocale = window.ATLASPageI18n?.locale || 'zh-cn';
+const translateUI = (text) => window.ATLASPageI18n
+    ? window.ATLASPageI18n.translate(text, pageTranslations)
+    : text;
+
+function formatMessageCount(count) {
+    const unit = translateUI('条消息');
+    return `${count}${['en'].includes(pageLocale) ? ' ' : ''}${unit}`;
+}
 
 // DOM 元素
 const elements = {
@@ -27,6 +41,7 @@ const elements = {
     modalClose: document.getElementById('modalClose'),
     modalCancel: document.getElementById('modalCancel'),
     modalSave: document.getElementById('modalSave'),
+    askToast: document.getElementById('askToast'),
     modelBtns: document.querySelectorAll('.model-btn'),
     suggestionCards: document.querySelectorAll('.suggestion-card')
 };
@@ -44,6 +59,7 @@ function setupEventListeners() {
     // 发送消息
     elements.sendBtn.addEventListener('click', sendMessage);
     elements.messageInput.addEventListener('keydown', (e) => {
+        if (e.isComposing || e.keyCode === 229) return;
         if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault();
             sendMessage();
@@ -56,9 +72,7 @@ function setupEventListeners() {
     // 模型选择
     elements.modelBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            elements.modelBtns.forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            state.currentModel = btn.dataset.model;
+            selectModel(btn.dataset.model);
         });
     });
 
@@ -66,7 +80,9 @@ function setupEventListeners() {
     elements.suggestionCards.forEach(card => {
         card.addEventListener('click', () => {
             const prompt = card.dataset.prompt;
+            if (state.isResponding || !prompt) return;
             elements.messageInput.value = prompt;
+            autoResizeTextarea();
             elements.messageInput.focus();
             sendMessage();
         });
@@ -83,16 +99,26 @@ function setupEventListeners() {
 
     const sidebarToggle = document.getElementById('askSidebarToggle');
     const sidebar = document.querySelector('.ask-sidebar');
-    const closeSidebar = () => sidebar?.classList.remove('open');
+    const setSidebarOpen = (isOpen) => {
+        sidebar?.classList.toggle('open', isOpen);
+        sidebarToggle?.setAttribute('aria-expanded', String(isOpen));
+        if (isOpen) document.getElementById('askSidebarClose')?.focus();
+    };
+    const closeSidebar = (restoreFocus = false) => {
+        const wasOpen = sidebar?.classList.contains('open');
+        setSidebarOpen(false);
+        if (restoreFocus && wasOpen) sidebarToggle?.focus();
+    };
     if (sidebarToggle) {
         sidebarToggle.addEventListener('click', () => {
-            sidebar?.classList.toggle('open');
+            setSidebarOpen(!sidebar?.classList.contains('open'));
         });
     }
-    document.getElementById('askSidebarClose')?.addEventListener('click', closeSidebar);
+    document.getElementById('askSidebarClose')?.addEventListener('click', () => closeSidebar(true));
     document.querySelector('.ask-main')?.addEventListener('click', (event) => {
         if (window.innerWidth <= 768 && sidebar?.classList.contains('open') && !event.target.closest('#askSidebarToggle')) {
-            closeSidebar();
+            const clickedControl = event.target.closest('button, a, input, textarea, [tabindex]:not([tabindex="-1"])');
+            closeSidebar(!clickedControl);
         }
     });
 
@@ -102,6 +128,36 @@ function setupEventListeners() {
             closeAPIModal();
         }
     });
+
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            if (elements.apiModal.classList.contains('is-open')) {
+                closeAPIModal();
+            } else {
+                closeSidebar(true);
+            }
+        }
+
+        if (event.key === 'Tab' && elements.apiModal.classList.contains('is-open')) {
+            keepFocusInModal(event);
+        }
+    });
+}
+
+function selectModel(model) {
+    if (!model) return;
+    state.currentModel = model;
+    elements.modelBtns.forEach((btn) => {
+        const isSelected = btn.dataset.model === model;
+        btn.classList.toggle('active', isSelected);
+        btn.setAttribute('aria-pressed', String(isSelected));
+    });
+
+    const currentChat = state.chats.find((chat) => chat.id === state.currentChatId);
+    if (currentChat) {
+        currentChat.model = model;
+        saveChatsToStorage();
+    }
 }
 
 // 自动调整输入框高度
@@ -114,14 +170,42 @@ function autoResizeTextarea() {
     elements.sendBtn.disabled = !textarea.value.trim();
 }
 
+function setComposerBusy(isBusy) {
+    elements.messageInput.disabled = isBusy;
+    elements.modelBtns.forEach((button) => {
+        button.disabled = isBusy;
+    });
+    elements.suggestionCards.forEach((button) => {
+        button.disabled = isBusy;
+    });
+    elements.sendBtn.disabled = isBusy || !elements.messageInput.value.trim();
+    elements.sendBtn.setAttribute('aria-busy', String(isBusy));
+    document.querySelector('.input-area')?.classList.toggle('is-busy', isBusy);
+}
+
+function showToast(message) {
+    elements.askToast.textContent = message;
+    elements.askToast.classList.add('is-visible');
+    window.clearTimeout(showToast.timeoutId);
+    showToast.timeoutId = window.setTimeout(() => {
+        elements.askToast.classList.remove('is-visible');
+    }, 2600);
+}
+
 // 发送消息
 async function sendMessage() {
     const message = elements.messageInput.value.trim();
-    if (!message) return;
+    if (!message || state.isResponding) return;
 
     // 创建新对话（如果需要）
     if (!state.currentChatId) {
         createNewChat();
+    }
+    const chat = state.chats.find((item) => item.id === state.currentChatId);
+    if (!chat) return;
+    chat.model = state.currentModel;
+    if (chat.title === '新对话') {
+        chat.title = message.length > 32 ? `${message.slice(0, 32)}…` : message;
     }
 
     // 隐藏欢迎屏幕，显示聊天区域
@@ -129,18 +213,26 @@ async function sendMessage() {
     elements.chatMessages.style.display = 'flex';
 
     // 添加用户消息
-    addMessage('user', message);
+    addMessage('user', message, chat.id, chat.model);
+    renderChatList();
 
     // 清空输入框
     elements.messageInput.value = '';
     autoResizeTextarea();
 
     // 获取 AI 响应
-    await getAIResponse(message);
+    state.isResponding = true;
+    setComposerBusy(true);
+    try {
+        await getAIResponse(message, chat.id, chat.model);
+    } finally {
+        state.isResponding = false;
+        setComposerBusy(false);
+    }
 }
 
 // 添加消息到界面
-function addMessage(role, content) {
+function addMessage(role, content, chatId = state.currentChatId, model = state.currentModel) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message message-${role}`;
 
@@ -148,7 +240,7 @@ function addMessage(role, content) {
     avatar.className = 'message-avatar';
     avatar.innerHTML = role === 'user'
         ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>'
-        : getModelIcon(state.currentModel);
+        : getModelIcon(model);
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
@@ -157,16 +249,16 @@ function addMessage(role, content) {
     messageDiv.appendChild(avatar);
     messageDiv.appendChild(contentDiv);
 
-    elements.chatMessages.appendChild(messageDiv);
-
-    // 滚动到底部
-    elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
-
     // 保存消息到当前对话
-    const currentChat = state.chats.find(c => c.id === state.currentChatId);
+    const currentChat = state.chats.find(c => c.id === chatId);
     if (currentChat) {
-        currentChat.messages.push({ role, content, timestamp: Date.now() });
+        currentChat.messages.push({ role, content, timestamp: Date.now(), model });
         saveChatsToStorage();
+    }
+
+    if (chatId === state.currentChatId) {
+        elements.chatMessages.appendChild(messageDiv);
+        elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
     }
 }
 
@@ -182,11 +274,11 @@ function getModelIcon(model) {
 }
 
 // 获取 AI 响应
-async function getAIResponse(userMessage) {
+async function getAIResponse(userMessage, chatId, model) {
     const typingDiv = document.createElement('div');
     typingDiv.className = 'message message-assistant typing';
     typingDiv.innerHTML = `
-        <div class="message-avatar">${getModelIcon(state.currentModel)}</div>
+        <div class="message-avatar">${getModelIcon(model)}</div>
         <div class="message-content">
             <span class="typing-dot"></span>
             <span class="typing-dot"></span>
@@ -199,15 +291,15 @@ async function getAIResponse(userMessage) {
     try {
         let response;
 
-        switch (state.currentModel) {
+        switch (model) {
             case 'gpt-4':
-                response = await callOpenAI(userMessage);
+                response = await callOpenAI(getChatHistory(chatId));
                 break;
             case 'claude':
-                response = await callClaude(userMessage);
+                response = await callClaude(getChatHistory(chatId));
                 break;
             case 'gemini':
-                response = await callGemini(userMessage);
+                response = await callGemini(getChatHistory(chatId));
                 break;
             case 'atlas':
             default:
@@ -219,19 +311,29 @@ async function getAIResponse(userMessage) {
         typingDiv.remove();
 
         // 添加 AI 响应
-        addMessage('assistant', response);
+        addMessage('assistant', response, chatId, model);
 
     } catch (error) {
         typingDiv.remove();
-        addMessage('assistant', `错误: ${error.message}`);
+        const errorPrefix = translateUI('错误:');
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        addMessage('assistant', `${errorPrefix}${errorPrefix.endsWith('：') ? '' : ' '}${errorMessage}`, chatId, model);
     }
 }
 
+function getChatHistory(chatId) {
+    const chat = state.chats.find((item) => item.id === chatId);
+    if (!chat) throw new Error('The current conversation could not be found.');
+    return chat.messages
+        .filter((message) => message.role === 'user' || message.role === 'assistant')
+        .map(({ role, content }) => ({ role, content }));
+}
+
 // 调用 OpenAI API
-async function callOpenAI(message) {
+async function callOpenAI(messages) {
     const apiKey = state.apiKeys.openai;
     if (!apiKey) {
-        throw new Error('请先配置 OpenAI API Key');
+        throw new Error(translateUI('请先配置 OpenAI API Key'));
     }
 
     const response = await fetch('https://api.openai.com/v1/chat/completions', {
@@ -242,24 +344,28 @@ async function callOpenAI(message) {
         },
         body: JSON.stringify({
             model: 'gpt-4',
-            messages: [{ role: 'user', content: message }],
+            messages,
             temperature: 0.7
         })
     });
 
     if (!response.ok) {
-        throw new Error('OpenAI API 调用失败');
+        throw new Error(translateUI('OpenAI API 调用失败'));
     }
 
     const data = await response.json();
-    return data.choices[0].message.content;
+    const answer = data.choices?.[0]?.message?.content;
+    if (typeof answer !== 'string' || !answer.trim()) {
+        throw new Error(translateUI('OpenAI API 返回了空响应'));
+    }
+    return answer;
 }
 
 // 调用 Claude API
-async function callClaude(message) {
+async function callClaude(messages) {
     const apiKey = state.apiKeys.claude;
     if (!apiKey) {
-        throw new Error('请先配置 Claude API Key');
+        throw new Error(translateUI('请先配置 Claude API Key'));
     }
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
@@ -267,28 +373,33 @@ async function callClaude(message) {
         headers: {
             'Content-Type': 'application/json',
             'x-api-key': apiKey,
+            'anthropic-dangerous-direct-browser-access': 'true',
             'anthropic-version': '2023-06-01'
         },
         body: JSON.stringify({
             model: 'claude-3-opus-20240229',
             max_tokens: 1024,
-            messages: [{ role: 'user', content: message }]
+            messages
         })
     });
 
     if (!response.ok) {
-        throw new Error('Claude API 调用失败');
+        throw new Error(translateUI('Claude API 调用失败'));
     }
 
     const data = await response.json();
-    return data.content[0].text;
+    const answer = data.content?.find((block) => block.type === 'text')?.text;
+    if (typeof answer !== 'string' || !answer.trim()) {
+        throw new Error(translateUI('Claude API 返回了空响应'));
+    }
+    return answer;
 }
 
 // 调用 Gemini API
-async function callGemini(message) {
+async function callGemini(messages) {
     const apiKey = state.apiKeys.gemini;
     if (!apiKey) {
-        throw new Error('请先配置 Gemini API Key');
+        throw new Error(translateUI('请先配置 Gemini API Key'));
     }
 
     const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
@@ -297,16 +408,26 @@ async function callGemini(message) {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            contents: [{ parts: [{ text: message }] }]
+            contents: messages.map(({ role, content }) => ({
+                role: role === 'assistant' ? 'model' : 'user',
+                parts: [{ text: content }]
+            }))
         })
     });
 
     if (!response.ok) {
-        throw new Error('Gemini API 调用失败');
+        throw new Error(translateUI('Gemini API 调用失败'));
     }
 
     const data = await response.json();
-    return data.candidates[0].content.parts[0].text;
+    const answer = data.candidates?.[0]?.content?.parts
+        ?.map((part) => part.text)
+        .filter((text) => typeof text === 'string')
+        .join('');
+    if (typeof answer !== 'string' || !answer.trim()) {
+        throw new Error(translateUI('Gemini API 返回了空响应'));
+    }
+    return answer;
 }
 
 // 调用 ATLAS 本地模型（模拟）
@@ -316,20 +437,20 @@ async function callATLAS(message) {
 
     // 模拟响应
     const responses = [
-        `我理解你的问题："${message}"。作为 ATLAS AI 助手，我会尽力帮助你。`,
-        `这是一个很好的问题。让我来为你分析一下...`,
-        `根据你的描述，我建议...`,
-        `我明白了。关于这个问题，我的看法是...`
+        translateUI('我理解你的问题："{message}"。作为 ATLAS AI 助手，我会尽力帮助你。').replace('{message}', message),
+        translateUI('这是一个很好的问题。让我来为你分析一下...'),
+        translateUI('根据你的描述，我建议...'),
+        translateUI('我明白了。关于这个问题，我的看法是...')
     ];
 
     return responses[Math.floor(Math.random() * responses.length)] +
-           `\n\n（这是 ATLAS 本地模型的模拟响应。实际部署时，这里会连接到真实的 AI 模型。）`;
+           `\n\n${translateUI('（这是 ATLAS 本地模型的模拟响应。实际部署时，这里会连接到真实的 AI 模型。）')}`;
 }
 
 // 创建新对话
 function createNewChat() {
     const chat = {
-        id: Date.now().toString(),
+        id: `${Date.now()}-${chatSequence++}`,
         title: '新对话',
         messages: [],
         createdAt: Date.now(),
@@ -346,6 +467,7 @@ function createNewChat() {
 
     renderChatList();
     saveChatsToStorage();
+    elements.newChatBtn.focus();
 }
 
 // 渲染对话列表
@@ -353,32 +475,43 @@ function renderChatList() {
     elements.chatList.innerHTML = '';
 
     state.chats.forEach(chat => {
-        const chatItem = document.createElement('div');
+        const chatRow = document.createElement('div');
+        chatRow.className = 'chat-row';
+        chatRow.setAttribute('role', 'listitem');
+
+        const chatItem = document.createElement('button');
         chatItem.className = 'chat-item' + (chat.id === state.currentChatId ? ' active' : '');
-        chatItem.innerHTML = `
-            <div class="chat-info">
-                <div class="chat-title">${chat.title}</div>
-                <div class="chat-preview">${chat.messages.length} 条消息</div>
-            </div>
-            <button class="chat-delete" data-id="${chat.id}">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
-                </svg>
-            </button>
+        chatItem.type = 'button';
+        chatItem.setAttribute('aria-pressed', String(chat.id === state.currentChatId));
+
+        const chatInfo = document.createElement('span');
+        chatInfo.className = 'chat-info';
+        const title = document.createElement('span');
+        title.className = 'chat-title';
+        title.textContent = translateUI(chat.title);
+        const preview = document.createElement('span');
+        preview.className = 'chat-preview';
+        preview.textContent = formatMessageCount(chat.messages.length);
+        chatInfo.append(title, preview);
+        chatItem.appendChild(chatInfo);
+        chatItem.addEventListener('click', () => loadChat(chat.id));
+
+        const deleteButton = document.createElement('button');
+        deleteButton.className = 'chat-delete';
+        deleteButton.type = 'button';
+        deleteButton.setAttribute('aria-label', `${translateUI('删除对话')}: ${chat.title}`);
+        deleteButton.innerHTML = `
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M3 6h18M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+            </svg>
         `;
-
-        chatItem.addEventListener('click', (e) => {
-            if (!e.target.closest('.chat-delete')) {
-                loadChat(chat.id);
-            }
-        });
-
-        chatItem.querySelector('.chat-delete').addEventListener('click', (e) => {
+        deleteButton.addEventListener('click', (e) => {
             e.stopPropagation();
             deleteChat(chat.id);
         });
 
-        elements.chatList.appendChild(chatItem);
+        chatRow.append(chatItem, deleteButton);
+        elements.chatList.appendChild(chatRow);
     });
 }
 
@@ -388,6 +521,7 @@ function loadChat(chatId) {
     if (!chat) return;
 
     state.currentChatId = chatId;
+    selectModel(chat.model || 'atlas');
     elements.chatMessages.innerHTML = '';
 
     if (chat.messages.length === 0) {
@@ -404,7 +538,7 @@ function loadChat(chatId) {
             avatar.className = 'message-avatar';
             avatar.innerHTML = msg.role === 'user'
                 ? '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3"/><path d="M5 20a7 7 0 0 1 14 0"/></svg>'
-                : getModelIcon(chat.model);
+                : getModelIcon(msg.model || chat.model);
             const content = document.createElement('div');
             content.className = 'message-content';
             content.textContent = msg.content;
@@ -413,12 +547,13 @@ function loadChat(chatId) {
         });
     }
 
+    elements.chatMessages.scrollTop = elements.chatMessages.scrollHeight;
     renderChatList();
 }
 
 // 删除对话
 function deleteChat(chatId) {
-    if (!confirm('确定要删除这个对话吗？')) return;
+    if (!confirm(translateUI('确定要删除这个对话吗？'))) return;
 
     state.chats = state.chats.filter(c => c.id !== chatId);
 
@@ -435,15 +570,36 @@ function deleteChat(chatId) {
 
 // 打开 API 设置模态框
 function openAPIModal() {
+    state.modalOpener = document.activeElement;
     document.getElementById('openaiKey').value = state.apiKeys.openai;
     document.getElementById('claudeKey').value = state.apiKeys.claude;
     document.getElementById('geminiKey').value = state.apiKeys.gemini;
-    elements.apiModal.style.display = 'flex';
+    elements.apiModal.classList.add('is-open');
+    elements.apiModal.setAttribute('aria-hidden', 'false');
+    elements.apiModal.querySelector('#openaiKey').focus();
 }
 
 // 关闭 API 设置模态框
 function closeAPIModal() {
-    elements.apiModal.style.display = 'none';
+    elements.apiModal.classList.remove('is-open');
+    elements.apiModal.setAttribute('aria-hidden', 'true');
+    if (state.modalOpener instanceof HTMLElement) state.modalOpener.focus();
+}
+
+function keepFocusInModal(event) {
+    const focusable = Array.from(elements.apiModal.querySelectorAll(
+        'a[href], button:not(:disabled), input:not(:disabled)'
+    ));
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (!first || !last) return;
+    if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+    }
 }
 
 // 保存 API Keys
@@ -459,22 +615,22 @@ function saveAPIKeys() {
     updateAPIStatus();
     closeAPIModal();
 
-    alert('API Keys 已保存！');
+    showToast(translateUI('API Keys 已保存！'));
 }
 
 // 更新 API 状态
 function updateAPIStatus() {
     const statuses = {
-        openaiStatus: state.apiKeys.openai ? '已配置' : '未配置',
-        claudeStatus: state.apiKeys.claude ? '已配置' : '未配置',
-        geminiStatus: state.apiKeys.gemini ? '已配置' : '未配置'
+        openaiStatus: Boolean(state.apiKeys.openai),
+        claudeStatus: Boolean(state.apiKeys.claude),
+        geminiStatus: Boolean(state.apiKeys.gemini)
     };
 
-    Object.entries(statuses).forEach(([id, text]) => {
+    Object.entries(statuses).forEach(([id, configured]) => {
         const el = document.getElementById(id);
         if (el) {
-            el.textContent = text;
-            el.className = 'api-status' + (text === '已配置' ? ' active' : '');
+            el.textContent = translateUI(configured ? '已配置' : '未配置');
+            el.className = 'api-status' + (configured ? ' active' : '');
         }
     });
 }
@@ -488,7 +644,29 @@ function saveChatsToStorage() {
 function loadChatsFromStorage() {
     const saved = localStorage.getItem('atlas_chats');
     if (saved) {
-        state.chats = JSON.parse(saved);
+        let parsed;
+        try {
+            parsed = JSON.parse(saved);
+        } catch (error) {
+            console.error('Unable to parse saved chat history.', error);
+            showToast(translateUI('无法读取本地对话记录，原数据未更改。'));
+            return;
+        }
+        if (!Array.isArray(parsed)) {
+            console.error('Saved chat history must be an array.');
+            showToast(translateUI('无法读取本地对话记录，原数据未更改。'));
+            return;
+        }
+        state.chats = parsed.filter((chat) =>
+            chat &&
+            typeof chat.id === 'string' &&
+            typeof chat.title === 'string' &&
+            Array.isArray(chat.messages)
+        );
+        if (state.chats.length !== parsed.length) {
+            console.error('Some malformed chat records were excluded from the loaded history.');
+            showToast(translateUI('部分损坏的对话记录已隐藏，其他记录仍可使用。'));
+        }
         renderChatList();
     }
 }

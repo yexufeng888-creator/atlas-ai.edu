@@ -478,9 +478,9 @@
         <div class="content-container" style="max-width: 1400px; background: transparent; box-shadow: none; padding: 3rem 2rem;">
 
             <!-- 欢迎区域 -->
-            <div style="text-align: center; margin-bottom: 3rem;">
-                <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">
-                    <span id="current-time"></span> · 周五
+            <div class="dashboard-intro" style="text-align: center; margin-bottom: 3rem;">
+                <p class="dashboard-date-line" style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">
+                    <span id="current-time"></span> · <span id="current-weekday">周五</span>
                 </p>
                 <h1 id="welcomeTitle" style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, #2563eb, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                     <span >下午好</span>，<span id="userName">演示用户</span>
@@ -494,43 +494,43 @@
             <div class="dashboard-grid">
 
                 <!-- 今日重点卡片 -->
-                <div class="dashboard-card shine-effect glow-on-hover" onclick="location.href='life-tasks.html'">
+                <div class="dashboard-card dashboard-card--focus shine-effect glow-on-hover">
                     <div class="card-icon-3d">🎯</div>
-                    <h3 class="card-title" >今日重点</h3>
+                    <h3 class="card-title"><a class="card-heading-link" href="life-tasks.html">今日重点</a></h3>
                     <p class="card-subtitle" >优先处理这些任务</p>
 
                     <div class="card-content">
-                        <div class="task-item" onclick="event.stopPropagation(); toggleTask(this)">
-                            <div class="task-checkbox"></div>
-                            <div style="flex: 1;">
+                        <div class="task-item" data-task-id="competitor-report">
+                            <button class="task-checkbox" type="button" data-action="toggle-task" aria-pressed="false"></button>
+                            <div class="task-copy">
                                 <div style="font-weight: 600; margin-bottom: 0.25rem;">完成竞品分析报告</div>
                                 <div style="font-size: 0.75rem; color: #6b7280;">截止今天 18:00</div>
                             </div>
                             <span style="padding: 0.25rem 0.75rem; background: rgba(239, 68, 68, 0.1); color: #ef4444; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">高</span>
                         </div>
 
-                        <div class="task-item" onclick="event.stopPropagation(); toggleTask(this)">
-                            <div class="task-checkbox"></div>
-                            <div style="flex: 1;">
+                        <div class="task-item" data-task-id="project-documents">
+                            <button class="task-checkbox" type="button" data-action="toggle-task" aria-pressed="false"></button>
+                            <div class="task-copy">
                                 <div style="font-weight: 600; margin-bottom: 0.25rem;">更新项目文档</div>
                                 <div style="font-size: 0.75rem; color: #6b7280;">截止明天</div>
                             </div>
                             <span style="padding: 0.25rem 0.75rem; background: rgba(245, 158, 11, 0.1); color: #f59e0b; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">中</span>
                         </div>
 
-                        <div class="task-item" onclick="event.stopPropagation(); toggleTask(this)">
-                            <div class="task-checkbox checked"></div>
-                            <div style="flex: 1; opacity: 0.6;">
+                        <div class="task-item is-complete" data-task-id="user-research" data-completed="true">
+                            <button class="task-checkbox checked" type="button" data-action="toggle-task" aria-pressed="true"></button>
+                            <div class="task-copy">
                                 <div style="font-weight: 600; margin-bottom: 0.25rem; text-decoration: line-through;">用户调研访谈</div>
                                 <div style="font-size: 0.75rem; color: #6b7280;">已完成</div>
                             </div>
-                            <span style="padding: 0.25rem 0.75rem; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">✓</span>
+                            <span class="task-status" style="padding: 0.25rem 0.75rem; background: rgba(16, 185, 129, 0.1); color: #10b981; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">✓</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- 今日日程 -->
-                <div class="dashboard-card shine-effect glow-on-hover" onclick="location.href='life-calendar.html'">
+                <div class="dashboard-card shine-effect glow-on-hover" data-href="life-calendar.html" tabindex="0" role="link">
                     <div class="card-icon-3d">📅</div>
                     <h3 class="card-title" >今日日程</h3>
                     <p class="card-subtitle" >接下来的安排</p>
@@ -565,7 +565,7 @@
                 </div>
 
                 <!-- 效率统计 -->
-                <div class="dashboard-card shine-effect glow-on-hover">
+                <div class="dashboard-card shine-effect glow-on-hover" data-href="life-tasks.html" tabindex="0" role="link">
                     <div class="card-icon-3d">📊</div>
                     <h3 class="card-title" >效率统计</h3>
                     <p class="card-subtitle" >本周进展</p>
@@ -602,7 +602,7 @@
                 </div>
 
                 <!-- AI 建议 -->
-                <div class="dashboard-card shine-effect glow-on-hover" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(217, 70, 239, 0.1));">
+                <div class="dashboard-card dashboard-card--insight shine-effect glow-on-hover" data-href="ask.html" tabindex="0" role="link">
                     <div class="card-icon-3d">🤖</div>
                     <h3 class="card-title" >AI 智能建议</h3>
                     <p class="card-subtitle" >基于你的工作模式</p>
@@ -631,30 +631,30 @@
                     <p class="card-subtitle" >常用功能</p>
 
                     <div class="card-content" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
-                        <button onclick="location.href='ask.html'" style="padding: 1rem; background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; border: none; border-radius: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        <a class="quick-action quick-action--primary" href="ask.html">
                             <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💬</div>
                             <div>询问 AI</div>
-                        </button>
+                        </a>
 
-                        <button onclick="location.href='life-tasks.html'" style="padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#2563eb'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#e5e7eb'">
+                        <a class="quick-action" href="life-tasks.html">
                             <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✅</div>
                             <div>新建任务</div>
-                        </button>
+                        </a>
 
-                        <button onclick="location.href='life-calendar.html'" style="padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#2563eb'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#e5e7eb'">
+                        <a class="quick-action" href="life-calendar.html">
                             <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📅</div>
                             <div>添加日程</div>
-                        </button>
+                        </a>
 
-                        <button onclick="location.href='memory.html'" style="padding: 1rem; background: white; border: 2px solid #e5e7eb; border-radius: 0.75rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'; this.style.borderColor='#2563eb'" onmouseout="this.style.transform='scale(1)'; this.style.borderColor='#e5e7eb'">
+                        <a class="quick-action" href="memory.html">
                             <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🧠</div>
                             <div>查看记忆</div>
-                        </button>
+                        </a>
                     </div>
                 </div>
 
                 <!-- 最近活动 -->
-                <div class="dashboard-card shine-effect glow-on-hover" style="grid-column: 1 / -1;">
+                <div class="dashboard-card dashboard-card--activity shine-effect glow-on-hover" data-href="life.html" tabindex="0" role="link">
                     <div class="card-icon-3d">📌</div>
                     <h3 class="card-title" >最近活动</h3>
                     <p class="card-subtitle" >你的最新动态</p>
@@ -685,9 +685,9 @@
     </main>
 
     <!-- 浮动操作按钮 -->
-    <div class="fab" onclick="location.href='ask.html'" title="询问 ATLAS">
+    <a class="fab" href="ask.html" title="询问 ATLAS" aria-label="询问 ATLAS">
         💬
-    </div>
+    </a>
 
     <!-- Footer -->
     <footer class="page-footer">
@@ -698,6 +698,9 @@
     <script src="assets/js/3d-effects.js?v=20260910"></script>
     <script src="assets/js/auth.js?v=20260910"></script>
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/secondary-page-i18n.js"></script>
+    <script src="assets/js/secondary-dashboard-i18n.js"></script>
+    <script src="assets/js/home-dashboard.js"></script>
     <script src="assets/js/atlas-scroll.js"></script>
     <script>
         </script>

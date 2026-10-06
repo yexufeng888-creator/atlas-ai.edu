@@ -590,8 +590,6 @@
 
 .tech-icon { width: 3.2rem; height: 3.2rem; display: grid; place-items: center; margin: 0 auto 1rem; color: #67e8f9; border: 1px solid rgba(103,232,249,.3); border-radius: 1rem; }
 
-.atlas-system-status { display: inline-flex; align-items: center; gap: .45rem; color: rgba(255,255,255,.62); font-size: 11px; white-space: nowrap; }
-.atlas-system-status i { width: 6px; height: 6px; border-radius: 50%; background: #58df9b; box-shadow: 0 0 10px #58df9b; }
 .atlas-login-link { color: #fff; text-decoration: none; font-size: 13px; padding: 6px 12px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; transition: background .2s ease; }
 .atlas-login-link:hover { background: rgba(255,255,255,.12); }
 
@@ -1212,5 +1210,208 @@ body {
 
     .section-header {
         margin-bottom: 2.5rem;
+    }
+}
+
+/* Product-page navigation and refined editorial sections */
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 132px;
+}
+
+.product-nav {
+    position: sticky;
+    top: 0;
+    margin-top: 12px;
+    z-index: 900;
+    min-height: 46px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 max(1.5rem, calc((100% - 1240px) / 2));
+    color: #f2f6ff;
+    background: rgba(8, 13, 23, .72);
+    border-bottom: 1px solid rgba(255, 255, 255, .1);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+}
+
+body[class*="page-index"] {
+    overflow-x: clip;
+    overflow-y: visible;
+}
+
+.product-nav.is-scrolled {
+    top: 64px;
+}
+
+.product-nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2.4rem);
+    min-width: 0;
+}
+
+.product-nav-links a {
+    position: relative;
+    padding: .5rem 0;
+    color: #98a6bc;
+    font-size: .76rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .2s ease;
+}
+
+.product-nav-links a:hover,
+.product-nav-links a[aria-current="location"] {
+    color: #fff;
+}
+
+.product-nav-links a[aria-current="location"]::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    border-radius: 2px;
+    background: #67e8f9;
+}
+
+.hero,
+.command-overview,
+.atlas-story,
+.product-stage,
+.features,
+.showcase,
+.use-cases,
+.ai-flow,
+.comparison,
+.faq,
+.tech-stack,
+.how-it-works,
+.cta {
+    scroll-margin-top: 132px;
+}
+
+.use-cases,
+.comparison,
+.faq,
+.how-it-works {
+    color: #f2f6ff;
+    background:
+        radial-gradient(ellipse at 50% 0, rgba(47, 125, 246, .11), transparent 35rem),
+        #080d17 !important;
+}
+
+.use-cases .section-title,
+.comparison .section-title,
+.faq .section-title,
+.how-it-works .section-title {
+    color: #f4f8ff !important;
+}
+
+.use-cases .section-eyebrow,
+.comparison .section-eyebrow,
+.faq .section-eyebrow,
+.how-it-works .section-eyebrow {
+    color: #67e8f9 !important;
+}
+
+.use-cases .section-description,
+.comparison .section-description,
+.faq .section-description,
+.how-it-works .section-description {
+    color: #98a6bc !important;
+}
+
+.use-cases > div:nth-child(2) > div {
+    border: 1px solid rgba(255, 255, 255, .13);
+    background:
+        radial-gradient(circle at 90% 10%, rgba(103, 232, 249, .13), transparent 14rem),
+        linear-gradient(145deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .025)) !important;
+    box-shadow: 0 24px 64px rgba(0, 0, 0, .24);
+}
+
+.use-cases > div:nth-child(2) > div h3 {
+    color: #f4f8ff !important;
+}
+
+.use-cases > div:nth-child(2) > div p,
+.use-cases > div:nth-child(2) > div li {
+    color: #c1ccdc !important;
+}
+
+.comparison > div:nth-child(2) > div li {
+    border: 1px solid rgba(255, 255, 255, .08) !important;
+    color: #c1ccdc !important;
+    background: rgba(255, 255, 255, .045) !important;
+}
+
+.comparison > div:nth-child(2) > div h3 {
+    color: #f2f6ff !important;
+}
+
+.faq > div:nth-child(2) > div {
+    border-color: rgba(255, 255, 255, .13) !important;
+    background: transparent !important;
+}
+
+.faq > div:nth-child(2) > div h3 {
+    color: #edf4ff !important;
+}
+
+.faq > div:nth-child(2) > div p {
+    color: #98a6bc !important;
+}
+
+.how-it-works > div:nth-child(2) > div h3 {
+    color: #f2f6ff !important;
+}
+
+.how-it-works > div:nth-child(2) > div p {
+    color: #98a6bc !important;
+}
+
+@media (max-width: 760px) {
+    .product-nav {
+        top: 0;
+        margin-top: 4px;
+        min-height: 44px;
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .product-nav.is-scrolled {
+        top: 56px;
+    }
+
+    .product-nav-links {
+        justify-content: flex-start;
+        gap: 1.5rem;
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .product-nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .product-nav-links a {
+        font-size: .69rem;
+    }
+
+    .use-cases,
+    .comparison,
+    .faq,
+    .how-it-works {
+        padding: 5.5rem 1.25rem !important;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
     }
 }

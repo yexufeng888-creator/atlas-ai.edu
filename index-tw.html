@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="ATLAS - 个人智能操作系统。用 AI 驱动的生产力工具改变你的生活。">
-    <title>ATLAS - 个人智能操作系统</title>
+    <meta name="description" content="ATLAS - 以 AI 驅動的個人智慧生活系統，助你整合資訊、梳理行動，讓生活更有條理。">
+    <title>ATLAS - 個人智慧生活系統</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
@@ -423,17 +423,26 @@
             }
         }
     </style>
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261002b">
 </head>
 <body class="has-global-nav">
-    <nav class="global-nav"></nav>
+<nav class="global-nav"></nav>
+<nav class="product-nav" aria-label="首頁產品導覽">
+    <div class="product-nav-links">
+        <a href="#top" aria-current="location">總覽</a>
+        <a href="#features">功能亮點</a>
+        <a href="#showcase">產品體驗</a>
+        <a href="#cta">立即開始</a>
+    </div>
+</nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="top">
         <div class="hero-content">
-            <div class="hero-eyebrow">个人智能操作系统</div>
-            <h1 class="hero-title">你的生活，<br>智能化管理</h1>
+            <div class="hero-eyebrow">個人智慧生活系統</div>
+            <h1 class="hero-title">讓生活，<br>更有條理。</h1>
             <p class="hero-subtitle">
-                將信息轉化為智能，將決策轉化為行動。ATLAS 是你的 AI 驅動的生活操作系統。
+                將資訊化為洞察，將決策化為行動。ATLAS 是由 AI 驅動的個人生活作業系統。
             </p>
             <div class="hero-cta">
                 <a href="signup.html" class="btn btn-primary">
@@ -443,6 +452,108 @@
                     </svg>
                 </a>
                 <a href="#features" class="btn btn-secondary">了解更多</a>
+            </div>
+            <div class="hero-metrics" aria-label="ATLAS 產品概覽">
+                <div><strong>24/7</strong><span>持續理解你的脈絡</span></div>
+                <div><strong>1 個</strong><span>連結工作的智慧空間</span></div>
+                <div><strong>你的資料</strong><span>始終由你掌控</span></div>
+            </div>
+            <div class="hero-visual" aria-label="ATLAS 智慧工作台預覽">
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 智慧工作台介面預覽">
+            </div>
+        </div>
+    </section>
+
+    <section class="command-overview" id="overview" aria-labelledby="command-overview-title">
+        <div class="command-overview-inner">
+            <div class="command-intro">
+                <div class="section-eyebrow">今日指揮台 · 09:41</div>
+                <h2 id="command-overview-title">把忙碌的一天，<br><span>整理成清晰的下一步。</span></h2>
+                <p>ATLAS 從你的任務、行程和長期記憶中找出重點，為你梳理行動順序。</p>
+                <a class="command-link" href="home.html">進入工作台 <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="command-panel" aria-label="ATLAS 今日工作台預覽">
+                <div class="command-panel-top">
+                    <span class="panel-kicker">TODAY / PERSONAL OS</span>
+                    <span class="panel-live"><i></i> 已同步</span>
+                </div>
+                <div class="command-grid">
+                    <div class="command-card command-card-focus">
+                        <span class="command-card-label">目前重點</span>
+                        <strong>完成產品提案 v2</strong>
+                        <span class="command-progress"><b></b></span>
+                        <small>預計 48 分鐘 · 高優先級</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">相關記憶</span>
+                        <strong>3 則相關脈絡</strong>
+                        <small>上次會議 · 使用者訪談 · 設計原則</small>
+                    </div>
+                    <div class="command-card">
+                        <span class="command-card-label">下一步建議</span>
+                        <strong>先確認使用者流程</strong>
+                        <small>根據 2 項尚待決定事項</small>
+                    </div>
+                </div>
+                <div class="command-timeline">
+                    <span class="timeline-dot is-done"></span><span>整理脈絡</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot is-active"></span><span>聚焦行動</span>
+                    <span class="timeline-line"></span>
+                    <span class="timeline-dot"></span><span>持續跟進</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="atlas-story" id="story" aria-labelledby="story-title">
+        <div class="story-sticky">
+            <div class="section-eyebrow">ATLAS 系統 / 01—03</div>
+            <h2 id="story-title">不是更多工具。<br><span>而是更少阻礙。</span></h2>
+            <p>從一個想法到完成一件事，ATLAS 持續為你連結所需脈絡。</p>
+            <div class="story-progress" aria-label="產品故事進度">
+                <span class="is-active"></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="story-steps">
+            <article class="story-step is-active" data-story-step="0">
+                <div class="story-step-index">01 / 收集</div>
+                <h3>每項輸入，<br>都有歸處。</h3>
+                <p>一句話、一份檔案或一場會議，ATLAS 將零散資訊整合成可用脈絡。</p>
+                <div class="story-visual story-visual-capture"><span>「準備下週的產品評審」</span><i>任務 · 行程 · 記憶</i></div>
+            </article>
+            <article class="story-step" data-story-step="1">
+                <div class="story-step-index">02 / 理解</div>
+                <h3>脈絡，<br>成為判斷。</h3>
+                <p>AI 串連重點、期限和未完成決定，讓你看清真正值得優先處理的事。</p>
+                <div class="story-visual story-visual-understand"><b>產品評審</b><span>3 則相關記憶</span><i>高優先級</i></div>
+            </article>
+            <article class="story-step" data-story-step="2">
+                <div class="story-step-index">03 / 行動</div>
+                <h3>從下一步開始，<br>推動事情完成。</h3>
+                <p>先取得清晰建議，再讓智能體協助跟進，讓計畫真正向前。</p>
+                <div class="story-visual story-visual-action"><strong>確認使用者流程</strong><span>已加入今日重點</span><i>下一步 →</i></div>
+            </article>
+        </div>
+    </section>
+
+    <section class="product-stage" id="product" aria-labelledby="product-stage-title">
+        <div class="product-stage-inner">
+            <div class="product-stage-copy">
+                <div class="section-eyebrow">ATLAS 智慧層</div>
+                <h2 id="product-stage-title">你的世界，<br><span>終於連成一體。</span></h2>
+                <p>任務、記憶、行程和智能體不再各自分散，而是在同一空間彼此理解。</p>
+                <div class="stage-feature-list">
+                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>看見重點</strong><small>每天自動整理優先順序</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>保留脈絡</strong><small>重要資訊伴隨每項工作</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>推動行動</strong><small>從建議走向真正完成</small></span><i aria-hidden="true">+</i></div>
+                </div>
+            </div>
+            <div class="product-stage-visual">
+                <div class="stage-orbit" aria-hidden="true"></div>
+                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 統一智慧工作台介面">
+                <span class="stage-badge stage-badge-focus">FOCUS / 84</span>
+                <span class="stage-badge stage-badge-memory">MEMORY / 03</span>
             </div>
         </div>
     </section>
@@ -478,7 +589,7 @@
                 <span class="feature-icon">🤖</span>
                 <h3 class="feature-title">AI 智能體</h3>
                 <p class="feature-description">
-                    专业智能體自动处理从旅行规划到邮件管理的所有事务。
+                    專業 AI 智慧代理可自動處理旅遊規劃、電子郵件管理等工作。
                 </p>
             </div>
 
@@ -531,15 +642,14 @@
     </section>
 
     <!-- Showcase Section -->
-    <section class="showcase">
+    <section class="showcase" id="showcase">
         <div class="showcase-content">
             <div class="showcase-text">
-                <h2>由創新者打造，<br>為創新者服務</h2>
+                <h2>讓智慧，<br>真正融入日常</h2>
                 <p>
-                    Campus Intelligence 是一支由設計師、工程師和 AI 研究人員組成的團隊，
-                    致力於創造賦能你成就更多的工具。
+                    串聯任務、記憶與行動，讓科技在真實生活中發揮作用。
                 </p>
-                <a href="#team" class="btn btn-primary">認識團隊</a>
+                <a href="team.html" class="btn btn-primary">認識團隊</a>
             </div>
             <div class="showcase-image">
                 🚀
@@ -548,7 +658,7 @@
     </section>
 
     <!-- CTA Section -->
-    <section class="cta">
+    <section class="cta" id="cta">
         <h2>準備好改變你的生活了嗎？</h2>
         <p>加入數千名使用 ATLAS 保持井井有條和高效的用戶。</p>
         <div class="hero-cta">
@@ -575,7 +685,7 @@
             <div class="footer-section">
                 <h4>公司</h4>
                 <div class="footer-links">
-                    <a href="#team" class="footer-link">關於</a>
+                    <a href="team.html" class="footer-link">關於</a>
                     <a href="blog.html" class="footer-link">博客</a>
                 </div>
             </div>
@@ -595,7 +705,7 @@
         </div>
     </footer>
 
-    <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/atlas-shell.js?v=20261002b"></script>
     <script src="assets/js/atlas-scroll.js"></script>
 </body>
 </html>
