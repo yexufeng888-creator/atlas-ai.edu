@@ -14,6 +14,30 @@
   // 添加页面标识类
   document.body.classList.add('has-global-nav', 'page-' + slug);
 
+  if (/^(home|ask|memory|life|agents|settings)(-|$)/.test(slug)) {
+    document.body.classList.add('atlas-app-page');
+
+    const motionStyles = document.createElement('link');
+    motionStyles.rel = 'stylesheet';
+    motionStyles.href = 'assets/css/app-motion.css?v=20261006b';
+    document.head.appendChild(motionStyles);
+
+    const motionScript = document.createElement('script');
+    motionScript.src = 'assets/js/app-motion.js?v=20261006b';
+    document.body.appendChild(motionScript);
+  }
+
+  if (/^settings(-|$)/.test(slug)) {
+    const settingsStyles = document.createElement('link');
+    settingsStyles.rel = 'stylesheet';
+    settingsStyles.href = 'assets/css/settings-ui.css?v=20261007h';
+    document.head.appendChild(settingsStyles);
+
+    const settingsScript = document.createElement('script');
+    settingsScript.src = 'assets/js/settings-ui.js?v=20261007h';
+    document.body.appendChild(settingsScript);
+  }
+
   // 导航链接配置 - 简体中文
   const linksZhCN = [
     { href: 'index.html', label: '首页' },
@@ -63,12 +87,12 @@
     currentLang === 'zh-tw' ? 'zh-TW' : currentLang;
 
   const navLabels = {
-    'zh-cn': ['首页', '工作台', '询问', '记忆', '生活', '智能体', '设置'],
-    'zh-hk': ['首頁', '工作台', '查詢', '記憶', '生活', '智能體', '設定'],
-    'zh-tw': ['首頁', '工作台', '詢問', '記憶', '生活', '智能體', '設定'],
-    en: ['Home', 'Dashboard', 'Ask', 'Memory', 'Life', 'Agents', 'Settings'],
-    ja: ['ホーム', 'ダッシュボード', '質問', 'メモリ', '生活', 'エージェント', '設定'],
-    ko: ['홈', '대시보드', '질문', '메모리', '생활', '에이전트', '설정']
+    'zh-cn': ['首页', '工作台', '对话', '记忆', '生活', '智能体', '设置'],
+    'zh-hk': ['首頁', '工作台', '對話', '記憶', '生活', '智能體', '設定'],
+    'zh-tw': ['首頁', '工作台', '對話', '記憶', '生活', '智能體', '設定'],
+    en: ['Home', 'Dashboard', 'Chat', 'Memory', 'Life', 'Agents', 'Settings'],
+    ja: ['ホーム', 'ダッシュボード', '会話', 'メモリ', '生活', 'エージェント', '設定'],
+    ko: ['홈', '대시보드', '대화', '메모리', '생활', '에이전트', '설정']
   };
   const navHrefs = currentLang === 'en'
     ? ['index-en.html', 'home.html', 'ask.html', 'memory.html', 'life.html', 'agents.html', 'settings.html']
@@ -81,7 +105,7 @@
       footer: 'Personal Intelligence OS · 由 ATLAS 驱动',
       pages: {
         home: ['个人工作台', '把任务、日程和智能建议集中在一个清晰的行动面板'],
-        ask: ['询问 ATLAS', '把问题交给你的个人智能助手'],
+        ask: ['对话 ATLAS', '把问题交给你的个人智能助手'],
         memory: ['记忆', 'ATLAS 对你的理解：事实、偏好、经历与推断'],
         life: ['生活', '日历、任务、项目、文档和行程的统一视图'],
         agents: ['智能体', 'Agent 能力、权限、运行记录和待确认动作'],
@@ -94,7 +118,7 @@
       footer: 'Personal Intelligence OS · 由 ATLAS 驅動',
       pages: {
         home: ['個人工作台', '將任務、日程和智能建議集中在清晰的行動面板'],
-        ask: ['查詢 ATLAS', '將問題交給你的個人智能助手'],
+        ask: ['對話 ATLAS', '將問題交給你的個人智能助手'],
         memory: ['記憶', 'ATLAS 對你的理解：事實、偏好、經歷與推斷'],
         life: ['生活', '日曆、任務、項目、文件和行程的統一視圖'],
         agents: ['智能體', 'Agent 能力、權限、運行記錄和待確認動作'],
@@ -107,7 +131,7 @@
       footer: 'Personal Intelligence OS · 由 ATLAS 驅動',
       pages: {
         home: ['個人工作台', '將任務、日程和智慧建議集中在清晰的行動面板'],
-        ask: ['詢問 ATLAS', '把問題交給你的個人智慧助手'],
+        ask: ['對話 ATLAS', '把問題交給你的個人智慧助手'],
         memory: ['記憶', 'ATLAS 對你的理解：事實、偏好、經歷與推論'],
         life: ['生活', '日曆、任務、專案、文件和行程的統一視圖'],
         agents: ['智慧體', 'Agent 能力、權限、執行記錄和待確認動作'],
@@ -120,7 +144,7 @@
       footer: 'Personal Intelligence OS · Powered by ATLAS',
       pages: {
         home: ['Personal dashboard', 'Tasks, schedules, and intelligent suggestions in one clear action panel'],
-        ask: ['Ask ATLAS', 'Give your questions to your personal intelligent assistant'],
+        ask: ['Chat with ATLAS', 'Give your questions to your personal intelligent assistant'],
         memory: ['Memory', 'How ATLAS understands you: facts, preferences, experiences, and inferences'],
         life: ['Life', 'One view for your calendar, tasks, projects, documents, and trips'],
         agents: ['Agents', 'Agent capabilities, permissions, runs, and actions awaiting confirmation'],
@@ -133,7 +157,7 @@
       footer: 'Personal Intelligence OS · ATLAS が提供',
       pages: {
         home: ['パーソナルダッシュボード', 'タスク、予定、インテリジェントな提案を一つの画面に'],
-        ask: ['ATLAS に質問', 'パーソナルインテリジェントアシスタントに質問する'],
+        ask: ['ATLAS と会話', 'パーソナルインテリジェントアシスタントに質問する'],
         memory: ['メモリ', 'ATLAS のあなたへの理解：事実、好み、経験、推論'],
         life: ['生活', 'カレンダー、タスク、プロジェクト、書類、旅行を一つの画面で'],
         agents: ['エージェント', 'エージェントの機能、権限、実行履歴、確認待ちの操作'],
@@ -146,7 +170,7 @@
       footer: 'Personal Intelligence OS · ATLAS 제공',
       pages: {
         home: ['개인 대시보드', '작업, 일정, 지능형 제안을 하나의 명확한 화면에서 관리'],
-        ask: ['ATLAS에 질문', '개인 지능형 어시스턴트에게 질문하기'],
+        ask: ['ATLAS와 대화', '개인 지능형 어시스턴트에게 질문하기'],
         memory: ['메모리', 'ATLAS가 이해하는 나: 사실, 선호, 경험, 추론'],
         life: ['생활', '캘린더, 작업, 프로젝트, 문서와 여행을 한눈에'],
         agents: ['에이전트', '에이전트 기능, 권한, 실행 기록, 확인 대기 작업'],
@@ -425,42 +449,42 @@
       memory: ['个人知识', '记忆', 'ATLAS 对你的理解：事实、偏好、经历与推断'],
       agents: ['受控自动化', '智能体', 'Agent 能力、权限、运行记录和待确认动作'],
       settings: ['用户控制', '设置', '个人资料、隐私控制、Demo 配置和执行规则'],
-      ask: ['个人智能助手', '询问 ATLAS', '把问题交给你的个人智能助手']
+      ask: ['个人智能助手', '对话', '把问题交给你的个人智能助手']
     },
     'zh-hk': {
       life: ['統一上下文', '生活', '日曆、任務、項目、文件和行程的統一視圖'],
       memory: ['個人知識', '記憶', 'ATLAS 對你的理解：事實、偏好、經歷與推斷'],
       agents: ['受控自動化', '智能體', 'Agent 能力、權限、運行記錄和待確認動作'],
       settings: ['用戶控制', '設定', '個人資料、私隱控制、Demo 配置和執行規則'],
-      ask: ['個人智能助手', '查詢 ATLAS', '將問題交給你的個人智能助手']
+      ask: ['個人智能助手', '對話', '將問題交給你的個人智能助手']
     },
     'zh-tw': {
       life: ['統一上下文', '生活', '日曆、任務、專案、文件和行程的統一視圖'],
       memory: ['個人知識', '記憶', 'ATLAS 對你的理解：事實、偏好、經歷與推論'],
       agents: ['受控自動化', '智慧體', 'Agent 能力、權限、執行記錄和待確認動作'],
       settings: ['使用者控制', '設定', '個人資料、隱私控制、Demo 配置和執行規則'],
-      ask: ['個人智慧助手', '詢問 ATLAS', '把問題交給你的個人智慧助手']
+      ask: ['個人智慧助手', '對話', '把問題交給你的個人智慧助手']
     },
     en: {
       life: ['Unified context', 'Life', 'One view for your calendar, tasks, projects, documents, and trips'],
       memory: ['Personal knowledge', 'Memory', 'How ATLAS understands you: facts, preferences, experiences, and inferences'],
       agents: ['Controlled automation', 'Agents', 'Agent capabilities, permissions, runs, and actions awaiting confirmation'],
       settings: ['User controls', 'Settings', 'Profile, privacy controls, demo configuration, and execution rules'],
-      ask: ['Personal intelligence', 'Ask ATLAS', 'Give your questions to your personal intelligent assistant']
+      ask: ['Personal intelligence', 'Chat', 'Give your questions to your personal intelligent assistant']
     },
     ja: {
       life: ['統合コンテキスト', '生活', 'カレンダー、タスク、プロジェクト、書類、旅行を一つの画面で'],
       memory: ['パーソナルナレッジ', 'メモリ', 'ATLAS のあなたへの理解：事実、好み、経験、推論'],
       agents: ['制御された自動化', 'エージェント', 'エージェントの機能、権限、実行履歴、確認待ちの操作'],
       settings: ['ユーザー管理', '設定', 'プロフィール、プライバシー、デモ設定、実行ルール'],
-      ask: ['パーソナルインテリジェンス', 'ATLAS に質問', 'パーソナルアシスタントに質問する']
+      ask: ['パーソナルインテリジェンス', '会話', 'パーソナルアシスタントに質問する']
     },
     ko: {
       life: ['통합 컨텍스트', '생활', '캘린더, 작업, 프로젝트, 문서와 여행을 한눈에'],
       memory: ['개인 지식', '메모리', 'ATLAS가 이해하는 나: 사실, 선호, 경험, 추론'],
       agents: ['제어된 자동화', '에이전트', '에이전트 기능, 권한, 실행 기록, 확인 대기 작업'],
       settings: ['사용자 제어', '설정', '프로필, 개인정보 보호, 데모 구성 및 실행 규칙'],
-      ask: ['개인 지능', 'ATLAS에 질문', '개인 지능형 어시스턴트에게 질문하기']
+      ask: ['개인 지능', '대화', '개인 지능형 어시스턴트에게 질문하기']
     }
   };
 

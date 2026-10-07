@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI 问询 - ATLAS</title>
+    <title>对话 - ATLAS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
-    <link rel="stylesheet" href="assets/css/ask.css?v=20261004a">
+    <link rel="stylesheet" href="assets/css/ask.css?v=20261006a">
 </head>
 <body class="has-global-nav">
     <nav class="global-nav"></nav>
@@ -47,14 +47,20 @@
 
         <!-- Main Chat Area -->
         <main class="ask-main">
-            <button class="ask-sidebar-toggle" id="askSidebarToggle" type="button" aria-label="打开对话历史" aria-controls="chatSidebar" aria-expanded="false">
-                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
-            </button>
+            <header class="chat-topbar">
+                <button class="ask-sidebar-toggle" id="askSidebarToggle" type="button" aria-label="打开对话历史" aria-controls="chatSidebar" aria-expanded="false">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
+                </button>
+                <div class="chat-topbar-title">对话</div>
+                <button class="chat-topbar-new" id="newChatTopBtn" type="button" aria-label="新对话" title="新对话">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                </button>
+            </header>
             <!-- Welcome Screen -->
             <div class="welcome-screen" id="welcomeScreen">
                 <div class="welcome-content">
                     <img src="assets/img/atlas-logo.jpg" alt="ATLAS" class="welcome-logo">
-                    <h1 class="welcome-title">你想了解什么？</h1>
+                    <h1 class="welcome-title">今天想聊些什么？</h1>
                     <p class="welcome-subtitle">选择一个 AI 模型开始对话</p>
 
                     <!-- 快捷建议 -->
@@ -120,6 +126,7 @@
                         </svg>
                     </button>
                 </div>
+                <p class="composer-note">AI 可能会犯错，请核查重要信息。</p>
             </div>
         </main>
     </div>

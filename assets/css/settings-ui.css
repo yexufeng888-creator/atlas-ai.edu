@@ -1,0 +1,463 @@
+body.atlas-app-page[class*="page-settings"] {
+    --settings-accent: #63a4ff;
+    --settings-accent-rgb: 99, 164, 255;
+    --settings-surface: rgba(15, 21, 34, .84);
+    --settings-border: rgba(255, 255, 255, .09);
+    --settings-text: #f5f7fb;
+    --settings-muted: #98a3b7;
+    background:
+        radial-gradient(ellipse at 12% 0, rgba(42, 86, 157, .16), transparent 38rem),
+        #080b13 !important;
+    color: var(--settings-text) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .page-content {
+    max-width: 1440px;
+    padding-top: 7.5rem;
+}
+
+body.atlas-app-page[class*="page-settings"] .page-header {
+    align-items: end;
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+}
+
+body.atlas-app-page[class*="page-settings"] .page-title {
+    background: linear-gradient(105deg, #fff 12%, #c8d9f7 75%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.atlas-app-page[class*="page-settings"] .page-description {
+    color: var(--settings-muted) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .memory-sections,
+body.atlas-app-page[class*="page-settings"] .settings-sections {
+    gap: 1rem;
+}
+
+body.atlas-app-page[class*="page-settings"] .memory-sections > .section-card,
+body.atlas-app-page[class*="page-settings"] .settings-sections > .section-card {
+    border: 1px solid var(--settings-border) !important;
+    border-radius: 1.1rem !important;
+    background: linear-gradient(150deg, rgba(19, 27, 43, .94), rgba(12, 17, 28, .92)) !important;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, .2), inset 0 1px 0 rgba(255, 255, 255, .035) !important;
+    color: var(--settings-text) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .memory-sections > .section-card:hover,
+body.atlas-app-page[class*="page-settings"] .settings-sections > .section-card:hover {
+    border-color: rgba(var(--settings-accent-rgb), .4) !important;
+    box-shadow: 0 22px 48px rgba(0, 0, 0, .28), 0 0 0 1px rgba(var(--settings-accent-rgb), .06) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .section-card h3 {
+    color: var(--settings-text) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .info-item {
+    border: 1px solid rgba(255, 255, 255, .075) !important;
+    border-radius: .65rem !important;
+    background: rgba(4, 9, 18, .32) !important;
+    box-shadow: none !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .info-label {
+    color: var(--settings-muted) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .info-value {
+    color: #e6ebf4 !important;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+body.atlas-app-page[class*="page-settings"] .settings-notice {
+    border: 1px solid var(--settings-border) !important;
+    border-radius: 1rem !important;
+    background: linear-gradient(145deg, rgba(18, 27, 44, .78), rgba(11, 16, 27, .7)) !important;
+    color: var(--settings-text);
+}
+
+body.atlas-app-page[class*="page-settings"] .page-body > div[style] {
+    border: 1px solid var(--settings-border) !important;
+    border-radius: 1rem !important;
+    background: linear-gradient(145deg, rgba(18, 27, 44, .78), rgba(11, 16, 27, .7)) !important;
+    color: var(--settings-text);
+}
+
+body.atlas-app-page[class*="page-settings"] .page-content button:not(.settings-theme-option):not(.settings-accent-swatch) {
+    border-color: rgba(255, 255, 255, .12) !important;
+    border-radius: .7rem !important;
+    background: rgba(255, 255, 255, .055) !important;
+    color: #eaf1ff !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .settings-theme-option {
+    border-color: rgba(255, 255, 255, .12) !important;
+    background: rgba(255, 255, 255, .055) !important;
+    color: #eaf1ff !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .settings-accent-options button {
+    min-height: 50px;
+    border: 2px solid rgba(255, 255, 255, .12) !important;
+}
+
+body.atlas-app-page[class*="page-settings"] .settings-accent-options button[aria-pressed="true"] {
+    border-color: var(--settings-accent) !important;
+    outline: 2px solid var(--settings-accent);
+    outline-offset: 2px;
+}
+
+body.atlas-app-page[class*="page-settings"] button:not(.settings-nav-link):not(.settings-dialog-close) {
+    color: #eaf1ff;
+    transition: border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
+}
+
+body.atlas-app-page[class*="page-settings"] button:not(.settings-nav-link):not(.settings-dialog-close):hover {
+    border-color: rgba(var(--settings-accent-rgb), .55) !important;
+    box-shadow: 0 8px 22px rgba(var(--settings-accent-rgb), .14);
+    transform: translateY(-1px);
+}
+
+body.atlas-app-page[class*="page-settings"] button[aria-pressed="true"]:not(.settings-accent-swatch) {
+    border-color: var(--settings-accent) !important;
+    background: linear-gradient(135deg, var(--settings-accent), #36bfd1) !important;
+    color: #07101d !important;
+    box-shadow: 0 8px 22px rgba(var(--settings-accent-rgb), .22);
+}
+
+.settings-subnav {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: .35rem;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 0 2rem;
+    padding: .45rem;
+    border: 1px solid rgba(210, 225, 255, .12);
+    border-radius: 1.35rem;
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, .075), rgba(255, 255, 255, .012) 45%, rgba(105, 157, 255, .045)),
+        rgba(9, 15, 27, .62);
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .1),
+        inset 0 -1px 0 rgba(255, 255, 255, .025),
+        0 14px 36px rgba(0, 0, 0, .16);
+    backdrop-filter: blur(28px) saturate(155%);
+    -webkit-backdrop-filter: blur(28px) saturate(155%);
+}
+
+.settings-subnav::-webkit-scrollbar {
+    display: none;
+}
+
+.settings-glass-indicator {
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    opacity: 0;
+    border: 1px solid rgba(159, 198, 255, .29);
+    border-radius: 1.05rem;
+    background:
+        radial-gradient(ellipse at 18% 0, rgba(255, 255, 255, .28), transparent 68%),
+        linear-gradient(145deg, rgba(174, 211, 255, .16), rgba(92, 148, 238, .09) 55%, rgba(255, 255, 255, .065));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .3),
+        inset 0 -1px 0 rgba(255, 255, 255, .07),
+        0 8px 24px rgba(27, 81, 165, .22),
+        0 0 0 1px rgba(255, 255, 255, .035);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    transform: translate3d(0, 0, 0);
+    transition:
+        transform .56s cubic-bezier(.2, .85, .2, 1),
+        width .56s cubic-bezier(.2, .85, .2, 1),
+        height .56s cubic-bezier(.2, .85, .2, 1),
+        opacity .18s ease,
+        border-radius .3s ease;
+    will-change: transform, width;
+}
+
+.settings-glass-indicator::before,
+.settings-glass-indicator::after {
+    position: absolute;
+    content: "";
+    pointer-events: none;
+    border-radius: inherit;
+}
+
+.settings-glass-indicator::before {
+    inset: 1px;
+    border: 1px solid rgba(255, 255, 255, .09);
+    background: linear-gradient(110deg, rgba(255, 255, 255, .075), transparent 36%, rgba(255, 255, 255, .025));
+}
+
+.settings-glass-indicator::after {
+    top: 2px;
+    left: 16%;
+    width: 68%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, .62), transparent);
+    filter: blur(.35px);
+}
+
+.settings-nav-link {
+    position: relative;
+    z-index: 1;
+    flex: 1 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 42px;
+    padding: .6rem 1rem;
+    border: 1px solid transparent;
+    border-radius: 1rem;
+    color: #aeb9cc;
+    font-size: .9rem;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .25s ease, text-shadow .25s ease;
+}
+
+.settings-nav-link:focus-visible,
+body.atlas-app-page[class*="page-settings"] button:focus-visible {
+    outline: 2px solid var(--settings-accent, #63a4ff);
+    outline-offset: 3px;
+}
+
+.settings-nav-link:hover,
+.settings-nav-link[aria-current="page"] {
+    color: #f4f8ff;
+    text-shadow: 0 0 18px rgba(198, 221, 255, .3);
+}
+
+.settings-nav-link[aria-current="page"] {
+    font-weight: 600;
+}
+
+.settings-dialog {
+    width: min(520px, calc(100vw - 2rem));
+    max-height: min(82vh, 760px);
+    margin: auto;
+    padding: 0;
+    overflow: auto;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: 1.25rem;
+    background: #101725;
+    color: #f5f7fb;
+    box-shadow: 0 32px 100px rgba(0, 0, 0, .65);
+}
+
+.settings-dialog::backdrop {
+    background: rgba(2, 5, 12, .72);
+    backdrop-filter: blur(8px);
+}
+
+.settings-dialog form {
+    display: grid;
+    gap: 1rem;
+    padding: 1.5rem;
+}
+
+.settings-dialog h2 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+
+.settings-dialog p {
+    margin: 0;
+    color: #a5b0c3;
+    line-height: 1.65;
+}
+
+.settings-dialog label {
+    display: grid;
+    gap: .4rem;
+    color: #c9d2e0;
+    font-size: .9rem;
+}
+
+.settings-dialog input,
+.settings-dialog select {
+    width: 100%;
+    min-height: 44px;
+    padding: .65rem .75rem;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: .65rem;
+    background: #090f19;
+    color: #f5f7fb;
+    font: inherit;
+}
+
+.settings-dialog input[type="checkbox"] {
+    width: 18px;
+    min-height: 18px;
+    accent-color: var(--settings-accent, #63a4ff);
+}
+
+.settings-dialog .settings-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: .65rem;
+    margin-top: .4rem;
+}
+
+.settings-dialog .settings-dialog-actions button {
+    min-height: 42px;
+    padding: .6rem .95rem;
+    border: 1px solid rgba(255, 255, 255, .14);
+    border-radius: .7rem;
+    background: rgba(255, 255, 255, .06);
+    color: #edf3ff;
+    font: inherit;
+    cursor: pointer;
+}
+
+.settings-dialog .settings-dialog-actions .settings-primary {
+    border-color: transparent;
+    background: linear-gradient(135deg, var(--settings-accent, #63a4ff), #36bfd1);
+    color: #07101d;
+    font-weight: 700;
+}
+
+.settings-dialog .settings-danger {
+    color: #ff9a9a;
+}
+
+.settings-toast {
+    position: fixed;
+    z-index: 10000;
+    right: 1.25rem;
+    bottom: 1.25rem;
+    max-width: min(420px, calc(100vw - 2.5rem));
+    padding: .85rem 1rem;
+    border: 1px solid rgba(103, 164, 255, .32);
+    border-radius: .8rem;
+    background: #121d30;
+    color: #eef5ff;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, .38);
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light {
+    background: #f2f5fa !important;
+    color: #172033 !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .page-title {
+    background: linear-gradient(105deg, #14223b, #4773bd);
+    background-clip: text;
+    -webkit-background-clip: text;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .page-description {
+    color: #64718a !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .memory-sections > .section-card,
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-sections > .section-card {
+    border-color: rgba(26, 43, 70, .1) !important;
+    background: linear-gradient(150deg, #fff, #f8faff) !important;
+    color: #172033 !important;
+    box-shadow: 0 14px 36px rgba(34, 53, 83, .08) !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .section-card h3,
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .info-value {
+    color: #172033 !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .info-label {
+    color: #65728a !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .info-item {
+    border-color: rgba(26, 43, 70, .09) !important;
+    background: #f5f7fb !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-subnav {
+    border-color: rgba(26, 43, 70, .12);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, .86), rgba(255, 255, 255, .4) 48%, rgba(220, 233, 255, .3)),
+        rgba(241, 246, 255, .72);
+    box-shadow: inset 0 1px 0 #fff, 0 14px 36px rgba(34, 53, 83, .1);
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-nav-link {
+    color: #4d5b72;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-glass-indicator {
+    border-color: rgba(86, 130, 198, .25);
+    background:
+        radial-gradient(ellipse at 18% 0, rgba(255, 255, 255, .92), transparent 68%),
+        linear-gradient(145deg, rgba(255, 255, 255, .76), rgba(142, 182, 244, .17) 58%, rgba(255, 255, 255, .34));
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, .9),
+        inset 0 -1px 0 rgba(255, 255, 255, .4),
+        0 8px 24px rgba(53, 99, 174, .16);
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .page-body > div[style] {
+    border-color: rgba(26, 43, 70, .1) !important;
+    background: linear-gradient(145deg, #fff, #f7f9fd) !important;
+    color: #172033;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .page-content button:not(.settings-theme-option):not(.settings-accent-swatch) {
+    border-color: rgba(26, 43, 70, .16) !important;
+    background: #f4f6fa !important;
+    color: #25334a !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-theme-option {
+    border-color: rgba(26, 43, 70, .16) !important;
+    background: #f4f6fa !important;
+    color: #25334a !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-nav-link:hover,
+body.atlas-app-page[class*="page-settings"].atlas-settings-light .settings-nav-link[aria-current="page"] {
+    color: #243651;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-compact .memory-sections > .section-card,
+body.atlas-app-page[class*="page-settings"].atlas-settings-compact .settings-sections > .section-card {
+    padding: 1.15rem !important;
+}
+
+body.atlas-app-page[class*="page-settings"].atlas-settings-spacious .memory-sections > .section-card,
+body.atlas-app-page[class*="page-settings"].atlas-settings-spacious .settings-sections > .section-card {
+    padding: 2rem !important;
+}
+
+@media (max-width: 720px) {
+    body.atlas-app-page[class*="page-settings"] .page-content {
+        padding-top: 5rem;
+    }
+
+    .settings-nav-link {
+        flex: 0 0 auto;
+        padding-inline: .8rem;
+        font-size: .8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .settings-glass-indicator {
+        transition: none;
+    }
+}

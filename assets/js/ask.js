@@ -90,6 +90,10 @@ function setupEventListeners() {
 
     // 新对话
     elements.newChatBtn.addEventListener('click', createNewChat);
+    document.getElementById('newChatTopBtn')?.addEventListener('click', () => {
+        createNewChat();
+        elements.messageInput.focus();
+    });
 
     // API 设置
     elements.apiSettingsBtn.addEventListener('click', openAPIModal);

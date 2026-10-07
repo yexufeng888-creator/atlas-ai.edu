@@ -12,6 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleMouseMove(e) {
         const card = e.currentTarget;
+        if (card.classList.contains('atlas-motion-card')) return;
         const rect = card.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function handleMouseLeave(e) {
         const card = e.currentTarget;
+        if (card.classList.contains('atlas-motion-card')) return;
         card.style.transform = `
             perspective(1000px)
             rotateX(0deg)

@@ -29,7 +29,7 @@ body.dashboard-home {
 
 .dashboard-home .content-container {
     max-width: none !important;
-    padding: 0 !important;
+    padding: 3rem 2rem !important;
 }
 
 .dashboard-home .content-container > div:first-child {
@@ -366,6 +366,10 @@ body.dashboard-home {
 }
 
 @media (max-width: 520px) {
+    .dashboard-home .content-container {
+        padding: 1.25rem !important;
+    }
+
     .dashboard-home #welcomeTitle {
         font-size: clamp(2rem, 9vw, 3rem) !important;
     }
