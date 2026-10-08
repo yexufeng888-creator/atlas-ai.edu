@@ -251,6 +251,23 @@
             background: rgba(255, 255, 255, 0.95);
             transform: translateX(8px);
         }
+
+        .auth-logout-button {
+            margin-top: 1rem;
+            padding: .6rem 1rem;
+            border: 1px solid rgba(100, 116, 139, .3);
+            border-radius: 999px;
+            color: #64748b;
+            background: rgba(255, 255, 255, .65);
+            font: inherit;
+            font-size: .85rem;
+            cursor: pointer;
+        }
+
+        .auth-logout-button:hover {
+            color: #1d4ed8;
+            border-color: #60a5fa;
+        }
     </style>
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
@@ -466,7 +483,7 @@
         }
     </style>
 </head>
-<body class="has-global-nav dashboard-home">
+<body class="has-global-nav dashboard-home" data-auth-required="true">
     <!-- 粒子背景 -->
     <canvas id="particles-canvas"></canvas>
 
@@ -479,15 +496,17 @@
 
             <!-- 欢迎区域 -->
             <div class="dashboard-intro" style="text-align: center; margin-bottom: 3rem;">
+                <p id="authStatus" role="status" aria-live="polite" style="margin: 0; color: #b42318;"></p>
                 <p class="dashboard-date-line" style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">
                     <span id="current-time"></span> · <span id="current-weekday">周五</span>
                 </p>
                 <h1 id="welcomeTitle" style="font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 700; margin-bottom: 1rem; background: linear-gradient(135deg, #2563eb, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
-                    <span >下午好</span>，<span id="userName">演示用户</span>
+                    <span >下午好</span>，<span id="userName">ATLAS 用户</span>
                 </h1>
                 <p style="font-size: 1.125rem; color: #6b7280;">
                     <span >今天你有</span> <strong style="color: #2563eb;"><span id="taskCount">5</span> <span >个待办事项</span></strong> <span >和</span> <strong style="color: #06b6d4;"><span id="meetingCount">3</span> <span >个会议</span></strong>
                 </p>
+                <button id="logoutBtn" class="auth-logout-button" type="button"><span>退出登录</span></button>
             </div>
 
             <!-- 主要仪表盘 -->
@@ -694,9 +713,11 @@
         <p>Personal Intelligence OS · 由 ATLAS 驱动</p>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/supabase-auth.js?v=20260912"></script>
     <script src="assets/js/page.js"></script>
     <script src="assets/js/3d-effects.js?v=20260910"></script>
-    <script src="assets/js/auth.js?v=20260910"></script>
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
     <script src="assets/js/secondary-dashboard-i18n.js"></script>

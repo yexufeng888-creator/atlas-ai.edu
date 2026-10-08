@@ -33,24 +33,24 @@
                 <p>Cookie 是存储在你设备上的小型文本文件，帮助网站记住你的偏好和活动。</p>
 
                 <h2 style="font-size: 1.5rem; font-weight: 700; color: #1a1a1a; margin: 2rem 0 1rem;">我们如何使用 Cookie？</h2>
-                <p>我们使用 Cookie 来：</p>
+                <p>当前网站前端会在浏览器本地存储中保存部分界面偏好和 Supabase 登录会话。项目当前前端代码不通过 Cookie 保存这些状态；网站托管、内容分发或安全服务是否设置 Cookie，需以实际部署配置为准。</p>
                 <ul style="margin: 1rem 0; padding-left: 2rem;">
-                    <li>保持你的登录状态</li>
-                    <li>记住你的偏好设置</li>
-                    <li>分析网站使用情况</li>
-                    <li>改善服务性能</li>
+                    <li>Supabase Auth 会话由认证客户端保存在当前浏览器的 localStorage 中；退出登录或清除网站数据可以结束本机会话</li>
+                    <li>语言和主题等界面偏好使用浏览器 localStorage 保存</li>
+                    <li>当前前端代码未配置分析或广告 Cookie</li>
+                    <li>实际托管或安全服务如需使用 Cookie，应在上线前补充说明其用途和管理方式</li>
                 </ul>
 
                 <h2 style="font-size: 1.5rem; font-weight: 700; color: #1a1a1a; margin: 2rem 0 1rem;">Cookie 类型</h2>
 
                 <h3 style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a; margin: 1.5rem 0 0.75rem;">必要 Cookie</h3>
-                <p>这些 Cookie 对网站运行至关重要，无法禁用。</p>
+                <p>如实际部署使用维持服务运行或安全所需的 Cookie，运营方应在此说明具体用途。当前前端代码未设置必要 Cookie；浏览器本地保存的 Supabase 会话不是 Cookie。</p>
 
                 <h3 style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a; margin: 1.5rem 0 0.75rem;">功能 Cookie</h3>
-                <p>这些 Cookie 使网站能够记住你的选择。</p>
+                <p>当前界面偏好使用 localStorage 保存，而非 Cookie。你可以在浏览器的网站数据设置中清除该偏好。</p>
 
                 <h3 style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a; margin: 1.5rem 0 0.75rem;">分析 Cookie</h3>
-                <p>这些 Cookie 帮助我们了解网站的使用情况。</p>
+                <p>当前项目代码未配置分析或广告 Cookie。若运营方未来引入此类技术，应先核验服务商、数据用途和法律要求，更新本政策并提供适用的选择机制。</p>
 
                 <h2 style="font-size: 1.5rem; font-weight: 700; color: #1a1a1a; margin: 2rem 0 1rem;">管理 Cookie</h2>
                 <p>你可以通过浏览器设置管理 Cookie 偏好。请注意，禁用某些 Cookie 可能影响网站功能。</p>

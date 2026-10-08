@@ -3,69 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS 帮助中心：查找入门指引、AI 对话、隐私和账户常见问题。">
     <title>帮助中心 - ATLAS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
-    
+    <link rel="stylesheet" href="assets/css/resources.css?v=20261008a">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav resource-page">
     <nav class="global-nav"></nav>
-
-    <!-- Page Hero -->
-    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
-            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">支持</div>
-            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">我们随时为你提供帮助</h1>
-            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">查找答案、浏览文档或联系我们的支持团队</p>
-        </div>
-    </section>
-
-    <!-- Page Content -->
-    <section style="padding: 6rem 2rem; background: #ffffff;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
-                <div style="background: #f9fafb; border-radius: 1rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">📚</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">快速入门</h3>
-                    <p style="color: #6b7280; margin-bottom: 1rem;">了解 ATLAS 的基础功能和使用方法</p>
-                    <a href="#" style="color: #0071e3; font-weight: 500; text-decoration: none;">查看指南 →</a>
-                </div>
-                <div style="background: #f9fafb; border-radius: 1rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">🎓</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">视频教程</h3>
-                    <p style="color: #6b7280; margin-bottom: 1rem;">通过视频快速掌握 ATLAS 的使用技巧</p>
-                    <a href="#" style="color: #0071e3; font-weight: 500; text-decoration: none;">观看教程 →</a>
-                </div>
-                <div style="background: #f9fafb; border-radius: 1rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                    <div style="font-size: 2rem; margin-bottom: 1rem;">💬</div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.75rem;">联系支持</h3>
-                    <p style="color: #6b7280; margin-bottom: 1rem;">遇到问题？我们的团队随时准备帮助你</p>
-                    <a href="contact.html" style="color: #0071e3; font-weight: 500; text-decoration: none;">联系我们 →</a>
-                </div>
+    <header class="resource-hero">
+        <p class="resource-eyebrow">SUPPORT</p>
+        <h1>从这里找到答案。</h1>
+        <p>浏览常见问题、了解目前可用的功能，或通过邮件与 ATLAS 团队联系。</p>
+    </header>
+    <main class="resource-main">
+        <nav class="resource-tabs" aria-label="资源导航">
+            <a href="blog.html">博客</a><a href="help-center.html" aria-current="page">帮助中心</a><a href="developers.html">开发者文档</a><a href="api.html">API 接口</a><a href="community.html">社区论坛</a><a href="changelog.html">更新日志</a>
+        </nav>
+        <section class="resource-section" aria-labelledby="quick-links">
+            <h2 id="quick-links">快速入口</h2>
+            <div class="resource-grid">
+                <article class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">↗</span>
+                    <h3>开始使用</h3>
+                    <p>从工作台、AI 对话和设置页面认识 ATLAS 当前提供的界面与功能。</p>
+                    <a href="home.html">打开工作台 →</a>
+                </article>
+                <article class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">⌘</span>
+                    <h3>开发者资源</h3>
+                    <p>查看开发者说明与 API 页面。示例内容不代表生产服务已开放。</p>
+                    <a href="developers.html">阅读开发者文档 →</a>
+                </article>
+                <article class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">◉</span>
+                    <h3>隐私与数据</h3>
+                    <p>了解可能处理的信息、第三方模型以及如何提交隐私请求。</p>
+                    <a href="privacy-policy.html">阅读隐私政策 →</a>
+                </article>
             </div>
-
-            <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">常见问题</h2>
-            <div style="display: grid; gap: 1rem;">
-                <details style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                    <summary style="font-weight: 600; cursor: pointer;">如何开始使用 ATLAS？</summary>
-                    <p style="margin-top: 1rem; color: #6b7280;">注册账户后，你可以立即开始使用 ATLAS。我们建议先完成新手引导，了解核心功能。</p>
+        </section>
+        <section class="resource-section" aria-labelledby="faq-heading">
+            <h2 id="faq-heading">常见问题</h2>
+            <label for="faq-search">搜索帮助主题</label>
+            <input id="faq-search" data-resource-search type="search" placeholder="例如：AI、隐私、数据" style="display:block;width:100%;max-width:560px;min-height:48px;margin:.6rem 0 1rem;padding:.75rem 1rem;border:1px solid rgba(29,29,31,.16);border-radius:.8rem;font:inherit">
+            <div class="resource-faq">
+                <details data-search-item>
+                    <summary>ATLAS 目前是完整上线的在线服务吗？</summary>
+                    <p>本网站包含可浏览的产品界面与部分本地演示交互。除页面明确说明外，不应将演示状态视为已连接真实账户、后台数据或生产 API。具体功能以实际部署和页面提示为准。</p>
                 </details>
-                <details style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                    <summary style="font-weight: 600; cursor: pointer;">ATLAS 支持哪些平台？</summary>
-                    <p style="margin-top: 1rem; color: #6b7280;">ATLAS 支持 Web、iOS、Android、macOS 和 Windows 平台。</p>
+                <details data-search-item>
+                    <summary>AI 对话内容会发送到哪里？</summary>
+                    <p>取决于你选择的模型和实际部署。AI 请求可能传送给相应模型服务商。提交敏感内容前请查看该服务商的处理地点、保存期限、训练用途及退出选项。详细说明见<a class="resource-link" href="privacy-policy.html#ai">隐私政策的 AI 章节</a>。</p>
                 </details>
-                <details style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                    <summary style="font-weight: 600; cursor: pointer;">如何导入现有数据？</summary>
-                    <p style="margin-top: 1rem; color: #6b7280;">前往设置 → 数据导入，选择你要导入的来源，按照向导完成导入。</p>
+                <details data-search-item>
+                    <summary>怎样管理本地保存的偏好？</summary>
+                    <p>部分外观偏好仅保存在当前浏览器。清除网站数据、切换浏览器或设备可能会移除这些偏好。页面上的本地设置不代表服务器账户资料已更改。</p>
+                </details>
+                <details data-search-item>
+                    <summary>如何请求访问、更正或删除个人信息？</summary>
+                    <p>请通过隐私政策列出的联系邮箱提交请求，并说明涉及的功能。运营方可能需要核验身份后处理；若数据保存在第三方服务中，也可能需要直接向该服务商提出请求。</p>
+                </details>
+                <details data-search-item>
+                    <summary>API 和开发者集成已经开放了吗？</summary>
+                    <p>本网站展示的 API 路径和代码目前仅用于说明 API 设计形式，不是可调用的线上端点。只有在正式发布开放说明、真实端点和认证方式后，才可据此进行集成。</p>
                 </details>
             </div>
-        
-        </div>
-    </section>
-
+            <p class="resource-empty" hidden>没有找到相关问题。请尝试其他关键词。</p>
+        </section>
+        <section class="resource-callout">
+            <h2>还需要帮助？</h2>
+            <p>描述你遇到的问题、所在页面和浏览器类型。请不要在邮件中发送密码或访问令牌。</p>
+            <a class="resource-button" href="mailto:yexufeng888@gmail.com?subject=ATLAS%20%E5%B8%AE%E5%8A%A9%E8%AF%B7%E6%B1%82">发送邮件联系支持 <span aria-hidden="true">→</span></a>
+        </section>
+    </main>
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/resources.js?v=20261008a"></script>
 </body>
 </html>

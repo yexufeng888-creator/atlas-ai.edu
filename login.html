@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sign in to ATLAS - Personal Intelligence OS">
-    <title>Login - ATLAS</title>
+    <meta name="description" content="登录 ATLAS 演示界面。查看登录数据处理方式、会话保存选项和隐私说明。">
+    <title>登录 - ATLAS</title>
     <link rel="stylesheet" href="assets/css/main.css">
     <link rel="stylesheet" href="assets/css/3d-effects.css">
     <link rel="stylesheet" href="assets/css/auth.css">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav auth-login-page">
     <!-- Language & Theme Controls -->
     <div class="top-controls">
         <div class="control-group">
@@ -55,43 +55,73 @@
                 <p class="auth-subtitle" >欢迎回来，继续你的智能工作流</p>
             </div>
 
-            <!-- Social Login -->
-            <div class="social-login">
-                <button class="social-btn google-btn">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                        <path fill="currentColor" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                        <path fill="currentColor" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                        <path fill="currentColor" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-                    </svg>
-                    <span data-i18n="login.google">使用 Google 登录</span>
-                </button>
+            <div id="authStatus" class="auth-status" role="status" aria-live="polite"></div>
 
-                <button class="social-btn github-btn">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.46-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/>
-                    </svg>
-                    <span data-i18n="login.github">使用 GitHub 登录</span>
-                </button>
-
-                <button class="social-btn apple-btn">
-                    <svg class="social-icon" viewBox="0 0 24 24">
-                        <path fill="currentColor" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-                    </svg>
-                    <span data-i18n="login.apple">使用 Apple 登录</span>
-                </button>
+            <div class="auth-method-tabs" role="tablist" aria-label="选择登录方式">
+                <button class="auth-method-tab active" id="emailOtpTab" type="button" role="tab" aria-selected="true" aria-controls="emailOtpForm" data-auth-method="emailOtp">邮箱验证码</button>
+                <button class="auth-method-tab" id="emailTab" type="button" role="tab" aria-selected="false" aria-controls="loginForm" data-auth-method="email">邮箱密码</button>
+                <button class="auth-method-tab" id="phoneTab" type="button" role="tab" aria-selected="false" aria-controls="phoneLoginForm" data-auth-method="phone">手机号</button>
             </div>
 
-            <div class="divider">
-                <span data-i18n="login.or">或</span>
-            </div>
-
-            <!-- Email Login Form -->
-            <form class="auth-form" id="loginForm">
+            <form class="auth-form" id="emailOtpForm" role="tabpanel" aria-labelledby="emailOtpTab">
                 <div class="form-group">
-                    <label class="form-label" >邮箱地址</label>
+                    <label class="form-label" for="otpEmail">邮箱地址</label>
+                    <input type="email" id="otpEmail" class="form-input" placeholder="your@email.com" required autocomplete="email">
+                    <small class="auth-help-text">我们会向该邮箱发送 6 位验证码；未注册邮箱验证后会自动创建账户。</small>
+                </div>
+                <div class="form-group" id="emailOtpGroup" hidden>
+                    <label class="form-label" for="emailOtpCode">邮箱验证码</label>
+                    <input type="text" id="emailOtpCode" class="form-input" placeholder="输入邮件中的验证码" inputmode="numeric" autocomplete="one-time-code" maxlength="8" pattern="[0-9]{6,8}">
+                </div>
+                <button type="button" class="btn-submit btn-3d" id="sendEmailOtpButton"><span>发送验证码</span></button>
+                <button type="submit" class="btn-submit btn-3d" id="verifyEmailOtpButton" hidden><span>验证并登录</span></button>
+            </form>
+
+            <form class="auth-form" id="phoneLoginForm" role="tabpanel" aria-labelledby="phoneTab" hidden>
+                <div class="form-group">
+                    <label class="form-label" for="loginPhone">中国大陆手机号</label>
+                    <input
+                        type="tel"
+                        id="loginPhone"
+                        class="form-input"
+                        placeholder="+86 138 0000 0000"
+                        required
+                        autocomplete="tel"
+                        inputmode="tel"
+                    >
+                    <small class="auth-help-text">请使用 +86 开头的中国大陆手机号；未注册号码验证后会自动创建账户。</small>
+                </div>
+                <div class="form-group" id="otpGroup" hidden>
+                    <label class="form-label" for="loginOtp">短信验证码</label>
+                    <input
+                        type="text"
+                        id="loginOtp"
+                        class="form-input"
+                        placeholder="输入 6 位验证码"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                        maxlength="6"
+                        pattern="[0-9]{6}"
+                    >
+                </div>
+                <button type="button" class="btn-submit btn-3d" id="sendOtpButton">
+                    <span>发送验证码</span>
+                </button>
+                <button type="submit" class="btn-submit btn-3d" id="verifyOtpButton" hidden>
+                    <span>验证并登录</span>
+                    <svg class="btn-icon" viewBox="0 0 24 24" width="20" height="20">
+                        <path fill="currentColor" d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                    </svg>
+                </button>
+            </form>
+
+            <form class="auth-form" id="loginForm" role="tabpanel" aria-labelledby="emailTab" hidden>
+                <div class="form-group">
+                    <label class="form-label" for="loginEmail">邮箱地址</label>
                     <input
                         type="email"
+                        id="loginEmail"
+                        name="email"
                         class="form-input"
                         placeholder="your@email.com"
                         required
@@ -100,10 +130,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" >密码</label>
+                    <label class="form-label" for="loginPassword">密码</label>
                     <div class="password-input">
                         <input
                             type="password"
+                            id="loginPassword"
+                            name="password"
                             class="form-input"
                             placeholder="••••••••"
                             required
@@ -118,10 +150,6 @@
                 </div>
 
                 <div class="form-options">
-                    <label class="checkbox-label">
-                        <input type="checkbox" class="form-checkbox">
-                        <span >记住我</span>
-                    </label>
                     <a href="reset-password.html" class="link" >忘记密码？</a>
                 </div>
 
@@ -133,18 +161,26 @@
                 </button>
             </form>
 
+            <section class="auth-privacy-notice" aria-labelledby="login-privacy-title">
+                <h2 id="login-privacy-title">登录时的信息与权限</h2>
+                <p>ATLAS 使用 Supabase Auth 处理账户验证。使用手机号时，手机号及验证码请求会发送至认证服务；短信发送服务由部署配置决定。请勿将验证码告知他人。</p>
+                <ul>
+                    <li><strong>账户信息：</strong>邮箱或手机号用于身份验证；邮箱注册可能需要通过邮件确认。</li>
+                    <li><strong>会话：</strong>登录令牌由 Supabase 客户端保存在当前浏览器，以维持登录状态；退出登录或清除网站数据可结束本机会话。</li>
+                    <li><strong>浏览器自动填充：</strong>邮箱、密码和验证码字段允许浏览器或密码管理器按你的设置自动填入；是否保存由你和浏览器控制。</li>
+                    <li><strong>设备权限：</strong>登录不请求摄像头、麦克风、位置、通讯录、照片或通知权限。</li>
+                </ul>
+                <p class="auth-privacy-links">详见 <a href="terms.html" class="link">服务条款</a>、<a href="privacy-policy.html" class="link">隐私政策</a> 和 <a href="cookies.html" class="link">Cookie 政策</a>。</p>
+            </section>
+
+            <label class="checkbox-label auth-consent-label">
+                <input type="checkbox" id="loginAcknowledgement" class="form-checkbox" required>
+                <span>我已阅读<a href="terms.html" class="link">服务条款</a>和<a href="privacy-policy.html" class="link">隐私政策</a>，并知悉本次登录所需信息将按相关说明处理（必选）</span>
+            </label>
+
             <div class="auth-footer">
                 <span >还没有账户？</span>
                 <a href="signup.html" class="link" >立即注册</a>
-            </div>
-        </div>
-
-        <!-- Demo Account Notice -->
-        <div class="demo-account-notice">
-            <div style="font-size: 0.875rem; color: #6b7280; line-height: 1.6;">
-                <strong style="color: #2563eb; display: block; margin-bottom: 0.5rem;">💡 演示账户</strong>
-                邮箱：<code style="background: rgba(37, 99, 235, 0.1); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #2563eb;">demo@atlas.com</code><br>
-                密码：<code style="background: rgba(37, 99, 235, 0.1); padding: 0.25rem 0.5rem; border-radius: 0.25rem; color: #2563eb;">demo123</code>
             </div>
         </div>
 
@@ -161,6 +197,8 @@
     <script src="assets/js/atlas-scroll.js"></script>
     <script src="assets/js/theme.js"></script>
     <script src="assets/js/3d-effects.js"></script>
-    <script src="assets/js/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/supabase-auth.js?v=20260912"></script>
 </body>
 </html>

@@ -3,172 +3,271 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS 隐私政策：了解我们可能处理的信息、处理目的、AI 服务、你的隐私权利及环境责任。">
     <title>隐私政策 - ATLAS</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <style>
+        body {
+            margin: 0;
+        }
+
+        .policy-page {
+            padding: 3rem 1.25rem 5rem;
+            background: #f7f8fc;
+            color: #344054;
+        }
+
+        .policy-wrap {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        .policy-heading {
+            padding: 7rem 1.5rem 3rem;
+            background: linear-gradient(135deg, #101a32, #243e72 60%, #4c3d83);
+            color: #fff;
+            text-align: center;
+        }
+
+        .policy-heading p {
+            max-width: 680px;
+            margin: .75rem auto 0;
+            color: #d7e2f8;
+            line-height: 1.7;
+        }
+
+        .policy-heading h1 {
+            margin: 0;
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            letter-spacing: -.03em;
+        }
+
+        .policy-content {
+            padding: clamp(1.25rem, 4vw, 3rem);
+            border: 1px solid #e4e8f0;
+            border-radius: 1.25rem;
+            background: #fff;
+            box-shadow: 0 16px 50px rgba(24, 39, 75, .07);
+            line-height: 1.85;
+            overflow-wrap: anywhere;
+        }
+
+        .policy-content h2 {
+            margin: 2.5rem 0 .75rem;
+            color: #172033;
+            font-size: 1.45rem;
+            line-height: 1.4;
+        }
+
+        .policy-content h3 {
+            margin: 1.5rem 0 .5rem;
+            color: #263653;
+            font-size: 1.08rem;
+        }
+
+        .policy-content p,
+        .policy-content ul,
+        .policy-content ol {
+            margin: .65rem 0;
+        }
+
+        .policy-content ul,
+        .policy-content ol {
+            padding-left: 1.5rem;
+        }
+
+        .policy-content li + li {
+            margin-top: .35rem;
+        }
+
+        .policy-content a {
+            color: #1769c2;
+            text-underline-offset: .18em;
+        }
+
+        .policy-notice,
+        .policy-callout {
+            margin: 1.25rem 0;
+            padding: 1rem 1.2rem;
+            border: 1px solid #d8e5fa;
+            border-radius: .8rem;
+            background: #f2f7ff;
+        }
+
+        .policy-notice {
+            border-color: #f2d99b;
+            background: #fff9e9;
+            color: #654b12;
+        }
+
+        .policy-meta {
+            color: #667085;
+            font-size: .92rem;
+        }
+
+        .policy-toc {
+            padding: 1.25rem 1.5rem;
+            border: 1px solid #e4e8f0;
+            border-radius: .8rem;
+            background: #f9fafc;
+        }
+
+        .policy-toc ol {
+            columns: 2;
+        }
+
+        @media (max-width: 640px) {
+            .policy-page {
+                padding: 1.25rem .75rem 3rem;
+            }
+
+            .policy-heading {
+                padding: 6rem 1rem 2.5rem;
+            }
+
+            .policy-toc ol {
+                columns: 1;
+            }
+        }
+    </style>
 </head>
 <body class="has-global-nav">
     <nav class="global-nav"></nav>
 
-    <!-- Page Hero -->
-    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
-            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">法律</div>
-            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">隐私政策</h1>
-            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">我们重视并保护你的隐私</p>
-        </div>
-    </section>
+    <header class="policy-heading">
+        <h1>隐私政策</h1>
+        <p>本政策说明 ATLAS 可能如何收集、使用、保存和披露个人信息，以及你可以如何管理这些信息。</p>
+    </header>
 
-    <!-- Page Content -->
-    <section style="padding: 6rem 2rem; background: #ffffff;">
-        <div style="max-width: 900px; margin: 0 auto;">
-            <div style="max-width: 800px; margin: 0 auto; line-height: 1.8; color: #4b5563;">
-                <p style="font-size: 0.875rem; color: #6b7280; margin-bottom: 3rem;">最后更新：2026年1月1日</p>
-
-                <div style="background: #f0f9ff; border-left: 4px solid #0ea5e9; padding: 1.5rem; margin-bottom: 3rem; border-radius: 0.5rem;">
-                    <p style="margin: 0; color: #0c4a6e;"><strong>简要说明：</strong> 我们收集必要的信息以提供服务，使用行业标准加密保护你的数据，并且永远不会出售你的个人信息。</p>
-                </div>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">1. 我们收集的信息</h2>
-
-                <h3 style="font-size: 1.5rem; font-weight: 600; color: #1a1a1a; margin: 2rem 0 1rem;">账户信息</h3>
-                <p>当你创建 ATLAS 账户时，我们会收集：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li><strong>电子邮件地址：</strong>用于账户验证和重要通知</li>
-                    <li><strong>姓名：</strong>用于个性化你的体验</li>
-                    <li><strong>密码：</strong>经过加密存储，我们无法查看你的密码</li>
-                    <li><strong>个人资料信息：</strong>可选填写的头像、简介等</li>
-                </ul>
-
-                <h3 style="font-size: 1.5rem; font-weight: 600; color: #1a1a1a; margin: 2rem 0 1rem;">使用数据</h3>
-                <p>为了提供和改进服务，我们会收集：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li><strong>你创建的内容：</strong>任务、笔记、日程等</li>
-                    <li><strong>使用情况：</strong>你如何使用 ATLAS 的功能</li>
-                    <li><strong>设备信息：</strong>设备类型、操作系统、浏览器</li>
-                    <li><strong>日志数据：</strong>IP 地址、访问时间、错误日志</li>
-                </ul>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">2. 我们如何使用信息</h2>
-                <p>我们使用收集的信息来：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li><strong>提供服务：</strong>使 ATLAS 的所有功能正常运行</li>
-                    <li><strong>个性化体验：</strong>根据你的偏好定制功能</li>
-                    <li><strong>改进产品：</strong>分析使用模式以优化性能</li>
-                    <li><strong>安全保护：</strong>检测和防止欺诈、滥用行为</li>
-                    <li><strong>客户支持：</strong>回应你的问题和请求</li>
-                    <li><strong>发送通知：</strong>重要的服务更新和安全警报</li>
-                </ul>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">3. 数据安全</h2>
-
-                <div style="background: #f9fafb; border-radius: 1rem; padding: 2rem; margin: 2rem 0; border: 1px solid #e5e7eb;">
-                    <h3 style="font-size: 1.25rem; font-weight: 600; color: #1a1a1a; margin-bottom: 1rem;">🔒 我们的安全措施</h3>
-                    <ul style="margin: 0; padding-left: 2rem; line-height: 1.8;">
-                        <li><strong>端到端加密：</strong>你的敏感数据在传输和存储时都经过加密</li>
-                        <li><strong>访问控制：</strong>严格限制员工对用户数据的访问</li>
-                        <li><strong>定期审计：</strong>由第三方安全公司进行审计</li>
-                        <li><strong>安全监控：</strong>24/7 监控系统安全</li>
-                        <li><strong>数据备份：</strong>定期备份以防数据丢失</li>
-                    </ul>
-                </div>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">4. 信息共享</h2>
-                <p><strong>我们不会出售你的个人信息。</strong> 我们只在以下情况下共享信息：</p>
-
-                <h3 style="font-size: 1.5rem; font-weight: 600; color: #1a1a1a; margin: 2rem 0 1rem;">服务提供商</h3>
-                <p>我们使用可信的第三方服务来运营 ATLAS：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li>云存储提供商（如 AWS）</li>
-                    <li>分析服务（如 Google Analytics）</li>
-                    <li>支付处理商（如 Stripe）</li>
-                    <li>邮件服务提供商</li>
-                </ul>
-                <p>这些服务提供商只能访问执行任务所需的信息，并承诺保护你的数据。</p>
-
-                <h3 style="font-size: 1.5rem; font-weight: 600; color: #1a1a1a; margin: 2rem 0 1rem;">法律要求</h3>
-                <p>在以下情况下，我们可能需要披露你的信息：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li>遵守法律、法规或法院命令</li>
-                    <li>保护我们的权利、财产或安全</li>
-                    <li>调查潜在的违规行为</li>
-                    <li>防止欺诈或安全威胁</li>
-                </ul>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">5. 你的权利</h2>
-                <p>你对自己的数据拥有以下权利：</p>
-
-                <div style="display: grid; gap: 1rem; margin: 2rem 0;">
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                        <h4 style="font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem;">📥 访问权</h4>
-                        <p style="margin: 0; color: #6b7280;">你可以随时下载你的所有数据</p>
-                    </div>
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                        <h4 style="font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem;">✏️ 更正权</h4>
-                        <p style="margin: 0; color: #6b7280;">你可以修改或更新你的个人信息</p>
-                    </div>
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                        <h4 style="font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem;">🗑️ 删除权</h4>
-                        <p style="margin: 0; color: #6b7280;">你可以要求删除你的账户和所有数据</p>
-                    </div>
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 1.5rem; border: 1px solid #e5e7eb;">
-                        <h4 style="font-weight: 600; color: #1a1a1a; margin-bottom: 0.5rem;">📤 携带权</h4>
-                        <p style="margin: 0; color: #6b7280;">你可以将数据导出到其他服务</p>
-                    </div>
-                </div>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">6. Cookie 和追踪</h2>
-                <p>我们使用 Cookie 和类似技术来：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li>保持你的登录状态</li>
-                    <li>记住你的偏好设置</li>
-                    <li>分析网站使用情况</li>
-                    <li>提供个性化内容</li>
-                </ul>
-                <p>你可以通过浏览器设置管理 Cookie。详见我们的 <a href="cookies.html" style="color: #0071e3; text-decoration: none;">Cookie 政策</a>。</p>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">7. 儿童隐私</h2>
-                <p>ATLAS 不面向 13 岁以下儿童。我们不会有意收集儿童的个人信息。如果你发现我们收集了儿童的信息，请立即联系我们。</p>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">8. 国际数据传输</h2>
-                <p>你的信息可能会被传输到你所在国家/地区以外的地方。我们会采取措施确保你的数据在任何地方都受到充分保护，符合本隐私政策。</p>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">9. 数据保留</h2>
-                <p>我们会保留你的信息：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li>只要你的账户处于活跃状态</li>
-                    <li>或者为了提供服务所必需的时间</li>
-                    <li>或者法律要求的时间</li>
-                </ul>
-                <p>当你删除账户后，我们会在 30 天内删除你的个人数据（法律要求保留的除外）。</p>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">10. 政策更新</h2>
-                <p>我们可能会更新本隐私政策。重大变更时，我们会：</p>
-                <ul style="margin: 1rem 0; padding-left: 2rem; line-height: 1.8;">
-                    <li>通过邮件通知你</li>
-                    <li>在应用内显示通知</li>
-                    <li>在网站上发布公告</li>
-                </ul>
-                <p>继续使用 ATLAS 即表示你接受更新后的政策。</p>
-
-                <h2 style="font-size: 2rem; font-weight: 700; color: #1a1a1a; margin: 3rem 0 1.5rem;">11. 联系我们</h2>
-                <p>如果你对本隐私政策有任何问题，请联系我们：</p>
-
-                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 1rem; padding: 2rem; margin: 2rem 0; color: white;">
-                    <p style="margin: 0 0 1rem 0;"><strong style="font-size: 1.125rem;">Campus Intelligence Inc.</strong></p>
-                    <p style="margin: 0.5rem 0;">📧 Email: <a href="mailto:yexufeng888@gmail.com" style="color: white; text-decoration: underline;">yexufeng888@gmail.com</a></p>
-                    <p style="margin: 0.5rem 0;">🌐 网站: <a href="contact.html" style="color: white; text-decoration: underline;">联系我们页面</a></p>
-                    <p style="margin: 0.5rem 0;">📍 地址：上海市闵行区金领古科技产业园区</p>
-                </div>
-
-                <div style="background: #fef3c7; border-left: 4px solid #f59e0b; padding: 1.5rem; margin: 3rem 0; border-radius: 0.5rem;">
-                    <p style="margin: 0; color: #92400e;"><strong>中国地区用户须知：</strong> 部分功能在中国地区因配合监管工作暂不提供。我们遵守当地法律法规，保护用户数据安全。</p>
-                </div>
+    <main class="policy-page">
+        <article class="policy-wrap policy-content">
+            <p class="policy-meta">生效日期：2026年10月7日 · 版本：1.0</p>
+            <div class="policy-notice">
+                <strong>上线前核验提示：</strong>本文件是面向 ATLAS 网站和产品体验的隐私政策草案，不构成法律意见。实际运营主体、服务器位置、已启用的数据分析/云存储/AI 服务商、数据保留期限和用户请求处理流程，必须由运营方按真实部署逐项核实并补齐。未实际启用的功能不应被理解为正在收集或处理数据；如实际做法与本政策不一致，应先修正做法或更新政策，再继续运营。
             </div>
-        </div>
-    </section>
+            <p><strong>简要说明：</strong>我们以提供和维护 ATLAS 服务为目的处理必要信息，尽量减少收集范围，不以出售个人信息为目的。不同页面、版本和集成可能使用不同功能；请以你正在使用的功能提示和实际设置为准。</p>
+
+            <nav class="policy-toc" aria-label="政策目录">
+                <strong>目录</strong>
+                <ol>
+                    <li><a href="#scope">适用范围与运营者</a></li>
+                    <li><a href="#data">我们可能处理的信息</a></li>
+                    <li><a href="#purpose">处理目的与依据</a></li>
+                    <li><a href="#ai">AI 对话与第三方模型</a></li>
+                    <li><a href="#cookies">Cookie 与本地存储</a></li>
+                    <li><a href="#sharing">共享、委托与披露</a></li>
+                    <li><a href="#transfer">跨境传输</a></li>
+                    <li><a href="#retention">保存期限与删除</a></li>
+                    <li><a href="#rights">你的权利与选择</a></li>
+                    <li><a href="#security">安全措施与事件处理</a></li>
+                    <li><a href="#children">未成年人信息</a></li>
+                    <li><a href="#automation">自动化处理</a></li>
+                    <li><a href="#environment">环境意识与可持续实践</a></li>
+                    <li><a href="#disclaimer">免责声明及第三方服务</a></li>
+                    <li><a href="#changes">政策更新与联系</a></li>
+                </ol>
+            </nav>
+
+            <h2 id="scope">1. 适用范围与运营者</h2>
+            <p>本政策适用于 ATLAS 网站、应用界面、个人智能工作流、对话及相关支持服务中由 ATLAS 运营方处理的个人信息。通过链接访问的第三方网站、模型平台或其他独立服务，适用其各自的隐私政策。</p>
+            <p><strong>运营者信息：</strong>本项目材料目前提供联系邮箱 <a href="mailto:yexufeng888@gmail.com">yexufeng888@gmail.com</a>。正式运营方应在上线版本中明确填写其法定或登记名称、适用的联系地址/地区和隐私联系渠道；如该邮箱并非运营方正式隐私联系地址，应先替换为有效地址。个人信息处理者身份和责任应以实际运营安排及适用法律为准。</p>
+            <p>ATLAS 的部分设置或演示功能可能只在当前浏览器中模拟操作或保存偏好，并不代表已连接到账户后台或已执行服务器端删除、导出、付款或权限变更。请勿仅凭界面提示推断某项后台操作已经完成。</p>
+
+            <h2 id="data">2. 我们可能处理的信息</h2>
+            <p>具体信息取决于你使用的功能以及运营方实际启用的集成。我们不会因为本政策列出某类信息，就必然收集该信息。</p>
+            <ul>
+                <li><strong>你主动提供的信息：</strong>例如姓名、电子邮件地址、头像、简介、反馈、客服通信，以及你在任务、笔记、日程或表单中输入的内容。</li>
+                <li><strong>账户与偏好：</strong>如账户标识、登录验证信息、语言、主题、界面和隐私设置。启用 Supabase Auth 后，邮箱、手机号及认证所需信息会由 Supabase 处理；启用短信 Hook 后，验证码发送请求还会交由实际配置的短信服务商处理。</li>
+                <li><strong>对话与 AI 输入：</strong>你提交给 AI 的提示词、对话上下文、上传内容以及生成结果。输入中可能包含个人信息或敏感信息，请谨慎提供。</li>
+                <li><strong>设备与运行信息：</strong>在服务运行、排错或安全保护确有需要且实际启用时，可能处理浏览器和设备类型、操作系统、访问时间、错误诊断信息、IP 地址或安全日志。是否记录及记录范围应以实际服务器和分析配置为准。</li>
+                <li><strong>支付与交易信息：</strong>只有在付费功能实际开放时才会涉及。支付凭据通常由所选支付服务商处理；运营方应在启用前说明实际支付服务商及其隐私安排。</li>
+                <li><strong>Cookie 和类似标识：</strong>可能包括维持会话、安全、保存偏好所需的技术，以及在明确启用时用于统计的标识。详见<a href="#cookies">第5节</a>。</li>
+                <li><strong>敏感个人信息：</strong>除非某项功能确有必要并依法取得相应授权或满足其他适用条件，请不要提交身份证件号码、精确位置、金融账户、健康、未成年人或其他敏感信息。</li>
+            </ul>
+            <p>我们也可能从你主动连接的第三方服务接收完成该功能所需的信息。连接前应向你说明数据类别、使用目的及第三方身份，并由你决定是否授权。Supabase Auth 或阿里云短信等认证服务是否启用、其实际处理地点和保留规则，应以部署配置、服务商条款及运营方补充披露为准；不得仅根据本政策推断某项服务已正式上线。</p>
+
+            <h2 id="purpose">3. 处理目的、必要性与适用依据</h2>
+            <p>在实际启用相关功能时，信息可能用于：</p>
+            <ul>
+                <li>提供你请求的页面、账户、AI 对话、任务管理及其他功能；</li>
+                <li>保存你的选择和偏好，响应客服或处理反馈；</li>
+                <li>维护服务运行、诊断错误、保障账户和系统安全，防止滥用或欺诈；</li>
+                <li>在取得必要授权或具备其他合法条件时，评估和改进服务体验；</li>
+                <li>遵守适用法律义务、响应合法有效的请求，或保护用户及公众的合法权益。</li>
+            </ul>
+            <p>我们仅在实现相关目的所需范围内处理信息。处理依据因地区、功能和具体情况而异，可能包括履行你请求的服务、取得你的同意、履行法定义务或适用法律认可的其他依据。需要同意时，你可以拒绝或撤回；这可能导致依赖该信息的功能无法使用，但不影响撤回前依法进行的处理。</p>
+
+            <h2 id="ai">4. AI 对话与第三方模型</h2>
+            <p>当你主动使用 AI 对话或生成类功能时，你提交的提示词、必要上下文、附件（如功能支持）和生成结果，可能由 ATLAS 传送给你选择的模型或相关技术服务商，以生成响应、处理请求或保障服务运行。传送范围应限于完成请求所需的信息。</p>
+            <ul>
+                <li>模型输出可能不准确、不完整、过时或不适合你的具体情境；使用前应自行核实。</li>
+                <li>第三方服务商可能依据其自身条款和隐私政策处理请求数据。正式启用前，运营方应披露实际服务商、处理地点、保留规则、是否用于模型训练及可用的退出设置；不同服务商和账户配置可能不同。</li>
+                <li>除非已核实对应服务商的合同、设置和实际配置，不应假设请求数据必定不被保留、必定不用于改进模型或必定仅在特定国家/地区处理。</li>
+                <li>请勿输入密码、访问令牌、商业机密、未公开的第三方资料，或其他你无权披露的信息。若你不希望内容发送给模型服务商，请不要提交该内容或停止使用相应 AI 功能。</li>
+            </ul>
+
+            <h2 id="cookies">5. Cookie 与本地存储</h2>
+            <p>浏览器 Cookie、localStorage 或类似技术可能用于记住语言和显示偏好、维持会话或保存安全设置。某些偏好可能只保存在你的设备上；清除浏览器数据、切换设备或使用隐私浏览模式可能使其丢失。</p>
+            <p>如果运营方启用非必要分析、广告或追踪技术，应按适用法律提供相应告知和选择机制，并在部署前更新本政策及 Cookie 说明。你可以通过浏览器设置限制或清除 Cookie，但这可能影响登录和部分功能。网站不应仅依据本段表述推断任何特定分析工具当前已启用。</p>
+
+            <h2 id="sharing">6. 共享、委托处理与依法披露</h2>
+            <p>ATLAS 不以出售个人信息为目的。只有在完成服务所必需、取得适当授权或具备其他合法依据时，信息才可能在必要范围内提供给：</p>
+            <ul>
+                <li><strong>受托服务商：</strong>例如实际采用的云托管、存储、邮件发送、模型推理、客服、安全、支付或运行监控服务商。运营方应在功能上线前核对并公布实际提供商和处理目的，不应把示例服务商视为已接入服务。</li>
+                <li><strong>你选择连接的服务：</strong>例如你主动授权的数据导入、导出或第三方集成。</li>
+                <li><strong>业务或组织变更的承接方：</strong>如发生合并、重组或资产转让，依法采取措施告知并确保信息继续受到适当保护。</li>
+                <li><strong>依法有权的机关或相关方：</strong>在适用法律要求、合法程序或为保护人身安全、合法权益及服务安全所必要的范围内披露。</li>
+            </ul>
+            <p>受托方应按约定目的和适用法律处理信息。正式运营前，运营方应核验合同约束、访问权限、保密义务、再委托安排及数据删除机制。</p>
+
+            <h2 id="transfer">7. 跨境传输</h2>
+            <p>如果实际使用的基础设施或第三方服务导致个人信息在你所在国家或地区以外处理，运营方应在传输前说明接收方类别、目的、信息类型、所在地区及适用的保护措施，并按适用法律完成所需的告知、授权、评估或其他程序。未经核验，不对服务器位置或跨境保护措施作出保证。你可以选择不使用依赖该跨境传输的功能。</p>
+
+            <h2 id="retention">8. 保存期限、导出与删除</h2>
+            <p>信息仅在完成收集目的所需的期间内保存，或在法律要求、争议处理、安全调查和履行服务所需范围内保留。实际期限会因信息类型、功能、备份周期和法律义务而不同；我们不作出所有数据均在固定天数内删除的承诺。</p>
+            <p>目的达成、账户注销或你提出有效删除请求后，我们会按适用法律和实际技术能力删除、匿名化或停止处理相关信息。备份副本可能需要在正常轮换周期内逐步清除；依法必须留存的信息会限制访问并在留存期限届满后处理。删除账户不一定自动删除你在第三方服务中独立保存的数据，你可能还需联系该第三方。</p>
+            <p>如果产品提供导出或删除入口，请在提交后查看明确的完成状态。演示页面中的按钮或本地偏好操作不代表服务器端数据已导出或删除。</p>
+
+            <h2 id="rights">9. 你的权利与选择</h2>
+            <p>根据你所在地区的适用法律，你可能有权请求访问、复制、更正、补充、删除个人信息，限制或反对特定处理，撤回同意，获取可携带的数据，或要求说明自动化决策。某些权利存在法定例外，申请也可能需要验证身份。</p>
+            <p>你可以通过本政策末尾的邮箱联系运营方并说明请求类型及相关账户/功能。请勿在邮件中发送密码或完整身份证件。运营方应在适用法定期限内核验并答复；此处不承诺未核实的统一处理时限。你也可以依法向有管辖权的监管机构投诉或寻求救济。</p>
+
+            <h2 id="security">10. 安全措施与安全事件</h2>
+            <p>运营方应结合信息类型和风险，采取适当的访问控制、权限管理、传输保护、备份、监控、人员保密和安全响应措施，并定期评估其有效性。具体措施取决于实际部署；除经核实外，本政策不声称已经采用端到端加密、特定 TLS 版本、全天候监控、第三方审计或渗透测试。</p>
+            <p>互联网传输和电子存储无法保证绝对安全。若发生可能影响个人信息安全的事件，运营方将依据适用法律采取补救措施，并在法律要求时通知受影响用户和相关机构。请妥善保管设备与登录凭据，并及时报告疑似未授权访问。</p>
+
+            <h2 id="children">11. 未成年人信息</h2>
+            <p>ATLAS 并非专为未成年人设计。未成年人应在监护人指导下使用；适用法律要求监护人同意时，应先取得同意。运营方不会故意收集其明知属于未成年人的个人信息，除非已履行适用的告知和授权要求。若监护人认为相关信息被不当收集，请通过下方联系方式提出核查和删除请求。</p>
+
+            <h2 id="automation">12. 自动化处理与个性化</h2>
+            <p>AI 生成、排序、摘要或推荐可能基于你提交的内容和功能设置自动生成结果。除非某功能明确告知并依法满足要求，ATLAS 不应仅以自动化方式对个人作出产生重大影响的决定。你可以要求人工说明或复核（如适用），并可停止使用相关自动化功能。</p>
+
+            <h2 id="environment">13. 环境意识与可持续实践</h2>
+            <p>我们认同减少数字服务不必要资源消耗的重要性，并将以合理方式支持可持续使用，包括尽量减少非必要数据收集和重复传输、鼓励用户仅保存所需内容，以及在技术和运营条件允许时优化页面和后台资源使用。</p>
+            <p>网站托管、网络传输和 AI 计算可能消耗能源并产生环境影响。除非经过独立测量和核验，我们不声称 ATLAS 已实现碳中和、使用可再生能源、达到特定环保认证或实现具体减排量。设备回收和电子废弃物应通过所在地正规回收渠道处理；ATLAS 不代替硬件制造商或回收机构提供回收服务。</p>
+
+            <h2 id="disclaimer">14. 免责声明及第三方服务</h2>
+            <ul>
+                <li><strong>信息准确性：</strong>网站内容、AI 输出、分析、提醒或建议仅供一般信息和效率辅助使用，不构成医疗、法律、财务、投资、安全或其他专业意见。涉及重要决定时，应咨询具备资质的专业人士并独立核实。</li>
+                <li><strong>服务可用性：</strong>网络、设备、维护、第三方服务或不可抗力可能导致功能中断、延迟、错误或数据暂时不可用。我们会按适用法律和实际运营能力处理问题，但不保证服务始终连续、无错误或适用于所有场景。</li>
+                <li><strong>安全与备份：</strong>我们采取合理措施保护信息，但不能保证任何系统绝对安全。对于重要资料，请自行保留适当备份；此建议不减少运营方依法承担的责任。</li>
+                <li><strong>外部链接和第三方服务：</strong>外部网站、模型、支付和集成服务由其各自运营者负责。我们无法控制其内容、可用性或处理方式，请在使用前阅读其条款与隐私政策。</li>
+                <li><strong>责任边界：</strong>本政策不构成对任何法定权利或运营方依法不得排除、限制的责任的放弃或限制。任何责任限制均以适用法律允许的范围为限。</li>
+            </ul>
+
+            <h2 id="changes">15. 政策更新与联系</h2>
+            <p>服务功能、数据处理方式或适用法律发生变化时，我们可能更新本政策，并在页面标注新的生效日期。重大变更会在适用法律要求时通过网站、产品界面或其他适当方式另行告知；需要重新取得同意的，将按要求办理。仅继续浏览本页面不应被解释为对依法需要单独同意事项的同意。</p>
+            <div class="policy-callout">
+                <strong>隐私请求与问题</strong>
+                <p>电子邮件：<a href="mailto:yexufeng888@gmail.com">yexufeng888@gmail.com</a></p>
+                <p>请在邮件主题中注明“ATLAS 隐私请求”，说明你的请求和相关功能。运营方可能需要合理核验身份后处理。正式运营方应确保该邮箱由负责处理隐私请求的团队持续管理。</p>
+            </div>
+            <p class="policy-meta">如本政策与适用法律的强制性规定不一致，以强制性规定为准。某一条款无效不影响其他条款的效力。</p>
+        </article>
+    </main>
 
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
 </body>

@@ -3,72 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS API 页面：查看接口形态示意与发布状态。">
     <title>API 接口 - ATLAS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
-    
+    <link rel="stylesheet" href="assets/css/resources.css?v=20261008a">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav resource-page">
     <nav class="global-nav"></nav>
-
-    <!-- Page Hero -->
-    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
-            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">API</div>
-            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">ATLAS API</h1>
-            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">强大、灵活、易用的 RESTful API</p>
-        </div>
-    </section>
-
-    <!-- Page Content -->
-    <section style="padding: 6rem 2rem; background: #ffffff;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            
-            <div style="margin-bottom: 4rem;">
-                <h2 style="font-size: 2rem; font-weight: 700; margin-bottom: 2rem;">API 端点</h2>
-                <div style="display: grid; gap: 1.5rem;">
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <span style="background: #10b981; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">GET</span>
-                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks</code>
-                        </div>
-                        <p style="color: #6b7280;">获取任务列表</p>
-                    </div>
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <span style="background: #3b82f6; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">POST</span>
-                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks</code>
-                        </div>
-                        <p style="color: #6b7280;">创建新任务</p>
-                    </div>
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <span style="background: #f59e0b; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">PUT</span>
-                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks/:id</code>
-                        </div>
-                        <p style="color: #6b7280;">更新任务</p>
-                    </div>
-                    <div style="background: #f9fafb; border-radius: 0.75rem; padding: 2rem; border: 1px solid #e5e7eb;">
-                        <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem;">
-                            <span style="background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 0.25rem; font-size: 0.75rem; font-weight: 600;">DELETE</span>
-                            <code style="font-family: 'Courier New', monospace; color: #1a1a1a;">/v1/tasks/:id</code>
-                        </div>
-                        <p style="color: #6b7280;">删除任务</p>
-                    </div>
-                </div>
-            </div>
-
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 1rem; padding: 3rem; color: white; text-align: center;">
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">准备开始？</h3>
-                <p style="opacity: 0.95; margin-bottom: 2rem;">获取你的 API 密钥并开始构建</p>
-                <a href="#" style="background: white; color: #667eea; padding: 0.75rem 2rem; border-radius: 980px; text-decoration: none; font-weight: 600; display: inline-block;">获取 API 密钥</a>
-            </div>
-        
-        </div>
-    </section>
-
+    <header class="resource-hero">
+        <p class="resource-eyebrow">API REFERENCE</p>
+        <h1>接口，有据可依。</h1>
+        <p>这里介绍 API 的概念与设计示例。请注意：本页没有提供可调用的生产 API 或 API 密钥申请流程。</p>
+    </header>
+    <main class="resource-main">
+        <nav class="resource-tabs" aria-label="资源导航">
+            <a href="blog.html">博客</a><a href="help-center.html">帮助中心</a><a href="developers.html">开发者文档</a><a href="api.html" aria-current="page">API 接口</a><a href="community.html">社区论坛</a><a href="changelog.html">更新日志</a>
+        </nav>
+        <section class="resource-callout">
+            <h2>尚未开放线上 API</h2>
+            <p>本页面的资源路径和请求样例只用于说明接口形态，不对应可访问的服务。请勿向任何猜测的域名或路径发送用户信息或凭据。若 API 正式开放，将在此公布真实基础地址、认证方式、版本与使用限制。</p>
+        </section>
+        <section class="resource-section" aria-labelledby="endpoint-heading">
+            <h2 id="endpoint-heading">接口形态示例</h2>
+            <p class="resource-lede">以下示例为概念说明，不是已部署的 API 契约。</p>
+            <article class="resource-card">
+                <p><strong>GET</strong> <code>/v1/tasks</code></p>
+                <p>示意：读取当前授权范围内的任务集合。真实分页、筛选和返回字段需以正式接口文档为准。</p>
+            </article>
+            <article class="resource-card" style="margin-top:1rem">
+                <p><strong>POST</strong> <code>/v1/tasks</code></p>
+                <p>示意：创建任务。真实字段校验、权限和幂等行为尚未在此定义。</p>
+            </article>
+        </section>
+        <section class="resource-section">
+            <h2>请求格式示意</h2>
+            <p class="resource-lede">命令使用保留域名 <code>api.example.invalid</code>，按设计不可解析，避免误调用真实服务。</p>
+            <pre class="resource-code"><code id="api-sample">curl --request GET \
+  --url https://api.example.invalid/v1/tasks \
+  --header 'Accept: application/json'</code></pre>
+            <button class="resource-button" type="button" data-copy-target="api-sample" data-copy-status="#api-copy-status">复制示例</button>
+            <p class="resource-status" id="api-copy-status" role="status" aria-live="polite"></p>
+        </section>
+        <section class="resource-grid resource-section">
+            <article class="resource-card">
+                <span class="resource-icon" aria-hidden="true">⌘</span>
+                <h3>开发者文档</h3>
+                <p>了解集成准备事项和安全边界。</p>
+                <a href="developers.html">阅读开发者文档 →</a>
+            </article>
+            <article class="resource-card">
+                <span class="resource-icon" aria-hidden="true">?</span>
+                <h3>API 常见问题</h3>
+                <p>查看当前是否开放以及如何寻求帮助。</p>
+                <a href="help-center.html">前往帮助中心 →</a>
+            </article>
+        </section>
+    </main>
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
+    <script src="assets/js/resources.js?v=20261008a"></script>
 </body>
 </html>

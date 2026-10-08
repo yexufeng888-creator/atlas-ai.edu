@@ -3,68 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="ATLAS 开发者文档：了解当前示例范围、API 设计说明和集成准备事项。">
     <title>开发者文档 - ATLAS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
-    
+    <link rel="stylesheet" href="assets/css/resources.css?v=20261008a">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav resource-page">
     <nav class="global-nav"></nav>
-
-    <!-- Page Hero -->
-    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
-            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">开发者</div>
-            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">为开发者打造</h1>
-            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">使用 ATLAS API 构建强大的集成和应用</p>
-        </div>
-    </section>
-
-    <!-- Page Content -->
-    <section style="padding: 6rem 2rem; background: #ffffff;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            
-            <div style="background: #f9fafb; border-radius: 1rem; padding: 3rem; border: 1px solid #e5e7eb; margin-bottom: 3rem;">
-                <h2 style="font-size: 1.75rem; font-weight: 700; margin-bottom: 1rem;">快速开始</h2>
-                <p style="color: #6b7280; margin-bottom: 2rem;">通过我们的 RESTful API 访问 ATLAS 的所有功能</p>
-                <div style="background: #1a1a1a; border-radius: 0.75rem; padding: 1.5rem; font-family: 'Courier New', monospace; color: #a1a1a6; overflow-x: auto;">
-                    <code>curl -X GET https://api.atlas.ai/v1/tasks \<br>
-  -H "Authorization: Bearer YOUR_API_KEY"</code>
-                </div>
+    <header class="resource-hero">
+        <p class="resource-eyebrow">FOR DEVELOPERS</p>
+        <h1>为构建而准备。</h1>
+        <p>探索 ATLAS 的开发者说明、接口设计示例和集成注意事项。当前页面不代表线上 API 已经开放。</p>
+    </header>
+    <main class="resource-main">
+        <nav class="resource-tabs" aria-label="资源导航">
+            <a href="blog.html">博客</a><a href="help-center.html">帮助中心</a><a href="developers.html" aria-current="page">开发者文档</a><a href="api.html">API 接口</a><a href="community.html">社区论坛</a><a href="changelog.html">更新日志</a>
+        </nav>
+        <section class="resource-callout" id="status">
+            <h2>当前状态：公开 API 尚未在此页面提供</h2>
+            <p>下方路径、请求体和命令均为静态文档示例，不要将它们用于生产数据，也不要向示例地址发送凭据。开放使用前，运营方需发布正式 API 基础地址、认证方式、版本政策、速率限制和服务条款。</p>
+            <a class="resource-button" href="api.html">查看 API 设计示例 <span aria-hidden="true">→</span></a>
+        </section>
+        <section class="resource-section" id="getting-started">
+            <h2>集成前检查清单</h2>
+            <p class="resource-lede">在正式接入任何账户或数据前，请先核验服务可用性与安全边界。</p>
+            <div class="resource-grid">
+                <article class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">01</span>
+                    <h3>确认访问权限</h3>
+                    <p>确认你已获准使用目标环境和数据，且不会在客户端代码或公开仓库中嵌入秘密。</p>
+                </article>
+                <article class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">02</span>
+                    <h3>最小化数据</h3>
+                    <p>只发送完成请求所需的信息。避免传递密码、令牌、敏感个人信息或未授权的第三方内容。</p>
+                </article>
+                <article class="resource-card">
+                    <span class="resource-icon" aria-hidden="true">03</span>
+                    <h3>处理失败情况</h3>
+                    <p>正式集成应显式处理认证失败、限流、网络中断与服务端错误，不应把失败伪装成成功。</p>
+                </article>
             </div>
-
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
-                <div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">📖 文档</h3>
-                    <ul style="list-style: none; padding: 0; display: grid; gap: 0.75rem;">
-                        <li><a href="api.html" style="color: #0071e3; text-decoration: none;">API 参考</a></li>
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">SDK 文档</a></li>
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">集成指南</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">🔧 工具</h3>
-                    <ul style="list-style: none; padding: 0; display: grid; gap: 0.75rem;">
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">API 密钥管理</a></li>
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">Webhook 配置</a></li>
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">测试工具</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem;">💡 示例</h3>
-                    <ul style="list-style: none; padding: 0; display: grid; gap: 0.75rem;">
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">代码示例</a></li>
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">集成案例</a></li>
-                        <li><a href="#" style="color: #0071e3; text-decoration: none;">最佳实践</a></li>
-                    </ul>
-                </div>
-            </div>
-        
-        </div>
-    </section>
-
+        </section>
+        <section class="resource-section" id="example">
+            <h2>请求结构示意</h2>
+            <p class="resource-lede">以下仅用于展示 JSON 请求的表达方式。接口路径和字段并非现行可用的服务契约。</p>
+            <pre class="resource-code"><code>{
+  "title": "Prepare project brief",
+  "dueDate": "2026-10-12",
+  "status": "open"
+}</code></pre>
+            <p>请勿把上述示例当作真实端点规范。准备集成时，请先查阅<a class="resource-link" href="api.html">API 说明</a>并确认正式发布状态。</p>
+        </section>
+        <section class="resource-callout">
+            <h2>需要开发者支持？</h2>
+            <p>描述你的集成场景和所需能力。请先移除邮件中的访问令牌、真实用户数据与其他机密信息。</p>
+            <a class="resource-button" href="mailto:yexufeng888@gmail.com?subject=ATLAS%20%E5%BC%80%E5%8F%91%E8%80%85%E5%92%A8%E8%AF%A2">联系开发者支持 <span aria-hidden="true">→</span></a>
+        </section>
+    </main>
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
 </body>
 </html>

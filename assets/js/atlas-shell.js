@@ -376,8 +376,6 @@
       principle1Title: '理解真实生活', principle1Body: '从日程、任务到长期记忆，关注信息背后的上下文。',
       principle2Title: '让行动更清晰', principle2Body: '把复杂问题拆解成下一步，而不是制造更多通知与噪音。',
       principle3Title: '把控制权交还给你', principle3Body: '透明的 AI 操作、可管理的数据，以及始终清晰的边界。',
-      thanksLabel: 'SPECIAL THANKS', thanksTitle: '特别感谢',
-      thanksBody: '特别感谢沈阳师范大学外国语学院张欣然参与校对。',
       backHome: '返回 ATLAS 首页'
     },
     'zh-hk': {
@@ -387,8 +385,6 @@
       principle1Title: '理解真實生活', principle1Body: '從日程、任務到長期記憶，關注資訊背後的脈絡。',
       principle2Title: '讓行動更清晰', principle2Body: '把複雜問題拆解成下一步，而不是製造更多通知與雜音。',
       principle3Title: '把控制權交還給你', principle3Body: '透明的 AI 操作、可管理的資料，以及始終清晰的界線。',
-      thanksLabel: '特別鳴謝', thanksTitle: '特別感謝',
-      thanksBody: '特別感謝沈陽師範大學外國語學院張欣然參與校對。',
       backHome: '返回 ATLAS 首頁'
     },
     'zh-tw': {
@@ -398,8 +394,6 @@
       principle1Title: '理解真實生活', principle1Body: '從日程、任務到長期記憶，關注資訊背後的脈絡。',
       principle2Title: '讓行動更清晰', principle2Body: '把複雜問題拆解成下一步，而不是製造更多通知與雜音。',
       principle3Title: '把控制權交還給你', principle3Body: '透明的 AI 操作、可管理的資料，以及始終清楚的界線。',
-      thanksLabel: '特別感謝', thanksTitle: '特別感謝',
-      thanksBody: '特別感謝沈陽師範大學外國語學院張欣然參與校對。',
       backHome: '返回 ATLAS 首頁'
     },
     en: {
@@ -409,8 +403,6 @@
       principle1Title: 'Understand real life', principle1Body: 'Connect calendars, tasks, and long-term memory to the context behind information.',
       principle2Title: 'Make action clearer', principle2Body: 'Turn complex challenges into a next step instead of creating more noise.',
       principle3Title: 'Put you in control', principle3Body: 'Transparent AI actions, manageable data, and boundaries that stay clear.',
-      thanksLabel: 'SPECIAL THANKS', thanksTitle: 'With gratitude',
-      thanksBody: 'Special thanks to Xinran Zhang of the School of Foreign Languages, Shenyang Normal University, for proofreading.',
       backHome: 'Back to ATLAS home'
     },
     ja: {
@@ -420,8 +412,6 @@
       principle1Title: '現実の暮らしを理解する', principle1Body: '予定、タスク、長期記憶をつなぎ、情報の背景にある文脈を捉えます。',
       principle2Title: '行動を明確にする', principle2Body: '複雑な課題を次の一歩に分解し、余計な通知を増やしません。',
       principle3Title: '主導権をあなたに', principle3Body: '透明な AI の操作、管理できるデータ、明確な境界を大切にします。',
-      thanksLabel: 'SPECIAL THANKS', thanksTitle: '感謝を込めて',
-      thanksBody: '校正にご協力いただいた瀋陽師範大学外国語学院の張欣然さんに、特別な感謝を申し上げます。',
       backHome: 'ATLAS ホームへ戻る'
     },
     ko: {
@@ -431,8 +421,6 @@
       principle1Title: '실제 생활 이해하기', principle1Body: '일정, 작업, 장기 기억을 연결해 정보의 맥락을 살펴봅니다.',
       principle2Title: '행동을 명확하게', principle2Body: '복잡한 문제를 다음 단계로 나누고 불필요한 알림을 늘리지 않습니다.',
       principle3Title: '주도권은 사용자에게', principle3Body: '투명한 AI 작업, 관리 가능한 데이터, 명확한 경계를 지킵니다.',
-      thanksLabel: 'SPECIAL THANKS', thanksTitle: '감사의 말씀',
-      thanksBody: '교정에 참여해 주신 선양사범대학교 외국어학원 장신란 님께 특별히 감사드립니다.',
       backHome: 'ATLAS 홈으로 돌아가기'
     }
   };

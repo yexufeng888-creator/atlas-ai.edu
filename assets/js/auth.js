@@ -356,14 +356,21 @@ document.addEventListener('DOMContentLoaded', () => {
         loginForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
-            const email = loginForm.querySelector('input[type="email"]').value;
-            const password = loginForm.querySelector('input[type="password"]').value;
-            const remember = loginForm.querySelector('input[type="checkbox"]')?.checked || false;
+            const email = loginForm.querySelector('input[name="email"]').value;
+            const password = loginForm.querySelector('input[name="password"]').value;
+            const acknowledgement = loginForm.querySelector('#loginAcknowledgement');
+            if (!acknowledgement || !acknowledgement.checked) {
+                showMessage('请先阅读并确认登录信息处理说明', 'error');
+                acknowledgement?.focus();
+                return;
+            }
+
+            const remember = loginForm.querySelector('#rememberMe')?.checked || false;
 
             const result = auth.login(email, password, remember);
 
             if (result.success) {
-                showMessage('登录成功！正在跳转...', 'success');
+                showMessage('演示登录成功！正在跳转...', 'success');
                 setTimeout(() => {
                     window.location.href = 'home.html';
                 }, 1000);
@@ -452,7 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 社交登录（演示模式）
     document.querySelectorAll('.social-btn').forEach(btn => {
         btn.addEventListener('click', () => {
-            showMessage('社交登录功能即将推出', 'info');
+            showMessage('第三方登录尚未接入；未向登录平台提交认证信息。', 'info');
         });
     });
 });
@@ -471,6 +478,8 @@ function showMessage(message, type = 'info') {
 
     const messageDiv = document.createElement('div');
     messageDiv.className = 'auth-message';
+    messageDiv.setAttribute('role', type === 'error' ? 'alert' : 'status');
+    messageDiv.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
     messageDiv.style.cssText = `
         position: fixed;
         top: 2rem;

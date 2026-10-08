@@ -3,71 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="查看 ATLAS 网站与产品体验的近期更新记录。">
     <title>更新日志 - ATLAS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
-    
+    <link rel="stylesheet" href="assets/css/resources.css?v=20261008a">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav resource-page">
     <nav class="global-nav"></nav>
-
-    <!-- Page Hero -->
-    <section class="page-hero" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 8rem 2rem 6rem; text-align: center; position: relative; overflow: hidden;">
-        <div style="position: relative; z-index: 10; max-width: 800px; margin: 0 auto;">
-            <div style="font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.9; margin-bottom: 1rem;">更新</div>
-            <h1 style="font-size: clamp(2.5rem, 5vw, 4rem); font-weight: 700; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.02em;">更新日志</h1>
-            <p style="font-size: 1.25rem; opacity: 0.95; line-height: 1.5; max-width: 600px; margin: 0 auto;">查看 ATLAS 的最新更新和改进</p>
-        </div>
-    </section>
-
-    <!-- Page Content -->
-    <section style="padding: 6rem 2rem; background: #ffffff;">
-        <div style="max-width: 1000px; margin: 0 auto;">
-            
-            <div style="max-width: 800px; margin: 0 auto;">
-                <div style="border-left: 2px solid #e5e7eb; padding-left: 2rem; margin-left: 1rem;">
-                    <div style="margin-bottom: 3rem; position: relative;">
-                        <div style="position: absolute; left: -2.5rem; width: 1rem; height: 1rem; background: #0071e3; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">2026年1月15日</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">v1.0.0 - 正式发布</h3>
-                        <ul style="color: #6b7280; line-height: 1.8;">
-                            <li>🎉 ATLAS 正式发布</li>
-                            <li>✨ 智能记忆系统</li>
-                            <li>🤖 AI 智能体功能</li>
-                            <li>📊 生活数据分析</li>
-                            <li>🔒 端到端加密</li>
-                        </ul>
-                    </div>
-
-                    <div style="margin-bottom: 3rem; position: relative;">
-                        <div style="position: absolute; left: -2.5rem; width: 1rem; height: 1rem; background: #6b7280; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">2025年12月1日</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Beta 0.9.0</h3>
-                        <ul style="color: #6b7280; line-height: 1.8;">
-                            <li>🎨 全新 UI 设计</li>
-                            <li>⚡ 性能优化</li>
-                            <li>🐛 修复已知问题</li>
-                        </ul>
-                    </div>
-
-                    <div style="position: relative;">
-                        <div style="position: absolute; left: -2.5rem; width: 1rem; height: 1rem; background: #6b7280; border-radius: 50%; border: 3px solid white;"></div>
-                        <div style="font-size: 0.875rem; color: #6b7280; margin-bottom: 0.5rem;">2025年11月1日</div>
-                        <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem;">Beta 0.8.0</h3>
-                        <ul style="color: #6b7280; line-height: 1.8;">
-                            <li>🔄 数据同步功能</li>
-                            <li>📱 移动端适配</li>
-                            <li>🌐 多语言支持</li>
-                        </ul>
-                    </div>
-                </div>
+    <header class="resource-hero">
+        <p class="resource-eyebrow">WHAT'S NEW</p>
+        <h1>一点一滴，持续改进。</h1>
+        <p>记录 ATLAS 网站体验和公开资源的重要调整。每条记录说明实际变更范围，不代表后台服务已开放。</p>
+    </header>
+    <main class="resource-main">
+        <nav class="resource-tabs" aria-label="资源导航">
+            <a href="blog.html">博客</a><a href="help-center.html">帮助中心</a><a href="developers.html">开发者文档</a><a href="api.html">API 接口</a><a href="community.html">社区论坛</a><a href="changelog.html" aria-current="page">更新日志</a>
+        </nav>
+        <section class="resource-section">
+            <h2>近期更新</h2>
+            <div class="resource-timeline">
+                <article class="resource-release">
+                    <time datetime="2026-10-08">2026年10月8日</time>
+                    <h3>资源中心重新整理</h3>
+                    <ul>
+                        <li>统一博客、帮助、开发者、API、社区和更新日志的视觉与资源导航。</li>
+                        <li>修复无效入口，明确标识尚未开放的论坛和 API 示例。</li>
+                        <li>为帮助中心增加可搜索的问题列表，为 API 代码示例增加复制操作。</li>
+                    </ul>
+                </article>
+                <article class="resource-release">
+                    <time datetime="2026-10-07">2026年10月7日</time>
+                    <h3>隐私说明完善</h3>
+                    <ul>
+                        <li>扩展隐私政策，补充 AI 服务、数据权利、免责声明和环境责任说明。</li>
+                        <li>在隐私控制页加入完整政策入口，并说明演示状态与实际后台配置的区别。</li>
+                    </ul>
+                    <a class="resource-link" href="privacy-policy.html">阅读隐私政策 →</a>
+                </article>
             </div>
-        
-        </div>
-    </section>
-
+        </section>
+        <section class="resource-callout">
+            <h2>想了解产品理念？</h2>
+            <p>在博客阅读设计思考，或前往帮助中心查看使用说明。</p>
+            <a class="resource-button" href="blog.html">浏览博客 <span aria-hidden="true">→</span></a>
+            <a class="resource-link" href="help-center.html" style="margin-left:1rem">帮助中心</a>
+        </section>
+    </main>
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
 </body>
 </html>
