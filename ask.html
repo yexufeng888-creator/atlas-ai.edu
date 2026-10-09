@@ -8,9 +8,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
-    <link rel="stylesheet" href="assets/css/ask.css?v=20261006a">
+    <link rel="stylesheet" href="assets/css/ask.css?v=20261009a">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav" data-auth-required="true">
     <nav class="global-nav"></nav>
 
     <!-- AI Ask Container -->
@@ -94,7 +94,7 @@
             <div class="input-area">
                 <!-- Model Selector -->
                 <div class="model-selector" role="group" aria-label="AI 模型">
-                    <button class="model-btn active" type="button" data-model="atlas" title="ATLAS 本地模型" aria-pressed="true">
+                    <button class="model-btn active" type="button" data-model="atlas" title="ATLAS 模型" aria-pressed="true">
                         <span class="model-icon model-icon-atlas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></span>
                         <span class="model-name">ATLAS</span>
                     </button>
@@ -196,14 +196,16 @@
                     <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="api-link">获取 API Key →</a>
                 </div>
 
-                <!-- ATLAS Local -->
+                <!-- Protected ATLAS API -->
                 <div class="api-config">
                     <div class="api-header">
                         <span class="api-icon model-icon-atlas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></span>
-                        <h3>ATLAS 本地模型</h3>
-                        <span class="api-status active">已启用</span>
+                        <h3>ATLAS 模型服务</h3>
+                        <span class="api-status" id="atlasBackendStatus">需登录</span>
                     </div>
-                    <p class="api-note">ATLAS 本地模型无需配置，开箱即用</p>
+                    <p class="api-note">ATLAS 通过受保护的服务器连接模型，只有登录用户可用，每位用户每天最多 20 次。</p>
+                    <button class="btn btn-secondary api-test-btn" id="atlasTestConnection" type="button">测试模型服务</button>
+                    <p class="api-note" id="atlasConnectionMessage" role="status" aria-live="polite">请先登录，然后测试服务器连接。</p>
                 </div>
             </div>
             <div class="modal-footer">
@@ -217,6 +219,10 @@
     <script src="assets/js/atlas-shell.js?v=20260910c"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
     <script src="assets/js/secondary-dashboard-i18n.js"></script>
-    <script src="assets/js/ask.js?v=20261004a"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="assets/js/supabase-config.js"></script>
+    <script src="assets/js/supabase-auth.js?v=20261009a"></script>
+    <script src="assets/js/atlas-ai-config.js?v=20261009a"></script>
+    <script src="assets/js/ask.js?v=20261009a"></script>
 </body>
 </html>

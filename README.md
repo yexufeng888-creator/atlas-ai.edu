@@ -50,6 +50,12 @@ npx serve atlas-html
 # 然后访问显示的 URL
 ```
 
+## 🤖 连接 ECS 上的 Ollama
+
+公开网站不能直接访问访客电脑上的 `localhost`，也不应把 Ollama 的 `11434` 端口暴露到公网。本项目使用 ECS 上的受保护 API：验证 Supabase 登录、限制每个用户每天 20 次，再将请求转发到仅监听本机的 Ollama。
+
+部署步骤、DNS、HTTPS、防火墙和 systemd 配置见 [server/DEPLOY.md](./server/DEPLOY.md)。API 使用 Python 标准库和 SQLite，不需要额外 Python 包。
+
 ## 🌐 部署
 
 ### GitHub Pages

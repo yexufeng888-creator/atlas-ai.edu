@@ -63,7 +63,7 @@
 
 1. 用本地 HTTP 服务或正式 HTTPS 域名打开网站，不要通过 `file://` 打开。可在仓库目录运行 `python3 -m http.server 8000`，然后访问 `http://localhost:8000/login.html`。
 2. 勾选服务条款与隐私政策确认，输入 `+86` 手机号，点击发送验证码。检查 Supabase Auth Hook/Edge Function 日志及阿里云发送记录；确认短信收到后输入 6 位验证码。
-3. 成功后应创建/验证 Supabase Auth 用户、建立 Supabase session 并进入 `home.html`。未登录访问工作台会被送回登录页。测试邮箱注册、验证邮件和重置密码时也要使用配置过的 SMTP 和 Redirect URLs。
+3. 成功后应创建/验证 Supabase Auth 用户、建立 Supabase session 并进入 `home.html`。未登录访问工作台或 `ask.html` 会被送回登录页；ATLAS 模型 API 还会在服务端验证 Supabase access token，并限制每位用户每天 20 次请求。测试邮箱注册、验证邮件和重置密码时也要使用配置过的 SMTP 和 Redirect URLs。
 4. 上线前确认 Aliyun RAM 权限最小化、Supabase RLS、短信限流以及（如已完成前端集成）CAPTCHA、隐私政策中的实际服务商及数据处理披露均已完成。短信送达、账户实名/备案及合规要求取决于你的 Supabase 与阿里云账户配置。
 
 > 工作台登录拦截在静态前端完成，只能控制页面展示，不能保护仓库中公开可下载的静态文件或替代后端授权。任何用户数据都应存入受 RLS 保护的表，并由 Supabase 按当前用户身份执行授权。

@@ -75,6 +75,7 @@ function setupEventListeners() {
             selectModel(btn.dataset.model);
         });
     });
+    document.getElementById('atlasTestConnection').addEventListener('click', testATLASBackend);
 
     // 快捷建议
     elements.suggestionCards.forEach(card => {
@@ -228,7 +229,7 @@ async function sendMessage() {
     state.isResponding = true;
     setComposerBusy(true);
     try {
-        await getAIResponse(message, chat.id, chat.model);
+        await getAIResponse(chat.id, chat.model);
     } finally {
         state.isResponding = false;
         setComposerBusy(false);
@@ -278,7 +279,7 @@ function getModelIcon(model) {
 }
 
 // 获取 AI 响应
-async function getAIResponse(userMessage, chatId, model) {
+async function getAIResponse(chatId, model) {
     const typingDiv = document.createElement('div');
     typingDiv.className = 'message message-assistant typing';
     typingDiv.innerHTML = `
@@ -307,7 +308,7 @@ async function getAIResponse(userMessage, chatId, model) {
                 break;
             case 'atlas':
             default:
-                response = await callATLAS(userMessage);
+                response = await callATLAS(getChatHistory(chatId));
                 break;
         }
 
@@ -434,21 +435,114 @@ async function callGemini(messages) {
     return answer;
 }
 
-// 调用 ATLAS 本地模型（模拟）
-async function callATLAS(message) {
-    // 模拟 API 延迟
-    await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 2000));
+function getATLASAPIBaseUrl() {
+    const value = window.ATLAS_AI_CONFIG?.apiBaseUrl;
+    if (!value) {
+        throw new Error(translateUI('ATLAS 服务地址尚未配置'));
+    }
 
-    // 模拟响应
-    const responses = [
-        translateUI('我理解你的问题："{message}"。作为 ATLAS AI 助手，我会尽力帮助你。').replace('{message}', message),
-        translateUI('这是一个很好的问题。让我来为你分析一下...'),
-        translateUI('根据你的描述，我建议...'),
-        translateUI('我明白了。关于这个问题，我的看法是...')
-    ];
+    let url;
+    try {
+        url = new URL(value);
+    } catch {
+        throw new Error(translateUI('ATLAS 服务地址无效'));
+    }
+    if (url.protocol !== 'https:' || url.username || url.password || url.pathname !== '/' || url.search || url.hash) {
+        throw new Error(translateUI('ATLAS 服务地址必须使用 HTTPS'));
+    }
+    return url.origin;
+}
 
-    return responses[Math.floor(Math.random() * responses.length)] +
-           `\n\n${translateUI('（这是 ATLAS 本地模型的模拟响应。实际部署时，这里会连接到真实的 AI 模型。）')}`;
+async function getSupabaseAccessToken() {
+    const client = window.atlasSupabase;
+    if (!client) {
+        throw new Error(translateUI('登录服务不可用，请刷新页面或重新登录'));
+    }
+    const { data, error } = await client.auth.getSession();
+    if (error) throw error;
+    const token = data.session?.access_token;
+    if (!token) throw new Error(translateUI('请登录后使用 ATLAS'));
+    return token;
+}
+
+async function callATLAS(messages) {
+    const endpoint = getATLASAPIBaseUrl();
+    const accessToken = await getSupabaseAccessToken();
+    let response;
+    try {
+        response = await fetch(`${endpoint}/api/chat`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({ messages: messages.slice(-6) })
+        });
+    } catch (error) {
+        if (error instanceof TypeError) {
+            throw new Error(translateUI('无法连接 ATLAS 服务，请检查网络和 HTTPS 配置'), { cause: error });
+        }
+        throw error;
+    }
+    const data = await response.json();
+    if (!response.ok) {
+        if (response.status === 401) throw new Error(translateUI('登录状态已失效，请重新登录'));
+        if (response.status === 429) throw new Error(translateUI('今天的 ATLAS 使用次数已达上限，请明天再试'));
+        if (response.status === 503) throw new Error(translateUI('ATLAS 服务忙碌或暂不可用，请稍后再试'));
+        if (response.status >= 500) throw new Error(translateUI('ATLAS 服务暂时无法完成请求，请稍后再试'));
+        if (response.status === 413 || response.status === 400) {
+            throw new Error(translateUI('消息过长或格式无效，请缩短后重试'));
+        }
+        throw new Error(data?.error || `${translateUI('ATLAS 请求失败')} (${response.status})`);
+    }
+    const answer = data?.message?.content;
+    if (typeof answer !== 'string' || !answer.trim()) {
+        throw new Error(translateUI('ATLAS 服务返回了空响应'));
+    }
+    return answer;
+}
+
+async function testATLASBackend() {
+    const button = document.getElementById('atlasTestConnection');
+    const status = document.getElementById('atlasBackendStatus');
+    const message = document.getElementById('atlasConnectionMessage');
+    button.disabled = true;
+    status.textContent = translateUI('连接中');
+    status.className = 'api-status';
+    message.textContent = '';
+
+    try {
+        const endpoint = getATLASAPIBaseUrl();
+        const accessToken = await getSupabaseAccessToken();
+        let response;
+        try {
+            response = await fetch(`${endpoint}/api/usage`, {
+                headers: { 'Authorization': `Bearer ${accessToken}` }
+            });
+        } catch (error) {
+            if (error instanceof TypeError) {
+                throw new Error(translateUI('无法连接 ATLAS 服务，请检查网络和 HTTPS 配置'), { cause: error });
+            }
+            throw error;
+        }
+        const data = await response.json();
+        if (!response.ok) {
+            if (response.status === 401) throw new Error(translateUI('登录状态已失效，请重新登录'));
+            throw new Error(data?.error || `${translateUI('ATLAS 请求失败')} (${response.status})`);
+        }
+        if (!Number.isInteger(data?.limit) || !Number.isInteger(data?.remaining)) {
+            throw new Error(translateUI('ATLAS 服务返回了无效状态'));
+        }
+        status.textContent = translateUI('已连接');
+        status.className = 'api-status active';
+        message.textContent = translateUI('服务已连接，今日剩余 {count} 次。').replace('{count}', data.remaining);
+    } catch (error) {
+        status.textContent = translateUI('连接失败');
+        status.className = 'api-status';
+        message.textContent = error instanceof Error ? error.message : String(error);
+    } finally {
+        button.disabled = false;
+    }
 }
 
 // 创建新对话
@@ -637,6 +731,10 @@ function updateAPIStatus() {
             el.className = 'api-status' + (configured ? ' active' : '');
         }
     });
+    const atlasBackendStatus = document.getElementById('atlasBackendStatus');
+    const atlasAPIConfigured = Boolean(window.ATLAS_AI_CONFIG?.apiBaseUrl);
+    atlasBackendStatus.textContent = translateUI(atlasAPIConfigured ? '待测试' : '未配置');
+    atlasBackendStatus.className = 'api-status';
 }
 
 // 保存对话到 localStorage
