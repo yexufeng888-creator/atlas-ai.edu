@@ -1,0 +1,200 @@
+.phone-device-stage {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(1.5rem, 5vw, 5rem);
+    min-height: 520px;
+    margin: 0 auto 3.5rem;
+    padding: clamp(1.5rem, 5vw, 4rem);
+    scroll-margin-top: 120px;
+    overflow: hidden;
+    border: 1px solid rgba(133, 173, 230, .18);
+    border-radius: 2rem;
+    color: #f5f8ff;
+    background:
+        radial-gradient(ellipse at 76% 48%, rgba(34, 118, 228, .24), transparent 40%),
+        linear-gradient(125deg, #101a2b, #080d17 72%);
+    box-shadow: 0 30px 80px rgba(22, 35, 58, .13);
+}
+
+.platform-showcase {
+    scroll-margin-top: 120px;
+}
+
+.phone-device-copy {
+    position: relative;
+    z-index: 1;
+    max-width: 440px;
+}
+
+.phone-device-kicker {
+    color: #6cdcf0;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .17em;
+}
+
+.phone-device-copy h3 {
+    margin: 1rem 0;
+    font-size: clamp(2.4rem, 4.4vw, 4.2rem);
+    line-height: 1.02;
+    letter-spacing: -.07em;
+}
+
+.phone-device-copy h3 span {
+    color: #9dc6ff;
+}
+
+.phone-device-description {
+    max-width: 370px;
+    color: #a6b5cb;
+    font-size: 1rem;
+    line-height: 1.8;
+}
+
+.phone-device-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .65rem;
+    margin-top: 1.7rem;
+    color: #a9e6f1;
+    font-size: .9rem;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.phone-device-link:hover {
+    color: #fff;
+}
+
+.phone-model-column {
+    min-width: 0;
+}
+
+.phone-model-stage {
+    position: relative;
+    display: grid;
+    min-width: 0;
+    min-height: 440px;
+    place-items: center;
+    isolation: isolate;
+}
+
+.phone-model-glow {
+    position: absolute;
+    z-index: -1;
+    width: min(76%, 360px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(74, 145, 255, .3), rgba(91, 83, 199, .08) 48%, transparent 72%);
+    filter: blur(15px);
+}
+
+.phone-model-viewer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: calc(100% - 1.75rem);
+    opacity: 0;
+    background: transparent;
+    --poster-color: transparent;
+    --progress-bar-color: #69d8ed;
+    --progress-bar-height: 2px;
+    transition: opacity .5s ease;
+    touch-action: pan-y;
+}
+
+.phone-device-stage.is-model-ready .phone-model-viewer {
+    opacity: 1;
+}
+
+.phone-device-stage.is-model-ready .phone-static-fallback {
+    opacity: 0;
+}
+
+.phone-static-fallback {
+    display: grid;
+    width: clamp(150px, 19vw, 210px);
+    aspect-ratio: 462 / 1000;
+    place-items: center;
+    padding: 5px;
+    border: 2px solid rgba(255, 255, 255, .65);
+    border-radius: 2.5rem;
+    background: linear-gradient(145deg, #9f4b5f, #471b2d 55%, #a15a68);
+    box-shadow: 0 34px 90px rgba(0, 0, 0, .55), inset 0 0 0 2px rgba(0, 0, 0, .22);
+    transition: opacity .4s ease;
+}
+
+.phone-static-frame {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border: 3px solid #08090c;
+    border-radius: 2.1rem;
+    background: #08090c;
+}
+
+.phone-static-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.phone-model-hint {
+    min-height: 1.2rem;
+    margin: .35rem 0 0;
+    color: #8293ab;
+    font-size: .72rem;
+    text-align: center;
+    pointer-events: none;
+}
+
+.phone-model-viewer:focus-visible {
+    outline: 2px solid #72deef;
+    outline-offset: 4px;
+}
+
+@media (max-width: 760px) {
+    .phone-device-stage {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        min-height: 0;
+        margin-bottom: 2.5rem;
+        padding: 1.5rem;
+        text-align: center;
+    }
+
+    .phone-device-copy {
+        margin: 0 auto;
+    }
+
+    .phone-device-copy h3 {
+        font-size: clamp(2.4rem, 10vw, 3.3rem);
+    }
+
+    .phone-device-description {
+        margin: 0 auto;
+        font-size: .9rem;
+    }
+
+    .phone-device-link {
+        justify-content: center;
+        margin-top: 1.2rem;
+    }
+
+    .phone-model-stage {
+        min-height: min(430px, 112vw);
+    }
+
+    .phone-static-fallback {
+        width: clamp(150px, 48vw, 205px);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .phone-model-viewer,
+    .phone-static-fallback {
+        transition: none;
+    }
+}

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
     <link rel="stylesheet" href="assets/css/site-legal-footer.css?v=20261009a">
+    <link rel="stylesheet" href="assets/css/device-model.css?v=20261013a">
     <style>
         * {
             margin: 0;
@@ -426,6 +427,7 @@
         }
     </style>
     <link rel="stylesheet" href="assets/css/index-premium.css?v=20261013-m5-polish">
+    <link rel="stylesheet" href="assets/css/product-film.css?v=20261013b">
 </head>
 <body class="has-global-nav">
 <nav class="global-nav"></nav>
@@ -440,6 +442,10 @@
 
     <!-- Hero Section -->
     <section class="hero" id="top">
+        <video class="hero-background-video" data-hero-video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+            <source src="assets/video/atlas-hero-background.mp4" type="video/mp4">
+        </video>
+        <canvas class="hero-atmosphere" data-hero-atmosphere aria-hidden="true"></canvas>
         <div class="hero-content">
             <div class="hero-eyebrow">个人智能操作系统</div>
             <h1 class="hero-title">你的生活，<br>智能化管理</h1>
@@ -453,7 +459,12 @@
                         <path d="M8 0L6.59 1.41 12.17 7H0V9H12.17L6.59 14.59 8 16 16 8z"/>
                     </svg>
                 </a>
-                <a href="#features" class="btn btn-secondary">了解更多</a>
+                <button class="btn btn-secondary" type="button" data-open-product-film>
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                        <path d="M5 3.5a.75.75 0 0 1 1.14-.64l6 3.75a.75.75 0 0 1 0 1.28l-6 3.75A.75.75 0 0 1 5 11V3.5Z"/>
+                    </svg>
+                    <span>观看产品短片</span>
+                </button>
             </div>
             <div class="hero-metrics" aria-label="ATLAS 产品概览">
                 <div><strong>24/7</strong><span>持续理解你的上下文</span></div>
@@ -466,6 +477,85 @@
         </div>
     </section>
 
+    <dialog class="product-film" data-product-film aria-labelledby="product-film-title">
+        <div class="product-film-shell">
+            <header class="product-film-header">
+                <div>
+                    <p class="product-film-kicker">ATLAS PRODUCT FILM · 01—03</p>
+                    <h2 id="product-film-title">让重要的事，自然发生。</h2>
+                </div>
+                <button class="product-film-close" type="button" data-film-close aria-label="关闭产品短片">×</button>
+            </header>
+
+            <div class="product-film-stage" aria-live="polite" aria-atomic="true">
+                <article class="film-scene is-active" data-film-scene="0">
+                    <div class="film-scene-copy">
+                        <span class="film-scene-index">01 / 捕获</span>
+                        <h3>零散信息，<br>都有去处。</h3>
+                        <p>一句想法、一份文件或一场会议，都能进入同一个上下文。</p>
+                    </div>
+                    <div class="film-scene-visual film-capture" aria-hidden="true">
+                        <span class="film-orbit film-orbit-one"></span>
+                        <span class="film-orbit film-orbit-two"></span>
+                        <div class="film-note">“下周准备产品评审”</div>
+                        <div class="film-chips"><span>任务</span><span>日程</span><span>记忆</span></div>
+                        <div class="film-signal"><i></i> 已加入你的上下文</div>
+                    </div>
+                </article>
+                <article class="film-scene" data-film-scene="1">
+                    <div class="film-scene-copy">
+                        <span class="film-scene-index">02 / 理解</span>
+                        <h3>看见关联，<br>找到重点。</h3>
+                        <p>ATLAS 连接相关记忆、时间安排与未完成决策，帮你理清优先级。</p>
+                    </div>
+                    <div class="film-scene-visual film-understand" aria-hidden="true">
+                        <span class="film-orbit film-orbit-one"></span>
+                        <span class="film-orbit film-orbit-two"></span>
+                        <div class="film-memory-node node-main">产品评审</div>
+                        <div class="film-memory-node node-a">用户访谈</div>
+                        <div class="film-memory-node node-b">设计原则</div>
+                        <div class="film-memory-node node-c">周五 14:00</div>
+                        <div class="film-connection connection-a"></div>
+                        <div class="film-connection connection-b"></div>
+                        <div class="film-connection connection-c"></div>
+                        <div class="film-signal"><i></i> 找到 3 条相关记忆</div>
+                    </div>
+                </article>
+                <article class="film-scene" data-film-scene="2">
+                    <div class="film-scene-copy">
+                        <span class="film-scene-index">03 / 行动</span>
+                        <h3>明确下一步，<br>让计划向前。</h3>
+                        <p>从清晰的行动建议开始，由你确认每一步，重要事情不再停留在列表里。</p>
+                    </div>
+                    <div class="film-scene-visual film-action" aria-hidden="true">
+                        <span class="film-orbit film-orbit-one"></span>
+                        <span class="film-orbit film-orbit-two"></span>
+                        <div class="film-action-card">
+                            <span>ATLAS 建议的下一步</span>
+                            <strong>确认用户流程</strong>
+                            <small>基于 2 个未完成决策 · 预计 15 分钟</small>
+                            <div class="film-action-status"><i></i> 已加入今日重点</div>
+                        </div>
+                        <span class="film-action-spark">✓</span>
+                    </div>
+                </article>
+            </div>
+
+            <footer class="product-film-controls">
+                <div class="film-progress" role="group" aria-label="产品短片章节">
+                    <button class="is-active" type="button" data-film-go="0" aria-label="第 1 幕：捕获" aria-current="step"></button>
+                    <button type="button" data-film-go="1" aria-label="第 2 幕：理解"></button>
+                    <button type="button" data-film-go="2" aria-label="第 3 幕：行动"></button>
+                </div>
+                <div class="film-control-actions">
+                    <span class="film-time" data-film-time>01 / 03</span>
+                    <button class="film-play-toggle" type="button" data-film-toggle aria-pressed="false">暂停</button>
+                    <a class="film-start-link" href="signup.html">开始使用 <span aria-hidden="true">→</span></a>
+                </div>
+            </footer>
+        </div>
+    </dialog>
+
     <section class="platform-showcase" id="platforms" aria-labelledby="platforms-title">
         <div class="platform-showcase-inner">
             <header class="platform-heading">
@@ -473,6 +563,41 @@
                 <h2 id="platforms-title">一款 AI，<span>四种设备体验。</span></h2>
                 <p class="platform-intro">从 Mac 上的资料梳理，到 iPhone 上的随手提问。</p>
             </header>
+            <div class="phone-device-stage" data-phone-stage>
+                <div class="phone-device-copy">
+                    <p class="phone-device-kicker">ATLAS ON IPHONE</p>
+                    <h3>重要的事，<br><span>随时在手边。</span></h3>
+                    <p class="phone-device-description">今日重点、日程和记忆在同一个清晰界面里。转动模型，看看 ATLAS 如何跟着你走。</p>
+                    <a class="phone-device-link" href="home.html">探索 ATLAS 工作台 <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="phone-model-column">
+                    <div class="phone-model-stage">
+                        <div class="phone-model-glow" aria-hidden="true"></div>
+                        <div class="phone-static-fallback" aria-hidden="true">
+                            <div class="phone-static-frame">
+                                <img src="assets/img/atlas-iphone-screen.jpg" alt="">
+                            </div>
+                        </div>
+                        <model-viewer
+                            class="phone-model-viewer"
+                            data-phone-model
+                            data-model-src="assets/models/atlas-iphone-18-pro-max-burgundy.glb"
+                            alt="酒红色 iPhone 18 Pro Max 屏幕显示 ATLAS 移动工作台的三维模型"
+                            camera-controls
+                            disable-zoom
+                            interaction-prompt="none"
+                            camera-orbit="0deg 75deg 115%"
+                            field-of-view="28deg"
+                            exposure="1.1"
+                            shadow-intensity="0.85"
+                            environment-image="neutral"
+                            loading="lazy"
+                            reveal="auto">
+                        </model-viewer>
+                    </div>
+                    <p class="phone-model-hint" data-phone-hint>正在加载 ATLAS 手机模型…</p>
+                </div>
+            </div>
             <div class="platform-grid">
                 <article class="platform-card">
                     <p class="platform-device">MACBOOK PRO</p>
@@ -1119,6 +1244,9 @@
 
     <script src="assets/js/atlas-shell.js?v=20261013a"></script>
     <script src="assets/js/atlas-scroll.js"></script>
+    <script src="assets/js/atlas-hero-motion.js?v=20261013c"></script>
+    <script src="assets/js/product-film.js?v=20261013a"></script>
+    <script src="assets/js/device-model.js?v=20261013c"></script>
 
     <style>
         /* 3D 卡片效果 */
