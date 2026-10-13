@@ -1,16 +1,53 @@
+/* ============================================================
+   统一法律信息与备案页脚 (Site Legal Footer)
+   Apple 风格极简自适应设计，完美融入所有浅色/深色二级页面
+   ============================================================ */
+
+/* 页面弹性吸底，防止内容较少时页脚悬空或切断 */
+body.has-global-nav {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+body.has-global-nav > main,
+body.has-global-nav > .page-content,
+body.has-global-nav > .content-container,
+body.has-global-nav > .resource-main,
+body.has-global-nav > .auth-container,
+body.has-global-nav > .team-page,
+body.has-global-nav > .pricing-hero {
+    flex: 1 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 基础通用页脚样式（默认透明背景，无缝融入各页面原底色） */
 .site-legal-footer {
-    padding: 1rem 2rem 1.3rem;
-    color: #6e6e73;
-    background: #f5f5f7;
-    font-size: .72rem;
+    width: 100%;
+    margin-top: auto;
+    padding: 1.5rem 2rem 1.8rem;
+    font-size: .74rem;
     line-height: 1.65;
+    background: transparent;
+    color: #86868b;
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
 }
 
 .site-legal-inner {
-    max-width: 1280px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding-top: .9rem;
-    border-top: 1px solid #d2d2d7;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.site-legal-tagline {
+    margin: 0 0 .55rem 0;
+    color: #86868b;
+    font-size: .78rem;
+    letter-spacing: .02em;
 }
 
 .site-legal-primary {
@@ -19,7 +56,7 @@
     justify-content: space-between;
     flex-wrap: wrap;
     gap: .4rem 1.5rem;
-    margin-bottom: .2rem;
+    margin-bottom: .25rem;
 }
 
 .site-legal-primary p,
@@ -28,21 +65,24 @@
 }
 
 .site-legal-primary p {
-    color: #424245;
+    color: #1d1d1f;
+    font-weight: 400;
 }
 
 .site-legal-links {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     gap: .35rem 0;
 }
 
 .site-legal-links a {
     padding: 0 .65rem;
-    border-left: 1px solid #c7c7cc;
-    color: inherit;
+    border-left: 1px solid rgba(0, 0, 0, 0.12);
+    color: #6e6e73;
     text-decoration: none;
     white-space: nowrap;
+    transition: color .2s ease;
 }
 
 .site-legal-links a:first-child {
@@ -51,28 +91,140 @@
 }
 
 .site-legal-links a:hover {
-    color: #1d1d1f;
+    color: #0071e3;
     text-decoration: underline;
     text-underline-offset: .16em;
 }
 
 .site-legal-meta {
-    color: #6e6e73;
+    color: #86868b;
+    font-size: .72rem;
+    margin-top: .2rem;
 }
 
+/* ============================================================
+   深色背景与 App 页面自适应 (Dark Theme & App Pages)
+   解决记忆、生活、智能体、设置、对话、登录等深色二级页面的突兀色块问题
+   ============================================================ */
+
+body.atlas-app-page .site-legal-footer,
+body.has-dark-theme .site-legal-footer,
+body.page-team .site-legal-footer,
+body.page-ask .site-legal-footer,
+.site-legal-footer.site-legal-dark,
+[data-theme="dark"] .site-legal-footer,
+body.dark-mode .site-legal-footer {
+    background: transparent !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+body.atlas-app-page .site-legal-inner,
+body.has-dark-theme .site-legal-inner,
+body.page-team .site-legal-inner,
+body.page-ask .site-legal-inner,
+.site-legal-footer.site-legal-dark .site-legal-inner,
+[data-theme="dark"] .site-legal-inner,
+body.dark-mode .site-legal-inner {
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body.atlas-app-page .site-legal-primary p,
+body.has-dark-theme .site-legal-primary p,
+body.page-team .site-legal-primary p,
+body.page-ask .site-legal-primary p,
+.site-legal-footer.site-legal-dark .site-legal-primary p,
+[data-theme="dark"] .site-legal-primary p,
+body.dark-mode .site-legal-primary p {
+    color: rgba(255, 255, 255, 0.72) !important;
+}
+
+body.atlas-app-page .site-legal-tagline,
+body.has-dark-theme .site-legal-tagline,
+body.page-team .site-legal-tagline,
+.site-legal-footer.site-legal-dark .site-legal-tagline,
+[data-theme="dark"] .site-legal-tagline,
+body.dark-mode .site-legal-tagline {
+    color: rgba(255, 255, 255, 0.4) !important;
+}
+
+body.atlas-app-page .site-legal-links a,
+body.has-dark-theme .site-legal-links a,
+body.page-team .site-legal-links a,
+body.page-ask .site-legal-links a,
+.site-legal-footer.site-legal-dark .site-legal-links a,
+[data-theme="dark"] .site-legal-links a,
+body.dark-mode .site-legal-links a {
+    color: rgba(255, 255, 255, 0.5) !important;
+    border-left-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body.atlas-app-page .site-legal-links a:hover,
+body.has-dark-theme .site-legal-links a:hover,
+body.page-team .site-legal-links a:hover,
+body.page-ask .site-legal-links a:hover,
+.site-legal-footer.site-legal-dark .site-legal-links a:hover,
+[data-theme="dark"] .site-legal-links a:hover,
+body.dark-mode .site-legal-links a:hover {
+    color: #ffffff !important;
+}
+
+body.atlas-app-page .site-legal-meta,
+body.has-dark-theme .site-legal-meta,
+body.page-team .site-legal-meta,
+body.page-ask .site-legal-meta,
+.site-legal-footer.site-legal-dark .site-legal-meta,
+[data-theme="dark"] .site-legal-meta,
+body.dark-mode .site-legal-meta {
+    color: rgba(255, 255, 255, 0.38) !important;
+}
+
+/* 首页大暗色 Footer 下的合法栏 */
+body[class*="page-index"] .site-legal-footer {
+    background: #0b0f19 !important;
+    color: rgba(255, 255, 255, 0.45) !important;
+}
+
+body[class*="page-index"] .site-legal-inner {
+    border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+body[class*="page-index"] .site-legal-primary p {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+body[class*="page-index"] .site-legal-links a {
+    color: rgba(255, 255, 255, 0.5) !important;
+    border-left-color: rgba(255, 255, 255, 0.12) !important;
+}
+
+body[class*="page-index"] .site-legal-links a:hover {
+    color: #38bdf8 !important;
+}
+
+body[class*="page-index"] .site-legal-meta {
+    color: rgba(255, 255, 255, 0.38) !important;
+}
+
+/* 隐藏旧式多余的单行 page-footer（避免双重页脚冲突） */
+body.atlas-app-page .page-footer:not(.site-legal-footer) {
+    display: none !important;
+}
+
+/* 移动端响应式处理 */
 @media (max-width: 640px) {
     .site-legal-footer {
-        padding: .8rem 1.1rem 1.1rem;
-        font-size: .68rem;
+        padding: 1.1rem 1.25rem 1.4rem;
+        font-size: .7rem;
     }
 
     .site-legal-primary {
         align-items: flex-start;
         flex-direction: column;
-        gap: .25rem;
+        gap: .35rem;
     }
 
     .site-legal-links a:first-child {
         padding-left: 0;
     }
 }
+

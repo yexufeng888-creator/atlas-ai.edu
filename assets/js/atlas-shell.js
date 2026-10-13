@@ -619,6 +619,120 @@
     });
   });
 
+  const legalFooterCopy = {
+    'zh-cn': {
+      region: '网站版权与备案信息',
+      nav: '法律信息',
+      privacy: '隐私政策',
+      terms: '服务条款',
+      copyright: '版权声明',
+      rights: '保留所有权利。'
+    },
+    'zh-hk': {
+      region: '網站版權與備案資訊',
+      nav: '法律資訊',
+      privacy: '隱私政策',
+      terms: '服務條款',
+      copyright: '版權聲明',
+      rights: '保留所有權利。'
+    },
+    'zh-tw': {
+      region: '網站版權與備案資訊',
+      nav: '法律資訊',
+      privacy: '隱私政策',
+      terms: '服務條款',
+      copyright: '版權聲明',
+      rights: '保留所有權利。'
+    },
+    en: {
+      region: 'Copyright and registration information',
+      nav: 'Legal information',
+      privacy: 'Privacy',
+      terms: 'Terms',
+      copyright: 'Copyright',
+      rights: 'All rights reserved.'
+    },
+    ja: {
+      region: '著作権および登録情報',
+      nav: '法的情報',
+      privacy: 'プライバシー',
+      terms: '利用規約',
+      copyright: '著作権',
+      rights: 'All rights reserved.'
+    },
+    ko: {
+      region: '저작권 및 등록 정보',
+      nav: '법률 정보',
+      privacy: '개인정보 처리방침',
+      terms: '이용약관',
+      copyright: '저작권',
+      rights: 'All rights reserved.'
+    }
+  }[currentLang];
+
+  if (!document.querySelector('.site-legal-footer') && !/^(test|debug)-/.test(slug)) {
+    if (!document.querySelector('link[href*="site-legal-footer.css"]')) {
+      const legalStyles = document.createElement('link');
+      legalStyles.rel = 'stylesheet';
+      legalStyles.href = 'assets/css/site-legal-footer.css?v=20261013b';
+      document.head.appendChild(legalStyles);
+    }
+
+    const legalFooter = document.createElement('footer');
+    legalFooter.className = 'site-legal-footer';
+    const isAppPage = document.body.classList.contains('atlas-app-page') || /^(home|ask|memory|life|agents|settings)(-|$)/.test(slug) || slug === 'team';
+    if (isAppPage) {
+      legalFooter.classList.add('site-legal-dark');
+    }
+    legalFooter.setAttribute('aria-label', legalFooterCopy.region);
+
+    const inner = document.createElement('div');
+    inner.className = 'site-legal-inner';
+
+    if (language && language.footer) {
+      const tagline = document.createElement('p');
+      tagline.className = 'site-legal-tagline';
+      tagline.textContent = language.footer;
+      inner.appendChild(tagline);
+    }
+
+    const primary = document.createElement('div');
+    primary.className = 'site-legal-primary';
+
+    const copyright = document.createElement('p');
+    copyright.textContent = `© 2026 Atlas Intelligence (Shanghai) Inc. ${legalFooterCopy.rights}`;
+    primary.appendChild(copyright);
+
+    const legalLinks = document.createElement('nav');
+    legalLinks.className = 'site-legal-links';
+    legalLinks.setAttribute('aria-label', legalFooterCopy.nav);
+    [
+      ['privacy-policy.html', legalFooterCopy.privacy],
+      ['terms.html', legalFooterCopy.terms],
+      ['copyright.html', legalFooterCopy.copyright]
+    ].forEach(([href, label]) => {
+      const link = document.createElement('a');
+      link.href = href;
+      link.textContent = label;
+      legalLinks.appendChild(link);
+    });
+    primary.appendChild(legalLinks);
+    inner.appendChild(primary);
+
+    const registration = document.createElement('p');
+    registration.className = 'site-legal-meta';
+    registration.textContent = '沪ICP备20267238号-2 · www.atlasai.com';
+    inner.appendChild(registration);
+    legalFooter.appendChild(inner);
+
+    const existingPageFooter = document.querySelector('.page-footer');
+    if (existingPageFooter) {
+      existingPageFooter.replaceWith(legalFooter);
+    } else {
+      document.body.appendChild(legalFooter);
+    }
+  }
+
   // 导出 ATLAS Shell API
   window.ATLAS = window.ATLAS || {};
   window.ATLAS.Shell = {
