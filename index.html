@@ -2,16 +2,16 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="ATLAS - 个人智能操作系统。用 AI 驱动的生产力工具改变你的生活。">
     <title>ATLAS - 个人智能操作系统</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
-    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
     <link rel="stylesheet" href="assets/css/site-legal-footer.css?v=20261009a">
-    <link rel="stylesheet" href="assets/css/device-model.css?v=20261013a">
+    <link rel="stylesheet" href="assets/css/device-model.css?v=20261023b">
     <style>
         * {
             margin: 0;
@@ -202,7 +202,7 @@
 
         .feature-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
             gap: 2rem;
             max-width: 1200px;
             margin: 0 auto;
@@ -561,19 +561,31 @@
             <header class="platform-heading">
                 <p class="platform-eyebrow">ATLAS AI · 设备体验</p>
                 <h2 id="platforms-title">一款 AI，<span>四种设备体验。</span></h2>
-                <p class="platform-intro">从 Mac 上的资料梳理，到 iPhone 上的随手提问。</p>
+                <p class="platform-intro">从 Mac 上的资料梳理，到 iPhone 上的两种使用形态。</p>
             </header>
             <div class="phone-device-stage" data-phone-stage>
                 <div class="phone-device-copy">
-                    <p class="phone-device-kicker">ATLAS ON IPHONE</p>
-                    <h3>重要的事，<br><span>随时在手边。</span></h3>
-                    <p class="phone-device-description">今日重点、日程和记忆在同一个清晰界面里。转动模型，看看 ATLAS 如何跟着你走。</p>
+                    <p class="phone-device-kicker" data-phone-kicker>ATLAS ON IPHONE DUO</p>
+                    <h3><span data-phone-headline-first>合上轻装，</span><br><span data-phone-headline-second>展开从容。</span></h3>
+                    <p class="phone-device-description" data-phone-description>合上时快速查看，展开后处理复杂任务。播放折叠演示，看看 ATLAS 如何适应两种屏幕状态。</p>
                     <a class="phone-device-link" href="home.html">探索 ATLAS 工作台 <span aria-hidden="true">→</span></a>
                 </div>
                 <div class="phone-model-column">
+                    <div class="phone-model-selector" role="group" aria-label="选择 iPhone 型号">
+                        <button class="phone-model-selector__button" type="button" data-phone-choice="duo" aria-pressed="true">iPhone Duo</button>
+                        <button class="phone-model-selector__button" type="button" data-phone-choice="iphone-18-pro-max" aria-pressed="false">iPhone 18 Pro Max</button>
+                    </div>
                     <div class="phone-model-stage">
                         <div class="phone-model-glow" aria-hidden="true"></div>
-                        <div class="phone-static-fallback" aria-hidden="true">
+                        <div class="phone-static-fallback phone-static-fallback--duo" data-phone-fallback="duo" aria-hidden="true">
+                            <div class="phone-duo-screen phone-duo-screen--inner">
+                                <img src="assets/img/iphone-duo-screen-inner.jpeg" alt="">
+                            </div>
+                            <div class="phone-duo-screen phone-duo-screen--outer">
+                                <img src="assets/img/iphone-duo-screen-outer.jpeg" alt="">
+                            </div>
+                        </div>
+                        <div class="phone-static-fallback" data-phone-fallback="iphone-18-pro-max" aria-hidden="true" hidden>
                             <div class="phone-static-frame">
                                 <img src="assets/img/atlas-iphone-screen.jpg" alt="">
                             </div>
@@ -581,13 +593,15 @@
                         <model-viewer
                             class="phone-model-viewer"
                             data-phone-model
-                            data-model-src="assets/models/atlas-iphone-18-pro-max-burgundy.glb"
-                            alt="酒红色 iPhone 18 Pro Max 屏幕显示 ATLAS 移动工作台的三维模型"
+                            data-model-kind="duo"
+                            data-model-src="assets/models/apple-iphone-duo-fold-star-white.glb"
+                            data-animation-name="open-close"
+                            alt="星白色 iPhone Duo 折叠屏手机的三维模型，内外屏展示 ATLAS 界面"
                             camera-controls
                             disable-zoom
                             interaction-prompt="none"
-                            camera-orbit="0deg 75deg 115%"
-                            field-of-view="28deg"
+                            camera-orbit="0deg 75deg 145%"
+                            field-of-view="32deg"
                             exposure="1.1"
                             shadow-intensity="0.85"
                             environment-image="neutral"
@@ -595,7 +609,17 @@
                             reveal="auto">
                         </model-viewer>
                     </div>
-                    <p class="phone-model-hint" data-phone-hint>正在加载 ATLAS 手机模型…</p>
+                    <button
+                        class="phone-model-toggle"
+                        type="button"
+                        data-phone-animation-toggle
+                        data-play-label="播放折叠演示"
+                        data-pause-label="暂停演示"
+                        data-loading-label="正在加载折叠演示…"
+                        data-unavailable-label="折叠演示暂不可用"
+                        aria-pressed="false"
+                        disabled>正在加载折叠演示…</button>
+                    <p class="phone-model-hint" data-phone-hint role="status" aria-live="polite">正在加载 iPhone Duo 三维模型…</p>
                 </div>
             </div>
             <div class="platform-grid">
@@ -1246,7 +1270,7 @@
     <script src="assets/js/atlas-scroll.js"></script>
     <script src="assets/js/atlas-hero-motion.js?v=20261013c"></script>
     <script src="assets/js/product-film.js?v=20261013a"></script>
-    <script src="assets/js/device-model.js?v=20261013c"></script>
+    <script src="assets/js/device-model.js?v=20261023b"></script>
 
     <style>
         /* 3D 卡片效果 */

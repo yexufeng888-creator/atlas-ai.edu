@@ -2,12 +2,12 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <meta name="description" content="ATLAS - 今天最值得处理什么，为什么">
     <title>首页 - ATLAS</title>
     <link rel="stylesheet" href="assets/css/page.css">
     <link rel="stylesheet" href="assets/css/3d-effects.css">
-    <link rel="stylesheet" href="assets/css/home.css">
+    <link rel="stylesheet" href="assets/css/home.css?v=20261023a">
     <style>
         /* 粒子背景 */
         #particles-canvas {
@@ -28,9 +28,288 @@
         /* 增强的工作台卡片 */
         .dashboard-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
             gap: 2rem;
             margin-top: 2rem;
+        }
+
+        .daily-brief {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            border: 1px solid rgba(37, 99, 235, 0.12);
+            border-radius: 1.5rem;
+            background: linear-gradient(120deg, rgba(239, 246, 255, 0.96), rgba(236, 254, 255, 0.9));
+            box-shadow: 0 12px 36px rgba(37, 99, 235, 0.08);
+        }
+
+        .daily-brief__content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .daily-brief__header,
+        .daily-brief__details,
+        .daily-brief__links {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .daily-brief__eyebrow {
+            margin-bottom: 0.25rem;
+            color: #2563eb;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .daily-brief__title {
+            margin: 0;
+            color: #172554;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+        }
+
+        .daily-brief__badge {
+            flex: 0 0 auto;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.09);
+            color: #1d4ed8;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .daily-brief__summary {
+            margin: 1rem 0;
+            color: #475569;
+        }
+
+        .daily-brief__details {
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .daily-brief__detail {
+            display: grid;
+            gap: 0.2rem;
+            min-width: min(100%, 240px);
+            padding: 0.75rem 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 0.85rem;
+            background: rgba(255, 255, 255, 0.68);
+        }
+
+        .daily-brief__detail-label {
+            color: #64748b;
+            font-size: 0.75rem;
+        }
+
+        .daily-brief__detail-value {
+            color: #1e293b;
+            font-size: 0.9rem;
+        }
+
+        .daily-brief__recommendation {
+            margin: 0;
+            color: #334155;
+            font-size: 0.9rem;
+        }
+
+        .daily-brief__links {
+            justify-content: flex-start;
+            margin-top: 1rem;
+        }
+
+        .daily-brief__links a {
+            color: #1d4ed8;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .daily-brief__links a:hover {
+            text-decoration: underline;
+        }
+
+        .daily-brief__links a:focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.4);
+            outline-offset: 3px;
+            border-radius: 0.2rem;
+        }
+
+        .capture-inbox {
+            margin-bottom: 2rem;
+            padding: clamp(1.25rem, 3vw, 2rem);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, 0.88);
+            box-shadow: 0 12px 36px rgba(15, 23, 42, 0.06);
+            backdrop-filter: blur(18px);
+        }
+
+        .capture-inbox__header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .capture-inbox__eyebrow {
+            margin-bottom: 0.25rem;
+            color: #0891b2;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+        }
+
+        .capture-inbox__title {
+            margin: 0;
+            color: #172554;
+            font-size: clamp(1.25rem, 2.5vw, 1.6rem);
+        }
+
+        .capture-inbox__hint {
+            margin: 0.4rem 0 0;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        .capture-inbox__count {
+            flex: 0 0 auto;
+            padding: 0.35rem 0.7rem;
+            border-radius: 999px;
+            background: rgba(8, 145, 178, 0.09);
+            color: #0e7490;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .capture-inbox__label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #334155;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .capture-inbox__form-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 0.75rem;
+        }
+
+        .capture-inbox__input {
+            width: 100%;
+            min-width: 0;
+            padding: 0.8rem 1rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 0.8rem;
+            background: #fff;
+            color: #1e293b;
+            font: inherit;
+        }
+
+        .capture-inbox__input:focus-visible {
+            border-color: #0891b2;
+            outline: 3px solid rgba(8, 145, 178, 0.18);
+        }
+
+        .capture-inbox__submit {
+            padding: 0.75rem 1.1rem;
+            border: 0;
+            border-radius: 0.8rem;
+            background: linear-gradient(135deg, #0891b2, #2563eb);
+            color: #fff;
+            font: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .capture-inbox__submit:hover:not(:disabled) {
+            filter: brightness(1.05);
+        }
+
+        .capture-inbox__submit:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+        }
+
+        .capture-inbox__note,
+        .capture-inbox__status,
+        .capture-inbox__empty {
+            margin: 0.75rem 0 0;
+            color: #64748b;
+            font-size: 0.8rem;
+        }
+
+        .capture-inbox__status.is-error {
+            color: #b42318;
+        }
+
+        .capture-inbox__list {
+            display: grid;
+            gap: 0.6rem;
+            max-height: 20rem;
+            margin: 1rem 0 0;
+            padding: 0;
+            overflow-y: auto;
+            list-style: none;
+        }
+
+        .capture-inbox__item {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.8rem 1rem;
+            border: 1px solid rgba(148, 163, 184, 0.18);
+            border-radius: 0.8rem;
+            background: rgba(248, 250, 252, 0.8);
+        }
+
+        .capture-inbox__text {
+            min-width: 0;
+            color: #334155;
+            overflow-wrap: anywhere;
+            white-space: pre-wrap;
+        }
+
+        .capture-inbox__remove {
+            flex: 0 0 auto;
+            padding: 0.2rem 0.45rem;
+            border: 0;
+            border-radius: 0.4rem;
+            background: transparent;
+            color: #64748b;
+            font: inherit;
+            font-size: 0.8rem;
+            cursor: pointer;
+        }
+
+        .capture-inbox__remove:hover {
+            background: rgba(239, 68, 68, 0.08);
+            color: #b42318;
+        }
+
+        .capture-inbox__remove:focus-visible,
+        .capture-inbox__submit:focus-visible {
+            outline: 3px solid rgba(37, 99, 235, 0.35);
+            outline-offset: 2px;
+        }
+
+        @media (max-width: 520px) {
+            .capture-inbox__form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .capture-inbox__submit {
+                width: 100%;
+            }
         }
 
         .dashboard-card {
@@ -177,10 +456,10 @@
         /* 浮动操作按钮 */
         .fab {
             position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 64px;
-            height: 64px;
+            bottom: calc(1.25rem + env(safe-area-inset-bottom, 0px));
+            right: calc(1.25rem + env(safe-area-inset-right, 0px));
+            width: clamp(52px, 14vw, 64px);
+            height: clamp(52px, 14vw, 64px);
             background: linear-gradient(135deg, #2563eb, #06b6d4);
             border-radius: 50%;
             display: flex;
@@ -269,7 +548,7 @@
             border-color: #60a5fa;
         }
     </style>
-    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20260910c">
+    <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
     <style>
         /* Apple-inspired Design System */
@@ -492,7 +771,7 @@
 
     <!-- Page Content -->
     <main class="page-content">
-        <div class="content-container" style="max-width: 1400px; background: transparent; box-shadow: none; padding: 3rem 2rem;">
+        <div class="content-container" style="max-width: 1400px; background: transparent; box-shadow: none; padding: 3rem clamp(1rem, 4vw, 2rem);">
 
             <!-- 欢迎区域 -->
             <div class="dashboard-intro" style="text-align: center; margin-bottom: 3rem;">
@@ -509,6 +788,56 @@
                 <button id="logoutBtn" class="auth-logout-button" type="button"><span>退出登录</span></button>
             </div>
 
+            <section class="daily-brief" aria-labelledby="dailyBriefTitle">
+                <div class="daily-brief__content">
+                    <div class="daily-brief__header">
+                        <div>
+                            <p class="daily-brief__eyebrow" id="dailyBriefEyebrow">每日简报</p>
+                            <h2 class="daily-brief__title" id="dailyBriefTitle">今日简报</h2>
+                        </div>
+                        <span class="daily-brief__badge" id="dailyBriefBadge">示例数据</span>
+                    </div>
+                    <p class="daily-brief__summary" id="dailyBriefSummary" aria-live="polite"></p>
+                    <div class="daily-brief__details">
+                        <div class="daily-brief__detail">
+                            <span class="daily-brief__detail-label" id="dailyBriefFocusLabel">优先任务</span>
+                            <strong class="daily-brief__detail-value" id="dailyBriefFocus"></strong>
+                        </div>
+                        <div class="daily-brief__detail">
+                            <span class="daily-brief__detail-label" id="dailyBriefNextLabel">下一项安排</span>
+                            <strong class="daily-brief__detail-value" id="dailyBriefNext"></strong>
+                        </div>
+                    </div>
+                    <p class="daily-brief__recommendation" id="dailyBriefRecommendation"></p>
+                    <div class="daily-brief__links">
+                        <a id="dailyBriefTasksLink" href="life-tasks.html">查看任务 →</a>
+                        <a id="dailyBriefCalendarLink" href="life-calendar.html">查看日程 →</a>
+                    </div>
+                </div>
+            </section>
+
+            <section class="capture-inbox" aria-labelledby="captureInboxTitle">
+                <div class="capture-inbox__header">
+                    <div>
+                        <p class="capture-inbox__eyebrow" id="captureInboxEyebrow">QUICK CAPTURE</p>
+                        <h2 class="capture-inbox__title" id="captureInboxTitle">随手收集箱</h2>
+                        <p class="capture-inbox__hint" id="captureInboxHint">先记下来，稍后再整理。</p>
+                    </div>
+                    <span class="capture-inbox__count" id="captureInboxCount" aria-live="polite">0 / 50</span>
+                </div>
+                <form id="captureInboxForm">
+                    <label class="capture-inbox__label" id="captureInboxLabel" for="captureInboxInput">记下一件事</label>
+                    <div class="capture-inbox__form-row">
+                        <input class="capture-inbox__input" id="captureInboxInput" type="text" maxlength="240" autocomplete="off" aria-describedby="captureInboxHint captureInboxPrivacyNote" required>
+                        <button class="capture-inbox__submit" id="captureInboxSubmit" type="submit">加入收集箱</button>
+                    </div>
+                </form>
+                <p class="capture-inbox__note" id="captureInboxPrivacyNote">仅保存在当前浏览器，不会同步；本设备的其他用户也可能看到，请勿保存密码等敏感信息。</p>
+                <p class="capture-inbox__status" id="captureInboxStatus" role="status" aria-live="polite"></p>
+                <p class="capture-inbox__empty" id="captureInboxEmpty">收集箱还是空的。先记下想法，稍后再整理。</p>
+                <ul class="capture-inbox__list" id="captureInboxList" aria-label="收集的内容"></ul>
+            </section>
+
             <!-- 主要仪表盘 -->
             <div class="dashboard-grid">
 
@@ -519,7 +848,7 @@
                     <p class="card-subtitle" >优先处理这些任务</p>
 
                     <div class="card-content">
-                        <div class="task-item" data-task-id="competitor-report">
+                        <div class="task-item" data-task-id="competitor-report" data-priority="1">
                             <button class="task-checkbox" type="button" data-action="toggle-task" aria-pressed="false"></button>
                             <div class="task-copy">
                                 <div style="font-weight: 600; margin-bottom: 0.25rem;">完成竞品分析报告</div>
@@ -528,7 +857,7 @@
                             <span style="padding: 0.25rem 0.75rem; background: rgba(239, 68, 68, 0.1); color: #ef4444; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">高</span>
                         </div>
 
-                        <div class="task-item" data-task-id="project-documents">
+                        <div class="task-item" data-task-id="project-documents" data-priority="2">
                             <button class="task-checkbox" type="button" data-action="toggle-task" aria-pressed="false"></button>
                             <div class="task-copy">
                                 <div style="font-weight: 600; margin-bottom: 0.25rem;">更新项目文档</div>
@@ -537,7 +866,7 @@
                             <span style="padding: 0.25rem 0.75rem; background: rgba(245, 158, 11, 0.1); color: #f59e0b; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">中</span>
                         </div>
 
-                        <div class="task-item is-complete" data-task-id="user-research" data-completed="true">
+                        <div class="task-item is-complete" data-task-id="user-research" data-completed="true" data-priority="3">
                             <button class="task-checkbox checked" type="button" data-action="toggle-task" aria-pressed="true"></button>
                             <div class="task-copy">
                                 <div style="font-weight: 600; margin-bottom: 0.25rem; text-decoration: line-through;">用户调研访谈</div>
@@ -557,7 +886,7 @@
                     <div class="card-content">
                         <div class="timeline">
                             <div class="timeline-item">
-                                <div class="timeline-time">14:00 - 15:00</div>
+                                <div class="timeline-time" data-event-time="14:00">14:00 - 15:00</div>
                                 <div class="timeline-content">
                                     <div style="font-weight: 600;">用户访谈</div>
                                     <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">📍 线上会议</div>
@@ -565,7 +894,7 @@
                             </div>
 
                             <div class="timeline-item">
-                                <div class="timeline-time">16:00 - 17:00</div>
+                                <div class="timeline-time" data-event-time="16:00">16:00 - 17:00</div>
                                 <div class="timeline-content">
                                     <div style="font-weight: 600;">整理竞品分析</div>
                                     <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">🎯 专注时间</div>
@@ -573,7 +902,7 @@
                             </div>
 
                             <div class="timeline-item">
-                                <div class="timeline-time">19:00</div>
+                                <div class="timeline-time" data-event-time="19:00">19:00</div>
                                 <div class="timeline-content">
                                     <div style="font-weight: 600;">健身房训练</div>
                                     <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">💪 个人时间</div>
@@ -721,7 +1050,8 @@
     <script src="assets/js/atlas-shell.js?v=20261013a"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
     <script src="assets/js/secondary-dashboard-i18n.js"></script>
-    <script src="assets/js/home-dashboard.js"></script>
+    <script src="assets/js/home-dashboard.js?v=20261023a"></script>
+    <script src="assets/js/home-inbox.js"></script>
     <script src="assets/js/atlas-scroll.js"></script>
     <script>
         </script>

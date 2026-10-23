@@ -16,6 +16,11 @@
   --atlas-glass: rgba(255, 255, 255, 0.06);
   --atlas-glass-border: rgba(255, 255, 255, 0.12);
   --atlas-nav-height: 52px;
+  --atlas-safe-top: env(safe-area-inset-top, 0px);
+  --atlas-safe-right: env(safe-area-inset-right, 0px);
+  --atlas-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --atlas-safe-left: env(safe-area-inset-left, 0px);
+  --atlas-nav-total-height: calc(var(--atlas-nav-height) + var(--atlas-safe-top));
 }
 
 html,
@@ -36,7 +41,9 @@ body {
   left: 0;
   right: 0;
   z-index: 9999;
-  height: var(--atlas-nav-height);
+  box-sizing: border-box;
+  height: var(--atlas-nav-total-height);
+  padding-top: var(--atlas-safe-top);
   background: rgba(0, 0, 0, 0.72);
   backdrop-filter: blur(40px) saturate(200%);
   -webkit-backdrop-filter: blur(40px) saturate(200%);
@@ -46,7 +53,7 @@ body {
 .atlas-nav-inner {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 calc(24px + var(--atlas-safe-right)) 0 calc(24px + var(--atlas-safe-left));
   height: 100%;
   display: flex;
   align-items: center;
@@ -311,11 +318,14 @@ body {
 
   .atlas-nav-panel {
     position: fixed;
-    top: var(--atlas-nav-height);
+    top: var(--atlas-nav-total-height);
     left: 0;
     right: 0;
     bottom: 0;
-    height: calc(100vh - var(--atlas-nav-height));
+    box-sizing: border-box;
+    height: calc(100vh - var(--atlas-nav-total-height));
+    height: calc(100dvh - var(--atlas-nav-total-height));
+    padding-bottom: var(--atlas-safe-bottom);
     background: #1a1a1a;
     backdrop-filter: blur(40px);
     flex-direction: column;
@@ -345,7 +355,7 @@ body {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    padding: 2rem 1.5rem;
+    padding: 2rem calc(1.5rem + var(--atlas-safe-right)) 2rem calc(1.5rem + var(--atlas-safe-left));
   }
 
   .atlas-nav-link {
@@ -395,7 +405,8 @@ body {
    ============================================================ */
 
 .has-global-nav {
-  padding-top: var(--atlas-nav-height);
+  box-sizing: border-box;
+  padding: var(--atlas-nav-total-height) var(--atlas-safe-right) var(--atlas-safe-bottom) var(--atlas-safe-left);
 }
 
 /* ============================================================

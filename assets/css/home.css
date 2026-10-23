@@ -352,16 +352,18 @@ body.dashboard-home {
         text-align: left;
     }
 
-    .dashboard-home .dashboard-grid {
-        grid-template-columns: 1fr;
-    }
-
     .dashboard-home .dashboard-card:nth-child(1) {
         grid-row: auto;
     }
 
     .dashboard-home .dashboard-card--activity {
         grid-column: auto;
+    }
+}
+
+@media (max-width: 680px) {
+    .dashboard-home .dashboard-grid {
+        grid-template-columns: 1fr;
     }
 }
 
