@@ -13,6 +13,7 @@
       id: 'duo',
       label: 'iPhone Duo',
       src: 'assets/models/apple-iphone-duo-fold-star-white.glb',
+      compressedSrc: 'assets/models/apple-iphone-duo-fold-star-white.glb.gz',
       animationName: 'open-close',
       alt: '星白色 iPhone Duo 折叠屏手机的三维模型，内外屏展示 ATLAS 界面',
       cameraOrbit: '0deg 75deg 145%',
@@ -28,6 +29,7 @@
       id: 'iphone-18-pro-max',
       label: 'iPhone 18 Pro Max',
       src: 'assets/models/atlas-iphone-18-pro-max-burgundy.glb',
+      compressedSrc: 'assets/models/atlas-iphone-18-pro-max-burgundy.glb.gz',
       screenMaterialName: 'COLOUR_Cherry_Screen',
       screenTexture: 'assets/img/atlas-iphone-screen.jpg',
       alt: '酒红色 iPhone 18 Pro Max 屏幕显示 ATLAS 移动工作台的三维模型',
@@ -54,10 +56,14 @@
   const modelViewerIntegrity = 'sha384-T4vc5AP9W2o3EVVQC6Is5mbKqFE2eysxg1XHwaZLquK0SjtY+4cLHoN3j1mK/MmB';
   let activeModel = models[viewer.dataset.modelKind];
   let selectionVersion = 0;
+  let sourceRequestVersion = -1;
+  let activeModelObjectUrl = null;
+  let rawFallbackVersion = -1;
   let isInView = false;
   let isLoadingRuntime = false;
   let hasFoldAnimation = false;
   let isAnimationPlaying = false;
+  const staleObjectUrls = new Set();
 
   if (!activeModel || !modelButtons.length || !toggle) {
     console.error('The iPhone model selector markup is incomplete.');
@@ -104,6 +110,53 @@
     return selectionVersion === version &&
       activeModel === model &&
       viewer.dataset.modelSrc === model.src;
+  }
+
+  function releaseStaleObjectUrls() {
+    staleObjectUrls.forEach((url) => URL.revokeObjectURL(url));
+    staleObjectUrls.clear();
+  }
+
+  async function loadSelectedModel(model, version) {
+    if (!isCurrentSelection(model, version) || sourceRequestVersion === version) return;
+    sourceRequestVersion = version;
+    rawFallbackVersion = -1;
+
+    let source = model.src;
+    if (typeof window.DecompressionStream === 'function' && model.compressedSrc) {
+      if (hint) hint.textContent = `正在下载并解压 ${model.label} 三维模型…`;
+      try {
+        const response = await fetch(model.compressedSrc);
+        if (!response.ok || !response.body) {
+          throw new Error(`Compressed model request failed: ${response.status}`);
+        }
+
+        const contentEncoding = response.headers.get('content-encoding') || '';
+        const decompressed = /\bgzip\b/i.test(contentEncoding)
+          ? await response.blob()
+          : await new Response(
+            response.body.pipeThrough(new window.DecompressionStream('gzip'))
+          ).blob();
+        if (!isCurrentSelection(model, version)) return;
+        source = URL.createObjectURL(new Blob([decompressed], { type: 'model/gltf-binary' }));
+      } catch (error) {
+        if (!isCurrentSelection(model, version)) return;
+        console.warn(`Could not load the compressed ${model.label} model; using the original GLB.`, error);
+        if (hint) hint.textContent = `压缩模型不可用，正在加载 ${model.label} 原始模型…`;
+      }
+    }
+
+    if (!isCurrentSelection(model, version)) {
+      if (source.startsWith('blob:')) URL.revokeObjectURL(source);
+      return;
+    }
+
+    if (activeModelObjectUrl && activeModelObjectUrl !== source) {
+      staleObjectUrls.add(activeModelObjectUrl);
+    }
+    activeModelObjectUrl = source.startsWith('blob:') ? source : null;
+    viewer.dataset.loadedModelKind = model.id;
+    viewer.setAttribute('src', source);
   }
 
   async function applyScreenTexture(model, version) {
@@ -153,16 +206,19 @@
   async function handleModelLoad() {
     const model = activeModel;
     const version = selectionVersion;
-    if (viewer.getAttribute('src') !== model.src) return;
+    if (viewer.dataset.loadedModelKind !== model.id) return;
+    if (viewer.getAttribute('src') !== (activeModelObjectUrl || model.src)) return;
 
     try {
       const textureApplied = await applyScreenTexture(model, version);
       if (!textureApplied || !isCurrentSelection(model, version)) return;
       setModelReady(model);
+      releaseStaleObjectUrls();
     } catch (error) {
       if (!isCurrentSelection(model, version)) return;
       console.error(`Could not apply the ${model.label} screen preview.`, error);
       setModelReady(model, model.textureErrorHint || model.loadErrorHint);
+      releaseStaleObjectUrls();
     }
   }
 
@@ -172,8 +228,10 @@
 
     activeModel = nextModel;
     selectionVersion += 1;
+    sourceRequestVersion = -1;
     stage.classList.remove('is-model-ready');
     hasFoldAnimation = false;
+    viewer.dataset.loadedModelKind = '';
     setToggleState(false);
     updateModelCopy();
     updateViewerAttributes();
@@ -185,10 +243,10 @@
       : toggle.dataset.unavailableLabel;
     if (hint) hint.textContent = `正在加载 ${activeModel.label} 三维模型…`;
 
-    if (customElements.get('model-viewer')) {
-      if (typeof viewer.pause === 'function') viewer.pause();
-      viewer.setAttribute('src', activeModel.src);
-    } else if (isInView) {
+    if (customElements.get('model-viewer') && typeof viewer.pause === 'function') {
+      viewer.pause();
+    }
+    if (isInView) {
       loadModelViewer();
     }
   }
@@ -197,9 +255,7 @@
     if (!activeModel.src || !isInView || document.hidden) return;
 
     if (customElements.get('model-viewer')) {
-      if (viewer.getAttribute('src') !== activeModel.src) {
-        viewer.setAttribute('src', activeModel.src);
-      }
+      loadSelectedModel(activeModel, selectionVersion);
       return;
     }
 
@@ -215,7 +271,7 @@
       customElements.whenDefined('model-viewer').then(() => {
         isLoadingRuntime = false;
         if (isInView && !document.hidden) {
-          viewer.setAttribute('src', activeModel.src);
+          loadSelectedModel(activeModel, selectionVersion);
         }
       });
     }, { once: true });
@@ -246,13 +302,38 @@
   });
 
   viewer.addEventListener('load', handleModelLoad);
+  viewer.addEventListener('progress', (event) => {
+    if (stage.classList.contains('is-model-ready')) return;
+    const totalProgress = event.detail?.totalProgress;
+    if (typeof totalProgress !== 'number' || !Number.isFinite(totalProgress)) return;
+
+    const percent = Math.round(Math.min(1, Math.max(0, totalProgress)) * 100);
+    if (hint) hint.textContent = `正在加载 ${activeModel.label} 三维模型 ${percent}%…`;
+  });
   viewer.addEventListener('error', (event) => {
+    const model = activeModel;
+    const version = selectionVersion;
+    if (viewer.dataset.loadedModelKind !== model.id) return;
+
+    if (activeModelObjectUrl &&
+        viewer.getAttribute('src') === activeModelObjectUrl &&
+        rawFallbackVersion !== version) {
+      console.warn(`Could not load the compressed ${model.label} model; retrying the original GLB.`, event);
+      staleObjectUrls.add(activeModelObjectUrl);
+      activeModelObjectUrl = null;
+      rawFallbackVersion = version;
+      viewer.setAttribute('src', model.src);
+      if (hint) hint.textContent = `压缩模型加载失败，正在重试 ${model.label} 原始模型…`;
+      return;
+    }
+
     stage.classList.remove('is-model-ready');
     hasFoldAnimation = false;
+    sourceRequestVersion = -1;
     toggle.disabled = true;
     toggle.textContent = toggle.dataset.unavailableLabel;
-    console.error(`Could not load the ${activeModel.label} 3D model.`, event);
-    if (hint) hint.textContent = `${activeModel.label} 3D 模型暂不可用 · 当前显示静态预览`;
+    console.error(`Could not load the ${model.label} 3D model.`, event);
+    if (hint) hint.textContent = `${model.label} 3D 模型暂不可用 · 当前显示静态预览`;
   });
   viewer.addEventListener('finished', () => {
     if (isAnimationPlaying) setToggleState(false);
@@ -276,7 +357,7 @@
   new IntersectionObserver(([entry]) => {
     isInView = entry.isIntersecting;
     if (isInView) loadModelViewer();
-  }).observe(stage);
+  }, { rootMargin: '900px 0px' }).observe(stage);
 
   document.addEventListener('visibilitychange', () => {
     if (isInView && !document.hidden) loadModelViewer();

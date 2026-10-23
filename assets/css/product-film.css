@@ -15,8 +15,12 @@
     transition: opacity .8s ease;
 }
 
+.hero.has-video-frame .hero-background-video {
+    opacity: .42;
+}
+
 .hero.has-background-video .hero-background-video {
-    opacity: .38;
+    opacity: .68;
 }
 
 .hero::before {
@@ -39,7 +43,7 @@
 }
 
 .hero.has-background-video .hero-atmosphere {
-    opacity: .2;
+    opacity: .08;
 }
 
 .hero-visual img {

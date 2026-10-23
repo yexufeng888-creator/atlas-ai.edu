@@ -1,12 +1,12 @@
 (() => {
   const canvas = document.querySelector('[data-hero-atmosphere]');
-  const hero = canvas?.closest('.hero');
+  const hero = canvas?.closest('.hero') || document.querySelector('.hero');
   const backgroundVideo = hero?.querySelector('[data-hero-video]');
   const context = canvas instanceof HTMLCanvasElement ? canvas.getContext('2d') : null;
 
-  if (!(canvas instanceof HTMLCanvasElement) || !(hero instanceof HTMLElement) || !context) {
-    return;
-  }
+  if (!(hero instanceof HTMLElement)) return;
+
+  const hasAtmosphereCanvas = canvas instanceof HTMLCanvasElement && Boolean(context);
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const particles = [];
@@ -17,6 +17,8 @@
   let isVisible = false;
 
   const resize = () => {
+    if (!hasAtmosphereCanvas) return;
+
     const bounds = hero.getBoundingClientRect();
     const pixelRatio = Math.min(window.devicePixelRatio || 1, 1.5);
     width = bounds.width;
@@ -42,6 +44,8 @@
   };
 
   const render = () => {
+    if (!hasAtmosphereCanvas) return;
+
     context.clearRect(0, 0, width, height);
     elapsed += 0.003;
 
@@ -97,11 +101,14 @@
     if (!(backgroundVideo instanceof HTMLVideoElement)) return;
 
     if (!isVisible || document.hidden || reducedMotion.matches) {
+      backgroundVideo.autoplay = false;
       backgroundVideo.pause();
       if (reducedMotion.matches) hero.classList.remove('has-background-video');
       return;
     }
 
+    backgroundVideo.preload = 'auto';
+    backgroundVideo.autoplay = true;
     backgroundVideo.play().catch((error) => {
       hero.classList.remove('has-background-video');
       updateAnimation();
@@ -112,7 +119,11 @@
   };
 
   if (backgroundVideo instanceof HTMLVideoElement) {
+    backgroundVideo.addEventListener('loadeddata', () => {
+      hero.classList.add('has-video-frame');
+    });
     backgroundVideo.addEventListener('playing', () => {
+      hero.classList.add('has-video-frame');
       hero.classList.add('has-background-video');
       updateAnimation();
     });
@@ -123,7 +134,7 @@
     });
   }
 
-  new ResizeObserver(resize).observe(hero);
+  if (hasAtmosphereCanvas) new ResizeObserver(resize).observe(hero);
   new IntersectionObserver(([entry]) => {
     isVisible = entry.isIntersecting;
     updateAnimation();
@@ -138,5 +149,5 @@
     updateAnimation();
     updateVideoPlayback();
   });
-  window.addEventListener('resize', resize, { passive: true });
+  if (hasAtmosphereCanvas) window.addEventListener('resize', resize, { passive: true });
 })();

@@ -6,6 +6,7 @@
     <meta name="description" content="ATLAS - 个人智能操作系统。用 AI 驱动的生产力工具改变你的生活。">
     <title>ATLAS - 个人智能操作系统</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
@@ -427,7 +428,7 @@
         }
     </style>
     <link rel="stylesheet" href="assets/css/index-premium.css?v=20261013-m5-polish">
-    <link rel="stylesheet" href="assets/css/product-film.css?v=20261013b">
+    <link rel="stylesheet" href="assets/css/product-film.css?v=20261023a">
 </head>
 <body class="has-global-nav">
 <nav class="global-nav"></nav>
@@ -442,7 +443,7 @@
 
     <!-- Hero Section -->
     <section class="hero" id="top">
-        <video class="hero-background-video" data-hero-video muted loop playsinline preload="metadata" aria-hidden="true" tabindex="-1">
+        <video class="hero-background-video" data-hero-video muted loop playsinline webkit-playsinline preload="metadata" aria-hidden="true" tabindex="-1">
             <source src="assets/video/atlas-hero-background.mp4" type="video/mp4">
         </video>
         <canvas class="hero-atmosphere" data-hero-atmosphere aria-hidden="true"></canvas>
@@ -605,7 +606,7 @@
                             exposure="1.1"
                             shadow-intensity="0.85"
                             environment-image="neutral"
-                            loading="lazy"
+                            loading="eager"
                             reveal="auto">
                         </model-viewer>
                     </div>
@@ -1268,9 +1269,9 @@
 
     <script src="assets/js/atlas-shell.js?v=20261013a"></script>
     <script src="assets/js/atlas-scroll.js"></script>
-    <script src="assets/js/atlas-hero-motion.js?v=20261013c"></script>
+    <script src="assets/js/atlas-hero-motion.js?v=20261023a"></script>
     <script src="assets/js/product-film.js?v=20261013a"></script>
-    <script src="assets/js/device-model.js?v=20261023b"></script>
+    <script src="assets/js/device-model.js?v=20261023f"></script>
 
     <style>
         /* 3D 卡片效果 */
