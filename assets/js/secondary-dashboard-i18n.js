@@ -150,7 +150,10 @@
       '创建了新项目"ATLAS v2.0"': '建立了新項目「ATLAS v2.0」',
       '开始规划下一代个人OS系统': '開始規劃下一代個人 OS 系統',
       '询问 ATLAS': '詢問 ATLAS',
-      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · 由 ATLAS 驅動'
+      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · 由 ATLAS 驅動',
+      '工作台中的任务、日程、活动与统计为示例内容；登录状态依当前部署配置显示。随手收集箱仅保存在当前浏览器，不会同步，请勿输入密码等敏感信息。': '工作台中的任務、日程、活動與統計為示例內容；登入狀態視乎目前部署設定。隨手收集箱只保存在目前瀏覽器，不會同步，請勿輸入密碼等敏感資料。',
+      '产品体验工作台 - ATLAS': '產品體驗工作台 - ATLAS',
+      'ATLAS 工作台体验：查看今日重点、日程示例并使用仅保存在当前浏览器的随手收集箱。': 'ATLAS 工作台體驗：查看今日重點、日程示例並使用只保存在目前瀏覽器的隨手收集箱。'
     },
     'zh-tw': {
       '首页 - ATLAS': '首頁 - ATLAS',
@@ -300,7 +303,10 @@
       '创建了新项目"ATLAS v2.0"': '建立了新專案「ATLAS v2.0」',
       '开始规划下一代个人OS系统': '開始規劃下一代個人 OS 系統',
       '询问 ATLAS': '詢問 ATLAS',
-      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · 由 ATLAS 驅動'
+      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · 由 ATLAS 驅動',
+      '工作台中的任务、日程、活动与统计为示例内容；登录状态依当前部署配置显示。随手收集箱仅保存在当前浏览器，不会同步，请勿输入密码等敏感信息。': '工作台中的任務、行程、活動與統計為範例內容；登入狀態依目前部署設定顯示。隨手收集箱僅保存在目前瀏覽器，不會同步，請勿輸入密碼等敏感資訊。',
+      '产品体验工作台 - ATLAS': '產品體驗工作台 - ATLAS',
+      'ATLAS 工作台体验：查看今日重点、日程示例并使用仅保存在当前浏览器的随手收集箱。': 'ATLAS 工作台體驗：查看今日重點、行程範例並使用僅保存在目前瀏覽器的隨手收集箱。'
     },
     en: {
       '首页 - ATLAS': 'Home - ATLAS',
@@ -450,7 +456,10 @@
       '创建了新项目"ATLAS v2.0"': 'Created the new project “ATLAS v2.0”',
       '开始规划下一代个人OS系统': 'Started planning the next-generation personal OS',
       '询问 ATLAS': 'Ask ATLAS',
-      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · Powered by ATLAS'
+      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · Powered by ATLAS',
+      '工作台中的任务、日程、活动与统计为示例内容；登录状态依当前部署配置显示。随手收集箱仅保存在当前浏览器，不会同步，请勿输入密码等敏感信息。': 'Dashboard tasks, schedules, activity, and metrics are sample content; sign-in depends on deployment. The quick-capture inbox stays in this browser and does not sync. Do not enter passwords or other sensitive information.',
+      '产品体验工作台 - ATLAS': 'Product experience workspace - ATLAS',
+      'ATLAS 工作台体验：查看今日重点、日程示例并使用仅保存在当前浏览器的随手收集箱。': 'ATLAS workspace preview: review sample priorities and schedule items. Quick-capture entries stay in this browser and do not sync.'
     },
     ja: {
       '首页 - ATLAS': 'ホーム - ATLAS',
@@ -600,7 +609,10 @@
       '创建了新项目"ATLAS v2.0"': '新しいプロジェクト「ATLAS v2.0」を作成しました',
       '开始规划下一代个人OS系统': '次世代パーソナル OS の計画を開始しました',
       '询问 ATLAS': 'ATLAS に質問',
-      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · ATLAS が提供'
+      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · ATLAS が提供',
+      '工作台中的任务、日程、活动与统计为示例内容；登录状态依当前部署配置显示。随手收集箱仅保存在当前浏览器，不会同步，请勿输入密码等敏感信息。': 'ワークスペースのタスク、予定、活動、統計はサンプルです。ログイン状態は実際の設定によります。クイックメモはこのブラウザー内に保存され、同期されません。パスワードなどの機密情報は入力しないでください。',
+      '产品体验工作台 - ATLAS': '製品体験ワークスペース - ATLAS',
+      'ATLAS 工作台体验：查看今日重点、日程示例并使用仅保存在当前浏览器的随手收集箱。': 'ATLAS ワークスペースの体験：今日の重点と予定のサンプルを確認できます。クイックメモはこのブラウザー内に保存され、同期されません。'
     },
     ko: {
       '首页 - ATLAS': '홈 - ATLAS',
@@ -750,7 +762,10 @@
       '创建了新项目"ATLAS v2.0"': '새 프로젝트 “ATLAS v2.0” 생성',
       '开始规划下一代个人OS系统': '차세대 개인 OS 계획을 시작했습니다',
       '询问 ATLAS': 'ATLAS에 질문',
-      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · ATLAS 제공'
+      'Personal Intelligence OS · 由 ATLAS 驱动': 'Personal Intelligence OS · ATLAS 제공',
+      '工作台中的任务、日程、活动与统计为示例内容；登录状态依当前部署配置显示。随手收集箱仅保存在当前浏览器，不会同步，请勿输入密码等敏感信息。': '작업 공간의 작업, 일정, 활동 및 통계는 샘플입니다. 로그인 상태는 배포 설정에 따라 달라집니다. 빠른 수집함은 이 브라우저에만 저장되고 동기화되지 않습니다. 비밀번호 등 민감한 정보는 입력하지 마세요.',
+      '产品体验工作台 - ATLAS': '제품 체험 워크스페이스 - ATLAS',
+      'ATLAS 工作台体验：查看今日重点、日程示例并使用仅保存在当前浏览器的随手收集箱。': 'ATLAS 워크스페이스 미리보기: 오늘의 우선순위와 일정 예시를 확인할 수 있습니다. 빠른 수집함은 이 브라우저에만 저장되며 동기화되지 않습니다.'
     }
   };
 

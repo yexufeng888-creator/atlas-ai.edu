@@ -18,7 +18,6 @@ body.has-global-nav > .auth-container,
 body.has-global-nav > .team-page,
 body.has-global-nav > .pricing-hero {
     flex: 1 0 auto;
-    width: 100%;
     box-sizing: border-box;
 }
 
@@ -227,4 +226,3 @@ body.atlas-app-page .page-footer:not(.site-legal-footer) {
         padding-left: 0;
     }
 }
-

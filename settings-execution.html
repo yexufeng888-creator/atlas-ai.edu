@@ -228,14 +228,14 @@
             <div class="page-header">
                 <p class="page-eyebrow">EXECUTION RULES</p>
                 <h1 class="page-title">执行规则</h1>
-                <p class="page-description">配置 Agent 自动化和确认规则</p>
+                <p class="page-description">调整本地演示中的确认级别；不会更改真实 Agent 权限。</p>
             </div>
 
             <div class="page-body">
 
             <div style="margin-bottom: 2rem; padding: 1.5rem; background: rgba(37, 99, 235, 0.05); border-radius: 1rem; text-align: center;">
                 <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">⚙️ 自动化级别</h3>
-                <p style="color: var(--color-text-muted); font-size: 0.875rem;">当前设置：中级自动化</p>
+                <p style="color: var(--color-text-muted); font-size: 0.875rem;">本地演示选择：中级自动化</p>
                 <div style="display: flex; gap: 1rem; margin-top: 1rem; justify-content: center;">
                     <button style="padding: 0.5rem 1rem; background: white; border: 1px solid var(--color-border); border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer;">手动确认</button>
                     <button style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; border: none; border-radius: 0.5rem; font-size: 0.875rem; cursor: pointer;">中级自动化</button>
@@ -319,15 +319,15 @@
                     <div class="info-list">
                         <div class="info-item">
                             <span class="info-label">单次执行超时</span>
-                            <span class="info-value">30 秒</span>
+                            <span class="info-value">未配置</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">每日执行上限</span>
-                            <span class="info-value">100 次</span>
+                            <span class="info-value">未配置</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">并发任务数</span>
-                            <span class="info-value">3 个</span>
+                            <span class="info-value">未配置</span>
                         </div>
                     </div>
                 </div>
@@ -338,15 +338,15 @@
                     <div class="info-list">
                         <div class="info-item">
                             <span class="info-label">每日预算</span>
-                            <span class="info-value">无限制</span>
+                            <span class="info-value">未公开</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">单次成本上限</span>
-                            <span class="info-value">¥5</span>
+                            <span class="info-value">未公开</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">本月已用</span>
-                            <span class="info-value">¥23 / ¥99</span>
+                            <span class="info-value">未连接账单数据</span>
                         </div>
                     </div>
                 </div>
@@ -357,19 +357,19 @@
                     <div class="info-list">
                         <div class="info-item">
                             <span class="info-label">执行完成通知</span>
-                            <span class="info-value" style="color: #10b981;">✓ 启用</span>
+                            <span class="info-value">未连接服务</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">失败通知</span>
-                            <span class="info-value" style="color: #10b981;">✓ 启用</span>
+                            <span class="info-value">未连接服务</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">待确认通知</span>
-                            <span class="info-value" style="color: #10b981;">✓ 启用</span>
+                            <span class="info-value">未连接服务</span>
                         </div>
                         <div class="info-item">
                             <span class="info-label">每日摘要</span>
-                            <span class="info-value" style="color: #10b981;">✓ 启用 (20:00)</span>
+                            <span class="info-value">未连接服务</span>
                         </div>
                     </div>
                 </div>
@@ -378,10 +378,10 @@
             <div style="margin-top: 2rem; padding: 2rem; background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.2); border-radius: 1rem;">
                 <h4 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: #ef4444;">🛡️ 安全规则</h4>
                 <ul style="color: var(--color-text-muted); font-size: 0.875rem; line-height: 1.8; list-style: none; padding-left: 0;">
-                    <li>• 所有涉及金钱、个人隐私或不可逆操作必须经过用户确认</li>
-                    <li>• Agent 不能在未授权的情况下访问第三方服务</li>
-                    <li>• 每个执行都有完整的审计日志，可随时查看</li>
-                    <li>• 异常行为会自动暂停执行并通知用户</li>
+                    <li>• 涉及外部服务、敏感信息或不可逆操作时，应在执行前明确请求用户确认</li>
+                    <li>• 实际访问范围取决于已启用的集成与账户权限</li>
+                    <li>• 此演示页未连接运行记录或审计服务</li>
+                    <li>• 异常处理方式以实际产品实现与部署配置为准</li>
                 </ul>
             </div>
 
@@ -395,8 +395,8 @@
 
     <script src="assets/js/page.js"></script>
     <script src="assets/js/3d-effects.js"></script>
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
-    <script src="assets/js/secondary-settings-i18n.js"></script>
+    <script src="assets/js/atlas-shell.js?v=20261027d"></script>
+    <script src="assets/js/secondary-settings-i18n.js?v=20261027d"></script>
     <script src="assets/js/atlas-scroll.js"></script>
     <script>
         // 语言切换按钮样式

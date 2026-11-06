@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>动作中心 - ATLAS</title>
+    <meta name="description" content="通过交互式示例了解 ATLAS 智能体的建议、用户确认与执行边界。">
+    <title>待确认操作 - ATLAS</title>
     <link rel="stylesheet" href="assets/css/page.css">
     <link rel="stylesheet" href="assets/css/3d-effects.css">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
@@ -223,104 +224,64 @@
 <body class="has-global-nav">
     <nav class="global-nav"></nav>
 
-    <main class="page-content">
+    <main class="page-content action-center-demo">
         <div class="content-container glass-card">
-            <div class="page-header">
-                <p class="page-eyebrow">ACTION CENTER</p>
-                <h1 class="page-title">待确认动作中心</h1>
-                <p class="page-description">查看和批准 Agent 提议的所有行动</p>
-            </div>
+            <header class="page-header">
+                <p class="page-eyebrow">演示体验 · 用户确认</p>
+                <h1 class="page-title">待确认操作</h1>
+                <p class="page-description">先检查建议内容与执行范围，再决定是否继续。</p>
+            </header>
 
             <div class="page-body">
+                <p class="page-demo-notice action-demo-notice" role="note">演示说明：以下资料和操作均为示例。当前页面只模拟状态变化，不会写入工作台、预订服务、发送邮件或调用外部操作。</p>
 
-            <div style="margin-bottom: 2rem; text-align: center;">
-                <h2 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem; color: #f59e0b;">⚠️ 1 个动作待确认</h2>
-                <p style="color: var(--color-text-muted);">其他 8 个已处理</p>
-            </div>
-
-            <!-- 待确认动作 -->
-            <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-text);">🟡 待确认</h3>
-
-                <div class="glass-card" style="padding: 1.5rem; margin-bottom: 1rem; border-left: 4px solid #f59e0b;">
-                    <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                <section class="action-demo-card" aria-labelledby="actionDemoTitle">
+                    <header class="action-demo-header">
                         <div>
-                            <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 0.25rem;">✈️ 预订上海往返机票</h4>
-                            <p style="font-size: 0.875rem; color: var(--color-text-muted);">Travel Planner Agent · 刚刚</p>
+                            <p class="action-demo-kicker">示例项目 · 需要用户确认</p>
+                            <h2 id="actionDemoTitle">准备产品评审清单</h2>
+                            <p>项目助理 · 演示任务</p>
                         </div>
-                        <span style="padding: 0.25rem 0.75rem; background: rgba(245, 158, 11, 0.1); color: #f59e0b; border-radius: 999px; font-size: 0.75rem; font-weight: 600;">待确认</span>
+                        <span class="action-demo-badge" data-demo-badge>待确认</span>
+                    </header>
+
+                    <div class="action-demo-plan">
+                        <h3>建议计划</h3>
+                        <ol>
+                            <li id="actionDemoPlanItem">核对新版用户流程</li>
+                            <li>整理仍需确认的问题</li>
+                            <li>形成评审前的准备清单</li>
+                        </ol>
                     </div>
 
-                    <div style="background: rgba(0, 0, 0, 0.02); padding: 1rem; border-radius: 0.5rem; margin-bottom: 1rem;">
-                        <p style="font-size: 0.875rem; color: var(--color-text); margin-bottom: 0.5rem;"><strong>航班信息：</strong></p>
-                        <p style="font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.6;">
-                            • 去程：9月15日 CA1234 北京-上海 08:30-11:00<br>
-                            • 返程：9月18日 CA1235 上海-北京 19:00-21:30<br>
-                            • 票价：¥1,280 (经济舱)<br>
-                            • 预订网址：携程旅行
-                        </p>
+                    <div class="action-demo-reason">
+                        <strong>建议依据</strong>
+                        <p>示例关联：用户访谈摘录、项目目标与待确认事项。采取行动前，请核对资料来源。</p>
                     </div>
 
-                    <div style="display: flex; gap: 1rem;">
-                        <button style="flex: 1; padding: 0.75rem; background: linear-gradient(135deg, #2563eb, #06b6d4); color: white; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">✓ 批准并预订</button>
-                        <button style="flex: 1; padding: 0.75rem; background: white; color: var(--color-text); border: 1px solid var(--color-border); border-radius: 0.5rem; font-weight: 600; cursor: pointer;">✎ 修改</button>
-                        <button style="padding: 0.75rem 1.5rem; background: rgba(239, 68, 68, 0.1); color: #ef4444; border: none; border-radius: 0.5rem; font-weight: 600; cursor: pointer;">✕ 拒绝</button>
+                    <div class="action-demo-controls" role="group" aria-label="选择如何处理此示例建议">
+                        <button class="action-demo-confirm" type="button" data-demo-action="confirm">确认建议</button>
+                        <button class="action-demo-edit" type="button" data-demo-action="edit">修改建议</button>
+                        <button class="action-demo-defer" type="button" data-demo-action="defer">暂不采用</button>
                     </div>
-                </div>
-            </div>
 
-            <!-- 今日已处理 -->
-            <div style="margin-bottom: 2rem;">
-                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-text);">✅ 今日已批准 (3)</h3>
-
-                <div class="info-list">
-                    <div class="info-item" style="padding: 1rem; border-left: 3px solid #10b981;">
-                        <div>
-                            <span style="font-weight: 600;">📧 发送会议纪要邮件</span>
-                            <span style="display: block; font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">14:30 批准 · 邮件助手</span>
+                    <form class="action-demo-edit-form" data-demo-edit-form hidden>
+                        <label for="actionDemoText">修改建议内容</label>
+                        <textarea id="actionDemoText" rows="3" maxlength="300" required>核对新版用户流程，并整理待确认问题。</textarea>
+                        <div class="action-demo-edit-controls">
+                            <button class="action-demo-confirm" type="submit" data-demo-action="save">保存到演示</button>
+                            <button class="action-demo-edit" type="button" data-demo-action="cancel">取消</button>
                         </div>
-                        <span style="color: #10b981; font-size: 0.875rem;">已执行</span>
-                    </div>
+                    </form>
 
-                    <div class="info-item" style="padding: 1rem; border-left: 3px solid #10b981;">
-                        <div>
-                            <span style="font-weight: 600;">📅 创建下周团队会议</span>
-                            <span style="display: block; font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">11:20 批准 · 日程助手</span>
-                        </div>
-                        <span style="color: #10b981; font-size: 0.875rem;">已执行</span>
-                    </div>
+                    <p class="action-demo-status" data-demo-status role="status" aria-live="polite">等待你的选择。当前操作只更新此页面的演示状态。</p>
+                </section>
 
-                    <div class="info-item" style="padding: 1rem; border-left: 3px solid #10b981;">
-                        <div>
-                            <span style="font-weight: 600;">🔔 设置项目截止提醒</span>
-                            <span style="display: block; font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">09:45 批准 · 任务助手</span>
-                        </div>
-                        <span style="color: #10b981; font-size: 0.875rem;">已执行</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- 今日已拒绝 -->
-            <div>
-                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; color: var(--color-text);">❌ 今日已拒绝 (1)</h3>
-
-                <div class="info-list">
-                    <div class="info-item" style="padding: 1rem; border-left: 3px solid #ef4444;">
-                        <div>
-                            <span style="font-weight: 600;">💰 续费年度订阅服务</span>
-                            <span style="display: block; font-size: 0.75rem; color: var(--color-text-muted); margin-top: 0.25rem;">10:15 拒绝 · 支付助手</span>
-                        </div>
-                        <span style="color: #ef4444; font-size: 0.875rem;">已取消</span>
-                    </div>
-                </div>
-            </div>
-
-            <div style="margin-top: 2rem; padding: 2rem; background: rgba(37, 99, 235, 0.05); border-radius: 1rem; text-align: center;">
-                <p style="color: var(--color-text-muted); font-size: 0.875rem;">
-                    💡 <strong>提示：</strong>可以在设置中配置哪些动作需要确认，哪些可以自动执行
-                </p>
-            </div>
-
+                <aside class="action-demo-boundary">
+                    <h2>操作边界</h2>
+                    <p>外部操作需要相应的接入能力与权限。本演示不会创建任务、发送邮件、预订服务或修改账户数据。</p>
+                    <a href="settings-execution.html">查看执行规则说明 <span aria-hidden="true">→</span></a>
+                </aside>
             </div>
         </div>
     </main>
@@ -331,9 +292,10 @@
 
     <script src="assets/js/page.js"></script>
     <script src="assets/js/3d-effects.js"></script>
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
+    <script src="assets/js/atlas-shell.js?v=20261027d"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
-    <script src="assets/js/secondary-agents-i18n.js"></script>
+    <script src="assets/js/secondary-agents-i18n.js?v=20261027b"></script>
+    <script src="assets/js/agents-actions-demo.js?v=20261027a"></script>
     <script src="assets/js/atlas-scroll.js"></script>
     <script>
         // 语言切换按钮样式

@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>定价方案 - ATLAS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <meta name="description" content="查看 ATLAS 套餐与价格信息的发布状态。">
+    <title>套餐信息 - ATLAS</title>
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
     <style>
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
             background: #f8f9fa;
             color: #1a1a1a;
         }
@@ -243,155 +242,180 @@
             color: #6b7280;
             line-height: 1.6;
         }
+
+        .pricing-info-card {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: clamp(1.5rem, 4vw, 3rem);
+            border: 1px solid rgba(148, 163, 184, .24);
+            border-radius: 1.5rem;
+            background: rgba(255, 255, 255, .96);
+            box-shadow: 0 24px 70px rgba(8, 18, 32, .12);
+            color: #1d2b3d;
+        }
+
+        .pricing-info-status {
+            color: #54708e;
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+        }
+
+        .pricing-info-card h2 {
+            margin: .7rem 0;
+            font-size: clamp(1.5rem, 3vw, 2.2rem);
+            line-height: 1.3;
+        }
+
+        .pricing-info-card > p:not(.pricing-info-status) {
+            max-width: 650px;
+            color: #586a7e;
+            line-height: 1.8;
+        }
+
+        .pricing-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .pricing-info-grid article {
+            padding: 1rem;
+            border: 1px solid #e4eaf0;
+            border-radius: 1rem;
+            background: #f7f9fc;
+        }
+
+        .pricing-info-grid h3 {
+            margin-bottom: .35rem;
+            font-size: 1rem;
+        }
+
+        .pricing-info-grid p {
+            margin: 0;
+            color: #586a7e;
+            font-size: .9rem;
+            line-height: 1.65;
+        }
+
+        .pricing-info-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .75rem;
+        }
+
+        .pricing-info-actions a {
+            display: inline-flex;
+            min-height: 44px;
+            align-items: center;
+            justify-content: center;
+            padding: .7rem 1rem;
+            border: 1px solid #d5e0eb;
+            border-radius: 999px;
+            color: #263f5a;
+            font-weight: 650;
+            text-decoration: none;
+        }
+
+        .pricing-info-actions a:first-child {
+            border-color: #1e3a58;
+            background: #1e3a58;
+            color: white;
+        }
+
+        .pricing-info-actions a:focus-visible {
+            outline: 3px solid #84b5e3;
+            outline-offset: 3px;
+        }
+
+        @media (max-width: 600px) {
+            .pricing-container {
+                padding-right: 1rem;
+                padding-left: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="has-global-nav">
     <nav class="global-nav"></nav>
 
-    <!-- Hero Section -->
-    <section class="pricing-hero">
-        <h1>简单透明的定价</h1>
-        <p>选择适合你的方案，随时可以升级或取消</p>
-
-        <div class="pricing-toggle">
-            <span style="font-weight: 600; opacity: 0.8;">月付</span>
-            <div class="toggle-switch" id="billingToggle">
-                <div class="toggle-slider"></div>
-            </div>
-            <span style="font-weight: 600; opacity: 0.8;">年付</span>
-            <span class="save-badge">节省 20%</span>
-        </div>
+    <section class="pricing-hero" aria-labelledby="pricing-title">
+        <p class="page-eyebrow">ATLAS / 套餐信息</p>
+        <h1 id="pricing-title">价格信息尚未公开</h1>
+        <p>目前没有已确认并公开的套餐、试用或支付说明。</p>
     </section>
 
-    <!-- Pricing Cards -->
-    <section class="pricing-container">
-        <div class="pricing-grid">
-            <!-- Free Plan -->
-            <div class="pricing-card">
-                <h2 class="plan-name">免费版</h2>
-                <p class="plan-description">适合个人用户开始使用</p>
-                <div class="plan-price">
-                    <span class="price-currency">¥</span>
-                    <span class="price-amount">0</span>
-                    <span class="price-period">/月</span>
-                </div>
-                <button class="plan-cta secondary">开始使用</button>
-                <ul class="plan-features">
-                    <li><span class="feature-icon">✓</span> 基础任务管理</li>
-                    <li><span class="feature-icon">✓</span> 最多 100 个任务</li>
-                    <li><span class="feature-icon">✓</span> 1GB 存储空间</li>
-                    <li><span class="feature-icon">✓</span> 基础 AI 助手</li>
-                    <li><span class="feature-icon">✓</span> Web 访问</li>
-                    <li><span class="feature-icon">✓</span> 社区支持</li>
-                </ul>
+    <main class="pricing-container">
+        <section class="pricing-info-card" aria-labelledby="pricing-status-title">
+            <p class="pricing-info-status">当前状态 · 未发布</p>
+            <h2 id="pricing-status-title">不以未经核实的信息作承诺</h2>
+            <p>本页暂不展示价格、存储额度、功能分层或试用期限。相关信息确认后，会在此处更新；在此之前，请以已发布的产品说明为准。</p>
+
+            <div class="pricing-info-grid">
+                <article>
+                    <h3>套餐与权益</h3>
+                    <p>尚未发布可核实的套餐清单。</p>
+                </article>
+                <article>
+                    <h3>试用与支付</h3>
+                    <p>尚未发布试用规则或支付方式。</p>
+                </article>
+                <article>
+                    <h3>团队方案</h3>
+                    <p>当前没有已确认的团队版信息。</p>
+                </article>
             </div>
 
-            <!-- Pro Plan -->
-            <div class="pricing-card featured">
-                <span class="featured-badge">最受欢迎</span>
-                <h2 class="plan-name">专业版</h2>
-                <p class="plan-description">适合追求效率的专业人士</p>
-                <div class="plan-price">
-                    <span class="price-currency">¥</span>
-                    <span class="price-amount" id="proPrice">69</span>
-                    <span class="price-period">/月</span>
-                </div>
-                <button class="plan-cta primary">立即升级</button>
-                <ul class="plan-features">
-                    <li><span class="feature-icon">✓</span> <strong>免费版所有功能</strong></li>
-                    <li><span class="feature-icon">✓</span> 无限任务</li>
-                    <li><span class="feature-icon">✓</span> 50GB 存储空间</li>
-                    <li><span class="feature-icon">✓</span> 高级 AI 能力</li>
-                    <li><span class="feature-icon">✓</span> AI 智能体</li>
-                    <li><span class="feature-icon">✓</span> 智能记忆系统</li>
-                    <li><span class="feature-icon">✓</span> 生活数据分析</li>
-                    <li><span class="feature-icon">✓</span> 全平台同步</li>
-                    <li><span class="feature-icon">✓</span> 优先支持</li>
-                </ul>
+            <div class="pricing-info-actions">
+                <a href="product.html">了解 ATLAS</a>
+                <a href="contact.html">联系 ATLAS</a>
             </div>
+        </section>
 
-            <!-- Team Plan -->
-            <div class="pricing-card">
-                <h2 class="plan-name">团队版</h2>
-                <p class="plan-description">适合团队和企业使用</p>
-                <div class="plan-price">
-                    <span class="price-currency">¥</span>
-                    <span class="price-amount" id="teamPrice">199</span>
-                    <span class="price-period">/月</span>
+        <section class="atlas-pass-showcase" style="max-width:860px;margin:2.5rem auto 0;border-radius:1.5rem;padding:2.5rem 2rem;" aria-labelledby="pricing-pass-title">
+            <div class="atlas-pass-showcase-inner" style="gap:2rem;">
+                <div class="atlas-pass-copy">
+                    <div class="section-eyebrow">ATLAS PASS · 概念身份预览</div>
+                    <h2 id="pricing-pass-title" style="font-size:clamp(1.6rem,3vw,2.2rem);">反射通行证</h2>
+                    <p style="font-size:0.95rem;">实时 WebGL2 平面金属反射预览（320×500px · 圆角 24px · 弹簧 120/16 · ±12° 物理法线联动）。本通行证仅作交互工艺展示，不代表付费会员权益承诺。</p>
+                    <div class="atlas-pass-specs">
+                        <span class="atlas-pass-spec-pill">2-Pass Gaussian Blur</span>
+                        <span class="atlas-pass-spec-pill">UV = vUv + 0.12 * q</span>
+                    </div>
                 </div>
-                <button class="plan-cta secondary">联系销售</button>
-                <ul class="plan-features">
-                    <li><span class="feature-icon">✓</span> <strong>专业版所有功能</strong></li>
-                    <li><span class="feature-icon">✓</span> 最多 10 个成员</li>
-                    <li><span class="feature-icon">✓</span> 500GB 共享存储</li>
-                    <li><span class="feature-icon">✓</span> 团队协作工具</li>
-                    <li><span class="feature-icon">✓</span> 管理员控制台</li>
-                    <li><span class="feature-icon">✓</span> SSO 单点登录</li>
-                    <li><span class="feature-icon">✓</span> 高级安全功能</li>
-                    <li><span class="feature-icon">✓</span> API 访问</li>
-                    <li><span class="feature-icon">✓</span> 专属客户经理</li>
-                </ul>
+                <div class="atlas-pass-stage">
+                    <div class="atlas-reflective-pass" data-atlas-reflective-pass role="img" aria-label="ATLAS 反射通行证 320×500 实时物理金属反射卡片，卡号 0001 2345 6789">
+                        <canvas class="atlas-reflective-pass__canvas" data-pass-canvas aria-hidden="true"></canvas>
+                        <div class="atlas-reflective-pass__hud">
+                            <div class="atlas-reflective-pass__top">
+                                <div>
+                                    <span class="atlas-reflective-pass__kicker">ATLAS PERSONAL OS</span>
+                                    <h3 class="atlas-reflective-pass__title">反射通行证</h3>
+                                </div>
+                                <span class="atlas-reflective-pass__chip" aria-hidden="true"></span>
+                            </div>
+                            <div class="atlas-reflective-pass__emblem" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <polygon points="12 3 20 19 4 19"/>
+                                    <circle cx="12" cy="13.5" r="2.2"/>
+                                </svg>
+                            </div>
+                            <div class="atlas-reflective-pass__bottom">
+                                <div class="atlas-reflective-pass__number">0001  2345  6789</div>
+                                <div class="atlas-reflective-pass__meta">
+                                    <span>LOCAL-FIRST IDENTITY</span>
+                                    <span data-pass-live-telemetry>MEM 04 · TASK 02</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="atlas-reflective-pass__border" aria-hidden="true"></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <h2 class="faq-title">常见问题</h2>
-
-        <div class="faq-item">
-            <h3 class="faq-question">可以随时取消吗？</h3>
-            <p class="faq-answer">可以。你可以随时取消订阅，取消后将继续使用到当前计费周期结束。</p>
-        </div>
-
-        <div class="faq-item">
-            <h3 class="faq-question">支持哪些支付方式？</h3>
-            <p class="faq-answer">我们支持支付宝、微信支付、银行卡以及国际信用卡（Visa、Mastercard、American Express）。</p>
-        </div>
-
-        <div class="faq-item">
-            <h3 class="faq-question">可以先试用吗？</h3>
-            <p class="faq-answer">可以！专业版和团队版都提供 14 天免费试用，无需信用卡。</p>
-        </div>
-
-        <div class="faq-item">
-            <h3 class="faq-question">年付和月付有什么区别？</h3>
-            <p class="faq-answer">年付可以节省 20%，相当于免费使用 2.4 个月。功能完全相同。</p>
-        </div>
-
-        <div class="faq-item">
-            <h3 class="faq-question">可以从免费版升级吗？</h3>
-            <p class="faq-answer">当然可以！你的所有数据都会保留，升级后立即获得所有高级功能。</p>
-        </div>
-
-        <div class="faq-item">
-            <h3 class="faq-question">团队版可以添加更多成员吗？</h3>
-            <p class="faq-answer">可以。每增加一个成员，每月额外收费 ¥20。</p>
-        </div>
-    </section>
-
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
-    <script>
-        // Billing toggle
-        const toggle = document.getElementById('billingToggle');
-        const proPrice = document.getElementById('proPrice');
-        const teamPrice = document.getElementById('teamPrice');
-
-        let isAnnual = false;
-
-        toggle.addEventListener('click', () => {
-            isAnnual = !isAnnual;
-            toggle.classList.toggle('active');
-
-            if (isAnnual) {
-                // 年付价格（月付 * 12 * 0.8 / 12）
-                proPrice.textContent = '55';
-                teamPrice.textContent = '159';
-            } else {
-                proPrice.textContent = '69';
-                teamPrice.textContent = '199';
-            }
-        });
-    </script>
+    <script src="assets/js/atlas-shell.js?v=20261106b"></script>
 </body>
 </html>

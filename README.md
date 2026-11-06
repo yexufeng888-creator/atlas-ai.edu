@@ -80,8 +80,9 @@ npx vercel atlas-html
 
 ## 📄 页面列表
 
-### 主页面 (6个)
+### 主页面 (8个)
 - `index.html` - 欢迎页
+- `product.html` - 产品能力与工作方式
 - `home.html` - 首页工作台
 - `ask.html` - 询问 ATLAS
 - `memory.html` - 记忆
@@ -116,7 +117,7 @@ npx vercel atlas-html
 - `settings-execution.html` - 执行规则
 - `settings-appearance.html` - 外观设置
 
-**总计: 26 个完整的 HTML 页面**
+**总计: 27 个核心 HTML 页面**
 
 ## 🎨 特色功能
 

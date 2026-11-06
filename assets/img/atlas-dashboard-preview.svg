@@ -1,0 +1,92 @@
+<svg width="900" height="520" viewBox="0 0 900 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="window" x1="60" y1="44" x2="790" y2="488" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#fff"/>
+      <stop offset="1" stop-color="#F7F9FC"/>
+    </linearGradient>
+    <linearGradient id="focus" x1="230" y1="210" x2="500" y2="430" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F3F8FF"/>
+      <stop offset="1" stop-color="#EAF1FA"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#526D8E"/>
+      <stop offset="1" stop-color="#9AB4D0"/>
+    </linearGradient>
+    <filter id="shadow" x="0" y="0" width="900" height="520" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#334155" flood-opacity=".12"/>
+    </filter>
+  </defs>
+
+  <rect x="18" y="16" width="864" height="488" rx="19" fill="url(#window)" stroke="#DDE4EC" filter="url(#shadow)"/>
+  <path d="M18 65H882" stroke="#E9EDF2"/>
+  <circle cx="43" cy="41" r="5" fill="#E99A93"/>
+  <circle cx="61" cy="41" r="5" fill="#EAC579"/>
+  <circle cx="79" cy="41" r="5" fill="#83BA99"/>
+  <text x="113" y="46" fill="#253449" font-family="Inter,Arial,sans-serif" font-size="13" font-weight="700" letter-spacing="2">ATLAS</text>
+  <text x="788" y="46" fill="#718096" font-family="Arial,sans-serif" font-size="11">个人工作台</text>
+
+  <path d="M179 66V504" stroke="#E8EDF3"/>
+  <text x="42" y="99" fill="#8290A3" font-family="Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="1.3">工作空间</text>
+  <rect x="35" y="113" width="127" height="31" rx="8" fill="#EDF3F9"/>
+  <circle cx="51" cy="128" r="4" fill="#627E9E"/>
+  <text x="63" y="132" fill="#34465C" font-family="Arial,sans-serif" font-size="10" font-weight="600">今日重点</text>
+  <circle cx="51" cy="165" r="4" fill="#A6B1C0"/>
+  <text x="63" y="169" fill="#748194" font-family="Arial,sans-serif" font-size="10">任务</text>
+  <circle cx="51" cy="197" r="4" fill="#A6B1C0"/>
+  <text x="63" y="201" fill="#748194" font-family="Arial,sans-serif" font-size="10">日程</text>
+  <circle cx="51" cy="229" r="4" fill="#A6B1C0"/>
+  <text x="63" y="233" fill="#748194" font-family="Arial,sans-serif" font-size="10">记忆</text>
+  <circle cx="51" cy="261" r="4" fill="#A6B1C0"/>
+  <text x="63" y="265" fill="#748194" font-family="Arial,sans-serif" font-size="10">项目</text>
+  <path d="M35 290H160" stroke="#E8EDF3"/>
+  <text x="42" y="315" fill="#8290A3" font-family="Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="1.3">收藏</text>
+  <text x="50" y="341" fill="#748194" font-family="Arial,sans-serif" font-size="10">个人知识库</text>
+  <text x="50" y="370" fill="#748194" font-family="Arial,sans-serif" font-size="10">本周计划</text>
+
+  <text x="210" y="101" fill="#7B8798" font-family="Arial,sans-serif" font-size="9" letter-spacing="1">星期三 · 5 月 21 日</text>
+  <text x="210" y="134" fill="#1F2E42" font-family="Arial,'PingFang SC',sans-serif" font-size="21" font-weight="600">早上好，Alex</text>
+  <text x="210" y="155" fill="#778497" font-family="Arial,'PingFang SC',sans-serif" font-size="10">今天有 3 件值得专注的事</text>
+  <rect x="767" y="90" width="80" height="27" rx="13.5" fill="#F2F5F8"/>
+  <circle cx="782" cy="103.5" r="4" fill="#7CAB8D"/>
+  <text x="792" y="107" fill="#667588" font-family="Arial,sans-serif" font-size="9">示例界面</text>
+
+  <rect x="210" y="177" width="405" height="199" rx="13" fill="url(#focus)" stroke="#E1E8F0"/>
+  <text x="230" y="203" fill="#718198" font-family="Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="1">今日重点</text>
+  <rect x="515" y="189" width="79" height="22" rx="11" fill="#E8EEF6"/>
+  <text x="531" y="204" fill="#667F9D" font-family="Arial,sans-serif" font-size="8" font-weight="600">高优先级</text>
+  <text x="230" y="239" fill="#27384D" font-family="Arial,'PingFang SC',sans-serif" font-size="16" font-weight="600">完成产品方案 v2</text>
+  <text x="230" y="259" fill="#748194" font-family="Arial,'PingFang SC',sans-serif" font-size="9">综合近期任务与会议，整理为一个清晰的下一步。</text>
+  <text x="230" y="292" fill="#64758A" font-family="Arial,'PingFang SC',sans-serif" font-size="9">今日进度</text>
+  <text x="562" y="292" fill="#64758A" font-family="Arial,sans-serif" font-size="9">2 / 5</text>
+  <rect x="230" y="303" width="364" height="6" rx="3" fill="#DDE5EE"/>
+  <rect x="230" y="303" width="153" height="6" rx="3" fill="url(#accent)"/>
+  <text x="230" y="342" fill="#7A899B" font-family="Arial,'PingFang SC',sans-serif" font-size="9">预计 48 分钟 · 专注时间已安排</text>
+  <circle cx="571" cy="341" r="12" fill="#E3EBF4"/>
+  <path d="m566 341 4 4 7-8" stroke="#627E9E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <rect x="631" y="177" width="216" height="199" rx="13" fill="#fff" stroke="#E5EAF0"/>
+  <text x="650" y="203" fill="#718198" font-family="Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="1">接下来</text>
+  <text x="795" y="203" fill="#8290A3" font-family="Arial,'PingFang SC',sans-serif" font-size="8">查看日程</text>
+  <path d="M660 235V345" stroke="#E1E7EE" stroke-width="1.5"/>
+  <circle cx="660" cy="244" r="4" fill="#738DAA"/>
+  <text x="675" y="246" fill="#415267" font-family="Arial,'PingFang SC',sans-serif" font-size="10" font-weight="600">用户访谈</text>
+  <text x="675" y="263" fill="#8793A3" font-family="Arial,sans-serif" font-size="8">14:00 · 线上会议</text>
+  <circle cx="660" cy="292" r="4" fill="#B6C1CE"/>
+  <text x="675" y="294" fill="#415267" font-family="Arial,'PingFang SC',sans-serif" font-size="10" font-weight="600">产品评审</text>
+  <text x="675" y="311" fill="#8793A3" font-family="Arial,sans-serif" font-size="8">16:30 · 会议室</text>
+  <circle cx="660" cy="340" r="4" fill="#B6C1CE"/>
+  <text x="675" y="342" fill="#415267" font-family="Arial,'PingFang SC',sans-serif" font-size="10" font-weight="600">整理会议记录</text>
+  <text x="675" y="359" fill="#8793A3" font-family="Arial,sans-serif" font-size="8">今天 · 约 15 分钟</text>
+
+  <rect x="210" y="392" width="637" height="82" rx="12" fill="#fff" stroke="#E5EAF0"/>
+  <text x="230" y="416" fill="#718198" font-family="Arial,sans-serif" font-size="9" font-weight="700" letter-spacing="1">相关上下文</text>
+  <rect x="230" y="428" width="186" height="29" rx="7" fill="#F5F7FA"/>
+  <circle cx="246" cy="442.5" r="5" fill="#D5E0EB"/>
+  <text x="259" y="446" fill="#526276" font-family="Arial,'PingFang SC',sans-serif" font-size="9">上周的用户访谈</text>
+  <rect x="425" y="428" width="186" height="29" rx="7" fill="#F5F7FA"/>
+  <circle cx="441" cy="442.5" r="5" fill="#D5E0EB"/>
+  <text x="454" y="446" fill="#526276" font-family="Arial,'PingFang SC',sans-serif" font-size="9">产品设计原则</text>
+  <rect x="620" y="428" width="207" height="29" rx="7" fill="#F5F7FA"/>
+  <circle cx="636" cy="442.5" r="5" fill="#D5E0EB"/>
+  <text x="649" y="446" fill="#526276" font-family="Arial,'PingFang SC',sans-serif" font-size="9">3 条关联记忆</text>
+</svg>

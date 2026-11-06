@@ -11,35 +11,35 @@
   const models = {
     duo: {
       id: 'duo',
-      label: 'iPhone Duo',
+      label: '折叠屏示意',
       src: 'assets/models/apple-iphone-duo-fold-star-white.glb',
       compressedSrc: 'assets/models/apple-iphone-duo-fold-star-white.glb.gz',
       animationName: 'open-close',
-      alt: '星白色 iPhone Duo 折叠屏手机的三维模型，内外屏展示 ATLAS 界面',
+      alt: '折叠屏设备概念模型，内外屏展示 ATLAS 界面示意',
       cameraOrbit: '0deg 75deg 145%',
       fieldOfView: '32deg',
-      kicker: 'ATLAS ON IPHONE DUO',
+      kicker: 'ATLAS · 设备概念演示',
       headlineFirst: '合上轻装，',
       headlineSecond: '展开从容。',
-      description: '合上时快速查看，展开后处理复杂任务。播放折叠演示，看看 ATLAS 如何适应两种屏幕状态。',
+      description: '查看折叠屏形态下的界面布局示意。此模型用于展示概念，不代表正式设备适配。',
       readyHint: '可拖动旋转查看 · 点击播放折叠演示',
-      loadErrorHint: '3D 模型暂不可用 · 当前显示 Duo 屏幕预览'
+      loadErrorHint: '3D 模型暂不可用 · 当前显示界面示意'
     },
     'iphone-18-pro-max': {
       id: 'iphone-18-pro-max',
-      label: 'iPhone 18 Pro Max',
+      label: '手机示意',
       src: 'assets/models/atlas-iphone-18-pro-max-burgundy.glb',
       compressedSrc: 'assets/models/atlas-iphone-18-pro-max-burgundy.glb.gz',
       screenMaterialName: 'COLOUR_Cherry_Screen',
       screenTexture: 'assets/img/atlas-iphone-screen.jpg',
-      alt: '酒红色 iPhone 18 Pro Max 屏幕显示 ATLAS 移动工作台的三维模型',
+      alt: '手机概念模型，屏幕展示 ATLAS 移动工作台界面示意',
       cameraOrbit: '0deg 75deg 115%',
       fieldOfView: '28deg',
-      kicker: 'ATLAS ON IPHONE 18 PRO MAX',
+      kicker: 'ATLAS · 移动体验概念',
       headlineFirst: '重要的事，',
       headlineSecond: '随时在手边。',
-      description: '熟悉的直板体验，今日重点、日程和记忆清晰呈现。拖动模型，查看 ATLAS 移动工作台。',
-      readyHint: '可拖动旋转查看 · ATLAS 工作台已显示',
+      description: '查看移动工作台的界面布局示意。此模型用于展示概念，不代表正式设备适配。',
+      readyHint: '可拖动旋转查看 · 界面为概念示意',
       textureErrorHint: 'ATLAS 屏幕贴图暂不可用 · 仍可旋转查看'
     }
   };
@@ -164,14 +164,14 @@
 
     const scene = viewer.model;
     if (!scene) {
-      throw new Error('The iPhone 18 Pro Max model scene is not ready.');
+      throw new Error('The selected phone model scene is not ready.');
     }
 
     const screenMaterial = scene.materials.find(
       (material) => material.name === model.screenMaterialName
     );
     if (!screenMaterial?.emissiveTexture) {
-      throw new Error('The iPhone 18 Pro Max screen material is unavailable.');
+      throw new Error('The selected phone model screen material is unavailable.');
     }
 
     const screenTexture = await viewer.createTexture(model.screenTexture);

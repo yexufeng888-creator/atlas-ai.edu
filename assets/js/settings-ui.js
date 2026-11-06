@@ -4,10 +4,127 @@
   const storageKey = 'atlas_settings_state_v1';
   const page = document.body.className.match(/\bpage-(settings(?:-[a-z-]+)?)\b/)?.[1] || 'settings';
   const locale = window.localStorage.getItem('atlas-locale') || 'zh-cn';
+  const uiCopyByLocale = {
+    'zh-cn': {
+      notice: '说明：本页更改仅保存在当前浏览器的演示设置中，不会更新服务器账户、第三方授权或实际执行权限。',
+      notConnected: '未连接账户',
+      notProvided: '未提供',
+      twoFactorOn: '演示中已开启',
+      twoFactorOff: '未设置 · 本地演示',
+      demoAccount: '演示账户 · 本地',
+      inactiveAccount: '已停用 · 本地演示',
+      deletedAccount: '本地演示资料已清除',
+      planUnset: '未配置',
+      planPersonal: '个人方案示例（仅本地）',
+      planTeam: '团队方案示例（仅本地）',
+      planTitle: '方案选择（本地演示）',
+      planDescription: '此页面未连接支付服务；本地选项不代表可购买的套餐或价格，也不会创建订阅或扣款。',
+      planOptionUnset: '未配置',
+      planOptionPersonal: '个人方案示例（仅本地）',
+      planOptionTeam: '团队方案示例（仅本地）',
+      emailPlaceholder: '仅在本地演示中保存'
+    },
+    'zh-hk': {
+      notice: '說明：本頁更改只會儲存在目前瀏覽器的演示設定中，不會更新伺服器帳戶、第三方授權或實際執行權限。',
+      notConnected: '未連接帳戶',
+      notProvided: '未提供',
+      twoFactorOn: '演示中已開啟',
+      twoFactorOff: '未設定 · 本地演示',
+      demoAccount: '演示帳戶 · 本地',
+      inactiveAccount: '已停用 · 本地演示',
+      deletedAccount: '本地演示資料已清除',
+      planUnset: '未配置',
+      planPersonal: '個人方案示例（僅本地）',
+      planTeam: '團隊方案示例（僅本地）',
+      planTitle: '方案選擇（本地演示）',
+      planDescription: '此頁面未連接支付服務；本地選項不代表可購買的套餐或價格，也不會建立訂閱或扣款。',
+      planOptionUnset: '未配置',
+      planOptionPersonal: '個人方案示例（僅本地）',
+      planOptionTeam: '團隊方案示例（僅本地）',
+      emailPlaceholder: '只會儲存在本地演示中'
+    },
+    'zh-tw': {
+      notice: '說明：本頁變更僅儲存在目前瀏覽器的示範設定中，不會更新伺服器帳戶、第三方授權或實際執行權限。',
+      notConnected: '未連接帳戶',
+      notProvided: '未提供',
+      twoFactorOn: '示範中已開啟',
+      twoFactorOff: '未設定 · 本機示範',
+      demoAccount: '示範帳戶 · 本機',
+      inactiveAccount: '已停用 · 本機示範',
+      deletedAccount: '本機示範資料已清除',
+      planUnset: '未設定',
+      planPersonal: '個人方案範例（僅本機）',
+      planTeam: '團隊方案範例（僅本機）',
+      planTitle: '方案選擇（本機示範）',
+      planDescription: '此頁面未連接付款服務；本機選項不代表可購買的方案或價格，也不會建立訂閱或扣款。',
+      planOptionUnset: '未設定',
+      planOptionPersonal: '個人方案範例（僅本機）',
+      planOptionTeam: '團隊方案範例（僅本機）',
+      emailPlaceholder: '僅儲存在本機示範中'
+    },
+    en: {
+      notice: 'Demo settings on this page are saved only in this browser. They do not update a server account, third-party access, or actual execution permissions.',
+      notConnected: 'No account connected',
+      notProvided: 'Not provided',
+      twoFactorOn: 'Enabled in demo',
+      twoFactorOff: 'Not set · Local demo',
+      demoAccount: 'Demo account · Local',
+      inactiveAccount: 'Inactive · Local demo',
+      deletedAccount: 'Local demo data cleared',
+      planUnset: 'Not configured',
+      planPersonal: 'Sample personal plan · Local only',
+      planTeam: 'Sample team plan · Local only',
+      planTitle: 'Plan selection · Local demo',
+      planDescription: 'This page is not connected to payments. Local choices do not represent available plans or prices and will not create a subscription or charge.',
+      planOptionUnset: 'Not configured',
+      planOptionPersonal: 'Sample personal plan · Local only',
+      planOptionTeam: 'Sample team plan · Local only',
+      emailPlaceholder: 'Saved only in this local demo'
+    },
+    ja: {
+      notice: 'このページの設定はデモ用としてこのブラウザーにのみ保存されます。サーバー上のアカウント、外部サービスの権限、実際の実行権限は変更されません。',
+      notConnected: 'アカウント未接続',
+      notProvided: '未設定',
+      twoFactorOn: 'デモで有効',
+      twoFactorOff: '未設定 · ローカルデモ',
+      demoAccount: 'デモアカウント · ローカル',
+      inactiveAccount: '停止中 · ローカルデモ',
+      deletedAccount: 'ローカルデモデータを削除しました',
+      planUnset: '未設定',
+      planPersonal: '個人プランの例 · ローカルのみ',
+      planTeam: 'チームプランの例 · ローカルのみ',
+      planTitle: 'プラン選択 · ローカルデモ',
+      planDescription: 'このページは決済サービスに接続されていません。ローカルの選択は提供中のプランや価格を示すものではなく、契約や請求も発生しません。',
+      planOptionUnset: '未設定',
+      planOptionPersonal: '個人プランの例 · ローカルのみ',
+      planOptionTeam: 'チームプランの例 · ローカルのみ',
+      emailPlaceholder: 'このローカルデモにのみ保存'
+    },
+    ko: {
+      notice: '이 페이지의 설정은 데모용으로 현재 브라우저에만 저장됩니다. 서버 계정, 외부 서비스 권한 또는 실제 실행 권한은 변경되지 않습니다.',
+      notConnected: '연결된 계정 없음',
+      notProvided: '제공되지 않음',
+      twoFactorOn: '데모에서 활성화됨',
+      twoFactorOff: '설정되지 않음 · 로컬 데모',
+      demoAccount: '데모 계정 · 로컬',
+      inactiveAccount: '비활성 · 로컬 데모',
+      deletedAccount: '로컬 데모 데이터 삭제됨',
+      planUnset: '구성되지 않음',
+      planPersonal: '개인 요금제 예시 · 로컬 전용',
+      planTeam: '팀 요금제 예시 · 로컬 전용',
+      planTitle: '요금제 선택 · 로컬 데모',
+      planDescription: '이 페이지는 결제 서비스와 연결되지 않았습니다. 로컬 선택은 실제 요금제나 가격이 아니며 구독이나 결제가 발생하지 않습니다.',
+      planOptionUnset: '구성되지 않음',
+      planOptionPersonal: '개인 요금제 예시 · 로컬 전용',
+      planOptionTeam: '팀 요금제 예시 · 로컬 전용',
+      emailPlaceholder: '이 로컬 데모에만 저장'
+    }
+  };
+  const uiCopy = uiCopyByLocale[locale.toLowerCase()] || uiCopyByLocale.en;
   const navLabels = {
-    'zh-cn': ['设置总览', '个人资料', '隐私控制', '执行规则', '外观设置', 'Demo 配置'],
-    'zh-hk': ['設定總覽', '個人資料', '私隱控制', '執行規則', '外觀設定', 'Demo 配置'],
-    'zh-tw': ['設定總覽', '個人資料', '隱私控制', '執行規則', '外觀設定', 'Demo 配置'],
+    'zh-cn': ['设置总览', '个人资料', '隐私控制', '执行规则', '外观设置', '演示配置'],
+    'zh-hk': ['設定總覽', '個人資料', '私隱控制', '執行規則', '外觀設定', '演示配置'],
+    'zh-tw': ['設定總覽', '個人資料', '隱私控制', '執行規則', '外觀設定', '示範設定'],
     en: ['Overview', 'Profile', 'Privacy', 'Execution', 'Appearance', 'Demo'],
     ja: ['設定概要', 'プロフィール', 'プライバシー', '実行ルール', '外観設定', 'Demo 設定'],
     ko: ['설정 개요', '프로필', '개인정보 보호', '실행 규칙', '화면 설정', 'Demo 구성']
@@ -34,11 +151,11 @@
     accent: 'blue',
     density: 'standard',
     execution: 'medium',
-    accountStatus: 'active',
+    accountStatus: 'demo',
     demoEnabled: true,
-    twoFactor: true,
-    plan: 'pro',
-    profile: { displayName: '演示用户', email: 'demo@atlas.com', phone: '138****8888' },
+    twoFactor: false,
+    plan: 'unconfigured',
+    profile: { displayName: '', email: '', phone: '' },
     privacy: {
       analytics: true,
       errors: true,
@@ -57,10 +174,14 @@
     const saved = window.localStorage.getItem(storageKey);
     if (!saved) return structuredClone(defaults);
     const parsed = JSON.parse(saved);
+    const profile = { ...defaults.profile, ...parsed.profile };
+    if (profile.displayName === '演示用户') profile.displayName = '';
+    if (profile.email === 'demo@atlas.com') profile.email = '';
+    if (profile.phone === '138****8888') profile.phone = '';
     return {
       ...structuredClone(defaults),
       ...parsed,
-      profile: { ...defaults.profile, ...parsed.profile },
+      profile,
       privacy: {
         ...defaults.privacy,
         ...parsed.privacy,
@@ -232,6 +353,7 @@
           behavior: 'smooth'
         });
       }
+
     };
     positionActiveIndicator(true);
     if ('ResizeObserver' in window) {
@@ -240,6 +362,17 @@
     } else {
       window.addEventListener('resize', () => positionActiveIndicator(), { passive: true });
     }
+  }
+
+  function addLocalDemoNotice() {
+    if (page === 'settings-privacy' || page === 'settings-demo') return;
+    const body = document.querySelector('.page-body');
+    if (!body || body.querySelector('[role="note"]')) return;
+    const notice = document.createElement('p');
+    notice.className = 'page-demo-notice';
+    notice.setAttribute('role', 'note');
+    notice.textContent = uiCopy.notice;
+    body.prepend(notice);
   }
 
   function syncButtonGroup(buttons, selectedIndex) {
@@ -298,16 +431,28 @@
       if (activeAccent) accentSummary.textContent = `${prefix}${activeAccent}渐变`;
     }
     if (page === 'settings-profile') {
-      updateInfoValue(0, 1, state.profile.displayName);
-      updateInfoValue(0, 2, state.profile.email);
-      updateInfoValue(0, 3, state.profile.phone);
-      updateInfoValue(2, 1, state.twoFactor ? '✓ 已启用' : '✕ 未启用');
-      updateInfoValue(4, 0, { free: 'Free 免费版', pro: 'Pro 专业版', team: 'Team 团队版' }[state.plan] || 'Pro 专业版');
+      updateInfoValue(0, 0, uiCopy.notConnected);
+      updateInfoValue(0, 1, state.profile.displayName || '—');
+      updateInfoValue(0, 2, state.profile.email || '—');
+      updateInfoValue(0, 3, state.profile.phone || '—');
+      updateInfoValue(2, 0, uiCopy.notConnected);
+      updateInfoValue(2, 1, state.twoFactor ? uiCopy.twoFactorOn : uiCopy.twoFactorOff);
+      updateInfoValue(2, 2, uiCopy.notConnected);
+      updateInfoValue(2, 3, uiCopy.notProvided);
+      updateInfoValue(4, 0, {
+        unconfigured: uiCopy.planUnset,
+        free: uiCopy.planPersonal,
+        pro: uiCopy.planPersonal,
+        team: uiCopy.planTeam,
+        'demo-personal': uiCopy.planPersonal,
+        'demo-team': uiCopy.planTeam
+      }[state.plan] || uiCopy.planUnset);
       updateInfoValue(4, 1, {
-        active: '✓ 活跃',
-        inactive: '✕ 已停用（本地演示）',
-        'deleted-demo': '本地演示资料已清除'
-      }[state.accountStatus] || '✓ 活跃');
+        demo: uiCopy.demoAccount,
+        active: uiCopy.demoAccount,
+        inactive: uiCopy.inactiveAccount,
+        'deleted-demo': uiCopy.deletedAccount
+      }[state.accountStatus] || uiCopy.demoAccount);
     }
     if (page === 'settings-privacy') {
       updateInfoValue(3, 0, `${Object.values(state.privacy.apps).filter(Boolean).length} 个`);
@@ -358,7 +503,7 @@
         description: '更新的信息保存在此浏览器的本地演示设置中。',
         fields: [
           { name: 'displayName', label: '显示名称', value: state.profile.displayName, required: true },
-          { name: 'email', label: '邮箱地址', type: 'email', value: state.profile.email, required: true },
+          { name: 'email', label: '邮箱地址', type: 'email', value: state.profile.email, placeholder: uiCopy.emailPlaceholder },
           { name: 'phone', label: '手机号码', value: state.profile.phone }
         ],
         onSubmit: (values) => {
@@ -389,12 +534,12 @@
       });
     } else if (action === 2) {
       openDialog({
-        title: '订阅计划',
-        description: '当前展示的是演示订阅信息。此站点尚未连接支付服务，升级不会产生扣款。',
-        fields: [{ name: 'plan', label: '选择计划', type: 'select', value: 'pro', options: [
-          { value: 'free', label: 'Free · 免费' },
-          { value: 'pro', label: 'Pro · ¥99/月' },
-          { value: 'team', label: 'Team · 联系销售' }
+        title: uiCopy.planTitle,
+        description: uiCopy.planDescription,
+        fields: [{ name: 'plan', label: '选择方案示例', type: 'select', value: state.plan, options: [
+          { value: 'unconfigured', label: uiCopy.planOptionUnset },
+          { value: 'demo-personal', label: uiCopy.planOptionPersonal },
+          { value: 'demo-team', label: uiCopy.planOptionTeam }
         ] }],
         submitLabel: '保存演示选择',
         onSubmit: (values) => {
@@ -666,6 +811,7 @@
   function init() {
     state = readState();
     addSettingsNavigation();
+    addLocalDemoNotice();
     document.body.classList.add('atlas-settings-page');
     setupButtonSemantics();
     if (page === 'settings-profile') setupProfile();

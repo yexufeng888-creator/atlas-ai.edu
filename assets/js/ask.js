@@ -51,7 +51,52 @@ function init() {
     loadChatsFromStorage();
     setupEventListeners();
     updateAPIStatus();
+    syncContextXrayBar();
+    window.addEventListener('atlas:state-change', syncContextXrayBar);
+    window.setTimeout(syncContextXrayBar, 400);
+    try {
+        const prefill = window.sessionStorage.getItem('atlas-prefill-ask');
+        if (prefill && elements.messageInput) {
+            window.sessionStorage.removeItem('atlas-prefill-ask');
+            elements.messageInput.value = prefill;
+            elements.messageInput.focus();
+        }
+    } catch (_) {
+        // ignore storage restrictions
+    }
     autoResizeTextarea();
+}
+
+function escapeAskHtml(value) {
+    return String(value == null ? '' : value)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+}
+
+function syncContextXrayBar() {
+    const bar = document.getElementById('atlasXrayBar');
+    const summaryText = document.getElementById('atlasXraySummaryText');
+    const chipsEl = document.getElementById('atlasXrayChips');
+    if (!bar || !summaryText || !chipsEl) return;
+
+    if (state.currentModel !== 'atlas') {
+        summaryText.textContent = `当前使用直连外部模型 (${state.currentModel.toUpperCase()}) · 本地个人记忆未发送至第三方`;
+        chipsEl.innerHTML = '<span class="atlas-sandbox-tag">隐私保护：仅 ATLAS 模型自动挂载个人上下文</span>';
+        return;
+    }
+
+    if (!window.AtlasOS || typeof window.AtlasOS.buildPromptContextSummary !== 'function') {
+        summaryText.textContent = 'Context X-Ray · 正在连接个人长期记忆与工作台任务…';
+        return;
+    }
+
+    const ctx = window.AtlasOS.buildPromptContextSummary();
+    summaryText.textContent = `Context X-Ray · 已挂载 ${ctx.memoryCount} 条长期记忆与 ${ctx.taskCount} 项活跃任务`;
+    chipsEl.innerHTML = (ctx.refs || [])
+        .map((r) => `<span class="atlas-sandbox-tag">[${escapeAskHtml(r.type)}] ${escapeAskHtml(r.title)}</span>`)
+        .join('');
 }
 
 // 设置事件监听
@@ -163,6 +208,7 @@ function selectModel(model) {
         currentChat.model = model;
         saveChatsToStorage();
     }
+    syncContextXrayBar();
 }
 
 // 自动调整输入框高度
@@ -236,8 +282,79 @@ async function sendMessage() {
     }
 }
 
+function populateMessageContent(contentDiv, role, content, model, contextRefs) {
+    if (role !== 'assistant') {
+        contentDiv.textContent = content;
+        return;
+    }
+
+    const isError = /^(错误:|Error:)/.test(String(content || '').trim());
+    if (isError) {
+        contentDiv.textContent = content;
+        return;
+    }
+
+    const refs =
+        Array.isArray(contextRefs) && contextRefs.length
+            ? contextRefs
+            : model === 'atlas' && window.AtlasOS && typeof window.AtlasOS.buildPromptContextSummary === 'function'
+            ? window.AtlasOS.buildPromptContextSummary().refs || []
+            : [];
+
+    if (model === 'atlas' && refs.length) {
+        const trace = document.createElement('details');
+        trace.className = 'atlas-cot-trace';
+        trace.innerHTML =
+            `<summary>CONTEXT X-RAY · 已检索 ${refs.length} 条个人记忆与活跃任务参与推理</summary>` +
+            `<ul class="atlas-cot-steps">${refs
+                .slice(0, 5)
+                .map((r) => `<li>[${escapeAskHtml(r.type || '上下文')}] ${escapeAskHtml(r.title || r)}</li>`)
+                .join('')}</ul>`;
+        contentDiv.appendChild(trace);
+    }
+
+    const bodyText = document.createElement('div');
+    bodyText.style.whiteSpace = 'pre-wrap';
+    bodyText.textContent = content;
+    contentDiv.appendChild(bodyText);
+
+    if (window.AtlasOS && typeof window.AtlasOS.addTask === 'function') {
+        const actionCard = document.createElement('div');
+        actionCard.className = 'atlas-gen-action-card';
+        const firstLine = String(content || '')
+            .split('\n')
+            .map((l) => l.replace(/^[#*\-\d.\s]+/, '').trim())
+            .find(Boolean) || '跟进 AI 建议事项';
+        const taskTitle = firstLine.slice(0, 56);
+
+        actionCard.innerHTML = `
+            <div style="min-width:0;flex:1;">
+                <div class="atlas-mono-badge" style="font-size:0.66rem;font-weight:700;color:#216db8;">GENERATIVE ACTION · 可执行下一步</div>
+                <div style="font-size:0.8rem;font-weight:600;margin-top:0.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeAskHtml(taskTitle)}</div>
+            </div>
+            <button type="button" data-gen-save-task>+ 写入工作台待办</button>
+        `;
+        const saveBtn = actionCard.querySelector('[data-gen-save-task]');
+        saveBtn.addEventListener('click', () => {
+            if (saveBtn.disabled) return;
+            window.AtlasOS.addTask({
+                title: taskTitle,
+                notes: String(content || '').slice(0, 480),
+                priority: 'medium',
+                due_date: 'AI 问询建议',
+                project: 'AI 协同',
+                source: 'ask_generative_ui'
+            });
+            saveBtn.disabled = true;
+            saveBtn.textContent = '✓ 已写入工作台';
+            showToast('已将该建议沉淀至个人工作台待办');
+        });
+        contentDiv.appendChild(actionCard);
+    }
+}
+
 // 添加消息到界面
-function addMessage(role, content, chatId = state.currentChatId, model = state.currentModel) {
+function addMessage(role, content, chatId = state.currentChatId, model = state.currentModel, contextRefs = null) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message message-${role}`;
 
@@ -249,7 +366,7 @@ function addMessage(role, content, chatId = state.currentChatId, model = state.c
 
     const contentDiv = document.createElement('div');
     contentDiv.className = 'message-content';
-    contentDiv.textContent = content;
+    populateMessageContent(contentDiv, role, content, model, contextRefs);
 
     messageDiv.appendChild(avatar);
     messageDiv.appendChild(contentDiv);
@@ -257,7 +374,7 @@ function addMessage(role, content, chatId = state.currentChatId, model = state.c
     // 保存消息到当前对话
     const currentChat = state.chats.find(c => c.id === chatId);
     if (currentChat) {
-        currentChat.messages.push({ role, content, timestamp: Date.now(), model });
+        currentChat.messages.push({ role, content, timestamp: Date.now(), model, contextRefs });
         saveChatsToStorage();
     }
 
@@ -316,7 +433,9 @@ async function getAIResponse(chatId, model) {
         typingDiv.remove();
 
         // 添加 AI 响应
-        addMessage('assistant', response, chatId, model);
+        const refs = state.lastContextRefs || null;
+        state.lastContextRefs = null;
+        addMessage('assistant', response, chatId, model, refs);
 
     } catch (error) {
         typingDiv.remove();
@@ -476,7 +595,10 @@ async function callATLAS(messages) {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${accessToken}`
             },
-            body: JSON.stringify({ messages: messages.slice(-6) })
+            body: JSON.stringify({
+                messages: messages.slice(-6),
+                include_context: true
+            })
         });
     } catch (error) {
         if (error instanceof TypeError) {
@@ -498,6 +620,11 @@ async function callATLAS(messages) {
     const answer = data?.message?.content;
     if (typeof answer !== 'string' || !answer.trim()) {
         throw new Error(translateUI('ATLAS 服务返回了空响应'));
+    }
+    if (Array.isArray(data?.context_refs)) {
+        state.lastContextRefs = data.context_refs.map((title) =>
+            typeof title === 'string' ? { type: '云端记忆', title } : title
+        );
     }
     return answer;
 }
@@ -639,7 +766,7 @@ function loadChat(chatId) {
                 : getModelIcon(msg.model || chat.model);
             const content = document.createElement('div');
             content.className = 'message-content';
-            content.textContent = msg.content;
+            populateMessageContent(content, msg.role, msg.content, msg.model || chat.model, msg.contextRefs || null);
             messageDiv.append(avatar, content);
             elements.chatMessages.appendChild(messageDiv);
         });

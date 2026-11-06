@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="与 ATLAS 对话；可用模型与能力以当前部署配置为准。">
     <title>对话 - ATLAS</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
     <link rel="stylesheet" href="assets/css/ask.css?v=20261009a">
@@ -112,6 +111,15 @@
                     </button>
                 </div>
 
+                <!-- Context X-Ray Bar -->
+                <details class="atlas-xray-bar" id="atlasXrayBar">
+                    <summary>
+                        <span id="atlasXraySummaryText">Context X-Ray · 个人长期记忆与活跃任务已就绪</span>
+                        <span class="atlas-mono-badge" style="font-size:0.68rem;">查看推理上下文 ▾</span>
+                    </summary>
+                    <div class="atlas-xray-chips" id="atlasXrayChips"></div>
+                </details>
+
                 <!-- Input Box -->
                 <div class="input-box">
                     <textarea
@@ -216,13 +224,13 @@
     </div>
     <div class="ask-toast" id="askToast" role="status" aria-live="polite"></div>
 
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
+    <script src="assets/js/atlas-shell.js?v=20261030a"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
     <script src="assets/js/secondary-dashboard-i18n.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="assets/js/supabase-config.js"></script>
     <script src="assets/js/supabase-auth.js?v=20261009a"></script>
     <script src="assets/js/atlas-ai-config.js?v=20261009a"></script>
-    <script src="assets/js/ask.js?v=20261009a"></script>
+    <script src="assets/js/ask.js?v=20261030a"></script>
 </body>
 </html>

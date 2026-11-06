@@ -1,0 +1,335 @@
+body.page-product {
+    --product-ink: #eff4fa;
+    --product-muted: #a8b7c9;
+    --product-line: rgba(201, 220, 240, .14);
+    margin: 0;
+    background:
+        radial-gradient(ellipse at 82% 4%, rgba(48, 102, 158, .2), transparent 34rem),
+        linear-gradient(180deg, #0a111d, #101b2a 48%, #0b1420);
+    color: var(--product-ink);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC",
+        "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased;
+}
+
+body.page-product .product-overview {
+    width: min(1160px, calc(100% - 3rem));
+    margin: 0 auto;
+    padding: clamp(6rem, 10vh, 8rem) 0 0;
+}
+
+body.page-product .product-overview :is(h1, h2, h3, p, li) {
+    overflow-wrap: anywhere;
+    text-wrap: pretty;
+}
+
+body.page-product .product-overview-hero {
+    display: grid;
+    justify-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+body.page-product .product-overview-kicker,
+body.page-product .product-section-kicker {
+    margin: 0;
+    color: #94c7e5;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: .12em;
+}
+
+body.page-product .product-overview-hero h1 {
+    max-width: 900px;
+    margin: 1.1rem 0 1rem;
+    color: #f4f7fb;
+    font-size: clamp(2.5rem, 6vw, 4.65rem);
+    font-weight: 620;
+    line-height: 1.16;
+    letter-spacing: -.045em;
+    text-wrap: balance;
+}
+
+body.page-product .product-overview-lead {
+    max-width: 740px;
+    margin: 0;
+    color: #b7c4d3;
+    font-size: clamp(1rem, 1.7vw, 1.18rem);
+    line-height: 1.9;
+}
+
+body.page-product .product-overview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .8rem;
+    margin-top: 1.7rem;
+}
+
+body.page-product .product-overview-primary,
+body.page-product .product-overview-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    min-height: 46px;
+    padding: .72rem 1.1rem;
+    border: 1px solid transparent;
+    border-radius: 999px;
+    font-size: .86rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: background .18s ease, border-color .18s ease, transform .18s ease;
+}
+
+body.page-product .product-overview-primary {
+    background: #eaf4fb;
+    color: #172b42;
+}
+
+body.page-product .product-overview-primary:hover {
+    background: #fff;
+    transform: translateY(-1px);
+}
+
+body.page-product .product-overview-secondary {
+    border-color: rgba(207, 225, 243, .25);
+    color: #e1ebf5;
+}
+
+body.page-product .product-overview-secondary:hover {
+    border-color: rgba(207, 225, 243, .5);
+    background: rgba(255, 255, 255, .06);
+}
+
+body.page-product .product-overview a:focus-visible {
+    outline: 3px solid #8fc6ee;
+    outline-offset: 4px;
+}
+
+body.page-product .product-overview-note {
+    margin: 1rem 0 0;
+    color: #91a1b5;
+    font-size: .72rem;
+    line-height: 1.7;
+}
+
+body.page-product .product-overview-preview {
+    position: relative;
+    width: min(100%, 960px);
+    margin: 2.5rem auto 0;
+}
+
+body.page-product .product-overview-preview img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(223, 236, 249, .15);
+    border-radius: 1rem;
+    box-shadow: 0 32px 90px rgba(0, 0, 0, .32);
+}
+
+body.page-product .product-overview-preview > span {
+    position: absolute;
+    top: .8rem;
+    right: .8rem;
+    padding: .38rem .6rem;
+    border: 1px solid rgba(218, 232, 246, .2);
+    border-radius: 999px;
+    background: rgba(10, 19, 31, .78);
+    color: #d6e4f2;
+    font-size: .65rem;
+}
+
+body.page-product .product-overview-section {
+    padding: clamp(4.5rem, 8vw, 7rem) 0;
+    border-bottom: 1px solid var(--product-line);
+}
+
+body.page-product .product-section-heading {
+    max-width: 760px;
+    margin: 0 0 2.2rem;
+}
+
+body.page-product .product-section-heading h2 {
+    margin: .65rem 0 .7rem;
+    color: #f0f5fa;
+    font-size: clamp(1.9rem, 4.5vw, 3rem);
+    font-weight: 580;
+    line-height: 1.26;
+    letter-spacing: -.035em;
+}
+
+body.page-product .product-section-heading > p:last-child {
+    max-width: 680px;
+    margin: 0;
+    color: var(--product-muted);
+    font-size: .98rem;
+    line-height: 1.85;
+}
+
+body.page-product .product-problem-grid,
+body.page-product .product-audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: .85rem;
+}
+
+body.page-product .product-problem-grid article,
+body.page-product .product-audience-grid article {
+    min-width: 0;
+    padding: 1.25rem;
+    border: 1px solid var(--product-line);
+    border-radius: .95rem;
+    background: linear-gradient(145deg, rgba(255, 255, 255, .055), rgba(255, 255, 255, .018));
+}
+
+body.page-product .product-problem-grid article > span {
+    color: #88b6d7;
+    font-size: .67rem;
+    font-weight: 700;
+    letter-spacing: .1em;
+}
+
+body.page-product .product-overview-section article h3 {
+    margin: .75rem 0 .45rem;
+    color: #e7eef6;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+body.page-product .product-overview-section article p {
+    margin: 0;
+    color: #a7b5c5;
+    font-size: .84rem;
+    line-height: 1.8;
+}
+
+body.page-product .product-logic {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .75rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body.page-product .product-logic li {
+    position: relative;
+    min-width: 0;
+    min-height: 190px;
+    padding: 1.15rem;
+    border: 1px solid var(--product-line);
+    border-radius: .95rem;
+    background:
+        radial-gradient(circle at 100% 0, rgba(117, 171, 215, .12), transparent 9rem),
+        rgba(255, 255, 255, .035);
+}
+
+body.page-product .product-logic li > span {
+    color: #90bddc;
+    font-size: .68rem;
+    font-weight: 700;
+}
+
+body.page-product .product-logic h3 {
+    margin: 1.4rem 0 .35rem;
+    color: #f1f5f9;
+    font-size: 1.2rem;
+}
+
+body.page-product .product-logic p {
+    margin: 0;
+    color: #9eafc1;
+    font-size: .79rem;
+    line-height: 1.75;
+}
+
+body.page-product .product-comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: .85rem;
+}
+
+body.page-product .product-comparison-grid article {
+    padding: clamp(1.2rem, 3vw, 1.8rem);
+    border: 1px solid var(--product-line);
+    border-radius: 1rem;
+    background: rgba(255, 255, 255, .04);
+}
+
+body.page-product .product-comparison-grid article:last-child {
+    border-color: rgba(137, 184, 226, .3);
+    background: linear-gradient(145deg, rgba(54, 94, 133, .24), rgba(255, 255, 255, .035));
+}
+
+body.page-product .product-comparison-grid h3 {
+    margin: 0 0 .85rem;
+    color: #eef4fa;
+    font-size: 1rem;
+}
+
+body.page-product .product-comparison-grid ul {
+    display: grid;
+    gap: .65rem;
+    margin: 0;
+    padding-left: 1.15rem;
+    color: #aebccc;
+    font-size: .84rem;
+    line-height: 1.75;
+}
+
+body.page-product .product-overview-cta {
+    padding: clamp(4rem, 8vw, 6rem) 0;
+    text-align: center;
+}
+
+body.page-product .product-overview-cta h2 {
+    margin: .8rem 0 1.4rem;
+    color: #f1f6fb;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    line-height: 1.25;
+    letter-spacing: -.035em;
+}
+
+@media (max-width: 760px) {
+    body.page-product .product-overview {
+        width: min(100% - 2rem, 640px);
+        padding-top: 6.5rem;
+    }
+
+    body.page-product .product-problem-grid,
+    body.page-product .product-audience-grid,
+    body.page-product .product-comparison-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    body.page-product .product-logic {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    body.page-product .product-logic li {
+        min-height: 160px;
+    }
+
+    body.page-product .product-overview-preview {
+        margin-top: 1.75rem;
+    }
+}
+
+@media (max-width: 420px) {
+    body.page-product .product-logic {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    body.page-product .product-overview-hero h1 {
+        font-size: 2.35rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.page-product .product-overview a {
+        transition: none;
+    }
+}

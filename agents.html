@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="ATLAS - Agent 能力、权限、运行记录和待确认动作">
-    <title>智能体 - ATLAS</title>
+    <meta name="description" content="了解 ATLAS 智能体如何理解任务、拆解计划、展示状态，并在执行前等待确认。">
+    <title>AI 智能体 - ATLAS</title>
     <link rel="stylesheet" href="assets/css/page.css">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
@@ -228,32 +228,108 @@
     <main class="page-content">
         <div class="content-container">
             <div class="page-header">
-                <p class="page-eyebrow">受控自动化</p>
-                <h1 class="page-title">智能体</h1>
-                <p class="page-description">Agent 能力、权限、运行记录和待确认动作</p>
+                <p class="page-eyebrow">受控协作</p>
+                <h1 class="page-title">AI 智能体</h1>
+                <p class="page-description">从理解目标到生成计划，先展示过程，再由你决定是否继续。</p>
             </div>
 
             <div class="page-body">
-                
-            <div class="agents-sections">
-                <a href="agents-travel.html" class="section-card featured">
-                    <h3>🧳 旅行规划</h3>
-                    <p>智能旅行计划助手（MVP重点）</p>
-                </a>
-                <a href="agents-runs.html" class="section-card">
-                    <h3>📊 运行记录</h3>
-                    <p>历史执行和审计日志</p>
-                </a>
-                <a href="agents-capabilities.html" class="section-card">
-                    <h3>🔧 Agent 能力</h3>
-                    <p>了解每个 Agent 的权限</p>
-                </a>
-                <a href="agents-actions.html" class="section-card">
-                    <h3>✅ 动作中心</h3>
-                    <p>待确认的行动提案</p>
-                </a>
-            </div>
-        
+                <section class="atlas-agent-console" data-atlas-agent-console aria-labelledby="liveAgentConsoleTitle">
+                    <div style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:0.75rem;">
+                        <div>
+                            <p class="atlas-mono-badge" style="margin:0 0 0.35rem;font-size:0.72rem;font-weight:700;color:#216db8;letter-spacing:0.08em;">HUMAN-IN-THE-LOOP · 实时智能体审批控制台</p>
+                            <h2 id="liveAgentConsoleTitle" style="margin:0;font-size:clamp(1.35rem,2.4vw,1.75rem);font-weight:700;">派发目标并审批智能体行动队列</h2>
+                        </div>
+                        <span class="atlas-mono-num" style="font-size:0.8rem;font-weight:600;color:#4a607a;" data-agent-live-stats>加载队列中…</span>
+                    </div>
+
+                    <form class="atlas-agent-dispatch-form" data-agent-dispatch-form>
+                        <input type="text" data-agent-goal-input placeholder="输入目标交由智能体拆解（如：下周三上午与林峰对齐折叠屏工作台交互方案）..." autocomplete="off" required />
+                        <button type="submit">拆解并加入审批队列 →</button>
+                    </form>
+
+                    <div class="atlas-agent-queue" data-agent-live-queue aria-live="polite"></div>
+                </section>
+
+                <section class="agent-workflow-demo" aria-labelledby="agent-demo-title">
+                    <div class="agent-workflow-demo__header">
+                        <div>
+                            <p class="agent-workflow-demo__eyebrow">交互式演示</p>
+                            <h2 id="agent-demo-title">准备一次产品评审</h2>
+                            <p>看看目标如何变成计划，以及确认前会显示哪些信息。</p>
+                        </div>
+                        <span class="agent-workflow-demo__sample">示例任务</span>
+                    </div>
+
+                    <ol class="agent-workflow-progress" aria-label="智能体工作阶段">
+                        <li data-agent-progress="0" aria-current="step"><span>01</span>理解目标</li>
+                        <li data-agent-progress="1"><span>02</span>生成计划</li>
+                        <li data-agent-progress="2"><span>03</span>等待确认</li>
+                        <li data-agent-progress="3"><span>04</span>演示结果</li>
+                    </ol>
+
+                    <div class="agent-workflow-panel" data-agent-panel="0">
+                        <p class="agent-workflow-panel__label">用户目标</p>
+                        <h3>“帮我准备下周的产品评审。”</h3>
+                        <p>智能体先识别目标与相关背景；此处显示的是演示内容，不读取你的账户资料。</p>
+                        <button class="agent-workflow-primary" type="button" data-agent-next>拆解为计划 <span aria-hidden="true">→</span></button>
+                    </div>
+
+                    <div class="agent-workflow-panel" data-agent-panel="1" hidden>
+                        <p class="agent-workflow-panel__label">建议计划</p>
+                        <h3>先整理背景，再列出待确认事项。</h3>
+                        <ol class="agent-plan-list">
+                            <li>查看相关项目资料与会议记录</li>
+                            <li>整理评审目标和待讨论问题</li>
+                            <li>生成一份可检查的准备清单</li>
+                        </ol>
+                        <button class="agent-workflow-primary" type="button" data-agent-next>查看执行状态 <span aria-hidden="true">→</span></button>
+                    </div>
+
+                    <div class="agent-workflow-panel" data-agent-panel="2" hidden>
+                        <p class="agent-workflow-panel__label">执行状态</p>
+                        <h3>计划已准备，等待你的确认。</h3>
+                        <p>演示中不会连接日历、发送邮件或修改任务。真实可执行操作取决于当前接入能力和权限。</p>
+                        <div class="agent-workflow-actions">
+                            <button class="agent-workflow-primary" type="button" data-agent-confirm>确认此示例计划</button>
+                            <button class="agent-workflow-secondary" type="button" data-agent-defer>暂不采用</button>
+                        </div>
+                    </div>
+
+                    <div class="agent-workflow-panel" data-agent-panel="3" hidden>
+                        <p class="agent-workflow-panel__label">演示结果</p>
+                        <h3>示例计划已确认。</h3>
+                        <p>这里只更新演示状态，没有创建任务或执行外部操作。</p>
+                        <button class="agent-workflow-secondary" type="button" data-agent-reset>重新查看流程</button>
+                    </div>
+
+                    <div class="agent-workflow-panel" data-agent-panel="4" hidden>
+                        <p class="agent-workflow-panel__label">演示结果</p>
+                        <h3>示例计划暂不采用。</h3>
+                        <p>真实产品中的任务或权限状态不会因这次演示而改变。</p>
+                        <button class="agent-workflow-secondary" type="button" data-agent-reset>重新查看流程</button>
+                    </div>
+                    <p class="agent-workflow-status" data-agent-status role="status" aria-live="polite">当前为交互演示，不会触发外部操作。</p>
+                </section>
+
+                <div class="agent-page-links" aria-label="智能体相关页面">
+                    <a href="agents-travel.html" class="section-card featured">
+                        <h3>旅行规划示例</h3>
+                        <p>查看如何把目的地、日期和偏好整理成可检查的行程草案。</p>
+                    </a>
+                    <a href="agents-capabilities.html" class="section-card">
+                        <h3>能力与权限</h3>
+                        <p>了解能力范围、确认方式与执行边界。</p>
+                    </a>
+                    <a href="agents-runs.html" class="section-card">
+                        <h3>运行记录示例</h3>
+                        <p>查看一份示例记录的状态与信息结构。</p>
+                    </a>
+                    <a href="agents-actions.html" class="section-card">
+                        <h3>待确认操作</h3>
+                        <p>通过页面演示检查建议、修改或暂不采用。</p>
+                    </a>
+                </div>
             </div>
         </div>
     </main>
@@ -264,10 +340,11 @@
     </footer>
 
     <script src="assets/js/page.js"></script>
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
+    <script src="assets/js/atlas-shell.js?v=20261030a"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
-    <script src="assets/js/secondary-agents-i18n.js"></script>
+    <script src="assets/js/secondary-agents-i18n.js?v=20261027b"></script>
     <script src="assets/js/atlas-scroll.js"></script>
+    <script src="assets/js/agents-workflow.js?v=20261027c"></script>
     <script>
         // 语言切换按钮样式
         const langStyle = document.createElement('style');

@@ -331,24 +331,25 @@
 
 .product-stage-inner {
     position: sticky;
-    top: 0;
-    min-height: 100vh;
+    top: var(--atlas-nav-total-height, 72px);
+    min-height: calc(100vh - var(--atlas-nav-total-height, 72px));
+    min-height: calc(100svh - var(--atlas-nav-total-height, 72px));
     max-width: 1280px;
     margin: 0 auto;
-    padding: 8rem 2rem 5rem;
+    padding: clamp(2.5rem, 5vh, 3.5rem) clamp(1.5rem, 3vw, 2.5rem);
     display: grid;
-    grid-template-columns: .72fr 1.28fr;
-    gap: 4rem;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    gap: clamp(2rem, 5vw, 4rem);
     align-items: center;
     overflow: hidden;
 }
 
-.product-stage-copy { position: relative; z-index: 2; }
+.product-stage-copy { position: relative; z-index: 2; max-width: 32rem; }
 .product-stage-copy .section-eyebrow { color: #67e8f9; text-align: left; font-size: .7rem; letter-spacing: .16em; }
-.product-stage-copy h2 { margin: 1rem 0 1.2rem; font-size: clamp(2.6rem, 5vw, 5rem); line-height: .98; letter-spacing: -.07em; }
+.product-stage-copy h2 { margin: 1rem 0 1.2rem; font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.06; letter-spacing: -.055em; text-wrap: balance; }
 .product-stage-copy h2 span { color: #8fc8ff; }
 .product-stage-copy > p { max-width: 320px; color: #8b9db8; line-height: 1.7; }
-.stage-feature-list { display: grid; gap: .4rem; margin-top: 2.5rem; max-width: 330px; }
+.stage-feature-list { display: grid; gap: .4rem; margin-top: clamp(1.25rem, 3.2vh, 2rem); max-width: min(100%, 430px); }
 .stage-feature { display: grid; grid-template-columns: 2rem 1fr auto; gap: .8rem; padding: .85rem 0; border-top: 1px solid rgba(255,255,255,.12); opacity: .48; transition: opacity .3s ease, transform .3s ease; cursor: pointer; }
 .stage-feature.is-active { opacity: 1; transform: translateX(8px); }
 .stage-feature b { color: #67e8f9; font: 700 .68rem/1 Inter, sans-serif; }
@@ -359,7 +360,7 @@
 .stage-feature.is-active i { transform: rotate(45deg); }
 
 .product-stage-visual { position: relative; min-width: 0; display: grid; place-items: center; perspective: 1400px; }
-.product-stage-visual img { position: relative; z-index: 1; width: min(100%, 700px); filter: drop-shadow(0 40px 80px rgba(0,0,0,.55)); transform: translateY(calc((1 - var(--stage-progress)) * 90px)) scale(calc(.72 + var(--stage-progress) * .28)) rotateY(calc((1 - var(--stage-progress)) * -10deg)); transform-origin: center center; }
+.product-stage-visual img { position: relative; z-index: 1; width: min(100%, 620px); filter: drop-shadow(0 40px 80px rgba(0,0,0,.55)); transform: translateY(calc((1 - var(--stage-progress)) * 90px)) scale(calc(.72 + var(--stage-progress) * .28)) rotateY(calc((1 - var(--stage-progress)) * -10deg)); transform-origin: center center; }
 .stage-orbit { position: absolute; width: min(48vw, 570px); aspect-ratio: 1; border: 1px solid rgba(103,232,249,.2); border-radius: 50%; box-shadow: 0 0 90px rgba(54,123,255,.22), inset 0 0 90px rgba(54,123,255,.1); transform: rotateX(68deg) rotateZ(calc(var(--stage-progress) * 18deg)); }
 .stage-orbit::after { content: ''; position: absolute; inset: 13%; border: 1px dashed rgba(143,200,255,.22); border-radius: 50%; }
 .stage-badge { position: absolute; z-index: 2; padding: .55rem .7rem; border: 1px solid rgba(103,232,249,.3); border-radius: .55rem; color: #a8f1ff; background: rgba(5,13,28,.75); box-shadow: 0 12px 30px rgba(0,0,0,.25); font: 700 .62rem/1 Inter, sans-serif; letter-spacing: .12em; opacity: calc(.4 + var(--stage-progress) * .6); }
@@ -789,9 +790,10 @@
     .story-progress { justify-content: center; }
     .story-step { min-height: 390px; }
     .product-stage { min-height: auto; }
-    .product-stage-inner { position: relative; min-height: auto; grid-template-columns: 1fr; gap: 3rem; padding: 6rem 1.5rem; }
+    .product-stage-inner { position: relative; top: auto; min-height: auto; grid-template-columns: 1fr; gap: 3rem; padding: 6rem 1.5rem; }
     .product-stage-copy { text-align: center; }
     .product-stage-copy .section-eyebrow { text-align: center; }
+    .product-stage-copy h2 { font-size: clamp(2.25rem, 7vw, 3.5rem); }
     .product-stage-copy > p { margin: 0 auto; }
     .stage-feature-list { margin: 2rem auto 0; text-align: left; }
     .stage-feature { max-height: 2.8rem; overflow: hidden; transition: max-height .35s ease, opacity .3s ease, transform .3s ease; }

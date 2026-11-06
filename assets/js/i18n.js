@@ -51,23 +51,23 @@
             'feature.analytics.desc': 'Beautiful dashboards that visualize your productivity, health, and habits.',
 
             'feature.privacy.title': 'Privacy First',
-            'feature.privacy.desc': 'Your data stays yours. End-to-end encryption and transparent AI operations.',
+            'feature.privacy.desc': 'Review data handling before connecting services. Available privacy controls depend on the active deployment.',
 
-            'feature.speed.title': 'Lightning Fast',
-            'feature.speed.desc': 'Native performance with instant search and real-time sync across all devices.',
+            'feature.speed.title': 'Search and context',
+            'feature.speed.desc': 'Search and related context can help surface information. Available capabilities depend on the active deployment.',
 
             // Stats
-            'stats.users': 'Active Users',
-            'stats.tasks': 'Tasks Completed',
-            'stats.uptime': 'Uptime',
-            'stats.rating': 'User Rating',
+            'stats.users': 'Understand',
+            'stats.tasks': 'Organize',
+            'stats.uptime': 'Decide',
+            'stats.rating': 'Act',
 
             
             // Stats
-            'stats.users': '活跃用户',
-            'stats.tasks': '已完成任务',
-            'stats.uptime': '在线时间',
-            'stats.rating': '用户评分',
+            'stats.users': '理解',
+            'stats.tasks': '组织',
+            'stats.uptime': '决策',
+            'stats.rating': '行动',
 
             // Showcase
             'showcase.title': '让智能，<br>真正融入日常',
@@ -282,16 +282,16 @@
             'feature.analytics.desc': '用精美的仪表板可视化你的生产力、健康和习惯。数据驱动的洞察帮你持续改进。',
 
             'feature.privacy.title': '隐私优先',
-            'feature.privacy.desc': '你的数据属于你。端到端加密、本地存储选项和透明的 AI 操作让你完全掌控。',
+            'feature.privacy.desc': '连接服务前，请先了解数据处理方式。可用的隐私控制取决于当前部署。',
 
-            'feature.performance.title': '闪电般快速',
-            'feature.performance.desc': '原生性能，即时搜索、实时同步和离线功能。在所有设备上无缝运行。',
+            'feature.performance.title': '信息检索与上下文',
+            'feature.performance.desc': '搜索与相关上下文有助于整理信息；实际功能以当前部署为准。',
 
             // Stats
-            'stats.users': '活跃用户',
-            'stats.tasks': '完成任务',
-            'stats.uptime': '正常运行',
-            'stats.rating': '用户评分',
+            'stats.users': '理解',
+            'stats.tasks': '组织',
+            'stats.uptime': '决策',
+            'stats.rating': '行动',
 
             // Team
             'team.badge': '我们的团队',

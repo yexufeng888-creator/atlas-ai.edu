@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="ATLAS - 今天最值得处理什么，为什么">
-    <title>首页 - ATLAS</title>
+    <meta name="description" content="ATLAS 工作台体验：查看今日重点、日程示例并使用仅保存在当前浏览器的随手收集箱。">
+    <title>产品体验工作台 - ATLAS</title>
     <link rel="stylesheet" href="assets/css/page.css">
     <link rel="stylesheet" href="assets/css/3d-effects.css">
     <link rel="stylesheet" href="assets/css/home.css?v=20261023a">
@@ -788,6 +788,8 @@
                 <button id="logoutBtn" class="auth-logout-button" type="button"><span>退出登录</span></button>
             </div>
 
+            <p class="dashboard-demo-note" role="note">工作台中的任务、日程、活动与统计为示例内容；登录状态依当前部署配置显示。随手收集箱仅保存在当前浏览器，不会同步，请勿输入密码等敏感信息。</p>
+
             <section class="daily-brief" aria-labelledby="dailyBriefTitle">
                 <div class="daily-brief__content">
                     <div class="daily-brief__header">
@@ -843,7 +845,9 @@
 
                 <!-- 今日重点卡片 -->
                 <div class="dashboard-card dashboard-card--focus shine-effect glow-on-hover">
-                    <div class="card-icon-3d">🎯</div>
+                    <div class="atlas-icon-squircle" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="12" cy="12" r="1.2" fill="currentColor"/></svg>
+                    </div>
                     <h3 class="card-title"><a class="card-heading-link" href="life-tasks.html">今日重点</a></h3>
                     <p class="card-subtitle" >优先处理这些任务</p>
 
@@ -879,7 +883,9 @@
 
                 <!-- 今日日程 -->
                 <div class="dashboard-card shine-effect glow-on-hover" data-href="life-calendar.html" tabindex="0" role="link">
-                    <div class="card-icon-3d">📅</div>
+                    <div class="atlas-icon-squircle" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3.2v3.2M16 3.2v3.2M3.5 9.8h17"/></svg>
+                    </div>
                     <h3 class="card-title" >今日日程</h3>
                     <p class="card-subtitle" >接下来的安排</p>
 
@@ -889,7 +895,7 @@
                                 <div class="timeline-time" data-event-time="14:00">14:00 - 15:00</div>
                                 <div class="timeline-content">
                                     <div style="font-weight: 600;">用户访谈</div>
-                                    <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">📍 线上会议</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">线上会议 · 协同评审</div>
                                 </div>
                             </div>
 
@@ -897,7 +903,7 @@
                                 <div class="timeline-time" data-event-time="16:00">16:00 - 17:00</div>
                                 <div class="timeline-content">
                                     <div style="font-weight: 600;">整理竞品分析</div>
-                                    <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">🎯 专注时间</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">深度专注时间</div>
                                 </div>
                             </div>
 
@@ -905,7 +911,7 @@
                                 <div class="timeline-time" data-event-time="19:00">19:00</div>
                                 <div class="timeline-content">
                                     <div style="font-weight: 600;">健身房训练</div>
-                                    <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">💪 个人时间</div>
+                                    <div style="font-size: 0.875rem; color: #6b7280; margin-top: 0.25rem;">个人节律与恢复</div>
                                 </div>
                             </div>
                         </div>
@@ -914,7 +920,9 @@
 
                 <!-- 效率统计 -->
                 <div class="dashboard-card shine-effect glow-on-hover" data-href="life-tasks.html" tabindex="0" role="link">
-                    <div class="card-icon-3d">📊</div>
+                    <div class="atlas-icon-squircle" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M4 19.5h16"/><rect x="6" y="11" width="3" height="6" rx="0.8"/><rect x="10.8" y="7" width="3" height="10" rx="0.8"/><rect x="15.6" y="4.5" width="3" height="12.5" rx="0.8"/></svg>
+                    </div>
                     <h3 class="card-title" >效率统计</h3>
                     <p class="card-subtitle" >本周进展</p>
 
@@ -938,11 +946,11 @@
 
                         <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; margin-top: 1rem;">
                             <div style="text-align: center; padding: 0.75rem; background: rgba(37, 99, 235, 0.05); border-radius: 0.5rem;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">23</div>
+                                <div class="atlas-mono-num" style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">23</div>
                                 <div style="font-size: 0.75rem; color: #6b7280;" >已完成</div>
                             </div>
                             <div style="text-align: center; padding: 0.75rem; background: rgba(6, 182, 212, 0.05); border-radius: 0.5rem;">
-                                <div style="font-size: 1.5rem; font-weight: 700; color: #06b6d4;">10</div>
+                                <div class="atlas-mono-num" style="font-size: 1.5rem; font-weight: 700; color: #06b6d4;">10</div>
                                 <div style="font-size: 0.75rem; color: #6b7280;" >进行中</div>
                             </div>
                         </div>
@@ -951,20 +959,22 @@
 
                 <!-- AI 建议 -->
                 <div class="dashboard-card dashboard-card--insight shine-effect glow-on-hover" data-href="ask.html" tabindex="0" role="link">
-                    <div class="card-icon-3d">🤖</div>
+                    <div class="atlas-icon-squircle" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12 3.2 14.1 9.8l6.7 2.2-6.7 2.2L12 20.8l-2.1-6.6L3.2 12l6.7-2.2L12 3.2Z"/></svg>
+                    </div>
                     <h3 class="card-title" >AI 智能建议</h3>
                     <p class="card-subtitle" >基于你的工作模式</p>
 
                     <div class="card-content">
-                        <div style="padding: 1rem; background: rgba(255, 255, 255, 0.7); border-radius: 0.75rem; margin-bottom: 1rem; border-left: 4px solid #8b5cf6;">
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">💡 专注时间建议</div>
+                        <div style="padding: 1rem; background: rgba(255, 255, 255, 0.7); border-radius: 0.75rem; margin-bottom: 1rem; border-left: 3px solid #2563eb;">
+                            <div style="font-weight: 600; margin-bottom: 0.5rem;">专注时间建议</div>
                             <div style="font-size: 0.875rem; color: #6b7280; line-height: 1.6;">
                                 你通常在晚上8-11点效率最高，建议将重要任务安排在这个时段
                             </div>
                         </div>
 
-                        <div style="padding: 1rem; background: rgba(255, 255, 255, 0.7); border-radius: 0.75rem; border-left: 4px solid #06b6d4;">
-                            <div style="font-weight: 600; margin-bottom: 0.5rem;">🎯 任务优化</div>
+                        <div style="padding: 1rem; background: rgba(255, 255, 255, 0.7); border-radius: 0.75rem; border-left: 3px solid #06b6d4;">
+                            <div style="font-weight: 600; margin-bottom: 0.5rem;">任务结构优化</div>
                             <div style="font-size: 0.875rem; color: #6b7280; line-height: 1.6;">
                                 "竞品分析报告"可以拆分为3个小任务，更容易完成
                             </div>
@@ -974,28 +984,30 @@
 
                 <!-- 快速操作 -->
                 <div class="dashboard-card shine-effect glow-on-hover">
-                    <div class="card-icon-3d">⚡</div>
+                    <div class="atlas-icon-squircle" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M13 2.8 4.8 13.5h6.4L10.2 21.2 19.2 10.2h-6.5L13 2.8Z"/></svg>
+                    </div>
                     <h3 class="card-title" >快速操作</h3>
                     <p class="card-subtitle" >常用功能</p>
 
                     <div class="card-content" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem;">
                         <a class="quick-action quick-action--primary" href="ask.html">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">💬</div>
+                            <span class="atlas-icon-squircle" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3.5 20.5l1.3-4.6A8.5 8.5 0 1 1 21 12Z"/></svg></span>
                             <div>询问 AI</div>
                         </a>
 
                         <a class="quick-action" href="life-tasks.html">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">✅</div>
+                            <span class="atlas-icon-squircle" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="m8.8 12.2 2.2 2.2 4.4-4.5"/></svg></span>
                             <div>新建任务</div>
                         </a>
 
                         <a class="quick-action" href="life-calendar.html">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">📅</div>
+                            <span class="atlas-icon-squircle" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3.2v3.2M16 3.2v3.2M3.5 9.8h17"/></svg></span>
                             <div>添加日程</div>
                         </a>
 
                         <a class="quick-action" href="memory.html">
-                            <div style="font-size: 1.5rem; margin-bottom: 0.5rem;">🧠</div>
+                            <span class="atlas-icon-squircle" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="5.5" cy="6.5" r="2"/><circle cx="18.5" cy="6.5" r="2"/><circle cx="6" cy="17.5" r="2"/><circle cx="18" cy="17.5" r="2"/><path d="m7.2 7.8 2.8 2.4M16.8 7.8 14 10.2M7.5 16.2l2.5-2.2M16.5 16.2 14 14"/></svg></span>
                             <div>查看记忆</div>
                         </a>
                     </div>
@@ -1003,7 +1015,9 @@
 
                 <!-- 最近活动 -->
                 <div class="dashboard-card dashboard-card--activity shine-effect glow-on-hover" data-href="life.html" tabindex="0" role="link">
-                    <div class="card-icon-3d">📌</div>
+                    <div class="atlas-icon-squircle" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v4.8l3.2 2"/></svg>
+                    </div>
                     <h3 class="card-title" >最近活动</h3>
                     <p class="card-subtitle" >你的最新动态</p>
 
@@ -1047,9 +1061,9 @@
     <script src="assets/js/supabase-auth.js?v=20260912"></script>
     <script src="assets/js/page.js"></script>
     <script src="assets/js/3d-effects.js?v=20260910"></script>
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
-    <script src="assets/js/secondary-page-i18n.js"></script>
-    <script src="assets/js/secondary-dashboard-i18n.js"></script>
+    <script src="assets/js/atlas-shell.js?v=20261030a"></script>
+    <script src="assets/js/secondary-page-i18n.js?v=20261027a"></script>
+    <script src="assets/js/secondary-dashboard-i18n.js?v=20261027b"></script>
     <script src="assets/js/home-dashboard.js?v=20261023a"></script>
     <script src="assets/js/home-inbox.js"></script>
     <script src="assets/js/atlas-scroll.js"></script>

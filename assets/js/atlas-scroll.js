@@ -99,7 +99,7 @@
       if (!('IntersectionObserver' in window)) return;
 
       this.elements = [...document.querySelectorAll(
-        'body > section:not(.hero):not(.atlas-no-reveal), main > section:not(.atlas-no-reveal), .page-section:not(.atlas-no-reveal)'
+        'body > section:not(.hero):not(.site-legal-footer):not(.atlas-no-reveal), main > section:not(.site-legal-footer):not(.atlas-no-reveal), .page-section:not(.atlas-no-reveal)'
       )];
       if (!this.elements.length) return;
 
@@ -110,7 +110,7 @@
           entry.target.classList.add('is-visible');
           this.observer.unobserve(entry.target);
         });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+      }, { rootMargin: '0px 0px -2% 0px', threshold: 0.01 });
 
       this.elements.forEach((element) => this.observer.observe(element));
     }
@@ -126,21 +126,34 @@
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', (e) => {
           const href = anchor.getAttribute('href');
-          if (href === '#') return;
+          if (!href || href === '#') return;
 
-          const target = document.querySelector(href);
+          let target = null;
+          try {
+            target = document.querySelector(href);
+          } catch (_) {
+            target = null;
+          }
           if (target) {
             e.preventDefault();
-            const offsetTop = target.getBoundingClientRect().top + window.pageYOffset - 60;
+            target.classList.add('is-visible');
+            const parentReveal = target.closest('.atlas-section-reveal');
+            if (parentReveal) parentReveal.classList.add('is-visible');
+
+            const offsetTop = Math.max(0, target.getBoundingClientRect().top + window.pageYOffset - 76);
 
             window.scrollTo({
               top: offsetTop,
               behavior: 'smooth'
             });
 
-            // 更新 URL
-            if (history.pushState) {
-              history.pushState(null, null, href);
+            // 更新 URL（兼容 file:// 与 http:// 协议）
+            try {
+              if (history.pushState) {
+                history.pushState(null, null, href);
+              }
+            } catch (_) {
+              window.location.hash = href;
             }
           }
         });

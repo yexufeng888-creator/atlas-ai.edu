@@ -3,15 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="ATLAS - 个人智能操作系统。用 AI 驱动的生产力工具改变你的生活。">
-    <title>ATLAS - 个人智能操作系统</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <meta name="description" content="ATLAS 是个人智能操作系统，帮助你理解信息、连接上下文、组织知识，并找到清晰的下一步。">
+    <title>ATLAS — 个人智能操作系统</title>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preload" as="image" href="assets/img/atlas-hero-lightveil-poster.jpg">
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
     <link rel="stylesheet" href="assets/css/atlas-scroll.css">
-    <link rel="stylesheet" href="assets/css/site-legal-footer.css?v=20261009a">
+    <link rel="stylesheet" href="assets/css/site-legal-footer.css?v=20261026b">
     <link rel="stylesheet" href="assets/css/device-model.css?v=20261023b">
     <style>
         * {
@@ -27,7 +26,7 @@
             --color-text-secondary: #86868b;
             --color-bg: #fbfbfd;
             --color-surface: #ffffff;
-            --font-system: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            --font-system: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
         }
 
         body {
@@ -427,54 +426,144 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261013-m5-polish">
+    <link rel="stylesheet" href="assets/css/index-premium.css?v=20261106-layout">
     <link rel="stylesheet" href="assets/css/product-film.css?v=20261023a">
+    <link rel="stylesheet" href="assets/css/homepage-reference.css?v=20261026d">
+    <link rel="stylesheet" href="assets/css/homepage-chinese.css?v=20261106-layout3">
+    <link rel="stylesheet" href="assets/css/apple-atlas-showcase.css?v=20261106c">
+    <link rel="stylesheet" href="assets/css/atlas-dynamic-os.css?v=20261106d">
 </head>
-<body class="has-global-nav">
+<body class="has-global-nav atlas-marketing-home">
 <nav class="global-nav"></nav>
-<nav class="product-nav" aria-label="首页产品导航">
-    <div class="product-nav-links">
-        <a href="#top" aria-current="location">概览</a>
-        <a href="#features">功能亮点</a>
-        <a href="#platforms">产品体验</a>
-        <a href="#workflow">工作流程</a>
-    </div>
-</nav>
 
     <!-- Hero Section -->
-    <section class="hero" id="top">
-        <video class="hero-background-video" data-hero-video muted loop playsinline webkit-playsinline preload="metadata" aria-hidden="true" tabindex="-1">
-            <source src="assets/video/atlas-hero-background.mp4" type="video/mp4">
-        </video>
-        <canvas class="hero-atmosphere" data-hero-atmosphere aria-hidden="true"></canvas>
+    <section class="hero has-cinema-stage" id="top">
+        <div class="hero-cinema-stage" data-hero-cinema aria-hidden="true">
+            <img
+                class="hero-cinema-poster"
+                src="assets/img/atlas-hero-lightveil-poster.jpg"
+                alt=""
+                fetchpriority="high"
+                decoding="async"
+            >
+            <video
+                class="hero-cinema-video"
+                data-hero-cinema-video
+                poster="assets/img/atlas-hero-lightveil-poster.jpg"
+                muted
+                loop
+                playsinline
+                webkit-playsinline
+                preload="metadata"
+                tabindex="-1"
+            >
+                <source src="assets/video/atlas-hero-background.mp4" type="video/mp4">
+            </video>
+            <div class="hero-cinema-caustics"></div>
+            <div class="hero-cinema-scrim"></div>
+        </div>
+        <div class="hero-cinema-controls" data-hero-cinema-controls>
+            <button
+                type="button"
+                class="hero-cinema-btn"
+                data-hero-video-toggle
+                hidden
+                aria-pressed="false"
+                aria-label="暂停背景光影视频"
+                title="暂停 / 播放背景光影视频"
+            >
+                <span class="hero-cinema-btn-dot"></span>
+                <span data-hero-video-toggle-label>暂停光影</span>
+            </button>
+            <button
+                type="button"
+                class="hero-cinema-btn hero-cinema-btn--preview"
+                data-hero-video-pick
+                hidden
+                title="选择 Gemini 生成的 MP4 视频立即在首屏预览效果"
+            >
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+                <span>试看 Gemini 视频</span>
+            </button>
+            <input type="file" accept="video/mp4,video/webm,video/*" data-hero-video-file hidden>
+        </div>
         <div class="hero-content">
-            <div class="hero-eyebrow">个人智能操作系统</div>
-            <h1 class="hero-title">你的生活，<br>智能化管理</h1>
-            <p class="hero-subtitle">
-                将信息转化为智能，将决策转化为行动。ATLAS 是你的 AI 驱动的生活操作系统。
-            </p>
-            <div class="hero-cta">
-                <a href="signup.html" class="btn btn-primary">
-                    <span>免费开始</span>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
-                        <path d="M8 0L6.59 1.41 12.17 7H0V9H12.17L6.59 14.59 8 16 16 8z"/>
-                    </svg>
-                </a>
-                <button class="btn btn-secondary" type="button" data-open-product-film>
-                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
-                        <path d="M5 3.5a.75.75 0 0 1 1.14-.64l6 3.75a.75.75 0 0 1 0 1.28l-6 3.75A.75.75 0 0 1 5 11V3.5Z"/>
-                    </svg>
-                    <span>观看产品短片</span>
+            <div class="hero-copy">
+                <div class="hero-eyebrow">ATLAS · 个人智能操作系统</div>
+                <h1 class="hero-title">让你的数字生活，<br>真正井然有序。</h1>
+                <p class="hero-subtitle">
+                    ATLAS 是你的个人智能系统。它理解你的信息、连接你的上下文，并帮助你将复杂事务转化为清晰的下一步行动。
+                </p>
+                <div class="hero-cta">
+                    <a href="home.html" class="btn btn-primary">
+                        <span>探索 ATLAS</span>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M8 0L6.59 1.41 12.17 7H0V9H12.17L6.59 14.59 8 16 16 8z"/>
+                        </svg>
+                    </a>
+                    <a class="btn btn-secondary" href="#features">了解产品能力</a>
+                </div>
+                <button class="hero-demo-link" type="button" data-open-product-film>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                            <path d="M5 3.5a.75.75 0 0 1 1.14-.64l6 3.75a.75.75 0 0 1 0 1.28l-6 3.75A.75.75 0 0 1 5 11V3.5Z"/>
+                        </svg>
+                        <span>观看交互式产品演示</span>
                 </button>
+                <a class="apple-atlas-home-link" href="#apple-intelligence-atlas">
+                    <span>Apple Intelligence + ATLAS</span>
+                    <span aria-hidden="true">→</span>
+                </a>
             </div>
-            <div class="hero-metrics" aria-label="ATLAS 产品概览">
-                <div><strong>24/7</strong><span>持续理解你的上下文</span></div>
-                <div><strong>1 个</strong><span>统一的智能工作台</span></div>
-                <div><strong>100%</strong><span>数据控制权归你</span></div>
+            <div class="hero-mantra" aria-label="理解、组织、决策、行动">
+                <a href="ask.html">理解</a>
+                <a href="memory.html">组织</a>
+                <a href="home.html">决策</a>
+                <a href="agents.html">行动</a>
             </div>
-            <div class="hero-visual" aria-label="ATLAS 智能中枢预览">
-                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 智能中枢界面预览">
+            <div class="hero-visual" aria-label="ATLAS 工作台产品界面示意">
+                <span class="hero-visual-note">界面示意 · 点击可进入工作台</span>
+                <a class="hero-device-laptop" href="home.html" aria-label="进入 ATLAS 桌面工作台">
+                    <img src="assets/img/atlas-dashboard-preview.svg" alt="ATLAS 个人工作台界面示意，画面内容为演示">
+                </a>
+                <a class="hero-device-phone" href="life.html" aria-label="进入 ATLAS 生活与日程空间">
+                    <img src="assets/img/atlas-iphone-screen.svg" alt="ATLAS 移动工作台界面示意，画面内容为演示">
+                </a>
             </div>
+        </div>
+        <div class="hero-trust">
+            <span class="hero-trust-label">让 AI 理解、组织并协助管理你的数字生活</span>
+            <nav class="hero-trust-items" aria-label="核心模块快捷入口：任务、日程、记忆、文件与智能体">
+                <a href="life-tasks.html">任务</a>
+                <a href="life-calendar.html">日程</a>
+                <a href="memory.html">记忆</a>
+                <a href="life-documents.html">文件</a>
+                <a href="agents.html">智能体</a>
+            </nav>
+        </div>
+    </section>
+
+    <section class="homepage-capabilities atlas-no-reveal" aria-label="ATLAS 核心能力">
+        <div class="homepage-capabilities-inner">
+            <a class="homepage-capability" href="memory.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 13.8 10l6.7 2-6.7 2-1.8 6.5L10.2 14l-6.7-2 6.7-2L12 3.5Z"/><path d="m19 3 .7 2.3L22 6l-2.3.7L19 9l-.7-2.3L16 6l2.3-.7L19 3Z"/></svg>
+                <div><h2>长期记忆</h2><p>整理重要事实、偏好与经历。</p></div>
+            </a>
+            <a class="homepage-capability" href="ask.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5Z"/><path d="m3 12 9 5 9-5"/><path d="m3 16 9 5 9-5"/></svg>
+                <div><h2>上下文理解</h2><p>把任务、目标与资料联系起来。</p></div>
+            </a>
+            <a class="homepage-capability" href="agents.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 10-13h-7l1-7Z"/></svg>
+                <div><h2>AI 智能体</h2><p>规划任务，等待确认后再行动。</p></div>
+            </a>
+            <a class="homepage-capability" href="home.html">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></svg>
+                <div><h2>统一工作台</h2><p>在一个空间里查看信息与任务。</p></div>
+            </a>
+            <a class="homepage-capabilities-aside" href="life.html">
+                <span>让每一天</span>
+                <strong>更从容一点 →</strong>
+            </a>
         </div>
     </section>
 
@@ -482,7 +571,7 @@
         <div class="product-film-shell">
             <header class="product-film-header">
                 <div>
-                    <p class="product-film-kicker">ATLAS PRODUCT FILM · 01—03</p>
+                    <p class="product-film-kicker">ATLAS 产品演示 · 01—03</p>
                     <h2 id="product-film-title">让重要的事，自然发生。</h2>
                 </div>
                 <button class="product-film-close" type="button" data-film-close aria-label="关闭产品短片">×</button>
@@ -500,7 +589,7 @@
                         <span class="film-orbit film-orbit-two"></span>
                         <div class="film-note">“下周准备产品评审”</div>
                         <div class="film-chips"><span>任务</span><span>日程</span><span>记忆</span></div>
-                        <div class="film-signal"><i></i> 已加入你的上下文</div>
+                        <div class="film-signal"><i></i> 示例：已加入上下文</div>
                     </div>
                 </article>
                 <article class="film-scene" data-film-scene="1">
@@ -519,7 +608,7 @@
                         <div class="film-connection connection-a"></div>
                         <div class="film-connection connection-b"></div>
                         <div class="film-connection connection-c"></div>
-                        <div class="film-signal"><i></i> 找到 3 条相关记忆</div>
+                        <div class="film-signal"><i></i> 示例：找到相关信息</div>
                     </div>
                 </article>
                 <article class="film-scene" data-film-scene="2">
@@ -534,10 +623,10 @@
                         <div class="film-action-card">
                             <span>ATLAS 建议的下一步</span>
                             <strong>确认用户流程</strong>
-                            <small>基于 2 个未完成决策 · 预计 15 分钟</small>
-                            <div class="film-action-status"><i></i> 已加入今日重点</div>
+                            <small>示例建议 · 请先核对相关资料</small>
+                            <div class="film-action-status"><i></i> 等待用户确认</div>
                         </div>
-                        <span class="film-action-spark">✓</span>
+                        <span class="film-action-spark">…</span>
                     </div>
                 </article>
             </div>
@@ -560,21 +649,21 @@
     <section class="platform-showcase" id="platforms" aria-labelledby="platforms-title">
         <div class="platform-showcase-inner">
             <header class="platform-heading">
-                <p class="platform-eyebrow">ATLAS AI · 设备体验</p>
-                <h2 id="platforms-title">一款 AI，<span>四种设备体验。</span></h2>
-                <p class="platform-intro">从 Mac 上的资料梳理，到 iPhone 上的两种使用形态。</p>
+                <p class="platform-eyebrow">ATLAS · 产品界面演示</p>
+                <h2 id="platforms-title">从桌面梳理，<span>到随手记录。</span></h2>
+                <p class="platform-intro">用同一套个人上下文，把资料整理与灵感捕获接续起来。</p>
             </header>
             <div class="phone-device-stage" data-phone-stage>
                 <div class="phone-device-copy">
-                    <p class="phone-device-kicker" data-phone-kicker>ATLAS ON IPHONE DUO</p>
+                    <p class="phone-device-kicker" data-phone-kicker>ATLAS · 设备概念演示</p>
                     <h3><span data-phone-headline-first>合上轻装，</span><br><span data-phone-headline-second>展开从容。</span></h3>
                     <p class="phone-device-description" data-phone-description>合上时快速查看，展开后处理复杂任务。播放折叠演示，看看 ATLAS 如何适应两种屏幕状态。</p>
                     <a class="phone-device-link" href="home.html">探索 ATLAS 工作台 <span aria-hidden="true">→</span></a>
                 </div>
                 <div class="phone-model-column">
-                    <div class="phone-model-selector" role="group" aria-label="选择 iPhone 型号">
-                        <button class="phone-model-selector__button" type="button" data-phone-choice="duo" aria-pressed="true">iPhone Duo</button>
-                        <button class="phone-model-selector__button" type="button" data-phone-choice="iphone-18-pro-max" aria-pressed="false">iPhone 18 Pro Max</button>
+                    <div class="phone-model-selector" role="group" aria-label="选择设备概念示意">
+                        <button class="phone-model-selector__button" type="button" data-phone-choice="duo" aria-pressed="true">折叠屏示意</button>
+                        <button class="phone-model-selector__button" type="button" data-phone-choice="iphone-18-pro-max" aria-pressed="false">手机示意</button>
                     </div>
                     <div class="phone-model-stage">
                         <div class="phone-model-glow" aria-hidden="true"></div>
@@ -597,7 +686,7 @@
                             data-model-kind="duo"
                             data-model-src="assets/models/apple-iphone-duo-fold-star-white.glb"
                             data-animation-name="open-close"
-                            alt="星白色 iPhone Duo 折叠屏手机的三维模型，内外屏展示 ATLAS 界面"
+                            alt="折叠屏设备概念模型，内外屏展示 ATLAS 界面示意"
                             camera-controls
                             disable-zoom
                             interaction-prompt="none"
@@ -620,76 +709,204 @@
                         data-unavailable-label="折叠演示暂不可用"
                         aria-pressed="false"
                         disabled>正在加载折叠演示…</button>
-                    <p class="phone-model-hint" data-phone-hint role="status" aria-live="polite">正在加载 iPhone Duo 三维模型…</p>
+                    <p class="phone-model-hint" data-phone-hint role="status" aria-live="polite">正在加载设备概念模型示意…</p>
                 </div>
             </div>
             <div class="platform-grid">
-                <article class="platform-card">
-                    <p class="platform-device">MACBOOK PRO</p>
-                    <h3>M5</h3>
+                <a class="platform-card" href="home.html">
+                    <p class="platform-device">桌面工作台</p>
+                    <h3>聚焦</h3>
                     <p class="platform-promise">先看清当下重点</p>
-                    <p class="platform-detail">归纳资料、拆解待办，把零散信息整理成清晰的下一步。</p>
-                </article>
-                <article class="platform-card">
-                    <p class="platform-device">MACBOOK PRO</p>
-                    <h3>M5 <span>Pro</span></h3>
+                    <p class="platform-detail">把资料、任务与日程放在同一处查看。</p>
+                    <span class="atlas-card-jump">打开工作台 →</span>
+                </a>
+                <a class="platform-card" href="life-projects.html">
+                    <p class="platform-device">项目资料</p>
+                    <h3>关联</h3>
                     <p class="platform-promise">多份资料，连贯推进</p>
-                    <p class="platform-detail">在会议、文档与项目背景之间反复对照，持续梳理思路与方案。</p>
-                </article>
-                <article class="platform-card">
-                    <p class="platform-device">MACBOOK PRO</p>
-                    <h3>M5 <span>Max</span></h3>
+                    <p class="platform-detail">将会议记录、文档与项目背景并列梳理。</p>
+                    <span class="atlas-card-jump">查看项目空间 →</span>
+                </a>
+                <a class="platform-card" href="memory.html">
+                    <p class="platform-device">知识整理</p>
+                    <h3>结构</h3>
                     <p class="platform-promise">复杂主题，层层展开</p>
-                    <p class="platform-detail">从多条线索中找关联、比选项，沉淀为可以继续完善的结构。</p>
-                </article>
-                <article class="platform-card platform-card-phone">
-                    <p class="platform-device">iPhone</p>
-                    <h3>18 <span>Pro</span></h3>
+                    <p class="platform-detail">从线索中识别关联，形成便于继续完善的结构。</p>
+                    <span class="atlas-card-jump">进入知识库 →</span>
+                </a>
+                <a class="platform-card platform-card-phone" href="life.html">
+                    <p class="platform-device">移动体验</p>
+                    <h3>记录</h3>
                     <p class="platform-promise">想法出现时，马上接住</p>
-                    <p class="platform-detail">随手记录、发起问询、查看当前重点，回到 Mac 后继续整理。</p>
-                </article>
+                    <p class="platform-detail">随手记录想法，回到工作台后继续整理。</p>
+                    <span class="atlas-card-jump">打开生活视图 →</span>
+                </a>
             </div>
-            <p class="platform-disclaimer">以上为 ATLAS AI 使用场景示例，并非设备芯片跑分或本地推理声明。模型响应由 ATLAS 接入的服务处理，实际速度受所选模型、服务状态与网络影响。</p>
+            <p class="platform-disclaimer">设备外观与界面均为概念演示，不代表正式硬件适配清单。实际可用功能、模型服务与响应速度以当前产品配置为准。</p>
+        </div>
+    </section>
+
+    <section class="apple-atlas-showcase atlas-no-reveal" id="apple-intelligence-atlas" aria-labelledby="apple-atlas-title">
+        <div class="apple-atlas-showcase__inner">
+            <div class="apple-atlas-showcase__copy">
+                <p class="apple-atlas-showcase__eyebrow">
+                    <span>APPLE INTELLIGENCE + ATLAS</span>
+                    <span class="apple-atlas-showcase__concept">体验构想</span>
+                </p>
+                <h2 id="apple-atlas-title">把一次理解，<br><span>连接成长期上下文。</span></h2>
+                <p class="apple-atlas-showcase__intro">
+                    当你主动分享一段文字或网页，受支持的设备端智能可协助提炼；ATLAS 再将内容关联到记忆、项目与待办。每一步都透明可检查，保存和行动由你确认。
+                </p>
+
+                <ol class="apple-atlas-showcase__steps">
+                    <li>
+                        <span class="apple-atlas-showcase__step-number">01</span>
+                        <span><strong>选择分享</strong><small>只处理你主动交给 ATLAS 的内容</small></span>
+                    </li>
+                    <li>
+                        <span class="apple-atlas-showcase__step-number">02</span>
+                        <span><strong>设备端理解</strong><small>受支持时提炼摘要、人物与日期</small></span>
+                    </li>
+                    <li>
+                        <span class="apple-atlas-showcase__step-number">03</span>
+                        <span><strong>连接 ATLAS</strong><small>关联记忆、项目与待办</small></span>
+                    </li>
+                    <li>
+                        <span class="apple-atlas-showcase__step-number">04</span>
+                        <span><strong>由你确认</strong><small>检查建议，再决定是否保存</small></span>
+                    </li>
+                </ol>
+
+                <div class="apple-atlas-showcase__actions">
+                    <a class="apple-atlas-showcase__primary" href="home.html">探索 ATLAS <span aria-hidden="true">→</span></a>
+                    <a class="apple-atlas-showcase__secondary" href="https://www.apple.com.cn/apple-intelligence/" target="_blank" rel="noopener noreferrer">
+                        Apple 智能官方介绍
+                        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M4.5 11.5 11 5m0 0H5.5M11 5v5.5"/></svg>
+                    </a>
+                </div>
+                <p class="apple-atlas-showcase__note">
+                    本区域为产品体验构想，不代表当前已完成 Apple Intelligence 系统级接入或 Apple 官方背书。实际能力取决于设备、系统版本、地区及正式产品接入。
+                </p>
+            </div>
+
+            <div class="apple-atlas-showcase__visual" aria-hidden="true">
+                <div class="apple-atlas-showcase__visual-frame">
+                    <video
+                        class="apple-atlas-showcase__video"
+                        data-apple-atlas-video
+                        tabindex="-1"
+                        poster="assets/img/atlas-apple-intelligence-poster.jpg"
+                        muted
+                        playsinline
+                        webkit-playsinline
+                        preload="metadata">
+                        <source src="assets/video/atlas-apple-intelligence.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="atlas-live-sandbox" id="live-sandbox" data-atlas-live-sandbox aria-labelledby="live-sandbox-title">
+        <div class="atlas-live-sandbox-inner">
+            <div class="section-header">
+                <div class="section-eyebrow">实时交互沙盒 · LIVE PERSONAL OS</div>
+                <h2 class="section-title" id="live-sandbox-title">现在就试一下：<br>输入一句话，看 ATLAS 如何理解并组织</h2>
+                <p class="section-description">不再只是静态截图。输入任何待办、会议或个人偏好，实时体验意图拆解、长期记忆关联与一键写入工作台。</p>
+            </div>
+            <div class="atlas-sandbox-shell">
+                <div class="atlas-sandbox-input-pane">
+                    <span class="atlas-sandbox-kicker"><i></i> 实时上下文解析引擎 · 支持直接写入工作台</span>
+                    <div class="atlas-sandbox-presets" role="group" aria-label="快捷体验示例">
+                        <button type="button" class="atlas-sandbox-preset is-active" data-sandbox-preset="下周五 14:00 和林峰评审 ATLAS V2 原型终稿，提前整理最近 3 次用户访谈结论">示例 1：产品评审与协作</button>
+                        <button type="button" class="atlas-sandbox-preset" data-sandbox-preset="记住我平时偏好结论先行、结构化的技术方案汇报风格">示例 2：记录个人沟通偏好</button>
+                        <button type="button" class="atlas-sandbox-preset" data-sandbox-preset="明天上午 10:00 紧急复核知识图谱节点关联与 API 配额策略">示例 3：高优研发任务排期</button>
+                    </div>
+                    <label for="atlas-sandbox-textarea" class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">输入一句想法或待办任务</label>
+                    <textarea
+                        id="atlas-sandbox-textarea"
+                        class="atlas-sandbox-textarea"
+                        data-sandbox-input
+                        rows="3"
+                        placeholder="输入你的想法、日程或偏好，例如：下周五 14:00 和林峰评审 V2 方案..."
+                    >下周五 14:00 和林峰评审 ATLAS V2 原型终稿，提前整理最近 3 次用户访谈结论</textarea>
+                    <div class="atlas-sandbox-actions">
+                        <button type="button" class="atlas-sandbox-commit-btn" data-sandbox-commit>
+                            <span>一键拆解并写入我的工作台</span>
+                            <span aria-hidden="true">→</span>
+                        </button>
+                        <div class="atlas-sandbox-meta-links">
+                            <span class="atlas-sandbox-live-counts" data-sandbox-live-counts>正在同步实时工作台状态…</span>
+                            <a class="atlas-sandbox-goto" href="home.html">进入工作台查看 →</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="atlas-sandbox-output-pane" aria-live="polite">
+                    <div class="atlas-sandbox-card">
+                        <div class="atlas-sandbox-card-head">
+                            <span>01 / 结构化任务拆解</span>
+                            <span>TASK &amp; SCHEDULE</span>
+                        </div>
+                        <div class="atlas-sandbox-card-body" data-sandbox-task-title>确认 ATLAS V2 用户核心流程与评审材料</div>
+                        <div class="atlas-sandbox-tags" data-sandbox-task-meta></div>
+                    </div>
+                    <div class="atlas-sandbox-card">
+                        <div class="atlas-sandbox-card-head">
+                            <span>02 / 命中的长期记忆上下文</span>
+                            <span>MEMORY GRAPH</span>
+                        </div>
+                        <div class="atlas-sandbox-tags" data-sandbox-memories></div>
+                    </div>
+                    <div class="atlas-sandbox-card">
+                        <div class="atlas-sandbox-card-head">
+                            <span>03 / 智能体下一步建议</span>
+                            <span>AGENT PROPOSAL</span>
+                        </div>
+                        <div class="atlas-sandbox-card-body" data-sandbox-action-title>生成会前同步清单</div>
+                        <p style="margin:0.35rem 0 0;font-size:0.78rem;color:#5c7087;line-height:1.6;" data-sandbox-action-summary></p>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
     <section class="command-overview" id="overview" aria-labelledby="command-overview-title">
         <div class="command-overview-inner">
             <div class="command-intro">
-                <div class="section-eyebrow">今日指挥台 · 09:41</div>
+                <div class="section-eyebrow">实时工作台状态预览</div>
                 <h2 id="command-overview-title">把复杂的一天，<br><span>整理成下一步。</span></h2>
-                <p>ATLAS 从你的任务、日程和长期记忆中提取重点，给出清晰的行动顺序。</p>
-                <a class="command-link" href="home.html">进入工作台 <span aria-hidden="true">→</span></a>
+                <p>下方卡片与你的实时工作台数据同步。在上方沙盒或按 <kbd style="padding:0.1rem 0.4rem;border:1px solid #cbd8e6;border-radius:5px;font-size:0.85em;">⌘K</kbd> 写入新内容，即可在此实时查看。</p>
+                <a class="command-link" href="home.html">进入完整工作台 <span aria-hidden="true">→</span></a>
             </div>
             <div class="command-panel" aria-label="ATLAS 今日工作台预览">
                 <div class="command-panel-top">
-                    <span class="panel-kicker">TODAY / PERSONAL OS</span>
-                    <span class="panel-live"><i></i> 已同步</span>
+                    <span class="panel-kicker">工作台 / 实时状态同步</span>
+                    <span class="panel-live"><i></i> 实时数据已连接</span>
                 </div>
                 <div class="command-grid">
-                    <div class="command-card command-card-focus">
-                        <span class="command-card-label">当前重点</span>
-                        <strong>完成产品方案 v2</strong>
+                    <a class="command-card command-card-focus" href="life-tasks.html">
+                        <span class="command-card-label">当前重点 · 点击查看任务</span>
+                        <strong data-live-focus-title>确认 ATLAS V2 用户核心流程与评审材料</strong>
                         <span class="command-progress"><b></b></span>
-                        <small>预计 48 分钟 · 高优先级</small>
-                    </div>
-                    <div class="command-card">
-                        <span class="command-card-label">智能记忆</span>
-                        <strong>3 条相关上下文</strong>
-                        <small>上次会议 · 用户访谈 · 设计原则</small>
-                    </div>
-                    <div class="command-card">
-                        <span class="command-card-label">下一步建议</span>
-                        <strong>先确认用户流程</strong>
-                        <small>基于 2 个未完成决策</small>
-                    </div>
+                        <small data-live-focus-meta>产品评审 · 周五 14:00 · 高优先级</small>
+                    </a>
+                    <a class="command-card" href="memory.html">
+                        <span class="command-card-label">智能记忆 · 点击进入图谱</span>
+                        <strong data-live-memory-title>正在推进 ATLAS V2 产品架构评审</strong>
+                        <small data-live-memory-meta>上次会议 · 用户访谈 · 设计原则</small>
+                    </a>
+                    <a class="command-card" href="agents.html">
+                        <span class="command-card-label">下一步建议 · 点击审批动作</span>
+                        <strong data-live-action-title>生成周五产品评审会前准备清单</strong>
+                        <small data-live-action-meta>规划智能体 · 等待你的确认</small>
+                    </a>
                 </div>
                 <div class="command-timeline">
                     <span class="timeline-dot is-done"></span><span>整理上下文</span>
                     <span class="timeline-line"></span>
                     <span class="timeline-dot is-active"></span><span>聚焦行动</span>
                     <span class="timeline-line"></span>
-                    <span class="timeline-dot"></span><span>自动跟进</span>
+                    <span class="timeline-dot"></span><span>等待确认</span>
                 </div>
             </div>
         </div>
@@ -697,9 +914,9 @@
 
     <section class="atlas-story" id="story" aria-labelledby="story-title">
         <div class="story-sticky">
-            <div class="section-eyebrow">ATLAS SYSTEM / 01—03</div>
+            <div class="section-eyebrow">ATLAS 工作方式 / 01—03</div>
             <h2 id="story-title">不是更多工具。<br><span>是更少的摩擦。</span></h2>
-            <p>从一个想法，到一个完成的行动，ATLAS 始终保持上下文在线。</p>
+            <p>从捕获信息，到理解关联，再到提出下一步建议。</p>
             <div class="story-progress" aria-label="产品故事进度">
                 <span class="is-active"></span><span></span><span></span>
             </div>
@@ -708,20 +925,20 @@
             <article class="story-step is-active" data-story-step="0">
                 <div class="story-step-index">01 / 捕获</div>
                 <h3>所有输入，<br>都有去处。</h3>
-                <p>一句话、一个文件或一场会议，ATLAS 把零散信息收进同一个可理解的上下文。</p>
-                <div class="story-visual story-visual-capture"><span>“下周准备产品评审”</span><i>任务 · 日程 · 记忆</i></div>
+                <p>将想法、任务与资料放在一起，作为后续整理的起点。</p>
+                <a class="story-visual story-visual-capture" href="life-tasks.html"><span>“下周准备产品评审”</span><i>进入任务 · 日程 · 记忆 →</i></a>
             </article>
             <article class="story-step" data-story-step="1">
                 <div class="story-step-index">02 / 理解</div>
                 <h3>上下文，<br>变成判断。</h3>
-                <p>AI 识别重要关系、截止时间和未完成决策，帮你看见真正应该优先处理的事。</p>
-                <div class="story-visual story-visual-understand"><b>产品评审</b><span>3 条相关记忆</span><i>高优先级</i></div>
+                <p>结合相关资料与任务背景，辅助识别重点和待处理的问题。</p>
+                <a class="story-visual story-visual-understand" href="memory.html"><b>产品评审</b><span>示例关联信息</span><i>查看关联记忆 →</i></a>
             </article>
             <article class="story-step" data-story-step="2">
                 <div class="story-step-index">03 / 行动</div>
-                <h3>从建议开始，<br>让事情完成。</h3>
-                <p>得到明确的下一步，并让智能体继续跟进，让计划不止停留在列表里。</p>
-                <div class="story-visual story-visual-action"><strong>确认用户流程</strong><span>已加入今日重点</span><i>下一步 →</i></div>
+                <h3>从建议开始，<br>让计划向前。</h3>
+                <p>先查看建议，再由你确认是否执行；演示内容不会触发外部操作。</p>
+                <a class="story-visual story-visual-action" href="agents.html"><strong>确认用户流程</strong><span>等待确认</span><i>前往智能体查看建议 →</i></a>
             </article>
         </div>
     </section>
@@ -729,20 +946,20 @@
     <section class="product-stage" id="product" aria-labelledby="product-stage-title">
         <div class="product-stage-inner">
             <div class="product-stage-copy">
-                <div class="section-eyebrow">THE ATLAS LAYER</div>
-                <h2 id="product-stage-title">你的世界，<br><span>终于连成一体。</span></h2>
-                <p>任务、记忆、日程和智能体不再各自分散。它们在同一个界面里彼此理解。</p>
+                <div class="section-eyebrow">ATLAS 工作方式</div>
+                <h2 id="product-stage-title">让信息彼此关联，<br><span>让下一步更清晰。</span></h2>
+                <p>把任务、记忆、日程与智能体放在同一工作流中，按需查看相关信息。</p>
                 <div class="stage-feature-list">
-                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>看见重点</strong><small>每天自动整理优先级</small></span><i aria-hidden="true">+</i></div>
-                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>保留上下文</strong><small>跨任务持续记住重要信息</small></span><i aria-hidden="true">+</i></div>
-                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>推动行动</strong><small>从建议走到真正完成</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature is-active" role="button" tabindex="0" aria-expanded="true"><b>01</b><span><strong>看见重点</strong><small>查看任务与日程中的优先事项</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>02</b><span><strong>保留上下文</strong><small>回看与当前事项相关的信息</small></span><i aria-hidden="true">+</i></div>
+                    <div class="stage-feature" role="button" tabindex="0" aria-expanded="false"><b>03</b><span><strong>推动行动</strong><small>检查建议，确认后再继续</small></span><i aria-hidden="true">+</i></div>
                 </div>
             </div>
             <div class="product-stage-visual">
                 <div class="stage-orbit" aria-hidden="true"></div>
-                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 统一智能工作台界面">
-                <span class="stage-badge stage-badge-focus">FOCUS / 84</span>
-                <span class="stage-badge stage-badge-memory">MEMORY / 03</span>
+                <img src="assets/img/atlas-dashboard-preview.svg" alt="ATLAS 个人工作台界面示意">
+                <span class="stage-badge stage-badge-focus">界面示意</span>
+                <span class="stage-badge stage-badge-memory">内容为演示</span>
             </div>
         </div>
     </section>
@@ -750,78 +967,120 @@
     <!-- Features Section -->
     <section class="features" id="features">
         <div class="section-header">
-            <div class="section-eyebrow">功能特性</div>
-            <h2 class="section-title">为你的成功而设计</h2>
-            <p class="section-description">
-                你需要的一切，让你保持井井有条、高效和掌控全局。
-            </p>
+            <div class="section-eyebrow">核心能力</div>
+            <h2 class="section-title">四种能力，围绕一个上下文</h2>
+            <p class="section-description">记忆、理解、智能体与工作台彼此衔接，让信息更容易变成下一步。</p>
         </div>
 
         <div class="feature-grid">
-            <div class="feature-card">
-                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4a3 3 0 0 0-3 3v1a3 3 0 0 0-2 2.8A3 3 0 0 0 6 14v1a3 3 0 0 0 4 2.8V20a2 2 0 0 0 4 0v-2.2a3 3 0 0 0 4-2.8v-1a3 3 0 0 0 2-3.2A3 3 0 0 0 18 8V7a3 3 0 0 0-3-3H9Z"/><path d="M9 8h.01M15 8h.01M8 13c1.5 1 2.5 1 4 0 1.5 1 2.5 1 4 0"/></svg></span>
-                <h3 class="feature-title">智能记忆</h3>
-                <p class="feature-description">
-                    在你需要的时候，记住你需要的一切。你的个人知识图谱与你一起成长。
-                </p>
-            </div>
+            <a class="feature-card feature-memory" href="memory.html">
+                <div class="feature-visual-memory" aria-hidden="true">
+                    <span class="memory-node memory-node-main">个人记忆</span>
+                    <span class="memory-node memory-node-a">偏好</span>
+                    <span class="memory-node memory-node-b">项目</span>
+                    <span class="memory-node memory-node-c">经历</span>
+                    <i class="memory-link memory-link-a"></i><i class="memory-link memory-link-b"></i><i class="memory-link memory-link-c"></i>
+                </div>
+                <div class="feature-card-copy">
+                    <span class="feature-kicker">MEMORY</span>
+                    <h3 class="feature-title">长期记忆</h3>
+                    <p class="feature-description">整理你记录的事实、偏好与经历，回看与当前事项相关的信息。</p>
+                    <span class="feature-more">探索个人知识库 <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
 
-            <div class="feature-card">
-                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></span>
-                <h3 class="feature-title">智能任务管理</h3>
-                <p class="feature-description">
-                    AI 驱动的优先级排序，适应你的工作风格，帮助你专注于重要的事情。
-                </p>
-            </div>
+            <a class="feature-card feature-context" href="#workflow">
+                <div class="feature-visual-context" aria-hidden="true">
+                    <span class="context-window context-window-back">会议纪要 · 评审准备</span>
+                    <span class="context-window context-window-mid">用户访谈 · 3 条摘录</span>
+                    <span class="context-window context-window-front"><i></i> 当前任务 · 梳理用户流程</span>
+                </div>
+                <div class="feature-card-copy">
+                    <span class="feature-kicker">CONTEXT</span>
+                    <h3 class="feature-title">上下文理解</h3>
+                    <p class="feature-description">把任务、目标与相关资料放在一起，帮助你更快看清背景和重点。</p>
+                    <span class="feature-more">查看工作流程 <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
 
-            <div class="feature-card">
-                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01M8 16h8"/></svg></span>
-                <h3 class="feature-title">AI 智能体</h3>
-                <p class="feature-description">
-                    专业智能体自动处理从旅行规划到邮件管理的所有事务。
-                </p>
-            </div>
+            <a class="feature-card feature-agents" href="agents.html">
+                <div class="feature-visual-agents" aria-hidden="true">
+                    <span class="agent-step is-complete"><i>✓</i>理解目标</span>
+                    <span class="agent-step is-complete"><i>✓</i>整理计划</span>
+                    <span class="agent-step is-current"><i>3</i>等待确认</span>
+                </div>
+                <div class="feature-card-copy">
+                    <span class="feature-kicker">AI AGENTS</span>
+                    <h3 class="feature-title">AI 智能体</h3>
+                    <p class="feature-description">围绕目标整理计划、展示进度；可执行操作以当前接入能力和确认提示为准。</p>
+                    <span class="feature-more">了解智能体 <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
 
-            <div class="feature-card">
-                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="m7 15 3-4 3 2 5-7"/></svg></span>
-                <h3 class="feature-title">生活分析</h3>
-                <p class="feature-description">
-                    美观的仪表板可视化你的生产力、健康和习惯。
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3M12 14v2"/></svg></span>
-                <h3 class="feature-title">隐私优先</h3>
-                <p class="feature-description">
-                    你的数据属于你。端到端加密和透明的 AI 操作。
-                </p>
-            </div>
-
-            <div class="feature-card">
-                <span class="feature-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg></span>
-                <h3 class="feature-title">闪电般快速</h3>
-                <p class="feature-description">
-                    原生性能，即时搜索和跨设备实时同步。
-                </p>
-            </div>
+            <a class="feature-card feature-workspace" href="home.html">
+                <div class="feature-visual-workspace" aria-hidden="true">
+                    <div class="workspace-topline"><i></i><i></i><i></i><span>今日工作台</span></div>
+                    <div class="workspace-row"><b>重点</b><span>准备项目评审</span><i></i></div>
+                    <div class="workspace-row"><b>资料</b><span>会议纪要、访谈记录</span><i></i></div>
+                    <div class="workspace-row"><b>建议</b><span>先检查待确认事项</span><i></i></div>
+                </div>
+                <div class="feature-card-copy">
+                    <span class="feature-kicker">ONE WORKSPACE</span>
+                    <h3 class="feature-title">统一体验</h3>
+                    <p class="feature-description">在一致的工作台中查看个人信息、任务与建议，按自己的节奏继续推进。</p>
+                    <span class="feature-more">体验 ATLAS <span aria-hidden="true">→</span></span>
+                </div>
+            </a>
         </div>
     </section>
 
     
 
-    <!-- Showcase Section -->
-    <section class="showcase" id="showcase">
-        <div class="showcase-content">
-            <div class="showcase-text">
-                <h2>让智能，<br>真正融入日常</h2>
+    <!-- Showcase Section: WebGL2 Physical Planar-Reflection Metal Pass -->
+    <section class="showcase atlas-pass-showcase" id="showcase" aria-labelledby="pass-showcase-title">
+        <div class="atlas-pass-showcase-inner">
+            <div class="showcase-text atlas-pass-copy">
+                <div class="section-eyebrow">WEBGL2 REAL-TIME OPTICS · 专属智能身份</div>
+                <h2 id="pass-showcase-title">不只是一个工具。<br>更是只属于你的个人上下文通行证。</h2>
                 <p>
-                    将任务、记忆与行动连接起来，让技术在真实生活中发挥作用。
+                    ATLAS 将你的长期记忆、工作台状态与受控智能体凝聚在同一枚独立上下文身份之中。移动指针轻触右侧金属通行证，感受实时双通道高斯环境模糊、微噪声倒角法线平面反射与 120/16 物理弹簧的真实机械阻尼。
                 </p>
-                <a href="team.html" class="btn btn-primary">认识团队</a>
+                <div class="atlas-pass-specs" aria-label="实时物理渲染规格">
+                    <span class="atlas-pass-spec-pill">WebGL2 2-Pass Blur</span>
+                    <span class="atlas-pass-spec-pill">R = reflect(I, N)</span>
+                    <span class="atlas-pass-spec-pill">Spring 120 / 16 · ±12°</span>
+                    <span class="atlas-pass-spec-pill">320 × 500 · R24</span>
+                </div>
+                <a href="home.html" class="btn btn-primary">进入我的个人工作台</a>
             </div>
-            <div class="showcase-image">
-                <img src="assets/img/atlas-command-center.svg" alt="ATLAS 智能工作流可视化">
+            <div class="atlas-pass-stage">
+                <div class="atlas-reflective-pass" data-atlas-reflective-pass role="img" aria-label="ATLAS 反射通行证 320×500 实时物理金属反射卡片，卡号 0001 2345 6789">
+                    <canvas class="atlas-reflective-pass__canvas" data-pass-canvas aria-hidden="true"></canvas>
+                    <div class="atlas-reflective-pass__hud">
+                        <div class="atlas-reflective-pass__top">
+                            <div>
+                                <span class="atlas-reflective-pass__kicker">ATLAS PERSONAL OS</span>
+                                <h3 class="atlas-reflective-pass__title">反射通行证</h3>
+                            </div>
+                            <span class="atlas-reflective-pass__chip" aria-hidden="true"></span>
+                        </div>
+                        <div class="atlas-reflective-pass__emblem" aria-hidden="true">
+                            <svg viewBox="0 0 24 24">
+                                <polygon points="12 3 20 19 4 19"/>
+                                <circle cx="12" cy="13.5" r="2.2"/>
+                            </svg>
+                        </div>
+                        <div class="atlas-reflective-pass__bottom">
+                            <div class="atlas-reflective-pass__number">0001  2345  6789</div>
+                            <div class="atlas-reflective-pass__meta">
+                                <span>LOCAL-FIRST IDENTITY</span>
+                                <span data-pass-live-telemetry>MEM 04 · TASK 02</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="atlas-reflective-pass__border" aria-hidden="true"></div>
+                </div>
+                <span class="atlas-pass-caption">移动光标倾斜 ±12° · 移出自动弹簧回正</span>
             </div>
         </div>
     </section>
@@ -829,297 +1088,248 @@
     <section class="use-cases" id="use-cases">
         <div class="section-header">
             <div class="section-eyebrow">使用场景</div>
-            <h2 class="section-title">为各种生活场景而设计</h2>
-            <p class="section-description">无论你是学生、职场人士还是创业者，ATLAS 都能帮助你更好地管理生活</p>
+            <h2 class="section-title">让不同的事务，回到同一上下文</h2>
+            <p class="section-description">从学习、项目到个人计划，按自己的方式整理信息，再决定下一步。</p>
         </div>
 
         <div class="scene-grid">
-            <article class="scene-card">
+            <a class="scene-card" href="life-tasks.html">
                 <div class="scene-visual scene-study" aria-hidden="true"><span></span><i></i><b></b></div>
                 <div class="scene-content">
                     <h3>学生</h3>
-                    <p>管理课程作业、考试安排和学习笔记。AI 助手帮你制定学习计划，追踪学习进度。</p>
+                    <p>把课程资料、作业安排与学习目标放在一处，按自己的节奏整理和推进。</p>
                     <ul>
-                        <li>✓ 课程表智能管理</li>
-                        <li>✓ 作业截止日期提醒</li>
-                        <li>✓ 学习笔记自动整理</li>
+                        <li>✓ 整理课程资料</li>
+                        <li>✓ 查看任务与截止时间</li>
+                        <li>✓ 将目标拆解为下一步</li>
                     </ul>
+                    <span class="atlas-card-jump">进入任务与学习空间 →</span>
                 </div>
-            </article>
+            </a>
 
-            <article class="scene-card">
+            <a class="scene-card" href="life-projects.html">
                 <div class="scene-visual scene-work" aria-hidden="true"><span></span><i></i><b></b></div>
                 <div class="scene-content">
                     <h3>职场人士</h3>
-                    <p>高效管理项目、会议和团队协作。AI 智能体帮你处理日常事务，专注核心工作。</p>
+                    <p>在项目资料、会议记录与待办事项之间建立联系，减少重复查找与整理。</p>
                     <ul>
-                        <li>✓ 项目进度追踪</li>
-                        <li>✓ 会议自动总结</li>
-                        <li>✓ 邮件智能处理</li>
+                        <li>✓ 查看项目相关信息</li>
+                        <li>✓ 汇总待讨论事项</li>
+                        <li>✓ 明确后续行动</li>
                     </ul>
+                    <span class="atlas-card-jump">进入项目与日程空间 →</span>
                 </div>
-            </article>
+            </a>
 
-            <article class="scene-card">
+            <a class="scene-card" href="home.html">
                 <div class="scene-visual scene-build" aria-hidden="true"><span></span><i></i><b></b></div>
                 <div class="scene-content">
                     <h3>创业者</h3>
-                    <p>掌控业务全局，管理客户关系和业务数据。AI 帮你做出更明智的商业决策。</p>
+                    <p>将想法、项目背景与待办事项集中整理，在复杂工作中保持清晰。</p>
                     <ul>
-                        <li>✓ 客户关系管理</li>
-                        <li>✓ 业务数据分析</li>
-                        <li>✓ 决策辅助支持</li>
+                        <li>✓ 梳理项目上下文</li>
+                        <li>✓ 比较不同方案</li>
+                        <li>✓ 形成可检查的行动计划</li>
                     </ul>
+                    <span class="atlas-card-jump">进入个人智能工作台 →</span>
                 </div>
-            </article>
+            </a>
         </div>
     </section>
-    <section class="ai-flow" id="workflow">
-        <div class="section-header">
-            <div class="section-eyebrow">AI 工作流</div>
-            <h2 class="section-title">从混乱输入，到清晰行动</h2>
-            <p class="section-description">ATLAS 将信息理解、记忆和执行连接成一个持续运行的智能回路。</p>
+    <section class="workflow-demo" id="workflow" aria-labelledby="workflow-title">
+        <div class="workflow-heading">
+            <p class="section-eyebrow">从信息，到行动</p>
+            <h2 class="section-title" id="workflow-title">一组项目资料，如何变成下一步？</h2>
+            <p class="section-description">以准备产品评审为例，看看信息如何汇总为可检查的行动建议。</p>
         </div>
-        <div class="flow-track">
-            <div class="flow-step"><span class="flow-index">01</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5h14v10H5zM8 19h8M12 15v4"/></svg><h3>捕获</h3><p>收集对话、任务与灵感</p></div>
-            <div class="flow-line"></div>
-            <div class="flow-step"><span class="flow-index">02</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7"/><path d="m9 12 2 2 4-5"/></svg><h3>理解</h3><p>识别意图与优先级</p></div>
-            <div class="flow-line"></div>
-            <div class="flow-step"><span class="flow-index">03</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg><h3>行动</h3><p>生成下一步并自动执行</p></div>
+        <div class="workflow-layout">
+            <div class="workflow-steps" role="group" aria-label="选择流程步骤">
+                <button class="workflow-step is-active" type="button" data-workflow-step="0" aria-controls="workflow-panel-0" aria-pressed="true"><span>01</span>收集资料</button>
+                <button class="workflow-step" type="button" data-workflow-step="1" aria-controls="workflow-panel-1" aria-pressed="false"><span>02</span>理解上下文</button>
+                <button class="workflow-step" type="button" data-workflow-step="2" aria-controls="workflow-panel-2" aria-pressed="false"><span>03</span>智能组织</button>
+                <button class="workflow-step" type="button" data-workflow-step="3" aria-controls="workflow-panel-3" aria-pressed="false"><span>04</span>提出建议</button>
+                <button class="workflow-step" type="button" data-workflow-step="4" aria-controls="workflow-panel-4" aria-pressed="false"><span>05</span>确认后行动</button>
+            </div>
+            <div class="workflow-panels" aria-live="polite" aria-atomic="true">
+                <article class="workflow-panel is-active" id="workflow-panel-0" data-workflow-panel="0">
+                    <p class="workflow-panel-kicker">01 / 收集资料</p>
+                    <h3>先把相关信息放到一起。</h3>
+                    <p>用户访谈摘录、需求文档和上次会议记录，构成这次评审的资料起点。</p>
+                    <div class="workflow-artifact-list" aria-label="示例项目资料">
+                        <span><i aria-hidden="true">文</i>需求文档 · 评审范围</span>
+                        <span><i aria-hidden="true">记</i>用户访谈 · 关键反馈</span>
+                        <span><i aria-hidden="true">会</i>会议记录 · 待确认问题</span>
+                    </div>
+                </article>
+                <article class="workflow-panel" id="workflow-panel-1" data-workflow-panel="1" hidden>
+                    <p class="workflow-panel-kicker">02 / 理解上下文</p>
+                    <h3>把资料放回项目背景中。</h3>
+                    <p>将当前评审目标与相关记录并列呈现，帮助你检查哪些信息值得关注。</p>
+                    <div class="workflow-context-map" aria-label="示例资料关联">
+                        <span class="workflow-context-main">产品评审</span>
+                        <span>用户反馈</span><span>目标用户</span><span>待确认问题</span>
+                    </div>
+                </article>
+                <article class="workflow-panel" id="workflow-panel-2" data-workflow-panel="2" hidden>
+                    <p class="workflow-panel-kicker">03 / 智能组织</p>
+                    <h3>从资料中理出清晰结构。</h3>
+                    <p>把内容整理为评审目标、已有信息与待确认事项；来源仍可回到原始资料核对。</p>
+                    <div class="workflow-organized">
+                        <div><b>评审目标</b><span>确认新版用户流程</span></div>
+                        <div><b>已有信息</b><span>访谈中出现的主要阻碍</span></div>
+                        <div><b>待确认</b><span>范围与负责人</span></div>
+                    </div>
+                </article>
+                <article class="workflow-panel" id="workflow-panel-3" data-workflow-panel="3" hidden>
+                    <p class="workflow-panel-kicker">04 / 提出建议</p>
+                    <h3>给出可检查的下一步。</h3>
+                    <p>根据已整理的背景，建议先核对用户流程与待确认问题，再进入评审。</p>
+                    <div class="workflow-suggestion">
+                        <span>下一步建议</span>
+                        <strong>检查用户流程与待确认问题</strong>
+                        <small>示例建议 · 请先核对资料来源</small>
+                    </div>
+                </article>
+                <article class="workflow-panel" id="workflow-panel-4" data-workflow-panel="4" hidden>
+                    <p class="workflow-panel-kicker">05 / 确认后行动</p>
+                    <h3>由你确认，再继续推进。</h3>
+                    <p>检查建议与执行范围后，再决定是否将其加入工作台。此处为演示，不会写入任务或触发外部操作。</p>
+                    <div class="workflow-confirmation">
+                        <span class="workflow-confirmation-status" role="status" aria-live="polite"><i aria-hidden="true"></i><span data-workflow-status>等待你的确认</span></span>
+                        <div class="workflow-confirmation-actions">
+                            <button type="button" class="workflow-confirm-button" data-workflow-confirm>确认建议</button>
+                            <button type="button" class="workflow-defer-button" data-workflow-defer>暂不采用</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </div>
+        <p class="workflow-disclaimer">演示体验 · 项目名称、资料与建议均为示例内容；交互只更新页面状态，不会执行外部操作。</p>
     </section>
     <!-- Comparison Section -->
-    <section class="comparison" id="comparison" style="padding: 8rem 2rem; background: #ffffff;">
-        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
-            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">为什么选择 ATLAS</div>
-            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">不只是另一个工具</h2>
-            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">ATLAS 将多个应用的功能整合为一个统一的智能系统</p>
+    <section class="comparison" id="comparison" aria-labelledby="comparison-title">
+        <div class="section-header">
+            <div class="section-eyebrow">理解 ATLAS</div>
+            <h2 class="section-title" id="comparison-title">与普通 AI 对话有什么不同？</h2>
+            <p class="section-description">对话工具适合一次提问与回答；ATLAS 更关注个人信息如何在任务之间被组织和延续。</p>
         </div>
 
-        <div style="max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem;">
-            <div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; color: #ef4444; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    传统方式
-                </h3>
-                <ul style="list-style: none; padding: 0; display: grid; gap: 1rem;">
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
-                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
-                        <span style="color: #4b5563;">在多个应用间切换，效率低下</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
-                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
-                        <span style="color: #4b5563;">数据分散，难以获得全局视角</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
-                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
-                        <span style="color: #4b5563;">需要手动整理和同步信息</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
-                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
-                        <span style="color: #4b5563;">缺少智能建议和自动化</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #fef2f2; border-radius: 0.5rem;">
-                        <span style="color: #ef4444; flex-shrink: 0;">✗</span>
-                        <span style="color: #4b5563;">学习曲线陡峭，需要配置多个工具</span>
-                    </li>
+        <div class="comparison-grid">
+            <article class="comparison-col comparison-col--baseline">
+                <div class="comparison-col-header">
+                    <span class="comparison-tag">SESSION-BASED</span>
+                    <h3>普通 AI 对话</h3>
+                </div>
+                <ul class="comparison-list">
+                    <li><span class="comparison-dot" aria-hidden="true"></span><span>通常围绕单次对话窗口组织信息</span></li>
+                    <li><span class="comparison-dot" aria-hidden="true"></span><span>切换任务时，往往需要重新补充项目背景</span></li>
+                    <li><span class="comparison-dot" aria-hidden="true"></span><span>对话记录与长期任务、日程需要另行手动整理</span></li>
+                    <li><span class="comparison-dot" aria-hidden="true"></span><span>适合即时问答、灵感发散与单次文本处理</span></li>
+                    <li><span class="comparison-dot" aria-hidden="true"></span><span>上下文随会话结束而分散在不同历史记录中</span></li>
                 </ul>
-            </div>
+            </article>
 
-            <div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; color: #10b981; margin-bottom: 2rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-                    </svg>
-                    使用 ATLAS
-                </h3>
-                <ul style="list-style: none; padding: 0; display: grid; gap: 1rem;">
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
-                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
-                        <span style="color: #4b5563;">一个统一界面，管理所有事务</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
-                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
-                        <span style="color: #4b5563;">AI 自动连接和分析你的所有数据</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
-                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
-                        <span style="color: #4b5563;">智能助手主动提醒和建议</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
-                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
-                        <span style="color: #4b5563;">自动化处理重复性任务</span>
-                    </li>
-                    <li style="display: flex; gap: 0.75rem; padding: 1rem; background: #f0fdf4; border-radius: 0.5rem;">
-                        <span style="color: #10b981; flex-shrink: 0;">✓</span>
-                        <span style="color: #4b5563;">开箱即用，几分钟即可上手</span>
-                    </li>
+            <article class="comparison-col comparison-col--atlas">
+                <div class="comparison-col-header">
+                    <span class="comparison-tag comparison-tag--accent">CONTEXT-FIRST OS</span>
+                    <h3>ATLAS 的方向</h3>
+                </div>
+                <ul class="comparison-list">
+                    <li><span class="comparison-check" aria-hidden="true">✓</span><span>围绕个人任务、长期记忆与资料持续组织上下文</span></li>
+                    <li><span class="comparison-check" aria-hidden="true">✓</span><span>在统一工作台中并列查看关联记忆、日程与待办</span></li>
+                    <li><span class="comparison-check" aria-hidden="true">✓</span><span>从自然语言输入直接拆解为可追踪的下一步建议</span></li>
+                    <li><span class="comparison-check" aria-hidden="true">✓</span><span>智能体动作先进入待确认队列，由你核对后再执行</span></li>
+                    <li><span class="comparison-check" aria-hidden="true">✓</span><span>支持随时通过 <kbd>⌘K</kbd> 命令中心跨页面检索与调度</span></li>
                 </ul>
-            </div>
+            </article>
         </div>
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq" id="faq" style="padding: 8rem 2rem; background: #f8f9fa;">
-        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
-            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">常见问题</div>
-            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">你可能想知道</h2>
-            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">关于 ATLAS 的常见问题解答</p>
+    <section class="faq" id="faq" aria-labelledby="faq-title">
+        <div class="section-header">
+            <div class="section-eyebrow">常见问题</div>
+            <h2 class="section-title" id="faq-title">关于 ATLAS</h2>
+            <p class="section-description">先了解产品边界，再选择适合自己的体验方式。</p>
         </div>
-
-        <div style="max-width: 800px; margin: 0 auto; display: grid; gap: 1.5rem;">
-            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
-                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
-                    ATLAS 是什么？
-                </h3>
-                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
-                    ATLAS 是一个 AI 驱动的个人智能操作系统，帮助你管理日常生活、工作任务、个人记忆和各种信息。它就像你的数字大脑，记住所有重要的事情，并在你需要时提供智能建议。
-                </p>
-            </div>
-
-            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
-                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
-                    我的数据安全吗？
-                </h3>
-                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
-                    你的数据安全是我们的首要任务。我们使用端到端加密保护你的所有信息，数据只存储在你的设备或加密的云端。我们永远不会将你的个人数据用于训练 AI 模型或出售给第三方。
-                </p>
-            </div>
-
-            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
-                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
-                    需要付费吗？
-                </h3>
-                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
-                    ATLAS 提供免费版本，包含核心功能。如果你需要更高级的 AI 能力、更大的存储空间和优先支持，可以升级到专业版。我们提供 14 天免费试用，无需信用卡。
-                </p>
-            </div>
-
-            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
-                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
-                    支持哪些平台？
-                </h3>
-                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
-                    ATLAS 支持 Web、iOS、Android、macOS 和 Windows。你的数据会在所有设备间实时同步，让你随时随地访问。
-                </p>
-            </div>
-
-            <div style="background: white; border-radius: 1rem; padding: 2rem; box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);">
-                <h3 style="font-size: 1.25rem; font-weight: 700; color: #1a1a1a; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.75rem;">
-                    <span style="width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.875rem; font-weight: 700; flex-shrink: 0;">Q</span>
-                    可以导入现有数据吗？
-                </h3>
-                <p style="font-size: 1rem; line-height: 1.6; color: #4b5563; padding-left: 3rem;">
-                    可以！ATLAS 支持从 Google Calendar、Notion、Evernote、Apple Notes 等主流应用导入数据。我们还提供 API 和插件，方便与你现有的工具集成。
-                </p>
-            </div>
+        <div class="faq-list">
+            <details class="faq-item">
+                <summary>ATLAS 是什么？</summary>
+                <p>ATLAS 是个人智能操作系统，旨在帮助你理解、组织个人信息，并将复杂事务转化为清晰的下一步。</p>
+            </details>
+            <details class="faq-item">
+                <summary>ATLAS 与普通 AI 聊天工具有什么不同？</summary>
+                <p>普通聊天工具适合快速问答；ATLAS 更关注任务、资料与长期上下文之间的组织。具体能力请以当前可用的产品界面为准。</p>
+            </details>
+            <details class="faq-item">
+                <summary>ATLAS 会自动替我执行操作吗？</summary>
+                <p>不会擅自替你执行外部操作。智能体生成的建议会先进入待确认队列，由你在工作台或命令中心核对并点击批准后才会写入任务或记忆库。</p>
+            </details>
+            <details class="faq-item">
+                <summary>我的信息如何存储和删除？</summary>
+                <p>未登录访客的沙盒与工作台体验数据保存在当前浏览器本地存储中（可随时在 <kbd>⌘K</kbd> 命令中心一键重置）；登录用户的数据同步方式请阅读<a href="privacy-policy.html">隐私政策</a>。</p>
+            </details>
+            <details class="faq-item">
+                <summary>如何开始体验？</summary>
+                <p>你可以直接在上方实时交互沙盒输入一句话体验拆解，或前往<a href="home.html">个人工作台</a>、<a href="agents.html">智能体中心</a>和<a href="memory.html">个人知识库</a>体验完整动态闭环。</p>
+            </details>
         </div>
     </section>
 
     <!-- Tech Stack Section -->
-    <section class="tech-stack" style="padding: 8rem 2rem; background: linear-gradient(180deg, #1a1a1a 0%, #2a2a2a 100%); color: white;">
-        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
-            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: #06b6d4; margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">强大技术</div>
-            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem; color: white;">基于前沿 AI 技术</h2>
-            <p class="section-description" style="font-size: 1.25rem; color: #a1a1a6; line-height: 1.5;">我们使用最先进的技术为你提供最佳体验</p>
+    <section class="tech-stack" aria-labelledby="tech-stack-title">
+        <div class="section-header">
+            <div class="section-eyebrow">透明说明</div>
+            <h2 class="section-title" id="tech-stack-title">能力与边界，清晰可见</h2>
+            <p class="section-description">模型、数据处理与操作能力以当前部署和页面说明为准。</p>
         </div>
 
-        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem;">
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+        <div class="tech-grid">
+            <a class="tech-card" href="ask.html">
                 <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></div>
-                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">多模型 AI</h3>
-                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
-                    集成 GPT-4、Claude 等顶级 AI 模型
-                </p>
-            </div>
+                <h3>模型服务</h3>
+                <p>通过受保护的后端 API 连接私有推理引擎，自动注入你的个人记忆与待办上下文。</p>
+                <span class="atlas-card-jump">体验 AI 问询 →</span>
+            </a>
 
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+            <a class="tech-card" href="privacy-policy.html">
                 <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg></div>
-                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">端到端加密</h3>
-                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
-                    军用级加密保护你的隐私
-                </p>
-            </div>
+                <h3>数据处理</h3>
+                <p>支持本地优先即时响应与云端账户同步，详细存储、传输与保留方式透明公开。</p>
+                <span class="atlas-card-jump">阅读隐私政策 →</span>
+            </a>
 
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+            <a class="tech-card" href="agents-actions.html">
                 <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></div>
-                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">实时同步</h3>
-                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
-                    毫秒级响应，跨设备即时更新
-                </p>
-            </div>
+                <h3>操作确认</h3>
+                <p>所有智能体规划的行动均提供清晰的来源说明与待确认状态，由你掌握最终决定权。</p>
+                <span class="atlas-card-jump">查看待确认动作 →</span>
+            </a>
 
-            <div style="background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 1rem; padding: 2rem; text-align: center; backdrop-filter: blur(10px);">
+            <a class="tech-card" href="memory.html">
                 <div class="tech-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><circle cx="5" cy="7" r="2"/><circle cx="19" cy="7" r="2"/><circle cx="19" cy="18" r="2"/><path d="m7 8 2 2m6 0 2-2m-2 5 2 2"/></svg></div>
-                <h3 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;">知识图谱</h3>
-                <p style="font-size: 0.9375rem; color: #a1a1a6; line-height: 1.5;">
-                    智能连接你的所有信息
-                </p>
-            </div>
+                <h3>知识组织</h3>
+                <p>将零散记录转化为可筛选、可关联的结构化记忆节点，让每一次提问都有据可依。</p>
+                <span class="atlas-card-jump">探索记忆星图 →</span>
+            </a>
         </div>
     </section>
-
-
-    
-
-    <!-- How It Works Section -->
-    <section class="how-it-works" style="padding: 8rem 2rem; background: #ffffff;">
-        <div class="section-header" style="text-align: center; max-width: 780px; margin: 0 auto 5rem;">
-            <div class="section-eyebrow" style="font-size: 1rem; font-weight: 600; color: var(--color-primary); margin-bottom: 0.5rem; letter-spacing: 0.05em; text-transform: uppercase;">如何开始</div>
-            <h2 class="section-title" style="font-size: clamp(2.5rem, 5vw, 3.5rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 1rem;">三步开始使用</h2>
-            <p class="section-description" style="font-size: 1.25rem; color: var(--color-text-secondary); line-height: 1.5;">只需几分钟，即可开启你的智能生活</p>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; max-width: 1000px; margin: 0 auto;">
-            <div style="text-align: center;">
-                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">1</div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #1a1a1a;">创建账户</h3>
-                <p style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
-                    使用邮箱或社交账号快速注册，30秒完成设置
-                </p>
-            </div>
-
-            <div style="text-align: center;">
-                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(240, 147, 251, 0.3);">2</div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #1a1a1a;">连接数据</h3>
-                <p style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
-                    导入日历、邮件和笔记，或从头开始建立你的数据
-                </p>
-            </div>
-
-            <div style="text-align: center;">
-                <div style="width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; color: white; font-size: 2rem; font-weight: 700; box-shadow: 0 10px 30px rgba(79, 172, 254, 0.3);">3</div>
-                <h3 style="font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; color: #1a1a1a;">开始使用</h3>
-                <p style="font-size: 1rem; color: #6b7280; line-height: 1.6;">
-                    与 AI 助手对话，让 ATLAS 开始为你工作
-                </p>
-            </div>
-        </div>
-    </section>
-
-
     <!-- CTA Section -->
     <section class="cta" id="cta">
-        <h2>准备好改变你的生活了吗？</h2>
-        <p>加入数千名使用 ATLAS 保持井井有条和高效的用户。</p>
+        <h2>让复杂归于清晰，让每一步更有方向。</h2>
+        <p>从一个任务、一份资料或一个想法开始。</p>
         <div class="hero-cta">
-            <a href="signup.html" class="btn btn-primary" style="background: white; color: var(--color-primary);">
-                开始免费试用
+            <a href="home.html" class="btn btn-primary">
+                探索 ATLAS
             </a>
-            <a href="pricing.html" class="btn btn-secondary" style="border-color: white; color: white;">
-                查看定价
+            <a href="#features" class="btn btn-secondary">
+                了解产品能力
             </a>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="footer" style="background: #0a0a0a; color: #a1a1a6; padding: 6rem 2rem 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
+    <footer class="footer" style="background: #0b111d; color: #b8c7d9; padding: 6rem 2rem 2rem; border-top: 1px solid rgba(255, 255, 255, 0.1);">
         <div style="max-width: 1400px; margin: 0 auto;">
             <!-- 页脚主要内容 -->
             <div style="display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 4rem; margin-bottom: 4rem;">
@@ -1129,9 +1339,9 @@
                         <img src="assets/img/atlas-logo.jpg" alt="ATLAS" style="width: 40px; height: 40px; border-radius: 10px;">
                         <span style="font-size: 1.5rem; font-weight: 700; color: white;">ATLAS</span>
                     </div>
-                    <p style="font-size: 0.9375rem; line-height: 1.6; color: #6b7280; margin-bottom: 2rem; max-width: 320px;">
-                        你的个人 AI 智能操作系统<br>
-                        让生活井井有条，工作高效有序
+                    <p style="font-size: 0.9375rem; line-height: 1.6; color: #a3b2c5; margin-bottom: 2rem; max-width: 320px;">
+                        个人智能操作系统<br>
+                        让 AI 理解、组织并协助管理你的数字生活
                     </p>
                     <!-- 中国区社交入口 -->
                     <div style="display: flex; flex-wrap: wrap; gap: 0.75rem;">
@@ -1169,12 +1379,12 @@
                 <div>
                     <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">产品</h4>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="#features" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">功能特性</a></li>
-                        <li><a href="pricing.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">定价方案</a></li>
-                        <li><a href="home.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">工作台</a></li>
-                        <li><a href="ask.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">AI 问询</a></li>
-                        <li><a href="memory.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">智能记忆</a></li>
-                        <li><a href="agents.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">AI 智能体</a></li>
+                        <li><a href="product.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">产品能力</a></li>
+                        <li><a href="pricing.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">定价方案</a></li>
+                        <li><a href="home.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">工作台</a></li>
+                        <li><a href="ask.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">AI 问询</a></li>
+                        <li><a href="memory.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">智能记忆</a></li>
+                        <li><a href="agents.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">AI 智能体</a></li>
                     </ul>
                 </div>
 
@@ -1182,13 +1392,13 @@
                 <div>
                     <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">资源</h4>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="blog.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">博客</a></li>
-                        <li><a href="help-center.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">帮助中心</a></li>
-                        <li><a href="developers.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">开发者中心</a></li>
-                        <li><a href="agents.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">AI 智能体</a></li>
-                        <li><a href="api.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">API 接口</a></li>
-                        <li><a href="community.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">社区论坛</a></li>
-                        <li><a href="changelog.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">更新日志</a></li>
+                        <li><a href="blog.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">博客</a></li>
+                        <li><a href="help-center.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">帮助中心</a></li>
+                        <li><a href="developers.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">开发者中心</a></li>
+                        <li><a href="agents.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">AI 智能体</a></li>
+                        <li><a href="api.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">API 接口</a></li>
+                        <li><a href="community.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">社区论坛</a></li>
+                        <li><a href="changelog.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">更新日志</a></li>
                     </ul>
                 </div>
 
@@ -1196,11 +1406,11 @@
                 <div>
                     <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">公司</h4>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="team.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">关于我们</a></li>
-                        <li><a href="careers.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">加入我们</a></li>
-                        <li><a href="news.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">新闻动态</a></li>
-                        <li><a href="partners.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">合作伙伴</a></li>
-                        <li><a href="contact.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">联系我们</a></li>
+                        <li><a href="team.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">关于我们</a></li>
+                        <li><a href="careers.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">加入我们</a></li>
+                        <li><a href="news.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">新闻动态</a></li>
+                        <li><a href="partners.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">合作伙伴</a></li>
+                        <li><a href="contact.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">联系我们</a></li>
                     </ul>
                 </div>
 
@@ -1208,10 +1418,10 @@
                 <div>
                     <h4 style="font-size: 0.875rem; font-weight: 600; color: white; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 0.05em;">法律</h4>
                     <ul style="list-style: none; padding: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-                        <li><a href="privacy-policy.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">隐私政策</a></li>
-                        <li><a href="terms.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">服务条款</a></li>
-                        <li><a href="cookies.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">Cookie 政策</a></li>
-                        <li><a href="copyright.html" style="color: #6b7280; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#6b7280'">版权声明</a></li>
+                        <li><a href="privacy-policy.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">隐私政策</a></li>
+                        <li><a href="terms.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">服务条款</a></li>
+                        <li><a href="cookies.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">Cookie 政策</a></li>
+                        <li><a href="copyright.html" style="color: #a3b2c5; text-decoration: none; font-size: 0.9375rem; transition: color 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='#a3b2c5'">版权声明</a></li>
                     </ul>
                 </div>
             </div>
@@ -1229,7 +1439,7 @@
             </div>
         </div>
     </footer>
-    <section class="site-legal-footer" aria-label="网站版权与备案信息">
+    <section class="site-legal-footer atlas-no-reveal" aria-label="网站版权与备案信息">
         <div class="site-legal-inner">
             <div class="site-legal-primary">
                 <p>© 2026 Atlas Intelligence (Shanghai) Inc. 保留所有权利。</p>
@@ -1267,11 +1477,12 @@
         }
     </style>
 
-    <script src="assets/js/atlas-shell.js?v=20261013a"></script>
-    <script src="assets/js/atlas-scroll.js"></script>
-    <script src="assets/js/atlas-hero-motion.js?v=20261023a"></script>
+    <script src="assets/js/atlas-shell.js?v=20261106-layout"></script>
+    <script src="assets/js/atlas-scroll.js?v=20261106c"></script>
     <script src="assets/js/product-film.js?v=20261013a"></script>
+    <script src="assets/js/homepage-workflow.js?v=20261026a"></script>
     <script src="assets/js/device-model.js?v=20261023f"></script>
+    <script src="assets/js/apple-atlas-video.js?v=20261106b"></script>
 
     <style>
         /* 3D 卡片效果 */
@@ -1283,18 +1494,6 @@
 
         .card-3d:hover {
             transform: translateY(-10px) rotateX(5deg);
-        }
-
-        /* 粒子背景容器 */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            opacity: 0.6;
         }
 
         /* 增强的卡片 3D 效果 */
@@ -1309,19 +1508,6 @@
             transform: translateY(-8px) translateZ(20px);
         }
 
-        /* 鼠标跟随光效 */
-        .mouse-glow {
-            position: fixed;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(102, 126, 234, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            transition: opacity 0.3s;
-        }
-
         /* 优化动画性能 */
         @media (prefers-reduced-motion: reduce) {
             .card-3d,
@@ -1332,180 +1518,7 @@
         }
     </style>
 
-    <!-- 粒子背景画布 -->
-    <canvas id="particles-canvas"></canvas>
-
-    <!-- 鼠标跟随光效 -->
-    <div class="mouse-glow" id="mouseGlow" style="opacity: 0;"></div>
-
     <script>
-        // 粒子系统
-        (function() {
-            const canvas = document.getElementById('particles-canvas');
-            if (!canvas) return;
-
-            const ctx = canvas.getContext('2d');
-            let particles = [];
-            let animationId;
-
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-
-            class Particle {
-                constructor() {
-                    this.reset();
-                }
-
-                reset() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.vx = (Math.random() - 0.5) * 0.5;
-                    this.vy = (Math.random() - 0.5) * 0.5;
-                    this.radius = Math.random() * 2 + 1;
-                    this.opacity = Math.random() * 0.5 + 0.2;
-                }
-
-                update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
-                    if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
-                }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(102, 126, 234, ${this.opacity})`;
-                    ctx.fill();
-                }
-            }
-
-            function init() {
-                resizeCanvas();
-                particles = [];
-                for (let i = 0; i < 50; i++) {
-                    particles.push(new Particle());
-                }
-            }
-
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                // 绘制粒子
-                particles.forEach(particle => {
-                    particle.update();
-                    particle.draw();
-                });
-
-                // 连接附近的粒子
-                for (let i = 0; i < particles.length; i++) {
-                    for (let j = i + 1; j < particles.length; j++) {
-                        const dx = particles[i].x - particles[j].x;
-                        const dy = particles[i].y - particles[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < 150) {
-                            ctx.beginPath();
-                            ctx.strokeStyle = `rgba(102, 126, 234, ${0.1 * (1 - distance / 150)})`;
-                            ctx.lineWidth = 0.5;
-                            ctx.moveTo(particles[i].x, particles[i].y);
-                            ctx.lineTo(particles[j].x, particles[j].y);
-                            ctx.stroke();
-                        }
-                    }
-                }
-
-                animationId = requestAnimationFrame(animate);
-            }
-
-            init();
-            animate();
-
-            window.addEventListener('resize', () => {
-                cancelAnimationFrame(animationId);
-                init();
-                animate();
-            });
-        })();
-
-        // 鼠标跟随光效
-        (function() {
-            const glow = document.getElementById('mouseGlow');
-            if (!glow) return;
-
-            let mouseX = 0, mouseY = 0;
-            let glowX = 0, glowY = 0;
-
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                glow.style.opacity = '1';
-            });
-
-            document.addEventListener('mouseleave', () => {
-                glow.style.opacity = '0';
-            });
-
-            function animateGlow() {
-                glowX += (mouseX - glowX) * 0.1;
-                glowY += (mouseY - glowY) * 0.1;
-
-                glow.style.left = glowX + 'px';
-                glow.style.top = glowY + 'px';
-
-                requestAnimationFrame(animateGlow);
-            }
-
-            animateGlow();
-        })();
-
-        // 3D 卡片倾斜效果
-        (function() {
-            const cards = document.querySelectorAll('.feature-card');
-
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const rect = card.getBoundingClientRect();
-                    const x = e.clientX - rect.left;
-                    const y = e.clientY - rect.top;
-
-                    const centerX = rect.width / 2;
-                    const centerY = rect.height / 2;
-
-                    const rotateX = (y - centerY) / 10;
-                    const rotateY = (centerX - x) / 10;
-
-                    card.style.transform = `
-                        translateY(-8px)
-                        rotateX(${rotateX}deg)
-                        rotateY(${rotateY}deg)
-                        scale(1.02)
-                    `;
-                });
-
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = '';
-                });
-            });
-        })();
-
-        // 滚动视差效果
-        (function() {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const parallaxElements = document.querySelectorAll('[data-parallax]');
-
-                parallaxElements.forEach(element => {
-                    const speed = element.dataset.parallax || 0.5;
-                    const yPos = -(scrolled * speed);
-                    element.style.transform = `translateY(${yPos}px)`;
-                });
-            });
-        })();
-
     </script>
 
 </body>

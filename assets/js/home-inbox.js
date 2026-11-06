@@ -232,6 +232,35 @@
     text.className = 'capture-inbox__text';
     text.textContent = item.text;
 
+    const actionsWrap = document.createElement('div');
+    actionsWrap.style.display = 'inline-flex';
+    actionsWrap.style.alignItems = 'center';
+    actionsWrap.style.gap = '0.4rem';
+
+    const promoteButton = document.createElement('button');
+    promoteButton.className = 'capture-inbox__remove';
+    promoteButton.style.color = '#1d4ed8';
+    promoteButton.style.fontWeight = '600';
+    promoteButton.type = 'button';
+    promoteButton.textContent = locale.startsWith('en') ? 'Promote to Task' : '转为待办 →';
+    promoteButton.addEventListener('click', () => {
+      if (window.AtlasOS) {
+        const analysis = window.AtlasOS.analyzeInput(item.text);
+        const task = window.AtlasOS.addTask({
+          title: analysis ? analysis.extracted_task.title : item.text,
+          priority: analysis ? analysis.extracted_task.priority : 'medium',
+          due_date: analysis ? analysis.extracted_task.due_date : '今日待办',
+          project: analysis ? analysis.extracted_task.project : '个人工作台',
+          source: 'inbox_promoted'
+        });
+        removeItem(item.id);
+        setStatus(locale.startsWith('en') ? 'Promoted to workspace task.' : `已升级为工作台任务：「${task.title}」`);
+        if (typeof window.AtlasOS.toast === 'function') {
+          window.AtlasOS.toast(`已升级为待办任务：「${task.title}」`);
+        }
+      }
+    });
+
     const removeButton = document.createElement('button');
     removeButton.className = 'capture-inbox__remove';
     removeButton.type = 'button';
@@ -239,7 +268,8 @@
     removeButton.setAttribute('aria-label', `${language.remove}: ${item.text}`);
     removeButton.addEventListener('click', () => removeItem(item.id));
 
-    row.append(text, removeButton);
+    actionsWrap.append(promoteButton, removeButton);
+    row.append(text, actionsWrap);
     return row;
   }
 

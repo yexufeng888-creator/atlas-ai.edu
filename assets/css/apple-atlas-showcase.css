@@ -1,0 +1,295 @@
+body.atlas-marketing-home .apple-atlas-home-link {
+    display: inline-flex;
+    align-items: center;
+    gap: .5rem;
+    margin: .5rem 0 0 .15rem;
+    padding: .35rem .2rem;
+    color: #304b68;
+    font-size: .78rem;
+    font-weight: 650;
+    text-decoration: none;
+    transition: color .2s ease, gap .2s ease;
+}
+
+body.atlas-marketing-home .apple-atlas-home-link:hover {
+    gap: .72rem;
+    color: #145c9e;
+}
+
+body.atlas-marketing-home .apple-atlas-home-link:focus-visible,
+body.atlas-marketing-home .apple-atlas-showcase__actions a:focus-visible {
+    outline: 3px solid rgba(112, 184, 255, .72);
+    outline-offset: 4px;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding: clamp(5rem, 8.5vw, 8rem) 1.5rem;
+    color: #f4f7fb;
+    background: #000;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__inner {
+    display: grid;
+    grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+    align-items: center;
+    gap: clamp(3rem, 7vw, 7rem);
+    width: min(1200px, 100%);
+    margin: 0 auto;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__copy {
+    max-width: 570px;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__copy,
+body.atlas-marketing-home .apple-atlas-showcase__visual {
+    transition:
+        opacity .72s cubic-bezier(.22, 1, .36, 1),
+        transform .92s cubic-bezier(.22, 1, .36, 1);
+}
+
+body.atlas-marketing-home .apple-atlas-showcase--scroll-ready:not(.is-in-view) .apple-atlas-showcase__copy {
+    opacity: 0;
+    transform: translate3d(0, 2rem, 0);
+}
+
+body.atlas-marketing-home .apple-atlas-showcase--scroll-ready:not(.is-in-view) .apple-atlas-showcase__visual {
+    opacity: 0;
+    transform: translate3d(0, 3rem, 0);
+}
+
+body.atlas-marketing-home .apple-atlas-showcase.is-in-view .apple-atlas-showcase__visual {
+    transition-delay: .12s;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__eyebrow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .7rem;
+    margin: 0 0 1.35rem;
+    color: #c2d0df;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .14em;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__concept {
+    padding: .28rem .55rem;
+    border: 1px solid rgba(228, 190, 160, .3);
+    border-radius: 999px;
+    color: #e7c2a8;
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .04em;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__copy h2 {
+    margin: 0 0 1.3rem;
+    color: #f7f8fa;
+    font-size: clamp(2.35rem, 4vw, 3.65rem);
+    font-weight: 520;
+    line-height: 1.2;
+    letter-spacing: -.055em;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__copy h2 span {
+    color: #c3d3e4;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__intro {
+    max-width: 520px;
+    margin: 0;
+    color: #b6c2d0;
+    font-size: .98rem;
+    line-height: 1.85;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__steps {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem 1rem;
+    margin: 2rem 0 1.8rem;
+    padding: 0;
+    list-style: none;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__steps li {
+    display: flex;
+    align-items: flex-start;
+    gap: .7rem;
+    min-width: 0;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__step-number {
+    flex: 0 0 auto;
+    color: #d7ad8d;
+    font-size: .65rem;
+    font-weight: 700;
+    letter-spacing: .06em;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__steps strong,
+body.atlas-marketing-home .apple-atlas-showcase__steps small {
+    display: block;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__steps strong {
+    margin: -.12rem 0 .23rem;
+    color: #edf2f7;
+    font-size: .82rem;
+    font-weight: 650;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__steps small {
+    color: #9eacbc;
+    font-size: .72rem;
+    line-height: 1.55;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .7rem 1.2rem;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__primary,
+body.atlas-marketing-home .apple-atlas-showcase__secondary {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: .55rem;
+    text-decoration: none;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__primary {
+    padding: .68rem 1.05rem;
+    border: 1px solid #e8eef5;
+    border-radius: 999px;
+    color: #111a24;
+    background: #edf3f8;
+    font-size: .8rem;
+    font-weight: 700;
+    transition: transform .2s ease, background-color .2s ease;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__primary:hover {
+    transform: translateY(-2px);
+    background: #fff;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__secondary {
+    color: #d1dce8;
+    font-size: .77rem;
+    font-weight: 600;
+    transition: color .2s ease;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__secondary:hover {
+    color: #fff;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__secondary svg {
+    width: 15px;
+    height: 15px;
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 1.5;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__note {
+    max-width: 550px;
+    margin: 1rem 0 0;
+    color: #8998a9;
+    font-size: .67rem;
+    line-height: 1.7;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__visual {
+    position: relative;
+    display: grid;
+    min-height: 0;
+    align-items: center;
+    padding: 0;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__visual-frame {
+    position: relative;
+    width: min(100%, 560px);
+    margin: 0 auto;
+    padding: 0;
+    background: #000;
+}
+
+body.atlas-marketing-home .apple-atlas-showcase__video {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2160 / 2310;
+    object-fit: contain;
+    object-position: center;
+    border: 0;
+    border-radius: 14px;
+    background: #000;
+}
+
+@media (max-width: 900px) {
+    body.atlas-marketing-home .apple-atlas-showcase__inner {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.5rem;
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase__copy {
+        max-width: 720px;
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase__visual {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 560px) {
+    body.atlas-marketing-home .apple-atlas-showcase {
+        padding: 4.5rem 1.1rem;
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase__copy h2 {
+        font-size: clamp(2.15rem, 9vw, 2.85rem);
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase__steps {
+        grid-template-columns: minmax(0, 1fr);
+        gap: .9rem;
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase__visual {
+        min-height: 0;
+        padding: 0;
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase__actions {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    body.atlas-marketing-home .apple-atlas-home-link,
+    body.atlas-marketing-home .apple-atlas-showcase__primary {
+        transition: none;
+    }
+
+    body.atlas-marketing-home .apple-atlas-showcase--scroll-ready .apple-atlas-showcase__copy,
+    body.atlas-marketing-home .apple-atlas-showcase--scroll-ready .apple-atlas-showcase__visual {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
+}
