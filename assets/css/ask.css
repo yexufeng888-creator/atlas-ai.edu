@@ -1639,3 +1639,102 @@ body {
         font-size: .77rem;
     }
 }
+
+@media (min-width: 769px) {
+    body.page-ask.has-atlas-dock {
+        padding-bottom: 0;
+    }
+
+    body.page-ask.has-atlas-dock .atlas-os-dock {
+        display: none;
+    }
+
+    body.page-ask.has-atlas-dock .ask-main .input-area {
+        padding-bottom: .8rem !important;
+    }
+
+    .ask-container .model-selector {
+        gap: .45rem;
+    }
+
+    .ask-container .model-btn {
+        min-height: 2.1rem;
+        padding: .4rem .72rem;
+        font-size: .79rem;
+    }
+}
+
+.ask-container .message-content .atlas-gen-action-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: .75rem 1rem;
+    margin: .9rem 0 0;
+    padding: .9rem 1rem;
+    border: 1px solid rgba(99, 164, 255, .24);
+    border-radius: 1rem;
+    background: linear-gradient(135deg, rgba(18, 31, 49, .98), rgba(22, 39, 61, .96));
+    color: #e7eefb;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .04), 0 10px 24px rgba(0, 0, 0, .2);
+}
+
+.ask-container .message-content .atlas-gen-action-copy {
+    display: grid;
+    min-width: 0;
+    gap: .3rem;
+}
+
+.ask-container .message-content .atlas-gen-action-label {
+    color: #7dd3fc;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .04em;
+}
+
+.ask-container .message-content .atlas-gen-action-title {
+    color: #f1f5f9;
+    display: -webkit-box;
+    font-size: .86rem;
+    font-weight: 600;
+    line-height: 1.45;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.ask-container .message-content .atlas-gen-action-card button {
+    min-height: 2.2rem;
+    padding: .45rem .85rem;
+    border: 1px solid rgba(147, 197, 253, .28);
+    border-radius: 999px;
+    background: linear-gradient(135deg, #2563eb, #0e7490);
+    color: #fff;
+    font: inherit;
+    font-size: .76rem;
+    font-weight: 650;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: filter .16s ease, transform .16s ease;
+}
+
+.ask-container .message-content .atlas-gen-action-card button:hover:not(:disabled) {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+}
+
+.ask-container .message-content .atlas-gen-action-card button:disabled {
+    border-color: rgba(52, 211, 153, .22);
+    background: rgba(16, 185, 129, .13);
+    color: #a7f3d0;
+    cursor: default;
+}
+
+@media (max-width: 480px) {
+    .ask-container .message-content .atlas-gen-action-card {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .ask-container .message-content .atlas-gen-action-card button {
+        justify-self: start;
+    }
+}

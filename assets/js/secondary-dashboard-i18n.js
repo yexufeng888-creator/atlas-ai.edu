@@ -962,7 +962,11 @@
       '请填写豆包模型 ID': '請填寫豆包模型 ID',
       'API Key 模式填写模型列表中的 Model ID。默认使用北京地域 API 地址，模型与 API Key 的地域需与 Base URL 一致。': 'API Key 模式請填寫模型清單中的 Model ID。預設使用北京地區 API 位址，模型與 API Key 的地區需與 Base URL 一致。',
       '管理 API Key →': '管理 API Key →',
-      '查看模型列表 →': '查看模型清單 →'
+      '查看模型列表 →': '查看模型清單 →',
+      'AI 建议 · 可加入工作台': 'AI 建議 · 可加入工作台',
+      '添加到工作台': '新增至工作台',
+      '✓ 已添加到工作台': '✓ 已新增至工作台',
+      '已将该建议沉淀至个人工作台待办': '已將該建議記錄至個人工作台待辦'
     },
     'zh-tw': {
       '密钥保存在当前浏览器。使用外部模型时，对话消息和 API Key 会直接发送给对应服务商，费用按服务商账户结算；请勿在公共设备保存密钥或发送敏感信息。': '金鑰會儲存在目前的瀏覽器。使用外部模型時，對話訊息和 API Key 會直接傳送至對應服務商，費用按服務商帳戶結算；請勿在公用裝置儲存金鑰或傳送敏感資訊。',
@@ -976,7 +980,11 @@
       '请填写豆包模型 ID': '請填寫豆包模型 ID',
       'API Key 模式填写模型列表中的 Model ID。默认使用北京地域 API 地址，模型与 API Key 的地域需与 Base URL 一致。': 'API Key 模式請填寫模型清單中的 Model ID。預設使用北京地區 API 位址，模型與 API Key 的地區需與 Base URL 一致。',
       '管理 API Key →': '管理 API Key →',
-      '查看模型列表 →': '查看模型清單 →'
+      '查看模型列表 →': '查看模型清單 →',
+      'AI 建议 · 可加入工作台': 'AI 建議 · 可加入工作台',
+      '添加到工作台': '加入工作台',
+      '✓ 已添加到工作台': '✓ 已加入工作台',
+      '已将该建议沉淀至个人工作台待办': '已將該建議加入個人工作台待辦'
     },
     en: {
       '密钥保存在当前浏览器。使用外部模型时，对话消息和 API Key 会直接发送给对应服务商，费用按服务商账户结算；请勿在公共设备保存密钥或发送敏感信息。': 'Keys are stored in this browser. When you use an external model, the current chat and API key are sent directly to that provider and billed to its account. Do not save keys on public devices or send sensitive information.',
@@ -990,7 +998,11 @@
       '请填写豆包模型 ID': 'Enter a Doubao model ID',
       'API Key 模式填写模型列表中的 Model ID。默认使用北京地域 API 地址，模型与 API Key 的地域需与 Base URL 一致。': 'For API key authentication, enter a Model ID from the model list. The default uses the Beijing API endpoint; the model and API key must match the Base URL region.',
       '管理 API Key →': 'Manage API key →',
-      '查看模型列表 →': 'View model list →'
+      '查看模型列表 →': 'View model list →',
+      'AI 建议 · 可加入工作台': 'AI suggestion · Add to workspace',
+      '添加到工作台': 'Add to workspace',
+      '✓ 已添加到工作台': '✓ Added to workspace',
+      '已将该建议沉淀至个人工作台待办': 'Suggestion added to your personal workspace tasks'
     },
     ja: {
       '密钥保存在当前浏览器。使用外部模型时，对话消息和 API Key 会直接发送给对应服务商，费用按服务商账户结算；请勿在公共设备保存密钥或发送敏感信息。': 'キーはこのブラウザーに保存されます。外部モデルを使用すると、現在のチャットと API キーがプロバイダーに直接送信され、料金はプロバイダーのアカウントに請求されます。共有端末にキーを保存したり、機密情報を送信したりしないでください。',
@@ -1004,7 +1016,11 @@
       '请填写豆包模型 ID': 'Doubao モデル ID を入力してください',
       'API Key 模式填写模型列表中的 Model ID。默认使用北京地域 API 地址，模型与 API Key 的地域需与 Base URL 一致。': 'API Key 認証ではモデル一覧の Model ID を入力してください。デフォルトは北京リージョンの API です。モデルと API キーは Base URL と同じリージョンである必要があります。',
       '管理 API Key →': 'API キーを管理 →',
-      '查看模型列表 →': 'モデル一覧を表示 →'
+      '查看模型列表 →': 'モデル一覧を表示 →',
+      'AI 建议 · 可加入工作台': 'AI の提案 · ワークスペースに追加',
+      '添加到工作台': 'ワークスペースに追加',
+      '✓ 已添加到工作台': '✓ ワークスペースに追加しました',
+      '已将该建议沉淀至个人工作台待办': '提案をワークスペースのタスクに追加しました'
     },
     ko: {
       '密钥保存在当前浏览器。使用外部模型时，对话消息和 API Key 会直接发送给对应服务商，费用按服务商账户结算；请勿在公共设备保存密钥或发送敏感信息。': '키는 이 브라우저에 저장됩니다. 외부 모델을 사용하면 현재 대화와 API 키가 제공업체로 직접 전송되고 해당 계정으로 요금이 청구됩니다. 공용 기기에 키를 저장하거나 민감한 정보를 보내지 마세요.',
@@ -1018,7 +1034,11 @@
       '请填写豆包模型 ID': 'Doubao 모델 ID를 입력하세요',
       'API Key 模式填写模型列表中的 Model ID。默认使用北京地域 API 地址，模型与 API Key 的地域需与 Base URL 一致。': 'API Key 인증에는 모델 목록의 Model ID를 입력하세요. 기본 주소는 베이징 API이며 모델과 API 키는 Base URL과 같은 지역이어야 합니다.',
       '管理 API Key →': 'API 키 관리 →',
-      '查看模型列表 →': '모델 목록 보기 →'
+      '查看模型列表 →': '모델 목록 보기 →',
+      'AI 建议 · 可加入工作台': 'AI 제안 · 작업 공간에 추가',
+      '添加到工作台': '작업 공간에 추가',
+      '✓ 已添加到工作台': '✓ 작업 공간에 추가됨',
+      '已将该建议沉淀至个人工作台待办': '제안을 개인 작업 공간 할 일에 추가했습니다'
     }
   };
   Object.entries(providerSettingsTranslations).forEach(([locale, entries]) => {

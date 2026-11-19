@@ -355,13 +355,16 @@ function populateMessageContent(contentDiv, role, content, model, contextRefs) {
             .map((l) => l.replace(/^[#*\-\d.\s]+/, '').trim())
             .find(Boolean) || '跟进 AI 建议事项';
         const taskTitle = firstLine.slice(0, 56);
+        const actionLabel = translateUI('AI 建议 · 可加入工作台');
+        const saveLabel = translateUI('添加到工作台');
+        const savedLabel = translateUI('✓ 已添加到工作台');
 
         actionCard.innerHTML = `
-            <div style="min-width:0;flex:1;">
-                <div class="atlas-mono-badge" style="font-size:0.66rem;font-weight:700;color:#216db8;">GENERATIVE ACTION · 可执行下一步</div>
-                <div style="font-size:0.8rem;font-weight:600;margin-top:0.15rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeAskHtml(taskTitle)}</div>
+            <div class="atlas-gen-action-copy">
+                <div class="atlas-gen-action-label">${escapeAskHtml(actionLabel)}</div>
+                <div class="atlas-gen-action-title">${escapeAskHtml(taskTitle)}</div>
             </div>
-            <button type="button" data-gen-save-task>+ 写入工作台待办</button>
+            <button type="button" data-gen-save-task>${escapeAskHtml(saveLabel)}</button>
         `;
         const saveBtn = actionCard.querySelector('[data-gen-save-task]');
         saveBtn.addEventListener('click', () => {
@@ -375,8 +378,8 @@ function populateMessageContent(contentDiv, role, content, model, contextRefs) {
                 source: 'ask_generative_ui'
             });
             saveBtn.disabled = true;
-            saveBtn.textContent = '✓ 已写入工作台';
-            showToast('已将该建议沉淀至个人工作台待办');
+            saveBtn.textContent = savedLabel;
+            showToast(translateUI('已将该建议沉淀至个人工作台待办'));
         });
         contentDiv.appendChild(actionCard);
     }
