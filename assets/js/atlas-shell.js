@@ -864,12 +864,12 @@
   if (!document.querySelector('link[href*="atlas-account.css"]')) {
     const accountStyles = document.createElement('link');
     accountStyles.rel = 'stylesheet';
-    accountStyles.href = 'assets/css/atlas-account.css?v=20261119a';
+    accountStyles.href = 'assets/css/atlas-account.css?v=20261119b';
     document.head.appendChild(accountStyles);
   }
   if (!document.querySelector('script[src*="atlas-nav-account.js"]')) {
     const accountScript = document.createElement('script');
-    accountScript.src = 'assets/js/atlas-nav-account.js?v=20261119a';
+    accountScript.src = 'assets/js/atlas-nav-account.js?v=20261119b';
     document.body.appendChild(accountScript);
   }
 

@@ -38,10 +38,18 @@ SYSTEM_PROMPT = (
     "你的名字是 ATLAS，是一位友好、可靠的中文 AI 助手。"
     "回答清晰实用；用户问候或询问身份时，简洁自然地介绍自己。"
     "不要每次回答都重复自我介绍；不确定时坦诚说明，不要编造。"
+    "可以提供简洁、可核查的依据或步骤摘要，但不要展示隐藏的逐步推理内容。"
 )
 VALID_MEMORY_CATEGORIES = frozenset({"personal", "preferences", "work", "relationships"})
 VALID_TASK_STATUSES = frozenset({"todo", "in_progress", "done"})
 VALID_TASK_PRIORITIES = frozenset({"high", "medium", "low"})
+REASONING_DEPTH_INSTRUCTIONS = {
+    "fast": "回答策略：快速。优先直接回答，保留结论和必要信息。使用用户的语言作答，不展示隐藏的逐步推理内容。",
+    "balanced": "",
+    "deep": "回答策略：深入。检查重要前提与边界，说明关键步骤、简短依据和结论。使用用户的语言作答，不展示隐藏的逐步推理内容。",
+    "max": "回答策略：极高。对复杂问题进行更充分的检查和方案比较，说明关键取舍并给出可核查的结论摘要。使用用户的语言作答，不展示隐藏的逐步推理内容。",
+}
+VALID_REASONING_DEPTHS = frozenset(REASONING_DEPTH_INSTRUCTIONS)
 INFERENCE_SLOT = threading.BoundedSemaphore(1)
 LOGGER = logging.getLogger("atlas-api")
 
@@ -56,6 +64,13 @@ def now_iso():
 
 def utc_day():
     return datetime.now(timezone.utc).date().isoformat()
+
+
+def apply_reasoning_depth(system_prompt, reasoning_depth):
+    if not isinstance(reasoning_depth, str) or reasoning_depth not in VALID_REASONING_DEPTHS:
+        raise ValueError("reasoning_depth must be fast, balanced, deep, or max")
+    instruction = REASONING_DEPTH_INSTRUCTIONS[reasoning_depth]
+    return f"{system_prompt}\n\n{instruction}" if instruction else system_prompt
 
 
 def initialize_database(database_path=DATABASE_PATH):
@@ -761,18 +776,32 @@ def decide_agent_action(user_id, action_id, decision, database_path=DATABASE_PAT
     if decision not in ("approve", "defer"):
         raise ValueError("decision must be approve or defer")
     with sqlite3.connect(database_path, timeout=10) as database:
+        database.execute("BEGIN IMMEDIATE")
         row = database.execute(
-            "SELECT agent_name, title, summary, action_type, payload_json, status, created_at FROM agent_actions WHERE id = ? AND user_id = ?",
+            "SELECT agent_name, title, summary, action_type, payload_json, status, created_at, updated_at FROM agent_actions WHERE id = ? AND user_id = ?",
             (action_id, user_id),
         ).fetchone()
         if not row:
             return None
+        if row[5] != "pending":
+            return {
+                "id": action_id,
+                "agent_name": row[0],
+                "title": row[1],
+                "summary": row[2],
+                "action_type": row[3],
+                "payload": json.loads(row[4] or "{}"),
+                "status": row[5],
+                "created_at": row[6],
+                "updated_at": row[7],
+                "created_entity": None,
+            }
         action_type = row[3]
         payload = json.loads(row[4] or "{}")
         new_status = "executed" if decision == "approve" else "deferred"
         timestamp = now_iso()
         database.execute(
-            "UPDATE agent_actions SET status = ?, updated_at = ? WHERE id = ? AND user_id = ?",
+            "UPDATE agent_actions SET status = ?, updated_at = ? WHERE id = ? AND user_id = ? AND status = 'pending'",
             (new_status, timestamp, action_id, user_id),
         )
 
@@ -1146,10 +1175,16 @@ class AtlasAPIHandler(BaseHTTPRequestHandler):
 
         # /api/chat
         include_context = bool(isinstance(payload, dict) and payload.get("include_context"))
+        reasoning_depth = payload.get("reasoning_depth", "balanced") if isinstance(payload, dict) else "balanced"
+        if not isinstance(reasoning_depth, str) or reasoning_depth not in VALID_REASONING_DEPTHS:
+            self.send_json(400, {"error": "reasoning_depth must be fast, balanced, deep, or max"})
+            return
+
         context_refs = []
         system_prompt = SYSTEM_PROMPT
         if include_context:
             system_prompt, context_refs = build_context_system_prompt(user_id)
+        system_prompt = apply_reasoning_depth(system_prompt, reasoning_depth)
 
         try:
             messages = validate_messages(

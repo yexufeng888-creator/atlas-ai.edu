@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta name="description" content="与 ATLAS 对话；可用模型与能力以当前部署配置为准。">
-    <title>对话 - ATLAS</title>
+    <meta name="description" content="与 ATLAS 对话，或将目标交给 Agent 工作流处理。">
+    <title>对话与 Agent 工作 - ATLAS</title>
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
-    <link rel="stylesheet" href="assets/css/ask.css?v=20261119d">
+    <link rel="stylesheet" href="assets/css/ask.css?v=20261119l">
 </head>
 <body class="has-global-nav" data-auth-required="true">
     <nav class="global-nav"></nav>
@@ -50,7 +50,19 @@
                 <button class="ask-sidebar-toggle" id="askSidebarToggle" type="button" aria-label="打开对话历史" aria-controls="chatSidebar" aria-expanded="false">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h10"/></svg>
                 </button>
-                <div class="chat-topbar-title">对话</div>
+                <div class="chat-topbar-center">
+                    <span class="chat-topbar-label">工作模式</span>
+                    <div class="chat-mode-switch" role="group" aria-label="选择工作模式">
+                        <button class="chat-mode-btn active" type="button" data-chat-mode="chat" aria-pressed="true">
+                            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3.5 4.5h13v9h-7l-4 3v-3h-2z"/><path d="M6.5 8h7M6.5 10.5h4.5"/></svg>
+                            <span>对话</span>
+                        </button>
+                        <button class="chat-mode-btn" type="button" data-chat-mode="agent" aria-pressed="false">
+                            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 5.5h12M4 10h7M4 14.5h5"/><path d="m13 13 2 2 3.5-4"/></svg>
+                            <span>Agent 工作</span>
+                        </button>
+                    </div>
+                </div>
                 <button class="chat-topbar-new" id="newChatTopBtn" type="button" aria-label="新对话" title="新对话">
                     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
                 </button>
@@ -59,24 +71,24 @@
             <div class="welcome-screen" id="welcomeScreen">
                 <div class="welcome-content">
                     <img src="assets/img/atlas-logo.jpg" alt="ATLAS" class="welcome-logo">
-                    <h1 class="welcome-title">今天想聊些什么？</h1>
-                    <p class="welcome-subtitle">选择一个 AI 模型开始对话</p>
+                    <h1 class="welcome-title" id="welcomeTitle">今天想聊些什么？</h1>
+                    <p class="welcome-subtitle" id="welcomeSubtitle">选择一个 AI 模型开始对话</p>
 
                     <!-- 快捷建议 -->
                     <div class="quick-suggestions">
-                        <button class="suggestion-card" data-prompt="帮我写一封专业的求职邮件">
+                        <button class="suggestion-card" data-prompt="帮我写一封专业的求职邮件" data-chat-prompt="帮我写一封专业的求职邮件" data-agent-prompt="为本周的求职申请制定计划并拆解成待办任务">
                             <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg></span>
                             <span class="suggestion-text">帮我写一封专业的求职邮件</span>
                         </button>
-                        <button class="suggestion-card" data-prompt="解释一下量子计算的基本原理">
+                        <button class="suggestion-card" data-prompt="解释一下量子计算的基本原理" data-chat-prompt="解释一下量子计算的基本原理" data-agent-prompt="整理一份量子计算入门学习计划并生成阶段任务">
                             <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10" cy="14" r="5"/><path d="m14 10 5-5M13.5 6.5l4 4M8 9l-3-3"/></svg></span>
                             <span class="suggestion-text">解释量子计算的基本原理</span>
                         </button>
-                        <button class="suggestion-card" data-prompt="给我一些提高工作效率的建议">
+                        <button class="suggestion-card" data-prompt="给我一些提高工作效率的建议" data-chat-prompt="给我一些提高工作效率的建议" data-agent-prompt="制定一份提升工作效率的行动计划并拆解成待办任务">
                             <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m13 2-9 12h7l-1 8 9-12h-7l1-8Z"/></svg></span>
                             <span class="suggestion-text">提高工作效率的建议</span>
                         </button>
-                        <button class="suggestion-card" data-prompt="帮我规划一次周末旅行">
+                        <button class="suggestion-card" data-prompt="帮我规划一次周末旅行" data-chat-prompt="帮我规划一次周末旅行" data-agent-prompt="规划周末旅行准备事项并生成待办清单">
                             <span class="suggestion-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 18-7-7 18-3-8-8-3Z"/><path d="m11 14 4-4"/></svg></span>
                             <span class="suggestion-text">帮我规划周末旅行</span>
                         </button>
@@ -91,8 +103,56 @@
 
             <!-- Input Area -->
             <div class="input-area">
+                <div class="agent-workflow-notice" id="agentWorkflowNotice" role="status" hidden>
+                    <span class="agent-workflow-notice-icon" aria-hidden="true">
+                        <svg viewBox="0 0 20 20"><path d="M4 5.5h12M4 10h7M4 14.5h5"/><path d="m13 13 2 2 3.5-4"/></svg>
+                    </span>
+                    <p><strong>Agent 工作流</strong>会将目标交给 ATLAS Planner/Curator，生成待确认建议，不会直接回答或自动执行。你可以在回复卡片中审核并决定。推理深度仅适用于对话模式。</p>
+                </div>
+
+                <details class="reasoning-control" id="reasoningControl" data-level="balanced">
+                    <summary class="reasoning-trigger" aria-label="推理深度">
+                        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="m10 2 1.4 5.2L17 9l-5.6 1.8L10 16l-1.4-5.2L3 9l5.6-1.8L10 2Z"/><path d="m16 13 .7 2.3L19 16l-2.3.7L16 19l-.7-2.3L13 16l2.3-.7L16 13Z"/></svg>
+                        <span class="reasoning-trigger-label">推理深度</span>
+                        <span class="reasoning-current" id="reasoningDepthValue">标准</span>
+                        <svg class="reasoning-chevron" viewBox="0 0 16 16" aria-hidden="true"><path d="m4 6 4 4 4-4"/></svg>
+                    </summary>
+                    <div class="reasoning-popover">
+                        <div class="reasoning-popover-heading">
+                            <div>
+                                <span>回答策略</span>
+                                <strong id="reasoningDepthLabel">标准</strong>
+                            </div>
+                            <span class="reasoning-popover-badge">回答偏好</span>
+                        </div>
+                        <div class="reasoning-slider-wrap">
+                            <input
+                                type="range"
+                                id="reasoningDepthSlider"
+                                min="0"
+                                max="3"
+                                step="1"
+                                value="1"
+                                aria-label="推理深度"
+                                aria-valuetext="标准"
+                                aria-describedby="reasoningDepthHelp"
+                            >
+                            <div class="reasoning-slider-markers" aria-hidden="true">
+                                <span></span><span></span><span></span><span></span>
+                            </div>
+                        </div>
+                        <div class="reasoning-level-labels" aria-hidden="true">
+                            <span>快速</span>
+                            <span>标准</span>
+                            <span>深入</span>
+                            <span>极高</span>
+                        </div>
+                        <p class="reasoning-help" id="reasoningDepthHelp">调整回答的分析深度和详略；具体效果取决于所选模型。不会展示内部推理内容。</p>
+                    </div>
+                </details>
+
                 <!-- Model Selector -->
-                <div class="model-selector" role="group" aria-label="AI 模型">
+                <div class="model-selector" id="modelSelector" role="group" aria-label="AI 模型">
                     <button class="model-btn" type="button" data-model="atlas" title="ATLAS 模型" aria-pressed="false">
                         <span class="model-icon model-icon-atlas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></span>
                         <span class="model-name">ATLAS</span>
@@ -127,6 +187,8 @@
                     </button>
                 </div>
 
+                <div class="attachment-tray" id="attachmentList" role="list" aria-label="待发送附件" aria-live="polite" hidden></div>
+
                 <!-- Context X-Ray Bar -->
                 <details class="atlas-xray-bar" id="atlasXrayBar">
                     <summary>
@@ -138,9 +200,13 @@
 
                 <!-- Input Box -->
                 <div class="input-box">
+                    <button class="attachment-btn" id="attachmentButton" type="button" aria-label="添加图片或文件" aria-controls="attachmentInput" title="添加图片或文件">
+                        <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 4v12M4 10h12"/></svg>
+                    </button>
                     <textarea
                         id="messageInput"
                         aria-label="输入消息"
+                        aria-describedby="composerNote attachmentHelp"
                         placeholder="输入消息... (Shift + Enter 换行，Enter 发送)"
                         rows="1"
                     ></textarea>
@@ -150,7 +216,9 @@
                         </svg>
                     </button>
                 </div>
-                <p class="composer-note">AI 可能会犯错，请核查重要信息。</p>
+                <input class="attachment-input" id="attachmentInput" type="file" accept="image/jpeg,image/png,image/webp,.pdf,.txt,.md,.csv,.json" multiple aria-label="选择图片或文件">
+                <p class="attachment-note" id="attachmentHelp">每次最多10张图片和10个文件；图片单张≤5 MB、文件单个≤10 MB，合计≤50 MB。文档每个最多提取10万字、总量最多10万字；PDF最多50页，扫描版PDF不做OCR。附件会发送给当前模型，原件不保存到对话历史。</p>
+                <p class="composer-note" id="composerNote">AI 可能会犯错，请核查重要信息。</p>
             </div>
         </main>
     </div>
@@ -300,13 +368,13 @@
     </div>
     <div class="ask-toast" id="askToast" role="status" aria-live="polite"></div>
 
-    <script src="assets/js/atlas-shell.js?v=20261119a"></script>
+    <script src="assets/js/atlas-shell.js?v=20261119b"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
-    <script src="assets/js/secondary-dashboard-i18n.js?v=20261119b"></script>
+    <script src="assets/js/secondary-dashboard-i18n.js?v=20261119j"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="assets/js/supabase-config.js"></script>
     <script src="assets/js/supabase-auth.js?v=20261009a"></script>
     <script src="assets/js/atlas-ai-config.js?v=20261009a"></script>
-    <script src="assets/js/ask.js?v=20261119d"></script>
+    <script src="assets/js/ask.js?v=20261119l"></script>
 </body>
 </html>

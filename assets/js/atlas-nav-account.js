@@ -199,9 +199,9 @@
         else delete status.dataset.state;
     }
 
-    function setAvatar(url, name) {
-        const image = accountControl?.querySelector('[data-account-image]');
-        const fallback = accountControl?.querySelector('[data-account-fallback]');
+    function setAvatar(url, name, control = accountControl) {
+        const image = control?.querySelector('[data-account-image]');
+        const fallback = control?.querySelector('[data-account-fallback]');
         if (!image || !fallback) return;
         const safeUrl = safeAvatarUrl(url);
         fallback.textContent = Array.from(name)[0]?.toUpperCase() || 'A';
@@ -309,7 +309,7 @@
             fallback.hidden = true;
         }, { once: true });
 
-        setAvatar(user.user_metadata?.avatar_url || user.user_metadata?.picture, name);
+        setAvatar(user.user_metadata?.avatar_url || user.user_metadata?.picture, name, control);
         return control;
     }
 

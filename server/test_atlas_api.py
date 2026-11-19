@@ -108,6 +108,29 @@ class PersonalOSStorageTests(unittest.TestCase):
             self.assertEqual(decided["status"], "executed")
             self.assertIsNotNone(decided["created_entity"])
 
+    def test_repeated_agent_action_approval_does_not_create_duplicate_tasks(self):
+        with tempfile.TemporaryDirectory() as directory:
+            db_path = str(Path(directory) / "agent-actions.sqlite3")
+            user_id = "user-agent-idempotent"
+            action = atlas_api.create_agent_action(
+                user_id,
+                {"goal": "整理本周的项目计划并安排后续任务"},
+                database_path=db_path,
+            )
+
+            approved = decide_agent_action(user_id, action["id"], "approve", database_path=db_path)
+            retried = decide_agent_action(user_id, action["id"], "approve", database_path=db_path)
+
+            self.assertEqual(approved["status"], "executed")
+            self.assertIsNotNone(approved["created_entity"])
+            self.assertEqual(retried["status"], "executed")
+            self.assertIsNone(retried["created_entity"])
+            created_tasks = [
+                task for task in list_tasks(user_id, database_path=db_path)
+                if task["source"] == "agent_approved"
+            ]
+            self.assertEqual(len(created_tasks), 1)
+
     def test_analyze_natural_input_extracts_entities(self):
         result = analyze_natural_input("明天下午 3 点和团队同步产品评审材料")
         self.assertEqual(result["extracted_task"]["project"], "产品评审")
@@ -180,6 +203,47 @@ class APIHandlerTests(unittest.TestCase):
         self.assertEqual(payload["usage"]["limit"], DAILY_LIMIT)
         self.assertEqual(call_model.call_args.args[0][0]["content"], SYSTEM_PROMPT)
         self.assertEqual(call_model.call_args.args[0][-1]["content"], "你好")
+
+    def test_authenticated_chat_adds_selected_reasoning_depth_to_server_prompt(self):
+        user_id = "e0c64a9f-2d31-42a9-895b-6eb919f70e51"
+        with (
+            patch("atlas_api.verify_supabase_user", return_value=user_id),
+            patch("atlas_api.reserve_daily_usage", return_value=1),
+            patch("atlas_api.call_ollama", return_value="总结。") as call_model,
+        ):
+            status, _, _ = self.post_chat(
+                {
+                    "Authorization": "Bearer test-access-token",
+                    "Content-Type": "application/json",
+                    "Origin": "https://wwwatlasai.com",
+                },
+                {
+                    "messages": [{"role": "user", "content": "比较两个方案"}],
+                    "reasoning_depth": "deep",
+                },
+            )
+
+        self.assertEqual(status, 200)
+        system_prompt = call_model.call_args.args[0][0]["content"]
+        self.assertIn("回答策略：深入", system_prompt)
+        self.assertIn("不展示隐藏的逐步推理内容", system_prompt)
+
+    def test_chat_rejects_unknown_reasoning_depth(self):
+        user_id = "e0c64a9f-2d31-42a9-895b-6eb919f70e51"
+        with patch("atlas_api.verify_supabase_user", return_value=user_id):
+            status, _, payload = self.post_chat(
+                {
+                    "Authorization": "Bearer test-access-token",
+                    "Content-Type": "application/json",
+                },
+                {
+                    "messages": [{"role": "user", "content": "你好"}],
+                    "reasoning_depth": "unbounded",
+                },
+            )
+
+        self.assertEqual(status, 400)
+        self.assertIn("reasoning_depth", payload["error"])
 
     def test_public_analyze_endpoint_works_without_auth(self):
         status, _, payload = self.request_json(

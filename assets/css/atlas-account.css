@@ -171,85 +171,395 @@
 }
 
 .atlas-account-page {
-  width: min(100% - 2rem, 680px);
-  margin: 2rem auto 4rem;
-  padding: clamp(1.25rem, 4vw, 2rem);
-  border: 1px solid rgba(148, 163, 184, 0.18);
-  border-radius: 1.4rem;
-  background: rgba(15, 23, 42, 0.82);
-  color: #e2e8f0;
-  box-shadow: 0 22px 65px rgba(0, 0, 0, 0.2);
+  --account-bg: #111827;
+  --account-bg-soft: #0b1220;
+  --account-border: rgba(148, 163, 184, 0.16);
+  --account-text: #f3f4f6;
+  --account-muted: #9ca3af;
+  width: min(100% - 2.5rem, 1120px);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 4vh, 2.75rem) 0 4rem;
+  color: var(--account-text);
 }
 
-.atlas-account-page h1 {
-  margin: 0 0 0.5rem;
-  color: #f8fafc;
-  font-size: clamp(1.6rem, 4vw, 2.2rem);
+.atlas-account-shell {
+  width: 100%;
 }
 
-.atlas-account-page > p {
-  margin: 0 0 1.5rem;
-  color: #94a3b8;
-  line-height: 1.6;
+.atlas-account-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+  margin-bottom: 1.5rem;
+  color: var(--account-muted);
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+
+.atlas-account-back-link:hover {
+  color: #fff;
+}
+
+.atlas-account-page-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.atlas-account-eyebrow,
+.atlas-account-preview-eyebrow {
+  margin: 0 0 0.45rem;
+  color: #7dd3fc;
+  font-size: 0.67rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.atlas-account-page-header h1 {
+  margin: 0;
+  color: var(--account-text);
+  font-size: clamp(1.8rem, 4vw, 2.45rem);
+  font-weight: 650;
+  letter-spacing: -0.045em;
+}
+
+.atlas-account-page-header > div > p:last-child {
+  max-width: 42rem;
+  margin: 0.55rem 0 0;
+  color: var(--account-muted);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.atlas-account-sync-label {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--account-border);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.58);
+  color: #cbd5e1;
+  font-size: 0.72rem;
+}
+
+.atlas-account-sync-label span,
+.atlas-account-preview-caption span {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+}
+
+.atlas-account-sync-label span {
+  background: #7dd3fc;
+  box-shadow: 0 0 0 3px rgba(125, 211, 252, 0.12);
+}
+
+.atlas-account-preview-caption span {
+  background: #34d399;
+  box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.12);
+}
+
+.atlas-account-page-status {
+  display: none;
+  margin: 0 0 1rem;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid rgba(125, 211, 252, 0.22);
+  border-radius: 0.75rem;
+  background: rgba(14, 116, 144, 0.12);
+  color: #bae6fd;
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+
+.atlas-account-page-status:not(:empty) {
+  display: block;
+}
+
+.atlas-account-page-status[data-state="error"] {
+  border-color: rgba(248, 113, 113, 0.28);
+  background: rgba(127, 29, 29, 0.18);
+  color: #fecaca;
+}
+
+.atlas-account-page-status[data-state="success"] {
+  border-color: rgba(52, 211, 153, 0.25);
+  background: rgba(6, 95, 70, 0.17);
+  color: #a7f3d0;
+}
+
+.atlas-account-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(270px, 0.68fr);
+  align-items: start;
+  gap: 1.1rem;
+}
+
+.atlas-account-editor,
+.atlas-account-preview-panel,
+.atlas-account-help-panel {
+  min-width: 0;
+  border: 1px solid var(--account-border);
+  border-radius: 1rem;
+  background: linear-gradient(145deg, rgba(20, 29, 44, 0.96), rgba(15, 23, 36, 0.96));
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.16);
 }
 
 .atlas-account-editor {
   display: grid;
-  gap: 1rem;
+  gap: 0;
+  overflow: hidden;
 }
 
-.atlas-account-editor label {
+.atlas-account-form-section {
   display: grid;
-  gap: 0.45rem;
-  color: #cbd5e1;
-  font-size: 0.84rem;
+  gap: 1.35rem;
+  padding: clamp(1.25rem, 3vw, 1.8rem);
+}
+
+.atlas-account-form-section + .atlas-account-form-section {
+  border-top: 1px solid var(--account-border);
+}
+
+.atlas-account-section-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+}
+
+.atlas-account-section-icon {
+  display: grid;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(125, 211, 252, 0.17);
+  border-radius: 0.65rem;
+  background: rgba(14, 116, 144, 0.16);
+  color: #7dd3fc;
+  font-size: 0.65rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.atlas-account-section-heading h2,
+.atlas-account-preview-panel h2,
+.atlas-account-help-panel h2 {
+  margin: 0;
+  color: #f3f4f6;
+  font-size: 0.98rem;
+  font-weight: 650;
+  letter-spacing: -0.015em;
+}
+
+.atlas-account-section-heading p {
+  margin: 0.25rem 0 0;
+  color: var(--account-muted);
+  font-size: 0.77rem;
+  line-height: 1.5;
+}
+
+.atlas-account-field {
+  display: grid;
+  gap: 0.5rem;
+  color: #e5e7eb;
+  font-size: 0.8rem;
   font-weight: 600;
+}
+
+.atlas-account-field > span {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.atlas-account-field > span b {
+  padding: 0.12rem 0.38rem;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  color: #9ca3af;
+  font-size: 0.61rem;
+  font-weight: 550;
 }
 
 .atlas-account-editor input:not([type="file"]) {
   width: 100%;
-  min-height: 44px;
-  padding: 0.65rem 0.8rem;
-  border: 1px solid rgba(148, 163, 184, 0.28);
+  min-height: 48px;
+  padding: 0.75rem 0.85rem;
+  border: 1px solid rgba(148, 163, 184, 0.23);
   border-radius: 0.7rem;
-  background: rgba(2, 6, 23, 0.72);
+  background: var(--account-bg-soft);
   color: #f8fafc;
   font: inherit;
+  font-size: 0.88rem;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
 }
 
-.atlas-account-editor input:focus {
-  border-color: #60a5fa;
-  outline: 3px solid rgba(96, 165, 250, 0.16);
+.atlas-account-editor input::placeholder {
+  color: #687386;
 }
 
-.atlas-account-editor small {
-  color: #94a3b8;
-  font-size: 0.74rem;
+.atlas-account-editor input[type="file"] {
+  width: 100%;
+  min-height: 3rem;
+  padding: 0.4rem;
+  border: 1px dashed rgba(148, 163, 184, 0.3);
+  border-radius: 0.7rem;
+  background: var(--account-bg-soft);
+  color: #9ca3af;
+  font: inherit;
+  font-size: 0.76rem;
+}
+
+.atlas-account-editor input[type="file"]::file-selector-button {
+  min-height: 2.1rem;
+  margin-right: 0.7rem;
+  padding: 0 0.8rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 0.48rem;
+  background: #1f2937;
+  color: #e5e7eb;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.73rem;
+  font-weight: 600;
+}
+
+.atlas-account-editor input[type="file"]::file-selector-button:hover {
+  background: #273449;
+}
+
+.atlas-account-editor input:focus-visible {
+  border-color: #67b7e9;
+  outline: 3px solid rgba(96, 165, 250, 0.15);
+  outline-offset: 1px;
+}
+
+.atlas-account-field small {
+  color: #8792a4;
+  font-size: 0.71rem;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.55;
 }
 
-.atlas-account-preview {
+.atlas-account-field-divider {
   display: flex;
   align-items: center;
+  gap: 0.75rem;
+  color: #748093;
+  font-size: 0.69rem;
+}
+
+.atlas-account-field-divider::before,
+.atlas-account-field-divider::after {
+  height: 1px;
+  flex: 1;
+  background: var(--account-border);
+  content: "";
+}
+
+.atlas-account-form-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1rem;
-  border: 1px solid rgba(148, 163, 184, 0.16);
-  border-radius: 1rem;
-  background: rgba(2, 6, 23, 0.38);
+  padding: 1rem clamp(1.25rem, 3vw, 1.8rem);
+  border-top: 1px solid var(--account-border);
+  background: rgba(10, 16, 27, 0.4);
+}
+
+.atlas-account-form-footer > span {
+  color: var(--account-muted);
+  font-size: 0.7rem;
+}
+
+.atlas-account-editor button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 42px;
+  padding: 0.65rem 1rem;
+  border: 1px solid rgba(147, 197, 253, 0.28);
+  border-radius: 0.7rem;
+  background: linear-gradient(135deg, #2563eb, #147d94);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 650;
+  transition: filter 150ms ease, transform 150ms ease;
+}
+
+.atlas-account-editor button[type="submit"]:hover:not(:disabled) {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.atlas-account-editor button[type="submit"] svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.6;
+}
+
+.atlas-account-editor button[type="submit"]:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.atlas-account-preview-column {
+  display: grid;
+  gap: 0.85rem;
+  position: sticky;
+  top: calc(var(--atlas-nav-height, 52px) + 1.25rem);
+}
+
+.atlas-account-preview-panel {
+  padding: 1.25rem;
+}
+
+.atlas-account-preview-panel h2 {
+  font-size: 1rem;
+}
+
+.atlas-account-preview-description {
+  margin: 0.45rem 0 1.2rem;
+  color: var(--account-muted);
+  font-size: 0.74rem;
+  line-height: 1.55;
+}
+
+.atlas-account-nav-preview {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  min-height: 3.5rem;
+  padding: 0.45rem 0.65rem 0.45rem 0.45rem;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 0.75rem;
+  background: #0b1220;
 }
 
 .atlas-account-preview-avatar {
   display: grid;
   place-items: center;
-  width: 64px;
-  height: 64px;
-  flex: 0 0 64px;
+  width: 2.3rem;
+  height: 2.3rem;
+  flex: 0 0 2.3rem;
   overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 50%;
   background: linear-gradient(145deg, #2563eb, #0e7490);
   color: #fff;
-  font-size: 1.3rem;
+  font-size: 0.85rem;
   font-weight: 700;
 }
 
@@ -259,37 +569,125 @@
   object-fit: cover;
 }
 
-.atlas-account-editor button[type="submit"] {
-  justify-self: start;
-  min-height: 42px;
-  padding: 0.65rem 1.1rem;
-  border: 1px solid rgba(147, 197, 253, 0.3);
-  border-radius: 999px;
-  background: linear-gradient(135deg, #2563eb, #0e7490);
-  color: #fff;
-  cursor: pointer;
-  font: inherit;
-  font-size: 0.84rem;
-  font-weight: 650;
+.atlas-account-nav-preview strong {
+  min-width: 0;
+  overflow: hidden;
+  color: #f8fafc;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.atlas-account-editor button[type="submit"]:disabled {
-  cursor: wait;
-  opacity: 0.65;
+.atlas-account-preview-chevron {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex: 0 0 auto;
+  margin-left: auto;
+  fill: none;
+  stroke: #94a3b8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
 }
 
-.atlas-account-page [data-account-editor-status]:not(:empty) {
-  margin-top: 1rem;
-  color: #7dd3fc;
-  font-size: 0.82rem;
-  line-height: 1.55;
+.atlas-account-preview-caption {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-top: 0.8rem;
+  color: #8792a4;
+  font-size: 0.68rem;
+  line-height: 1.5;
 }
 
-.atlas-account-page [data-account-editor-status][data-state="error"] {
-  color: #fca5a5;
+.atlas-account-preview-caption span {
+  width: 0.38rem;
+  height: 0.38rem;
+  flex: 0 0 0.38rem;
+}
+
+.atlas-account-help-panel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem;
+  background: rgba(15, 23, 36, 0.72);
+}
+
+.atlas-account-help-icon {
+  display: grid;
+  flex: 0 0 2rem;
+  width: 2rem;
+  height: 2rem;
+  place-items: center;
+  border: 1px solid rgba(52, 211, 153, 0.16);
+  border-radius: 0.65rem;
+  background: rgba(6, 95, 70, 0.18);
+  color: #6ee7b7;
+}
+
+.atlas-account-help-icon svg {
+  width: 1.05rem;
+  height: 1.05rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 1.5;
+}
+
+.atlas-account-help-panel h2 {
+  margin-top: 0.1rem;
+  font-size: 0.79rem;
+}
+
+.atlas-account-help-panel p {
+  margin: 0.35rem 0 0;
+  color: var(--account-muted);
+  font-size: 0.7rem;
+  line-height: 1.6;
+}
+
+.atlas-account-page a:focus-visible,
+.atlas-account-page button:focus-visible {
+  outline: 2px solid #7dd3fc;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-account-editor input,
+  .atlas-account-editor button[type="submit"] {
+    transition: none;
+  }
 }
 
 @media (max-width: 768px) {
+  .atlas-account-page {
+    width: min(100% - 1.25rem, 40rem);
+    padding-top: 1.35rem;
+  }
+
+  .atlas-account-page-header {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.9rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .atlas-account-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .atlas-account-preview-column {
+    position: static;
+    order: -1;
+  }
+
+  .atlas-account-preview-panel {
+    padding: 1rem;
+  }
+
   .atlas-nav-right {
     gap: 0.35rem;
     margin-left: auto;
@@ -314,5 +712,20 @@
 
   .atlas-account-menu {
     right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .atlas-account-sync-label {
+    font-size: 0.67rem;
+  }
+
+  .atlas-account-form-footer {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .atlas-account-editor button[type="submit"] {
+    width: 100%;
   }
 }
