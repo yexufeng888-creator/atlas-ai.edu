@@ -4,7 +4,7 @@
 
 // 状态管理
 const state = {
-    currentModel: 'atlas',
+    currentModel: 'deepseek',
     currentChatId: null,
     chats: [],
     isResponding: false,
@@ -12,9 +12,37 @@ const state = {
     apiKeys: {
         openai: localStorage.getItem('openai_key') || '',
         claude: localStorage.getItem('claude_key') || '',
-        gemini: localStorage.getItem('gemini_key') || ''
+        gemini: localStorage.getItem('gemini_key') || '',
+        deepseek: localStorage.getItem('deepseek_key') || '',
+        qwen: localStorage.getItem('qwen_key') || '',
+        kimi: localStorage.getItem('kimi_key') || '',
+        doubao: localStorage.getItem('doubao_key') || ''
+    },
+    apiModels: {
+        deepseek: localStorage.getItem('deepseek_model') || 'deepseek-flash',
+        qwen: localStorage.getItem('qwen_model') || 'qwen-plus',
+        qwenBaseUrl: localStorage.getItem('qwen_base_url') ||
+            'https://dashscope.aliyuncs.com/compatible-mode/v1',
+        kimi: localStorage.getItem('kimi_model') || 'kimi-k2.6',
+        doubao: localStorage.getItem('doubao_model') || 'doubao-seed-2-1-pro-260915',
+        doubaoBaseUrl: localStorage.getItem('doubao_base_url') ||
+            'https://ark.cn-beijing.volces.com/api/v3'
     }
 };
+
+function getInitialModel() {
+    const configuredModels = [
+        ['deepseek', state.apiKeys.deepseek && state.apiModels.deepseek],
+        ['qwen', state.apiKeys.qwen && state.apiModels.qwen && state.apiModels.qwenBaseUrl],
+        ['kimi', state.apiKeys.kimi && state.apiModels.kimi],
+        ['doubao', state.apiKeys.doubao && state.apiModels.doubao && state.apiModels.doubaoBaseUrl],
+        ['gpt-4', state.apiKeys.openai],
+        ['claude', state.apiKeys.claude],
+        ['gemini', state.apiKeys.gemini]
+    ];
+    return configuredModels.find(([, isConfigured]) => isConfigured)?.[0] || 'deepseek';
+}
+
 let chatSequence = 0;
 
 const pageTranslations = window.ATLASSecondaryDashboardI18n?.translations || {};
@@ -49,6 +77,7 @@ const elements = {
 // 初始化
 function init() {
     loadChatsFromStorage();
+    selectModel(getInitialModel());
     setupEventListeners();
     updateAPIStatus();
     syncContextXrayBar();
@@ -390,7 +419,11 @@ function getModelIcon(model) {
         'atlas': '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg>',
         'gpt-4': '<i class="model-dot model-dot-openai"></i>',
         'claude': '<i class="model-dot model-dot-claude"></i>',
-        'gemini': '<i class="model-dot model-dot-gemini"></i>'
+        'gemini': '<i class="model-dot model-dot-gemini"></i>',
+        'deepseek': '<i class="model-dot model-dot-deepseek"></i>',
+        'qwen': '<i class="model-dot model-dot-qwen"></i>',
+        'kimi': '<i class="model-dot model-dot-kimi"></i>',
+        'doubao': '<i class="model-dot model-dot-doubao"></i>'
     };
     return icons[model] || icons.atlas;
 }
@@ -422,6 +455,18 @@ async function getAIResponse(chatId, model) {
                 break;
             case 'gemini':
                 response = await callGemini(getChatHistory(chatId));
+                break;
+            case 'deepseek':
+                response = await callCompatibleProvider('deepseek', getChatHistory(chatId));
+                break;
+            case 'qwen':
+                response = await callCompatibleProvider('qwen', getChatHistory(chatId));
+                break;
+            case 'kimi':
+                response = await callCompatibleProvider('kimi', getChatHistory(chatId));
+                break;
+            case 'doubao':
+                response = await callCompatibleProvider('doubao', getChatHistory(chatId));
                 break;
             case 'atlas':
             default:
@@ -554,6 +599,144 @@ async function callGemini(messages) {
     return answer;
 }
 
+function getQwenEndpoint() {
+    let url;
+    try {
+        url = new URL(state.apiModels.qwenBaseUrl);
+    } catch {
+        throw new Error(translateUI('通义千问 Base URL 必须是有效的 HTTPS 地址'));
+    }
+
+    const hostAllowed = url.hostname === 'dashscope.aliyuncs.com' ||
+        url.hostname === 'dashscope-intl.aliyuncs.com' ||
+        url.hostname.endsWith('.maas.aliyuncs.com');
+    const path = url.pathname.replace(/\/+$/, '');
+    if (url.protocol !== 'https:' || !hostAllowed || url.username || url.password || url.port ||
+        url.search || url.hash || path !== '/compatible-mode/v1') {
+        throw new Error(translateUI('通义千问 Base URL 必须是有效的 HTTPS 地址'));
+    }
+    return `${url.origin}${path}/chat/completions`;
+}
+
+function getDoubaoEndpoint() {
+    let url;
+    try {
+        url = new URL(state.apiModels.doubaoBaseUrl);
+    } catch {
+        throw new Error(translateUI('豆包 Base URL 必须是有效的 HTTPS 地址'));
+    }
+
+    const hostAllowed = /^ark\.cn-[a-z0-9-]+\.volces\.com$/.test(url.hostname);
+    const path = url.pathname.replace(/\/+$/, '');
+    if (url.protocol !== 'https:' || !hostAllowed || url.username || url.password || url.port ||
+        url.search || url.hash || path !== '/api/v3') {
+        throw new Error(translateUI('豆包 Base URL 必须是有效的 HTTPS 地址'));
+    }
+    return `${url.origin}${path}/chat/completions`;
+}
+
+function getProviderConfig(providerId) {
+    const providers = {
+        deepseek: {
+            name: 'DeepSeek',
+            apiKey: state.apiKeys.deepseek,
+            model: state.apiModels.deepseek,
+            endpoint: 'https://api.deepseek.com/chat/completions',
+            missingKeyMessage: '请先配置 DeepSeek API Key'
+        },
+        qwen: {
+            name: translateUI('通义千问'),
+            apiKey: state.apiKeys.qwen,
+            model: state.apiModels.qwen,
+            endpoint: getQwenEndpoint,
+            missingKeyMessage: '请先配置通义千问 API Key'
+        },
+        kimi: {
+            name: 'Kimi',
+            apiKey: state.apiKeys.kimi,
+            model: state.apiModels.kimi,
+            endpoint: 'https://api.moonshot.cn/v1/chat/completions',
+            missingKeyMessage: '请先配置 Kimi API Key'
+        },
+        doubao: {
+            name: translateUI('豆包'),
+            apiKey: state.apiKeys.doubao,
+            model: state.apiModels.doubao,
+            endpoint: getDoubaoEndpoint,
+            missingKeyMessage: '请先配置豆包 API Key',
+            missingModelMessage: '请填写豆包模型 ID'
+        }
+    };
+    const config = providers[providerId];
+    if (!config) throw new Error(translateUI('不支持的模型服务'));
+    return config;
+}
+
+async function callCompatibleProvider(providerId, messages) {
+    const config = getProviderConfig(providerId);
+    if (!config.apiKey) throw new Error(translateUI(config.missingKeyMessage));
+    if (!config.model) {
+        throw new Error(translateUI(config.missingModelMessage || '请填写模型 ID'));
+    }
+    const endpoint = typeof config.endpoint === 'function' ? config.endpoint() : config.endpoint;
+
+    let response;
+    try {
+        response = await fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${config.apiKey}`
+            },
+            body: JSON.stringify({ model: config.model, messages })
+        });
+    } catch (error) {
+        if (error instanceof TypeError) {
+            throw new Error(translateUI('无法连接所选模型 API，请检查网络和跨域配置'), { cause: error });
+        }
+        throw error;
+    }
+
+    let data;
+    try {
+        data = await response.json();
+    } catch {
+        if (response.ok) {
+            throw new Error(translateUI('模型 API 返回了无法解析的响应'));
+        }
+        data = null;
+    }
+
+    if (!response.ok) {
+        const apiError = typeof data?.error === 'string'
+            ? data.error
+            : typeof data?.error?.message === 'string'
+                ? data.error.message
+                : typeof data?.message === 'string'
+                    ? data.message
+                    : '';
+        if (response.status === 401 || response.status === 403) {
+            throw new Error(translateUI('API Key 无效、地域不匹配或没有模型权限'));
+        }
+        if (response.status === 429) {
+            throw new Error(translateUI('模型 API 请求过于频繁或额度不足，请稍后重试'));
+        }
+        const status = `${config.name} API ${translateUI('调用失败')} (HTTP ${response.status})`;
+        throw new Error(apiError ? `${status}: ${apiError}` : status);
+    }
+
+    const content = data?.choices?.[0]?.message?.content;
+    const answer = typeof content === 'string'
+        ? content
+        : Array.isArray(content)
+            ? content.map((part) => typeof part?.text === 'string' ? part.text : '').join('')
+            : '';
+    if (!answer.trim()) {
+        throw new Error(translateUI('模型 API 返回了空响应'));
+    }
+    return answer;
+}
+
 function getATLASAPIBaseUrl() {
     const value = window.ATLAS_AI_CONFIG?.apiBaseUrl;
     if (!value) {
@@ -602,7 +785,7 @@ async function callATLAS(messages) {
         });
     } catch (error) {
         if (error instanceof TypeError) {
-            throw new Error(translateUI('无法连接 ATLAS 服务，请检查网络和 HTTPS 配置'), { cause: error });
+            throw new Error(translateUI('ATLAS 服务端暂时不可达。可在 API 设置配置外部模型并切换模型，或恢复 ATLAS 后端。'), { cause: error });
         }
         throw error;
     }
@@ -648,7 +831,7 @@ async function testATLASBackend() {
             });
         } catch (error) {
             if (error instanceof TypeError) {
-                throw new Error(translateUI('无法连接 ATLAS 服务，请检查网络和 HTTPS 配置'), { cause: error });
+                throw new Error(translateUI('ATLAS 服务端暂时不可达。可在 API 设置配置外部模型并切换模型，或恢复 ATLAS 后端。'), { cause: error });
             }
             throw error;
         }
@@ -799,6 +982,16 @@ function openAPIModal() {
     document.getElementById('openaiKey').value = state.apiKeys.openai;
     document.getElementById('claudeKey').value = state.apiKeys.claude;
     document.getElementById('geminiKey').value = state.apiKeys.gemini;
+    document.getElementById('deepseekKey').value = state.apiKeys.deepseek;
+    document.getElementById('deepseekModel').value = state.apiModels.deepseek;
+    document.getElementById('qwenKey').value = state.apiKeys.qwen;
+    document.getElementById('qwenModel').value = state.apiModels.qwen;
+    document.getElementById('qwenBaseUrl').value = state.apiModels.qwenBaseUrl;
+    document.getElementById('kimiKey').value = state.apiKeys.kimi;
+    document.getElementById('kimiModel').value = state.apiModels.kimi;
+    document.getElementById('doubaoKey').value = state.apiKeys.doubao;
+    document.getElementById('doubaoBaseUrl').value = state.apiModels.doubaoBaseUrl;
+    document.getElementById('doubaoModel').value = state.apiModels.doubao;
     elements.apiModal.classList.add('is-open');
     elements.apiModal.setAttribute('aria-hidden', 'false');
     elements.apiModal.querySelector('#openaiKey').focus();
@@ -832,10 +1025,32 @@ function saveAPIKeys() {
     state.apiKeys.openai = document.getElementById('openaiKey').value.trim();
     state.apiKeys.claude = document.getElementById('claudeKey').value.trim();
     state.apiKeys.gemini = document.getElementById('geminiKey').value.trim();
+    state.apiKeys.deepseek = document.getElementById('deepseekKey').value.trim();
+    state.apiKeys.qwen = document.getElementById('qwenKey').value.trim();
+    state.apiKeys.kimi = document.getElementById('kimiKey').value.trim();
+    state.apiKeys.doubao = document.getElementById('doubaoKey').value.trim();
+    state.apiModels.deepseek = document.getElementById('deepseekModel').value.trim();
+    state.apiModels.qwen = document.getElementById('qwenModel').value.trim();
+    state.apiModels.qwenBaseUrl = document.getElementById('qwenBaseUrl').value.trim() ||
+        'https://dashscope.aliyuncs.com/compatible-mode/v1';
+    state.apiModels.kimi = document.getElementById('kimiModel').value.trim();
+    state.apiModels.doubao = document.getElementById('doubaoModel').value.trim();
+    state.apiModels.doubaoBaseUrl = document.getElementById('doubaoBaseUrl').value.trim() ||
+        'https://ark.cn-beijing.volces.com/api/v3';
 
     localStorage.setItem('openai_key', state.apiKeys.openai);
     localStorage.setItem('claude_key', state.apiKeys.claude);
     localStorage.setItem('gemini_key', state.apiKeys.gemini);
+    localStorage.setItem('deepseek_key', state.apiKeys.deepseek);
+    localStorage.setItem('qwen_key', state.apiKeys.qwen);
+    localStorage.setItem('kimi_key', state.apiKeys.kimi);
+    localStorage.setItem('doubao_key', state.apiKeys.doubao);
+    localStorage.setItem('deepseek_model', state.apiModels.deepseek);
+    localStorage.setItem('qwen_model', state.apiModels.qwen);
+    localStorage.setItem('qwen_base_url', state.apiModels.qwenBaseUrl);
+    localStorage.setItem('kimi_model', state.apiModels.kimi);
+    localStorage.setItem('doubao_model', state.apiModels.doubao);
+    localStorage.setItem('doubao_base_url', state.apiModels.doubaoBaseUrl);
 
     updateAPIStatus();
     closeAPIModal();
@@ -848,7 +1063,11 @@ function updateAPIStatus() {
     const statuses = {
         openaiStatus: Boolean(state.apiKeys.openai),
         claudeStatus: Boolean(state.apiKeys.claude),
-        geminiStatus: Boolean(state.apiKeys.gemini)
+        geminiStatus: Boolean(state.apiKeys.gemini),
+        deepseekStatus: Boolean(state.apiKeys.deepseek && state.apiModels.deepseek),
+        qwenStatus: Boolean(state.apiKeys.qwen && state.apiModels.qwen && state.apiModels.qwenBaseUrl),
+        kimiStatus: Boolean(state.apiKeys.kimi && state.apiModels.kimi),
+        doubaoStatus: Boolean(state.apiKeys.doubao && state.apiModels.doubao && state.apiModels.doubaoBaseUrl)
     };
 
     Object.entries(statuses).forEach(([id, configured]) => {

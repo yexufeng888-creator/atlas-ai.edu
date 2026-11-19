@@ -7,7 +7,7 @@
     <title>对话 - ATLAS</title>
     <link rel="icon" type="image/jpeg" href="assets/img/atlas-logo.jpg">
     <link rel="stylesheet" href="assets/css/atlas-shell.css?v=20261023a">
-    <link rel="stylesheet" href="assets/css/ask.css?v=20261009a">
+    <link rel="stylesheet" href="assets/css/ask.css?v=20261119b">
 </head>
 <body class="has-global-nav" data-auth-required="true">
     <nav class="global-nav"></nav>
@@ -93,7 +93,7 @@
             <div class="input-area">
                 <!-- Model Selector -->
                 <div class="model-selector" role="group" aria-label="AI 模型">
-                    <button class="model-btn active" type="button" data-model="atlas" title="ATLAS 模型" aria-pressed="true">
+                    <button class="model-btn" type="button" data-model="atlas" title="ATLAS 模型" aria-pressed="false">
                         <span class="model-icon model-icon-atlas"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="7" width="16" height="12" rx="3"/><path d="M12 3v4M8 12h.01M16 12h.01"/></svg></span>
                         <span class="model-name">ATLAS</span>
                     </button>
@@ -108,6 +108,22 @@
                     <button class="model-btn" type="button" data-model="gemini" title="Google Gemini" aria-pressed="false">
                         <span class="model-icon model-icon-gemini"><i></i></span>
                         <span class="model-name">Gemini</span>
+                    </button>
+                    <button class="model-btn active" type="button" data-model="deepseek" title="DeepSeek" aria-pressed="true">
+                        <span class="model-icon model-icon-deepseek"><i></i></span>
+                        <span class="model-name">DeepSeek</span>
+                    </button>
+                    <button class="model-btn" type="button" data-model="qwen" title="通义千问" aria-pressed="false">
+                        <span class="model-icon model-icon-qwen"><i></i></span>
+                        <span class="model-name">通义千问</span>
+                    </button>
+                    <button class="model-btn" type="button" data-model="kimi" title="Kimi" aria-pressed="false">
+                        <span class="model-icon model-icon-kimi"><i></i></span>
+                        <span class="model-name">Kimi</span>
+                    </button>
+                    <button class="model-btn" type="button" data-model="doubao" title="豆包" aria-pressed="false">
+                        <span class="model-icon model-icon-doubao"><i></i></span>
+                        <span class="model-name">豆包</span>
                     </button>
                 </div>
 
@@ -148,7 +164,8 @@
             </div>
             <div class="modal-body">
                 <p class="modal-description">配置你的 API 密钥以使用不同的 AI 模型</p>
-                <p class="api-note api-security-note">密钥保存在当前浏览器，并直接发送给对应 AI 服务商。请勿在公共设备上保存密钥。</p>
+                <p class="api-note api-security-note">密钥保存在当前浏览器。使用外部模型时，对话消息和 API Key 会直接发送给对应服务商，费用按服务商账户结算；请勿在公共设备保存密钥或发送敏感信息。</p>
+                <p class="api-note">国内模型直连需要服务商允许当前网站跨域（CORS）；如连接失败，请检查网络和跨域配置。</p>
 
                 <!-- OpenAI API -->
                 <div class="api-config">
@@ -204,6 +221,65 @@
                     <a href="https://makersuite.google.com/app/apikey" target="_blank" rel="noopener noreferrer" class="api-link">获取 API Key →</a>
                 </div>
 
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-deepseek"><i></i></span>
+                        <h3>DeepSeek</h3>
+                        <span class="api-status" id="deepseekStatus">未配置</span>
+                    </div>
+                    <label class="api-field-label" for="deepseekKey">API Key</label>
+                    <input class="api-input" id="deepseekKey" type="password" placeholder="sk-..." aria-label="DeepSeek API Key" autocomplete="off">
+                    <label class="api-field-label" for="deepseekModel">模型 ID</label>
+                    <input class="api-input" id="deepseekModel" type="text" placeholder="deepseek-flash" aria-label="DeepSeek 模型 ID" autocomplete="off" spellcheck="false">
+                    <a href="https://platform.deepseek.com/api_keys" target="_blank" rel="noopener noreferrer" class="api-link">获取 API Key →</a>
+                </div>
+
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-qwen"><i></i></span>
+                        <h3>通义千问</h3>
+                        <span class="api-status" id="qwenStatus">未配置</span>
+                    </div>
+                    <label class="api-field-label" for="qwenKey">阿里云百炼 API Key</label>
+                    <input class="api-input" id="qwenKey" type="password" placeholder="sk-..." aria-label="通义千问 API Key" autocomplete="off">
+                    <label class="api-field-label" for="qwenModel">模型 ID</label>
+                    <input class="api-input" id="qwenModel" type="text" placeholder="qwen-plus" aria-label="通义千问模型 ID" autocomplete="off" spellcheck="false">
+                    <label class="api-field-label" for="qwenBaseUrl">兼容模式 Base URL</label>
+                    <input class="api-input" id="qwenBaseUrl" type="url" aria-label="通义千问兼容模式 Base URL" autocomplete="url" spellcheck="false">
+                    <p class="api-note">默认 Base URL 仍可用。API Key 与 Base URL 地域需一致；使用北京地域 Workspace 域名时，请填写控制台提供的 https://&lt;WorkspaceId&gt;.cn-beijing.maas.aliyuncs.com/compatible-mode/v1。</p>
+                    <a href="https://bailian.console.aliyun.com/?tab=model#/api-key" target="_blank" rel="noopener noreferrer" class="api-link">获取 API Key →</a>
+                </div>
+
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-kimi"><i></i></span>
+                        <h3>Kimi（月之暗面）</h3>
+                        <span class="api-status" id="kimiStatus">未配置</span>
+                    </div>
+                    <label class="api-field-label" for="kimiKey">API Key</label>
+                    <input class="api-input" id="kimiKey" type="password" placeholder="sk-..." aria-label="Kimi API Key" autocomplete="off">
+                    <label class="api-field-label" for="kimiModel">模型 ID</label>
+                    <input class="api-input" id="kimiModel" type="text" placeholder="kimi-k2.6" aria-label="Kimi 模型 ID" autocomplete="off" spellcheck="false">
+                    <a href="https://platform.moonshot.cn/console/api-keys" target="_blank" rel="noopener noreferrer" class="api-link">获取 API Key →</a>
+                </div>
+
+                <div class="api-config">
+                    <div class="api-header">
+                        <span class="api-icon model-icon-doubao"><i></i></span>
+                        <h3>豆包（火山方舟）</h3>
+                        <span class="api-status" id="doubaoStatus">未配置</span>
+                    </div>
+                    <label class="api-field-label" for="doubaoKey">火山方舟 API Key</label>
+                    <input class="api-input" id="doubaoKey" type="password" placeholder="..." aria-label="豆包 API Key" autocomplete="off">
+                    <label class="api-field-label" for="doubaoBaseUrl">API Base URL</label>
+                    <input class="api-input" id="doubaoBaseUrl" type="url" aria-label="豆包 API Base URL" autocomplete="url" spellcheck="false">
+                    <label class="api-field-label" for="doubaoModel">模型 ID</label>
+                    <input class="api-input" id="doubaoModel" type="text" placeholder="doubao-seed-2-1-pro-260915" aria-label="豆包模型 ID" autocomplete="off" spellcheck="false">
+                    <p class="api-note">API Key 模式填写模型列表中的 Model ID。默认使用北京地域 API 地址，模型与 API Key 的地域需与 Base URL 一致。</p>
+                    <a href="https://ark.volcengine.com/region:cn-beijing/apiKey" target="_blank" rel="noopener noreferrer" class="api-link">管理 API Key →</a>
+                    <a href="https://ark.volcengine.com/region:cn-beijing/docs/model-list" target="_blank" rel="noopener noreferrer" class="api-link">查看模型列表 →</a>
+                </div>
+
                 <!-- Protected ATLAS API -->
                 <div class="api-config">
                     <div class="api-header">
@@ -226,11 +302,11 @@
 
     <script src="assets/js/atlas-shell.js?v=20261030a"></script>
     <script src="assets/js/secondary-page-i18n.js"></script>
-    <script src="assets/js/secondary-dashboard-i18n.js"></script>
+    <script src="assets/js/secondary-dashboard-i18n.js?v=20261119b"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script src="assets/js/supabase-config.js"></script>
     <script src="assets/js/supabase-auth.js?v=20261009a"></script>
     <script src="assets/js/atlas-ai-config.js?v=20261009a"></script>
-    <script src="assets/js/ask.js?v=20261030a"></script>
+    <script src="assets/js/ask.js?v=20261119c"></script>
 </body>
 </html>

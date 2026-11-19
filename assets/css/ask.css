@@ -687,6 +687,18 @@ body {
     border-color: #667eea;
 }
 
+.api-field-label {
+    display: block;
+    margin: 0.75rem 0 0.35rem;
+    color: #6b7280;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.api-field-label:first-of-type {
+    margin-top: 0;
+}
+
 .api-test-btn {
     margin: 0.5rem 0;
 }
@@ -964,6 +976,10 @@ body {
 .model-dot-openai, .model-icon-openai i { background: #59d49a; box-shadow: 0 0 10px #59d49a; }
 .model-dot-claude, .model-icon-claude i { background: #c084fc; box-shadow: 0 0 10px #c084fc; }
 .model-dot-gemini, .model-icon-gemini i { background: #60a5fa; box-shadow: 0 0 10px #60a5fa; }
+.model-dot-deepseek, .model-icon-deepseek i { background: #4ea1ff; box-shadow: 0 0 10px #4ea1ff; }
+.model-dot-qwen, .model-icon-qwen i { background: #f5a623; box-shadow: 0 0 10px #f5a623; }
+.model-dot-kimi, .model-icon-kimi i { background: #bd8cff; box-shadow: 0 0 10px #bd8cff; }
+.model-dot-doubao, .model-icon-doubao i { background: #57d2e8; box-shadow: 0 0 10px #57d2e8; }
 #messageInput {
     background: var(--ask-panel);
     border-color: var(--ask-border);
@@ -981,6 +997,7 @@ body {
 .api-security-note { border-color: rgba(103, 164, 255, .22); }
 .api-config { background: var(--ask-panel-soft); border-color: var(--ask-border); }
 .api-header h3 { color: var(--ask-text); }
+.api-field-label { color: var(--ask-muted); }
 .api-input { background: #0a0f1b; border-color: var(--ask-border); color: var(--ask-text); }
 .api-input:focus { border-color: var(--ask-cyan); }
 .api-link { color: var(--ask-cyan); }
