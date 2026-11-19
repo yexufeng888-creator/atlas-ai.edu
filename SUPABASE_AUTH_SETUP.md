@@ -67,3 +67,9 @@
 4. 上线前确认 Aliyun RAM 权限最小化、Supabase RLS、短信限流以及（如已完成前端集成）CAPTCHA、隐私政策中的实际服务商及数据处理披露均已完成。短信送达、账户实名/备案及合规要求取决于你的 Supabase 与阿里云账户配置。
 
 > 工作台登录拦截在静态前端完成，只能控制页面展示，不能保护仓库中公开可下载的静态文件或替代后端授权。任何用户数据都应存入受 RLS 保护的表，并由 Supabase 按当前用户身份执行授权。
+
+## 6. 头像上传
+
+导航栏登录状态使用 Supabase Auth session；昵称和头像 URL 保存到当前用户的 Auth metadata，不依赖额外的 `profiles` 表。头像文件存储在公开读取的 `atlas-avatars` bucket 中，因此请勿上传敏感图片。
+
+首次启用头像文件上传前，在 Supabase SQL Editor 运行 `supabase/migrations/20261119140000_atlas_avatar_storage.sql`。迁移限制文件类型为 JPG、PNG、WebP，最大 5 MB，并只允许登录用户在自己的用户 ID 目录下上传或删除对象。迁移应用前，用户仍可用个人资料页填写 HTTPS 头像 URL 和修改昵称；文件上传会提示存储尚未启用。

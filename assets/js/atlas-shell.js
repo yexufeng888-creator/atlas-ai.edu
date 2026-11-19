@@ -250,10 +250,6 @@
         <span class="atlas-brand-name">ATLAS</span>
       </a>
 
-      <button class="atlas-menu-toggle" type="button" aria-expanded="false" aria-controls="atlas-nav-panel" aria-label="${navigationCopy.open}">
-        <span class="atlas-menu-lines" aria-hidden="true"></span>
-      </button>
-
       <div class="atlas-nav-panel" id="atlas-nav-panel">
         <div class="atlas-nav-links">
           ${links.map((item) => {
@@ -356,6 +352,13 @@
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="atlas-nav-right">
+        <div class="atlas-nav-account-slot" data-atlas-nav-account-slot></div>
+        <button class="atlas-menu-toggle" type="button" aria-expanded="false" aria-controls="atlas-nav-panel" aria-label="${navigationCopy.open}">
+          <span class="atlas-menu-lines" aria-hidden="true"></span>
+        </button>
       </div>
     </div>`;
   nav.querySelector('.atlas-brand').href = navHrefs[0];
@@ -857,6 +860,18 @@
     openMenu: () => setMenu(true),
     toggleMenu: () => setMenu(!nav.classList.contains('is-open'))
   };
+
+  if (!document.querySelector('link[href*="atlas-account.css"]')) {
+    const accountStyles = document.createElement('link');
+    accountStyles.rel = 'stylesheet';
+    accountStyles.href = 'assets/css/atlas-account.css?v=20261119a';
+    document.head.appendChild(accountStyles);
+  }
+  if (!document.querySelector('script[src*="atlas-nav-account.js"]')) {
+    const accountScript = document.createElement('script');
+    accountScript.src = 'assets/js/atlas-nav-account.js?v=20261119a';
+    document.body.appendChild(accountScript);
+  }
 
   // 立即恢复高定深色/浅色主题偏好，避免闪烁
   try {
